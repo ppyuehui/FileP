@@ -40,6 +40,9 @@ enum class Icon {
     FullScreen, Save, Unlock, Eject, Skip, Disconnect, Music, Wrench, Timer, Help, Puzzle,
     // The Pulse assistant (command palette hand-off), filled in the accent.
     Sparkle,
+    // 左右分屏 straight away: two panes, apart (Icon::Split is one box cut in
+    // two, which is the split menu).
+    SplitSideBySide,
     Count
 };
 
@@ -63,6 +66,7 @@ inline constexpr const wchar_t* kGlyphPinToolbar = L"\xF5C0";
 inline constexpr const wchar_t* kGlyphFolderList = L"\xF5C1";   // a 收藏栏 group
 inline constexpr const wchar_t* kGlyphSparkle = L"\xF5C2";
 inline constexpr const wchar_t* kGlyphTopBar = L"\xF5C3";   // a window with a top bar (收藏栏)
+inline constexpr const wchar_t* kGlyphSplitSideBySide = L"\xF5C4";   // 左右分屏, one click
 
 inline constexpr bool IsPinned(Icon icon) noexcept {
     return icon >= Icon::PinFavorites && icon <= Icon::PinToolbar;
@@ -167,6 +171,7 @@ inline Icon FromGlyph(std::wstring_view glyph) noexcept {
     case L'\xF5C1': return Icon::FolderList;
     case L'\xF5C2': return Icon::Sparkle;
     case L'\xF5C3': return Icon::Toolbar;
+    case L'\xF5C4': return Icon::SplitSideBySide;
     case L'\xF168': return Icon::GroupBy;
     case L'\xE8F1': return Icon::FolderList;
     case L'\xE777': return Icon::Reset;
@@ -463,6 +468,9 @@ inline ID2D1PathGeometry* BuildGeometry(ID2D1Factory* factory, Icon icon) noexce
     case Icon::SplitThree: box(3,4,21,20); line(12,4,12,20); line(12,12,21,12); break;
     case Icon::SplitFour: box(3,4,21,20); line(12,4,12,20); line(3,12,21,12); break;
     case Icon::Columns: box(3,4,21,20); line(9,4,9,20); line(15,4,15,20); break;
+    // 左右分屏: two panes side by side with a gap, so it does not read as the
+    // split menu's single box.
+    case Icon::SplitSideBySide: box(2.5f,5.5f,10.5f,18.5f); box(13.5f,5.5f,21.5f,18.5f); break;
     case Icon::SwapHorizontal:
         line(3,8,20,8); path({{16,4},{20,8},{16,12}});
         line(21,16,4,16); path({{8,12},{4,16},{8,20}}); break;

@@ -2981,7 +2981,7 @@ constexpr ToolbarToolDef kToolbarTools[] = {
     {app::CmdCompressZip, L"\xF012", l10n::StringId::ToolbarToolZip, L"", false},
     {app::CmdToggleFolderSizes, L"\xEDA2", l10n::StringId::ToolbarToolFolderSizes, L"", true},
     {0, L"\xE7C3", l10n::StringId::ToolbarToolExtensions, L"", true},
-    {0, L"\xE89F", l10n::StringId::LayoutVertical, L"Ctrl+Alt+2", false},
+    {0, ui::command_icons::kGlyphSplitSideBySide, l10n::StringId::LayoutVertical, L"Ctrl+Alt+2", false},
 };
 static_assert(std::size(kToolbarTools) == app::kToolbarToolCount, "one catalog row per toolbar_tools.h id");
 
