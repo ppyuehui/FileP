@@ -29,6 +29,7 @@
 #include "../ui/file_operation_dialog.h"
 #include "../ui/folder_picker_dialog.h"
 #include "../ui/batch_rename_dialog.h"
+#include "../ui/custom_commands_dialog.h"
 #include "../ui/toolbar_picker.h"
 #include "../ui/toolbar_pin_drag.h"
 #include "../ui/advanced_search_dialog.h"
@@ -1652,6 +1653,10 @@ void DispatchMenuCommand(AppState& s, int cmd) {
     const bool needs_files=cmd==app::CmdProperties || cmd==app::CmdOpenPath || cmd==app::CmdOpenInNewTab || cmd==app::CmdRename ||
         cmd==app::CmdGroupIntoFolder || cmd==app::CmdDissolveFolder || cmd==app::CmdSetAlias;
     if(needs_files && DeferContentSelection(s,[cmd](AppState& v){DispatchMenuCommand(v,cmd);})) return;
+    if (cmd == app::CmdCustomCommandManage) {
+        ui::ShowCustomCommandsDialog(s.hwnd, s.customCommands);
+        return;
+    }
     if (cmd >= app::CmdCustomCommandBase && cmd <= app::CmdCustomCommandLast) {
         RunCustomCommandAt(s, static_cast<size_t>(cmd - app::CmdCustomCommandBase));
         return;
@@ -2015,6 +2020,8 @@ void AppendCustomCommandRows(AppState& s, std::vector<ui::FluentMenuItem>& items
         if (command.name.empty() || !command.ListedFor(on_folder)) continue;
         items.push_back(VerbRow(static_cast<int>(app::CmdCustomCommandBase + i), command.name, L"\xE756"));
     }
+    // The editor stays reachable even before the first command exists.
+    items.push_back(VerbRow(app::CmdCustomCommandManage, L"管理自定义命令…", L"\xE713"));
 }
 
 

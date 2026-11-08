@@ -123,6 +123,7 @@ enum MenuCmd : int {
     CmdUnlockDrive = 3902,      // BitLocker-locked drive: 解锁
     CmdMapNetworkDrive = 3903,  // a share, or This PC background: 映射网络驱动器
     // 自定义命令: one id per command (index into AppState::customCommands).
+    CmdCustomCommandManage = 3999,  // 管理自定义命令… (opens the editor)
     CmdCustomCommandBase = 4000,
     CmdCustomCommandLast = 4099,
     CmdUnpinNetwork = 3904,     // Network view: remove the selected pins

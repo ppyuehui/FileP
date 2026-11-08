@@ -36,6 +36,7 @@
 #include "../ui/drag_drop.h"
 #include "../ui/file_operation_dialog.h"
 #include "../ui/batch_rename_dialog.h"
+#include "../ui/custom_commands_dialog.h"
 #include "../ui/quick_preview_window.h"
 #include "app_sidebar_refresh.h"
 #include "cloud_sync_probe.h"
@@ -4045,6 +4046,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
             }
         } else if (wcscmp(__wargv[i], L"--colorpickdialog") == 0) {
             state.colorpickdialog = true;
+        } else if (wcscmp(__wargv[i], L"--edit-commands") == 0) {
+            state.edit_commands = true;
         } else if (wcscmp(__wargv[i], L"--shot-tray") == 0) {
             state.shot_tray = true;
             // Optional item count: --shot-tray 1 stages a single file.
@@ -4523,6 +4526,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
         DestroyWindow(hwnd);
         OleUninitialize();
         return ok ? 0 : 1;
+    }
+
+    if (state.edit_commands) {
+        // Interactive smoke test: the 自定义命令 editor on its own.
+        ui::ShowCustomCommandsDialog(hwnd, state.customCommands);
+        DestroyWindow(hwnd);
+        OleUninitialize();
+        return 0;
     }
 
     if (state.colorpickdialog) {
