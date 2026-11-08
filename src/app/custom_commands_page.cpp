@@ -127,10 +127,17 @@ void SyncCommandsPage(AppState& s, const ui::WindowViewModel& vm) {
     s.renderer.SettingsCommandFields(vm, D2D1::RectF(0.0f, 0.0f, static_cast<float>(client.right),
                                                      static_cast<float>(client.bottom)),
                                      &name_rc, &value_rc);
+    // The column the page scrolls in: a field whose row left it must go, or it
+    // would float over the header / status bar.
+    const D2D1_RECT_F column = s.renderer.SettingsContentRect(
+        vm, D2D1::RectF(0.0f, 0.0f, static_cast<float>(client.right), static_cast<float>(client.bottom)));
     const auto place = [&](HWND edit, const D2D1_RECT_F& rc) {
         if (!edit) return;
         const int w = static_cast<int>(rc.right - rc.left), h = static_cast<int>(rc.bottom - rc.top);
-        if (w <= 0 || h <= 0) { ShowWindow(edit, SW_HIDE); return; }
+        if (w <= 0 || h <= 0 || rc.top < column.top || rc.bottom > column.bottom) {
+            ShowWindow(edit, SW_HIDE);
+            return;
+        }
         SetWindowPos(edit, HWND_TOP, static_cast<int>(rc.left), static_cast<int>(rc.top),
                      w - 2, h - 2, SWP_SHOWWINDOW | SWP_NOACTIVATE);
     };
