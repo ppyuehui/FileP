@@ -61,13 +61,26 @@ void ClampSelection(AppState& s) {
     if (s.command_step_sel < 0 && steps > 0) s.command_step_sel = -1;
 }
 
-HWND MakeEdit(HWND parent, int id) {
+// Tab moves between the two fields instead of into the control.
+LRESULT CALLBACK FieldProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam,
+                           UINT_PTR, DWORD_PTR ref) {
+    AppState* s = reinterpret_cast<AppState*>(ref);
+    if (s && msg == WM_KEYDOWN && wparam == VK_TAB) {
+        HWND other = hwnd == s->command_name_edit ? s->command_value_edit : s->command_name_edit;
+        if (other && IsWindow(other) && IsWindowVisible(other)) SetFocus(other);
+        return 0;
+    }
+    return DefSubclassProc(hwnd, msg, wparam, lparam);
+}
+
+HWND MakeEdit(HWND parent, int id, AppState& s) {
     // A redirected child surface: plain child windows sit behind the
     // DirectComposition surface, so the fields use the same host as the
     // rename / address editors (ui::edit_host.h).
     HWND edit = ui::CreateRedirectedChildEdit(parent);
     if (!edit) return nullptr;
     SetWindowLongPtrW(edit, GWLP_ID, id);
+    SetWindowSubclass(edit, FieldProc, 1, reinterpret_cast<DWORD_PTR>(&s));
     SetWindowTheme(edit, L"", L"");
     SendMessageW(edit, WM_SETFONT, reinterpret_cast<WPARAM>(GetStockObject(DEFAULT_GUI_FONT)), TRUE);
     return edit;
@@ -119,8 +132,8 @@ void SyncCommandsPage(AppState& s, const ui::WindowViewModel& vm) {
         if (s.command_value_edit) ShowWindow(s.command_value_edit, SW_HIDE);
         return;
     }
-    if (!s.command_name_edit) s.command_name_edit = MakeEdit(s.hwnd, kNameEditId);
-    if (!s.command_value_edit) s.command_value_edit = MakeEdit(s.hwnd, kValueEditId);
+    if (!s.command_name_edit) s.command_name_edit = MakeEdit(s.hwnd, kNameEditId, s);
+    if (!s.command_value_edit) s.command_value_edit = MakeEdit(s.hwnd, kValueEditId, s);
     RECT client{};
     GetClientRect(s.hwnd, &client);
     D2D1_RECT_F name_rc{}, value_rc{};
