@@ -354,6 +354,23 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
         segmented(lay.text_render_card,lay.text_render_row,text_render,text_render_values,vm.settings_text_render,H::SettingsTextRender,I::SettingsTextRender,I::SettingsTextRenderDesc,3,L"\xE8D2");
         const I ui_font_size[]={I::UiFontSmall,I::UiFontDefault,I::UiFontLarge,I::UiFontLarger};const int ui_font_size_values[]={90,100,112,125};
         segmented(lay.ui_font_size_card,lay.ui_font_size_row,ui_font_size,ui_font_size_values,vm.settings_ui_font_scale,H::SettingsUiFontSize,I::SettingsUiFontSize,I::SettingsUiFontSizeDesc,4,L"\xE8E9");
+        {
+            // 任务栏标题: 上级\当前, each name cut to its own 1..40 character limit.
+            const auto stepper=[&](D2D1_RECT_F card,const std::wstring& title,const std::wstring& desc,
+                                   D2D1_RECT_F minus,D2D1_RECT_F value,D2D1_RECT_F plus,int current,int hit_index) {
+                label(card,title,desc,L"\xE8AC",minus.left-8*scale_);
+                painter_.DrawText(std::to_wstring(current),value,compositor_->TextFormat(),theme.text,
+                    fluent::HorizontalAlignment::Center);
+                button(minus,L"",H::SettingsTaskbarChars,hit_index,false,current>1,L"\xE738");
+                button(plus,L"",H::SettingsTaskbarChars,hit_index+1,false,current<40,L"\xE710");
+            };
+            stepper(lay.taskbar_parent_card,l10n::Get(I::SettingsTaskbarParent),l10n::Get(I::SettingsTaskbarParentDesc),
+                    lay.taskbar_parent_minus,lay.taskbar_parent_value,lay.taskbar_parent_plus,
+                    vm.settings_taskbar_parent_chars,0);
+            stepper(lay.taskbar_current_card,l10n::Get(I::SettingsTaskbarCurrent),l10n::Get(I::SettingsTaskbarCurrentDesc),
+                    lay.taskbar_current_minus,lay.taskbar_current_value,lay.taskbar_current_plus,
+                    vm.settings_taskbar_current_chars,2);
+        }
         if(lay.wallpaper_card.bottom>lay.wallpaper_card.top) {
         const auto& preview = lay.wallpaper_preview;
         MakeBrush(dc, theme.fill_hover, brFillHover_);
@@ -543,10 +560,6 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
         toggle(lay.pinned_names_row,I::PinnedNames,I::PinnedNamesDesc,L"\xE718",vm.show_pinned_tab_names,6);
         toggle(lay.close_tab_double_click_row,I::SettingsCloseTabDoubleClick,I::SettingsCloseTabDoubleClickDesc,L"\xEA39",vm.settings_close_tab_double_click,35);
         toggle(lay.close_last_tab_row,I::SettingsCloseLastTab,I::SettingsCloseLastTabDesc,L"\xE89F",vm.settings_close_last_tab,26);
-        const I taskbar_chars[]={I::TaskbarChars3,I::TaskbarChars5,I::TaskbarChars8,I::TaskbarChars12,I::TaskbarCharsNone};
-        const int taskbar_values[]={3,5,8,12,0};
-        segmented(lay.taskbar_parent_card,lay.taskbar_parent_row,taskbar_chars,taskbar_values,vm.settings_taskbar_parent_chars,H::SettingsTaskbarParent,I::SettingsTaskbarParent,I::SettingsTaskbarParentDesc,5,L"\xE8AC");
-        segmented(lay.taskbar_current_card,lay.taskbar_current_row,taskbar_chars,taskbar_values,vm.settings_taskbar_current_chars,H::SettingsTaskbarCurrent,I::SettingsTaskbarCurrent,I::SettingsTaskbarCurrentDesc,5,L"\xE8AC");
         }
         if(page==9) {
         const I density[]={I::SettingsDensityCompact,I::SettingsDensityStandard,I::SettingsDensityRoomy};const int heights[]={28,34,40};

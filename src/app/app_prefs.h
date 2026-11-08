@@ -290,7 +290,7 @@ inline int NormalizeHoverCardSize(int value) noexcept {
 // 任务栏标题: characters shown per folder name (0 = no limit). The settings
 // offer 3 / 5 / 8 / 12; anything else falls back to the default of 5.
 inline int NormalizeTaskbarChars(int value) noexcept {
-    return value == 0 || value == 3 || value == 8 || value == 12 ? value : 5;
+    return value >= 1 && value <= 40 ? value : 5;
 }
 
 std::wstring FolderOpenCommandLine(const std::wstring& exe);

@@ -4424,10 +4424,5 @@
 #define IDS_SETTINGS_TASKBAR_PARENT_DESC                                                 5632
 #define IDS_SETTINGS_TASKBAR_CURRENT                                                     5633
 #define IDS_SETTINGS_TASKBAR_CURRENT_DESC                                                5634
-#define IDS_TASKBAR_CHARS_3                                                              5635
-#define IDS_TASKBAR_CHARS_5                                                              5636
-#define IDS_TASKBAR_CHARS_8                                                              5637
-#define IDS_TASKBAR_CHARS_12                                                             5638
-#define IDS_TASKBAR_CHARS_NONE                                                           5639
 
 #endif  // PULSE_STRING_IDS_H

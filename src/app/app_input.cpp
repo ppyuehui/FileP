@@ -3504,8 +3504,7 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
                    hit.region == ui::HitTestResult::SettingsStartupOpen ||
                    hit.region == ui::HitTestResult::SettingsNewTabOpen ||
                    hit.region == ui::HitTestResult::SettingsExternalOpen ||
-                   hit.region == ui::HitTestResult::SettingsTaskbarParent ||
-                   hit.region == ui::HitTestResult::SettingsTaskbarCurrent ||
+                   hit.region == ui::HitTestResult::SettingsTaskbarChars ||
                    hit.region == ui::HitTestResult::SettingsNotifyIcon ||
                    hit.region == ui::HitTestResult::SettingsBlankClick ||
                    hit.region == ui::HitTestResult::SettingsHomeFolder ||
@@ -3521,12 +3520,8 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
             case ui::HitTestResult::SettingsNotifyIcon: s->settings.NotifyIcon(hit.index); break;
             case ui::HitTestResult::SettingsBlankClick: s->settings.BlankClick(hit.index); break;
             case ui::HitTestResult::SettingsHomeFolder: s->settings.HomeFolder(hit.index); break;
-            case ui::HitTestResult::SettingsTaskbarParent:
-                s->settings.TaskbarParentChars(hit.index);
-                SyncTaskbarWindowTitle(*s);
-                break;
-            case ui::HitTestResult::SettingsTaskbarCurrent:
-                s->settings.TaskbarCurrentChars(hit.index);
+            case ui::HitTestResult::SettingsTaskbarChars:
+                s->settings.TaskbarChars(hit.index);
                 SyncTaskbarWindowTitle(*s);
                 break;
             case ui::HitTestResult::SettingsLanCache: SetLanCacheMode(*s, hit.index); break;

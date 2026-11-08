@@ -26,7 +26,7 @@ std::wstring LimitName(const std::wstring& name, int limit) {
         i += step;
         ++kept;
     }
-    return cut + L" [\u2026]";
+    return cut + L"[\u2026]";
 }
 
 // The folder above `path`: empty for a drive root, a UNC share root or a
@@ -59,14 +59,14 @@ std::wstring TaskbarWindowTitle(const app::Tab* tab, int parent_chars, int curre
         const std::wstring parent = ParentTitle(tab->current_path);
         if (!parent.empty()) title = LimitName(parent, parent_chars) + L"\\" + title;
     }
-    return title + L" \u2014 FileP";
+    return title;
 }
 
 bool SyncTaskbarWindowTitle(AppState& s) {
     if (!s.hwnd) return false;
     // M7c: with two or more windows each is called by its name, so Alt+Tab
     // and the taskbar tell them apart.
-    const auto title = WindowIdentityShown(s) ? WindowDisplayName(s) + L" \u2014 FileP"
+    const auto title = WindowIdentityShown(s) ? WindowDisplayName(s)
         : TaskbarWindowTitle(ActiveTab(s), s.appPrefs.taskbar_parent_chars, s.appPrefs.taskbar_current_chars);
     const int length = GetWindowTextLengthW(s.hwnd);
     if (length == static_cast<int>(title.size())) {

@@ -2596,9 +2596,13 @@ struct SettingsLayout {
     D2D1_RECT_F close_last_tab_row{};
     D2D1_RECT_F close_tab_double_click_row{};
     D2D1_RECT_F taskbar_parent_card{};
-    D2D1_RECT_F taskbar_parent_row[5]{};
+    D2D1_RECT_F taskbar_parent_minus{};
+    D2D1_RECT_F taskbar_parent_value{};
+    D2D1_RECT_F taskbar_parent_plus{};
     D2D1_RECT_F taskbar_current_card{};
-    D2D1_RECT_F taskbar_current_row[5]{};
+    D2D1_RECT_F taskbar_current_minus{};
+    D2D1_RECT_F taskbar_current_value{};
+    D2D1_RECT_F taskbar_current_plus{};
     D2D1_RECT_F confirm_delete_row{};
     D2D1_RECT_F start_in_tray_row{};
     D2D1_RECT_F text_render_card{};

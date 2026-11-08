@@ -894,16 +894,13 @@ void SettingsController::DetailsColumns(uint32_t mask) {
     SaveAndApply(SettingsEffect::ListStyle);
 }
 
-void SettingsController::TaskbarParentChars(int index) {
-    static constexpr int values[] = {3, 5, 8, 12, 0};
-    if (prefs_ && SelectValue(index, values, prefs_->taskbar_parent_chars))
-        SaveAndApply(SettingsEffect::None);
-}
-
-void SettingsController::TaskbarCurrentChars(int index) {
-    static constexpr int values[] = {3, 5, 8, 12, 0};
-    if (prefs_ && SelectValue(index, values, prefs_->taskbar_current_chars))
-        SaveAndApply(SettingsEffect::None);
+void SettingsController::TaskbarChars(int index) {
+    if (!prefs_ || index < 0 || index > 3) return;
+    int& value = index < 2 ? prefs_->taskbar_parent_chars : prefs_->taskbar_current_chars;
+    const int next = (std::max)(1, (std::min)(40, value + (index % 2 == 0 ? -1 : 1)));
+    if (next == value) return;
+    value = next;
+    SaveAndApply(SettingsEffect::None);
 }
 
 // Startup and new-tab locations are read when they are used; nothing to apply.

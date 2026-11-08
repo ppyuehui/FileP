@@ -1487,8 +1487,7 @@ struct HitTestResult {
         SettingsNotifyIcon,
         SettingsNewTabOpen,
         SettingsExternalOpen,
-        SettingsTaskbarParent,
-        SettingsTaskbarCurrent,
+        SettingsTaskbarChars,  // 任务栏标题: 0 上级-, 1 上级+, 2 当前-, 3 当前+
         SettingsBlankClick,
         SettingsHomeFolder,
         SettingsLanCache,  // 发现结果保留: 0 10 min, 1 1 h, 2 this session
