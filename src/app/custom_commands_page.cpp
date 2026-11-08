@@ -110,8 +110,9 @@ void FillCommandsPage(AppState& s, ui::WindowViewModel& vm) {
 
 void SyncCommandsPage(AppState& s, const ui::WindowViewModel& vm) {
     if (s.shot.active) return;   // the snapshot needs no text fields
-    const bool on = s.hwnd && s.pane && vm.settings_page == ui::kSettingsPageCommands &&
-                    IsSettingsTab(s.pane->ActiveTab());
+    // The page is drawn only while the settings tab shows it, so the page
+    // number is enough: the active pane can belong to another layout.
+    const bool on = s.hwnd && vm.settings_page == ui::kSettingsPageCommands;
     if (!on) {
         if (s.command_name_edit) ShowWindow(s.command_name_edit, SW_HIDE);
         if (s.command_value_edit) ShowWindow(s.command_value_edit, SW_HIDE);
