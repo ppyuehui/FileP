@@ -1877,11 +1877,16 @@ void DispatchMenuCommand(AppState& s, int cmd) {
         app::Tab* tab = ActiveTab(s);
         if (tab && tab->SelectedCount() > 0) {
             CopySelectedPath(s);
+            s.notification_toast.ShowSnack(s.hwnd, ui::SnackIcon::Suggest,
+                l10n::Get(l10n::StringId::CopiedShort), {}, {}, {}, 2000);
             break;
         }
         std::wstring full = tab ? tab->current_path : L"";
-        if (!full.empty())
+        if (!full.empty()) {
             ops::WriteClipboardText(fs::IsDevicePath(full) ? DeviceFriendlyPath(full) : ClipboardPath(full));
+            s.notification_toast.ShowSnack(s.hwnd, ui::SnackIcon::Suggest,
+                l10n::Get(l10n::StringId::CopiedShort), {}, {}, {}, 2000);
+        }
         break;
     }
     case app::CmdUndo:

@@ -2320,7 +2320,8 @@ TitleChrome MakeTitleChrome(float window_w, float scale, float title_h) {
 constexpr float kSettingsNavW = 200.0f;
 // 5: 快速预览, 6: 系统右键菜单, 7: 快捷键, 8: 增强包; 0 and 9-12 split the former 通用 page:
 // 0 外观, 9 文件列表, 10 标签页与窗口, 11 启动与集成, 12 文件操作.
-constexpr int kSettingsNavCount = 13;
+// Pages 0..14: 13 is the AI sub-page (drawn under 增强包), 14 自定义命令.
+constexpr int kSettingsNavCount = 15;
 inline bool IsGeneralSettingsPage(int page) noexcept { return page == 0 || (page >= 9 && page <= 12) || page == 14; }
 // Sidebar order, top to bottom, in five groups (关于 3 sits at the bottom, 6 has no row).
 constexpr int kSettingsNavOrder[] = {0, 9, 10, 11, 12, 14, 1, 5, 8, 2, 7, 4};

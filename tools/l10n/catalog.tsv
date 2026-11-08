@@ -4438,3 +4438,4 @@ SettingsPageCommands	IDS_SETTINGS_PAGE_COMMANDS	5643	自定义命令	Custom comm
 SettingsSecCommands	IDS_SETTINGS_SEC_COMMANDS	5644	自定义命令	Custom commands	自訂命令
 SettingsCommandsDesc	IDS_SETTINGS_COMMANDS_DESC	5645	把一串常用操作存成命令，右键菜单或工具栏一键执行	Save a run of steps as a command and run it from the context menu or the toolbar	把一串常用操作存成命令，右鍵選單或工具列一鍵執行
 SettingsCommandsOpen	IDS_SETTINGS_COMMANDS_OPEN	5646	编辑命令…	Edit commands…	編輯命令…
+SettingsCommandsIntro	IDS_SETTINGS_COMMANDS_INTRO	5647	命令可以用右键菜单一键执行，也可以加到工具栏上。	Commands run from the context menu, or from the toolbar once added there.	命令可以用右鍵選單一鍵執行，也可以加到工具列上。

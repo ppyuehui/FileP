@@ -74,6 +74,8 @@ void MainRenderer::DrawSettings(const WindowViewModel& vm, const D2D1_RECT_F& re
         pulse::l10n::StringId::SettingsPageTabs,
         pulse::l10n::StringId::SettingsPageSystem,
         pulse::l10n::StringId::SettingsPageFileOps,
+        pulse::l10n::StringId::SettingsGeneral,      // 13: the AI sub-page, no row of its own
+        pulse::l10n::StringId::SettingsPageCommands, // 14
     };
     static_assert(std::size(kNav) == kSettingsNavCount);
     static constexpr const wchar_t* kNavIcon[] = {
@@ -86,6 +88,8 @@ void MainRenderer::DrawSettings(const WindowViewModel& vm, const D2D1_RECT_F& re
         L"\xE737",  // 标签页与窗口
         L"\xE7E8",  // 启动与集成
         L"\xE8DE",  // 文件操作
+        L"\xE99A",  // AI 与 MCP
+        L"\xE756",  // 自定义命令
     };
     static_assert(std::size(kNavIcon) == kSettingsNavCount);
     // Page 5 (快速预览) has no string-table entry; see pack_text. Page 2 is
@@ -95,6 +99,7 @@ void MainRenderer::DrawSettings(const WindowViewModel& vm, const D2D1_RECT_F& re
         if (page == 7) return std::wstring(shortcuts_text::Title());
         if (page == 8) return std::wstring(pack_text::PacksSection());
         if (page == 0) return pulse::l10n::Get(pulse::l10n::StringId::SettingsAppearance);
+        if (page == ui::kSettingsPageCommands) return pulse::l10n::Get(pulse::l10n::StringId::SettingsPageCommands);
         return page == 5 ? std::wstring(pack_text::Title()) : pulse::l10n::Get(kNav[page]);
     };
     {
@@ -203,7 +208,9 @@ void MainRenderer::DrawSettings(const WindowViewModel& vm, const D2D1_RECT_F& re
             : vm.settings_page == 9 ? l10n::StringId::SettingsFileListIntro
             : vm.settings_page == 10 ? l10n::StringId::SettingsTabsIntro
             : vm.settings_page == 11 ? l10n::StringId::SettingsSystemIntro
-            : vm.settings_page == 12 ? l10n::StringId::SettingsFileOpsIntro : l10n::StringId::SettingsSearchIntro),
+            : vm.settings_page == 12 ? l10n::StringId::SettingsFileOpsIntro
+            : vm.settings_page == kSettingsPageCommands ? l10n::StringId::SettingsCommandsIntro
+            : l10n::StringId::SettingsSearchIntro),
             D2D1::RectF(lay.content.left+pad,origin+60*scale_,lay.content.right-pad,origin+84*scale_),
             compositor_->SmallFormat(),theme.text_secondary);
 

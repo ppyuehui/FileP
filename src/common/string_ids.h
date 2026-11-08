@@ -4431,5 +4431,6 @@
 #define IDS_SETTINGS_SEC_COMMANDS                                                        5644
 #define IDS_SETTINGS_COMMANDS_DESC                                                       5645
 #define IDS_SETTINGS_COMMANDS_OPEN                                                       5646
+#define IDS_SETTINGS_COMMANDS_INTRO                                                      5647
 
 #endif  // PULSE_STRING_IDS_H

@@ -4411,4 +4411,5 @@ BEGIN
     IDS_SETTINGS_SEC_COMMANDS "自訂命令"
     IDS_SETTINGS_COMMANDS_DESC "把一串常用操作存成命令，右鍵選單或工具列一鍵執行"
     IDS_SETTINGS_COMMANDS_OPEN "編輯命令…"
+    IDS_SETTINGS_COMMANDS_INTRO "命令可以用右鍵選單一鍵執行，也可以加到工具列上。"
 END

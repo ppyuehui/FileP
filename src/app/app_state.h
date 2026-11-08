@@ -498,6 +498,8 @@ struct AppState : AppCoreOwner {
     // Smoke test: open the interactive color picker dialog on launch.
     bool colorpickdialog = false;
     bool edit_commands = false;  // --edit-commands: open the 自定义命令 editor
+    // --shot-settings <page>: open Settings on that page before --shot writes.
+    int shot_settings_page = -1;
     // GUI verification for the tray card deck: stage a few files pre-shot.
     bool shot_tray = false;
     int shot_tray_count = 4;

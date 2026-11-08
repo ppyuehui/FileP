@@ -4423,6 +4423,7 @@ enum class StringId : UINT {
     SettingsSecCommands = IDS_SETTINGS_SEC_COMMANDS,
     SettingsCommandsDesc = IDS_SETTINGS_COMMANDS_DESC,
     SettingsCommandsOpen = IDS_SETTINGS_COMMANDS_OPEN,
+    SettingsCommandsIntro = IDS_SETTINGS_COMMANDS_INTRO,
 };
 
 bool IsLanguageId(std::wstring_view id) noexcept;

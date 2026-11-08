@@ -3728,6 +3728,19 @@ int ShotModeMain(AppState& state, HWND hwnd) {
     bool ok = false;
     __try {
         WaitForShotReady(state);
+        if (state.shot_settings_page >= 0) {
+            // --shot-settings <page>: render Settings itself, for UI checks.
+            OpenSettingsTab(state, state.shot_settings_page);
+            for (int i = 0; i < 8; ++i) {
+                Render(state);
+                MSG settings_msg{};
+                while (PeekMessageW(&settings_msg, nullptr, 0, 0, PM_REMOVE)) {
+                    TranslateMessage(&settings_msg);
+                    DispatchMessageW(&settings_msg);
+                }
+                Sleep(30);
+            }
+        }
         StageTagShotStates(state);
         StageSplitShot(state);
         if (state.shot_details && state.pane && state.pane->ActiveTab() &&
@@ -4056,6 +4069,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
             state.colorpickdialog = true;
         } else if (wcscmp(__wargv[i], L"--edit-commands") == 0) {
             state.edit_commands = true;
+        } else if (wcscmp(__wargv[i], L"--shot-settings") == 0 && i + 1 < __argc) {
+            state.shot_settings_page = _wtoi(__wargv[++i]);
         } else if (wcscmp(__wargv[i], L"--shot-tray") == 0) {
             state.shot_tray = true;
             // Optional item count: --shot-tray 1 stages a single file.
