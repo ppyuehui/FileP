@@ -9,6 +9,8 @@
 #include "../ui/settings_page_ids.h"
 #include "../ui/edit_host.h"
 #include "../ui/typography.h"
+#include "../ui/FluentTokens.h"
+#include "app_hosted_edit.h"
 #include "app_commands.h"
 #include "app_navigation.h"
 
@@ -62,16 +64,26 @@ void ClampSelection(AppState& s) {
     if (s.command_step_sel < 0 && steps > 0) s.command_step_sel = -1;
 }
 
-// Tab moves between the two fields instead of into the control.
+// Tab moves between the two fields; everything else is drawn by the compositor
+// (LumaText), so the field's text is the same face, size and weight as the
+// DirectWrite text around it instead of GDI text that never quite matches.
 LRESULT CALLBACK FieldProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam,
                            UINT_PTR, DWORD_PTR ref) {
     AppState* s = reinterpret_cast<AppState*>(ref);
-    if (s && msg == WM_KEYDOWN && wparam == VK_TAB) {
+    if (!s) return DefSubclassProc(hwnd, msg, wparam, lparam);
+    if (msg == WM_KEYDOWN && wparam == VK_TAB) {
         HWND other = hwnd == s->command_name_edit ? s->command_value_edit : s->command_name_edit;
         if (other && IsWindow(other) && IsWindowVisible(other)) SetFocus(other);
         return 0;
     }
-    return DefSubclassProc(hwnd, msg, wparam, lparam);
+    IDWriteTextFormat* format = HostedEditFormat(*s, hwnd);
+    const D2D1_COLOR_F ink = HostedEditForeground(*s);
+    const D2D1_COLOR_F paper = HostedEditBackground(*s);
+    LRESULT handled = 0;
+    if (ui::HandleChildEditMessage(s->compositor, format, ink, paper,
+                                   ui::EditBackBrush(s->editBrush), hwnd, msg, wparam, lparam, handled))
+        return handled;
+    return ui::DefPresentedChildEditProc(s->compositor, format, ink, paper, hwnd, msg, wparam, lparam);
 }
 
 HWND MakeEdit(HWND parent, int id, AppState& s) {
@@ -82,6 +94,8 @@ HWND MakeEdit(HWND parent, int id, AppState& s) {
     if (!edit) return nullptr;
     SetWindowLongPtrW(edit, GWLP_ID, id);
     SetWindowSubclass(edit, FieldProc, 1, reinterpret_cast<DWORD_PTR>(&s));
+    // A hair of side margin: the caret should not touch the frame's border.
+    SendMessageW(edit, EM_SETMARGINS, EC_LEFTMARGIN | EC_RIGHTMARGIN, MAKELPARAM(2, 2));
     SetWindowTheme(edit, L"", L"");
     // The app's own edit font, not the stock GUI font: the fields must match
     // the text around them (size and family alike).
