@@ -55,6 +55,30 @@ inline int ToolbarToolIndex(std::wstring_view id) noexcept {
     return -1;
 }
 
+// 自定义命令 on the toolbar: "cmd:<index into CustomCommandStore::commands>".
+// The index is the command's place in the store, so the id follows the list.
+inline constexpr std::wstring_view kCustomToolPrefix = L"cmd:";
+inline bool IsCustomCommandTool(std::wstring_view id) noexcept {
+    return id.size() > kCustomToolPrefix.size() && id.substr(0, kCustomToolPrefix.size()) == kCustomToolPrefix;
+}
+// The command index, or npos when the id is not one of them.
+inline size_t CustomCommandToolSlot(std::wstring_view id) noexcept {
+    if (!IsCustomCommandTool(id)) return std::wstring_view::npos;
+    size_t value = 0;
+    for (size_t i = kCustomToolPrefix.size(); i < id.size(); ++i) {
+        if (id[i] < L'0' || id[i] > L'9' || value > 9999) return std::wstring_view::npos;
+        value = value * 10 + static_cast<size_t>(id[i] - L'0');
+    }
+    return value;
+}
+inline std::wstring CustomCommandToolId(size_t slot) {
+    return std::wstring(kCustomToolPrefix) + std::to_wstring(slot);
+}
+// A toolbar slot: a built-in tool or one of the user's commands.
+inline bool IsToolbarSlot(std::wstring_view id) noexcept {
+    return ToolbarToolIndex(id) >= 0 || CustomCommandToolSlot(id) != std::wstring_view::npos;
+}
+
 // Known ids only, each once, at most kMaxToolbarTools, order kept.
 // Separators only between two tools (none first, last or twice in a row);
 // they do not count toward the limit.
@@ -67,7 +91,7 @@ inline std::vector<std::wstring> NormalizeToolbarTools(const std::vector<std::ws
             continue;
         }
         if (count >= kMaxToolbarTools) break;
-        if (ToolbarToolIndex(id) < 0) continue;
+        if (!IsToolbarSlot(id)) continue;
         bool seen = false;
         for (const auto& kept : out) seen = seen || kept == id;
         if (!seen) { out.push_back(id); ++count; }
@@ -80,7 +104,7 @@ inline std::vector<std::wstring> NormalizeToolbarTools(const std::vector<std::ws
 inline std::vector<std::wstring> ToolbarToolsOnly(const std::vector<std::wstring>& tools) {
     std::vector<std::wstring> out;
     for (const auto& id : tools)
-        if (ToolbarToolIndex(id) >= 0) out.push_back(id);
+        if (IsToolbarSlot(id)) out.push_back(id);
     return out;
 }
 
@@ -91,7 +115,7 @@ inline uint64_t ToolbarSeparatorMask(const std::vector<std::wstring>& tools) noe
     bool pending = false;
     for (const auto& id : tools) {
         if (IsToolbarSeparator(id)) { pending = slot > 0; continue; }
-        if (ToolbarToolIndex(id) < 0) continue;
+        if (!IsToolbarSlot(id)) continue;
         if (pending && slot < 64) mask |= uint64_t{1} << slot;
         pending = false;
         ++slot;
@@ -155,7 +179,7 @@ inline std::vector<std::wstring> KeepToolbarSeparators(const std::vector<std::ws
     bool pending = false;
     for (const auto& id : old_tools) {
         if (IsToolbarSeparator(id)) { pending = true; continue; }
-        if (ToolbarToolIndex(id) < 0 || !kept(id)) continue;
+        if (!IsToolbarSlot(id) || !kept(id)) continue;
         if (pending) before.push_back(id);
         pending = false;
     }

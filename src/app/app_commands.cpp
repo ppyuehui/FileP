@@ -4355,16 +4355,17 @@ void ShowToolbarMore(AppState& s) {
     const uint64_t separators=app::ToolbarSeparatorMask(s.appPrefs.toolbar_tools);
     size_t pin=0;
     for (const auto& id : s.appPrefs.toolbar_tools) {
+        const size_t custom=app::CustomCommandToolSlot(id);
         const int tool=app::ToolbarToolIndex(id);
-        if (tool<0 || pin>=pins.size()) continue;
+        if ((tool<0 && custom==std::wstring_view::npos) || pin>=pins.size()) continue;
         const size_t slot=pin++;
         if (slot<layout.pins.size() && layout.pins[slot].right>layout.pins[slot].left) continue;
         // The user's groups carry over into the menu as separator lines.
         if (!items.empty() && slot<64 && (separators>>slot & 1)) items.back().separator_after=true;
-        const ToolbarToolDef& def=kToolbarTools[tool];
+        const ToolbarToolDef& def=kToolbarTools[tool<0 ? 0 : tool];
         ui::FluentMenuItem item;
-        item.command=pins[slot].command; item.text=l10n::Get(def.label);
-        item.glyph=def.glyph; item.shortcut=app::ShownShortcut(def.shortcut);
+        item.command=pins[slot].command; item.text=tool<0 ? pins[slot].label : l10n::Get(def.label);
+        item.glyph=pins[slot].glyph; item.shortcut=tool<0 ? std::wstring() : app::ShownShortcut(def.shortcut);
         item.enabled=pins[slot].enabled;
         item.checked=pins[slot].checked;
         item.glyph=pins[slot].glyph;
@@ -4507,7 +4508,7 @@ void PushToolbarPinDrag(AppState& s) {
     if (g_toolbar_link_tool >= 0 && static_cast<size_t>(g_toolbar_link_tool) < app::kToolbarToolCount) {
         int slot = 0;
         for (const auto& id : s.appPrefs.toolbar_tools) {
-            if (app::ToolbarToolIndex(id) < 0) continue;
+            if (!app::IsToolbarSlot(id)) continue;
             if (id == app::kToolbarToolIds[g_toolbar_link_tool]) { state.linked = slot; break; }
             ++slot;
         }
@@ -4536,6 +4537,20 @@ std::vector<ui::SelectionChipAction> ToolbarPinActions(AppState& s) {
         !ToolbarToolPinned(s, app::kToolbarToolIds[g_toolbar_preview]))
         ids.emplace_back(app::kToolbarToolIds[g_toolbar_preview]);
     for (const auto& id : ids) {
+        const size_t custom = app::CustomCommandToolSlot(id);
+        if (custom != std::wstring_view::npos) {
+            // 自定义命令 pinned as a toolbar button: one click runs its steps.
+            if (custom >= s.customCommands.commands.size() ||
+                out.size() >= static_cast<size_t>(ui::kToolbarCommandPins)) continue;
+            const app::CustomCommand& command = s.customCommands.commands[custom];
+            ui::SelectionChipAction action;
+            action.command = app::CmdCustomCommandBase + static_cast<int>(custom);
+            action.glyph = L"\xE756";
+            action.label = command.name.empty() ? l10n::Get(l10n::StringId::SettingsPageCommands) : command.name;
+            action.enabled = !tab->current_path.empty();
+            out.push_back(std::move(action));
+            continue;
+        }
         const int tool = app::ToolbarToolIndex(id);
         if (tool < 0 || out.size() >= static_cast<size_t>(ui::kToolbarCommandPins)) continue;
         const ToolbarToolDef& def = kToolbarTools[tool];
@@ -4633,6 +4648,9 @@ static constexpr ToolbarViewDef kToolbarViews[] = {
     {L"fav_bar", L"\xE728", l10n::StringId::FavoritesBar},   // 收藏栏, on the 窗格 section
 };
 static constexpr size_t kToolbarViewCount = std::size(kToolbarViews);
+// The picker's tile indices: 0…tools-1 are the tools, then the view buttons,
+// then one tile per 自定义命令 (appended at the end so the older indices stay).
+static constexpr size_t kToolbarCustomBase = app::kToolbarToolCount + kToolbarViewCount;
 static bool& ToolbarViewPref(AppState& s, size_t i) {
     return i == 0 ? s.appPrefs.toolbar_show_sort : i == 1 ? s.appPrefs.toolbar_show_filter
          : i == 2 ? s.appPrefs.toolbar_show_group : s.appPrefs.favorites_bar;
@@ -4669,7 +4687,16 @@ static std::vector<size_t> ToolbarPinsOrder(const AppState& s) {
     static_assert(std::size(kCatalogOrder) == app::kToolbarToolCount, "every tool has a place");
     std::vector<size_t> order;
     std::vector<char> placed(app::kToolbarToolCount, 0);
+    std::vector<char> placed_custom(s.customCommands.commands.size(), 0);
     for (const auto& id : s.appPrefs.toolbar_tools) {
+        const size_t custom = app::CustomCommandToolSlot(id);
+        if (custom != std::wstring_view::npos) {
+            if (custom < placed_custom.size() && !placed_custom[custom]) {
+                placed_custom[custom] = 1;
+                order.push_back(kToolbarCustomBase + custom);
+            }
+            continue;
+        }
         const int at = app::ToolbarToolIndex(id);
         if (at >= 0 && !placed[at]) { placed[at] = 1; order.push_back(static_cast<size_t>(at)); }
     }
@@ -4678,6 +4705,8 @@ static std::vector<size_t> ToolbarPinsOrder(const AppState& s) {
         if (at >= 0 && !placed[at]) { placed[at] = 1; order.push_back(static_cast<size_t>(at)); }
     }
     for (size_t i = 0; i < kToolbarViewCount; ++i) order.push_back(app::kToolbarToolCount + i);
+    for (size_t i = 0; i < placed_custom.size(); ++i)
+        if (!placed_custom[i]) order.push_back(kToolbarCustomBase + i);
     return order;
 }
 
@@ -4731,6 +4760,19 @@ void ShowToolbarCustomize(AppState& s, int page) {
         tile.checked = ToolbarViewShown(s, i);
         spec.pins.push_back(std::move(tile));
     }
+    // 自定义命令: one tile each, so the user's commands can be pinned like a
+    // built-in tool (the toolbar runs their steps on one click).
+    for (size_t i = 0; i < s.customCommands.commands.size(); ++i) {
+        ui::ToolbarPickerTile tile;
+        tile.glyph = L"\xE756";
+        tile.label = s.customCommands.commands[i].name.empty()
+                         ? l10n::Get(l10n::StringId::SettingsPageCommands)
+                         : s.customCommands.commands[i].name;
+        tile.keywords = app::CustomCommandToolId(i);
+        tile.section = 0;   // 文件: they act on the folder, and stay visible without scrolling
+        tile.checked = ToolbarToolPinned(s, app::CustomCommandToolId(i));
+        spec.pins.push_back(std::move(tile));
+    }
     spec.pins_order = ToolbarPinsOrder(s);
 
     // 选中时: the chip's actions, kept ones in chip order first.
@@ -4780,6 +4822,10 @@ void ShowToolbarCustomize(AppState& s, int page) {
         for (size_t index : pinned) {
             if (index < app::kToolbarToolCount) tools.emplace_back(app::kToolbarToolIds[index]);
             else if (index - app::kToolbarToolCount < kToolbarViewCount) view[index - app::kToolbarToolCount] = true;
+            else if (index >= kToolbarCustomBase) {
+                const size_t custom = index - kToolbarCustomBase;
+                if (custom < s.customCommands.commands.size()) tools.emplace_back(app::CustomCommandToolId(custom));
+            }
         }
         bool changed = false;
         for (size_t i = 0; i < kToolbarViewCount; ++i)

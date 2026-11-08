@@ -4077,6 +4077,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
             g_shot_favorites_bar = true;
         } else if (wcscmp(__wargv[i], L"--shot-toolbar-apps") == 0) {
             g_shot_toolbar_apps = true;
+
         } else if (wcscmp(__wargv[i], L"--shot-ai") == 0 && i + 1 < __argc) {
             g_shot_ai = _wtoi(__wargv[++i]);
         } else if (wcscmp(__wargv[i], L"--shot-favorites-hover") == 0 && i + 1 < __argc) {
