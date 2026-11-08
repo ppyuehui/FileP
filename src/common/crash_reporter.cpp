@@ -106,7 +106,7 @@ std::wstring DefaultDataRoot(bool machine_scope) {
     wchar_t path[MAX_PATH]{};
     const int csidl = machine_scope ? CSIDL_COMMON_APPDATA : CSIDL_LOCAL_APPDATA;
     if (FAILED(SHGetFolderPathW(nullptr, csidl, nullptr, SHGFP_TYPE_CURRENT, path))) return {};
-    return JoinPath(path, L"Pulse");
+    return JoinPath(path, L"FileP");
 }
 
 std::wstring SafeBuildId() {

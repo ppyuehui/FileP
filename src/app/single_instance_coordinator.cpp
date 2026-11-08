@@ -10,9 +10,9 @@
 namespace pulse::app {
 namespace {
 
-constexpr wchar_t kMutexName[] = L"Local\\Pulse.Singleton";
-constexpr wchar_t kWindowClass[] = L"PulseMainWindow";
-constexpr wchar_t kPrimaryProperty[] = L"Pulse.Singleton.PrimaryPid";
+constexpr wchar_t kMutexName[] = L"Local\\FileP.Singleton";
+constexpr wchar_t kWindowClass[] = L"FilePMainWindow";
+constexpr wchar_t kPrimaryProperty[] = L"FileP.Singleton.PrimaryPid";
 constexpr ULONG_PTR kOpenPathMessage = 0x50554C53; // 'PULS'
 constexpr ULONG_PTR kOpenRequestMessage = 0x50554C32; // 'PUL2'
 constexpr size_t kMaxForwardedPathChars = 32768;

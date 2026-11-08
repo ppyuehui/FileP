@@ -242,6 +242,10 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         l.pinned_names_row=row(64);
         l.close_tab_double_click_row=row(64);
         l.close_last_tab_row=row(64);
+
+        section(I::SettingsSecTaskbar);
+        l.taskbar_parent_card=row(seg_h); segments(l.taskbar_parent_card,l.taskbar_parent_row,5,360);
+        l.taskbar_current_card=row(seg_h); segments(l.taskbar_current_card,l.taskbar_current_row,5,360);
     } else if (page == 11) {
         section(I::SettingsIntegration);
         end_group();   // the integration card is laid out and drawn on its own

@@ -265,6 +265,9 @@ public:
     // Optional Details columns (ui/details_column_set.h bits), every folder.
     void DetailsColumns(uint32_t mask);
     void StartupOpen(int index);
+    // 任务栏标题: 0 none / 3 / 5 / 8 / 12 characters per folder name.
+    void TaskbarParentChars(int index);
+    void TaskbarCurrentChars(int index);
     void NotifyIcon(int index);
     void NewTabOpen(int index);
     void ExternalOpen(int index);  // plan §6 policy (multi-window M7b)

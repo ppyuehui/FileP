@@ -23,6 +23,7 @@
 #include "window_overview_ui.h"
 #include "app_updates.h"
 #include "app_internal.h"
+#include "app_window_title.h"
 #include "global_search_controller.h"
 #include "selection_caps.h"
 #include "app_input.h"
@@ -3503,6 +3504,8 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
                    hit.region == ui::HitTestResult::SettingsStartupOpen ||
                    hit.region == ui::HitTestResult::SettingsNewTabOpen ||
                    hit.region == ui::HitTestResult::SettingsExternalOpen ||
+                   hit.region == ui::HitTestResult::SettingsTaskbarParent ||
+                   hit.region == ui::HitTestResult::SettingsTaskbarCurrent ||
                    hit.region == ui::HitTestResult::SettingsNotifyIcon ||
                    hit.region == ui::HitTestResult::SettingsBlankClick ||
                    hit.region == ui::HitTestResult::SettingsHomeFolder ||
@@ -3518,6 +3521,14 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
             case ui::HitTestResult::SettingsNotifyIcon: s->settings.NotifyIcon(hit.index); break;
             case ui::HitTestResult::SettingsBlankClick: s->settings.BlankClick(hit.index); break;
             case ui::HitTestResult::SettingsHomeFolder: s->settings.HomeFolder(hit.index); break;
+            case ui::HitTestResult::SettingsTaskbarParent:
+                s->settings.TaskbarParentChars(hit.index);
+                SyncTaskbarWindowTitle(*s);
+                break;
+            case ui::HitTestResult::SettingsTaskbarCurrent:
+                s->settings.TaskbarCurrentChars(hit.index);
+                SyncTaskbarWindowTitle(*s);
+                break;
             case ui::HitTestResult::SettingsLanCache: SetLanCacheMode(*s, hit.index); break;
             case ui::HitTestResult::SettingsThumbCache: s->settings.ClearThumbCache(); break;
             case ui::HitTestResult::SettingsMtimeStyle: s->settings.MtimeStyle(hit.index); break;

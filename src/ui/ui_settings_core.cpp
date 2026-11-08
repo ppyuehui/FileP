@@ -543,6 +543,10 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
         toggle(lay.pinned_names_row,I::PinnedNames,I::PinnedNamesDesc,L"\xE718",vm.show_pinned_tab_names,6);
         toggle(lay.close_tab_double_click_row,I::SettingsCloseTabDoubleClick,I::SettingsCloseTabDoubleClickDesc,L"\xEA39",vm.settings_close_tab_double_click,35);
         toggle(lay.close_last_tab_row,I::SettingsCloseLastTab,I::SettingsCloseLastTabDesc,L"\xE89F",vm.settings_close_last_tab,26);
+        const I taskbar_chars[]={I::TaskbarChars3,I::TaskbarChars5,I::TaskbarChars8,I::TaskbarChars12,I::TaskbarCharsNone};
+        const int taskbar_values[]={3,5,8,12,0};
+        segmented(lay.taskbar_parent_card,lay.taskbar_parent_row,taskbar_chars,taskbar_values,vm.settings_taskbar_parent_chars,H::SettingsTaskbarParent,I::SettingsTaskbarParent,I::SettingsTaskbarParentDesc,5,L"\xE8AC");
+        segmented(lay.taskbar_current_card,lay.taskbar_current_row,taskbar_chars,taskbar_values,vm.settings_taskbar_current_chars,H::SettingsTaskbarCurrent,I::SettingsTaskbarCurrent,I::SettingsTaskbarCurrentDesc,5,L"\xE8AC");
         }
         if(page==9) {
         const I density[]={I::SettingsDensityCompact,I::SettingsDensityStandard,I::SettingsDensityRoomy};const int heights[]={28,34,40};

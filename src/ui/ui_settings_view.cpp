@@ -1308,6 +1308,8 @@ float MainRenderer::SettingsDestinationOffset(const WindowViewModel& vm, int set
     case I::SettingsExternalOpen: target=l.external_open_card;break;
     case I::SettingsCloseLastTab: target=l.close_last_tab_row;break;
     case I::SettingsCloseTabDoubleClick: target=l.close_tab_double_click_row;break;
+    case I::SettingsTaskbarParent: target=l.taskbar_parent_card;break;
+    case I::SettingsTaskbarCurrent: target=l.taskbar_current_card;break;
     case I::SettingsConfirmDelete: target=l.confirm_delete_row;break;
     case I::SettingsOpenFolders: target=l.integration_cover[0];break;
     case I::SettingsRowHeight: target=l.density_card;break;

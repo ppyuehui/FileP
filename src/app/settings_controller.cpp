@@ -894,6 +894,18 @@ void SettingsController::DetailsColumns(uint32_t mask) {
     SaveAndApply(SettingsEffect::ListStyle);
 }
 
+void SettingsController::TaskbarParentChars(int index) {
+    static constexpr int values[] = {3, 5, 8, 12, 0};
+    if (prefs_ && SelectValue(index, values, prefs_->taskbar_parent_chars))
+        SaveAndApply(SettingsEffect::None);
+}
+
+void SettingsController::TaskbarCurrentChars(int index) {
+    static constexpr int values[] = {3, 5, 8, 12, 0};
+    if (prefs_ && SelectValue(index, values, prefs_->taskbar_current_chars))
+        SaveAndApply(SettingsEffect::None);
+}
+
 // Startup and new-tab locations are read when they are used; nothing to apply.
 void SettingsController::StartupOpen(int index) {
     static constexpr int values[] = {0, 1};

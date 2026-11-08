@@ -123,6 +123,8 @@ void AppPrefs::ResetToDefaults() {
     preview_trigger = kPreviewTriggerHover;
     hover_preview_delay_ms = 500;
     hover_card_size = kHoverCardMedium;
+    taskbar_parent_chars = 5;
+    taskbar_current_chars = 5;
     change_tracking_enabled = false;
     change_tracking_days = 7;
     theme_mode = -1;
@@ -311,6 +313,8 @@ std::wstring AppPrefs::ToJson() const {
     out += L",\n  \"preview_trigger\":" + std::to_wstring(NormalizePreviewTrigger(preview_trigger));
     out += L",\n  \"hover_preview_delay_ms\":" + std::to_wstring(NormalizeHoverPreviewDelay(hover_preview_delay_ms));
     out += L",\n  \"hover_card_size\":" + std::to_wstring(NormalizeHoverCardSize(hover_card_size));
+    out += L",\n  \"taskbar_parent_chars\":" + std::to_wstring(NormalizeTaskbarChars(taskbar_parent_chars));
+    out += L",\n  \"taskbar_current_chars\":" + std::to_wstring(NormalizeTaskbarChars(taskbar_current_chars));
     out += L",\n  \"change_tracking_enabled\":";
     out += change_tracking_enabled ? L"true" : L"false";
     out += L",\n  \"change_tracking_days\":";
@@ -573,6 +577,10 @@ bool AppPrefs::FromJson(const std::wstring& json) {
         pulse::json::ExtractInt(json, L"hover_preview_delay_ms", 500));
     hover_card_size = NormalizeHoverCardSize(
         pulse::json::ExtractInt(json, L"hover_card_size", kHoverCardMedium));
+    taskbar_parent_chars = NormalizeTaskbarChars(
+        pulse::json::ExtractInt(json, L"taskbar_parent_chars", 5));
+    taskbar_current_chars = NormalizeTaskbarChars(
+        pulse::json::ExtractInt(json, L"taskbar_current_chars", 5));
     change_tracking_enabled = pulse::json::ExtractBool(json, L"change_tracking_enabled", false);
     change_tracking_days = pulse::json::ExtractInt(json, L"change_tracking_days", 7);
     if (change_tracking_days != 1 && change_tracking_days != 3 && change_tracking_days != 7)

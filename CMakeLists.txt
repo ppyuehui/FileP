@@ -543,6 +543,8 @@ endif()
 list(APPEND PULSE_APP_SOURCES src/index/network_agent_client.cpp)
 if(PULSE_APP_SOURCES)
     add_executable(pulse WIN32 ${PULSE_APP_SOURCES})
+    # 私人分支: the binary is FileP.exe, everything else stays as upstream names it.
+    set_target_properties(pulse PROPERTIES OUTPUT_NAME "FileP")
     if(PULSE_WITH_SELFTEST)
         target_compile_definitions(pulse PRIVATE PULSE_WITH_SELFTEST=1)
         target_sources(pulse PRIVATE src/bench/startup_rollback_test.cpp)

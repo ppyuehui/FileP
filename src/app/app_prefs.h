@@ -151,6 +151,10 @@ struct AppPrefs {
     // The card's size step: 0 small, 1 medium, 2 large (kHoverCardSize*). The
     // card takes the content's shape within it; Ctrl enlarges it while held.
     int hover_card_size = 1;
+    // 任务栏标题: characters of the parent and the current folder name shown
+    // there (0 = no limit; see TaskbarWindowTitle in app_window_title.cpp).
+    int taskbar_parent_chars = 5;
+    int taskbar_current_chars = 5;
     bool change_tracking_enabled = false;
     int change_tracking_days = 7;
     // system / zh-CN / en-US
@@ -282,6 +286,11 @@ constexpr int kHoverCardMedium = 1;
 constexpr int kHoverCardLarge = 2;
 inline int NormalizeHoverCardSize(int value) noexcept {
     return value == kHoverCardSmall || value == kHoverCardLarge ? value : kHoverCardMedium;
+}
+// 任务栏标题: characters shown per folder name (0 = no limit). The settings
+// offer 3 / 5 / 8 / 12; anything else falls back to the default of 5.
+inline int NormalizeTaskbarChars(int value) noexcept {
+    return value == 0 || value == 3 || value == 8 || value == 12 ? value : 5;
 }
 
 std::wstring FolderOpenCommandLine(const std::wstring& exe);

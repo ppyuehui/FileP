@@ -4426,3 +4426,13 @@ OpAuthTitleMove	IDS_OP_AUTH_TITLE_MOVE	5626	移动到这里需要管理员权限
 OpAuthTitleDelete	IDS_OP_AUTH_TITLE_DELETE	5627	删除这些项目需要管理员权限	Deleting these items needs administrator permission	刪除這些項目需要系統管理員權限
 OpAuthNotGrantedShort	IDS_OP_AUTH_NOT_GRANTED_SHORT	5628	没有获得管理员权限。	Administrator permission wasn't granted.	沒有取得系統管理員權限。
 OpAuthorizationOnce	IDS_OP_AUTHORIZATION_ONCE	5629	确认一次即可，本次操作的其余项目不会再问。	You only need to approve once; the rest of this operation won't ask again.	確認一次即可，本次操作的其餘項目不會再詢問。
+SettingsSecTaskbar	IDS_SETTINGS_SEC_TASKBAR	5630	任务栏标题	Taskbar title	工作列標題
+SettingsTaskbarParent	IDS_SETTINGS_TASKBAR_PARENT	5631	上级文件夹字符数	Parent folder characters	上層資料夾字元數
+SettingsTaskbarParentDesc	IDS_SETTINGS_TASKBAR_PARENT_DESC	5632	任务栏标题里「上级\当前」的上级部分超过这个字数就截断，末尾加 […]（按中文字符计）	The parent part of 上级\当前 in the taskbar title is cut at this many characters, ending with […]	工作列標題裡「上層\目前」的上層部分超過這個字數就截斷，末尾加 […]（按中文字元計）
+SettingsTaskbarCurrent	IDS_SETTINGS_TASKBAR_CURRENT	5633	当前文件夹字符数	Current folder characters	目前資料夾字元數
+SettingsTaskbarCurrentDesc	IDS_SETTINGS_TASKBAR_CURRENT_DESC	5634	任务栏标题里「上级\当前」的当前部分超过这个字数就截断，末尾加 […]（按中文字符计）	The current part of 上级\当前 in the taskbar title is cut at this many characters, ending with […]	工作列標題裡「上層\目前」的目前部分超過這個字數就截斷，末尾加 […]（按中文字元計）
+TaskbarChars3	IDS_TASKBAR_CHARS_3	5635	3 个	3	3 個
+TaskbarChars5	IDS_TASKBAR_CHARS_5	5636	5 个	5	5 個
+TaskbarChars8	IDS_TASKBAR_CHARS_8	5637	8 个	8	8 個
+TaskbarChars12	IDS_TASKBAR_CHARS_12	5638	12 个	12	12 個
+TaskbarCharsNone	IDS_TASKBAR_CHARS_NONE	5639	不限	No limit	不限

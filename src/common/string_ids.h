@@ -4419,5 +4419,15 @@
 #define IDS_OP_AUTH_TITLE_DELETE                                                         5627
 #define IDS_OP_AUTH_NOT_GRANTED_SHORT                                                    5628
 #define IDS_OP_AUTHORIZATION_ONCE                                                        5629
+#define IDS_SETTINGS_SEC_TASKBAR                                                         5630
+#define IDS_SETTINGS_TASKBAR_PARENT                                                      5631
+#define IDS_SETTINGS_TASKBAR_PARENT_DESC                                                 5632
+#define IDS_SETTINGS_TASKBAR_CURRENT                                                     5633
+#define IDS_SETTINGS_TASKBAR_CURRENT_DESC                                                5634
+#define IDS_TASKBAR_CHARS_3                                                              5635
+#define IDS_TASKBAR_CHARS_5                                                              5636
+#define IDS_TASKBAR_CHARS_8                                                              5637
+#define IDS_TASKBAR_CHARS_12                                                             5638
+#define IDS_TASKBAR_CHARS_NONE                                                           5639
 
 #endif  // PULSE_STRING_IDS_H

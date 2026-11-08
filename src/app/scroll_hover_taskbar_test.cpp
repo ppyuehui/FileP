@@ -59,20 +59,22 @@ bool RunScrollHoverTaskbarTest() {
         if (value) ++passed; else ++failed;
         ok &= value;
     };
-    check(TaskbarWindowTitle(nullptr) == L"Pulse", "no active folder keeps the Pulse fallback");
+    check(TaskbarWindowTitle(nullptr) == L"FileP", "no active folder keeps the FileP fallback");
     Tab title_tab;
     title_tab.current_path = L"C:\\fixture\\中文 项目\\";
-    check(TaskbarWindowTitle(&title_tab) == L"中文 项目 — Pulse",
-        "taskbar title uses the Unicode folder leaf, including spaces and trailing slash");
+    check(TaskbarWindowTitle(&title_tab, 0, 0) == L"fixture\\中文 项目 \u2014 FileP",
+        "taskbar title uses the parent and the Unicode folder leaf, spaces and trailing slash included");
+    check(TaskbarWindowTitle(&title_tab, 4, 2) == L"fixt [\u2026]\\中文 [\u2026] \u2014 FileP",
+        "each name is cut to its own character limit with […] at the end");
     title_tab.current_path = L"C:\\";
-    check(TaskbarWindowTitle(&title_tab) == L"C: — Pulse", "drive roots retain their display name");
+    check(TaskbarWindowTitle(&title_tab, 0, 0) == L"C: \u2014 FileP", "drive roots retain their display name");
     title_tab.current_path = L"\\\\server\\share\\";
-    check(TaskbarWindowTitle(&title_tab) == L"share — Pulse", "UNC share naming requires no network access");
+    check(TaskbarWindowTitle(&title_tab, 0, 0) == L"share \u2014 FileP", "UNC share naming requires no network access");
     title_tab.current_path.clear();
-    check(TaskbarWindowTitle(&title_tab) == l10n::Get(l10n::StringId::ThisPc) + L" — Pulse",
+    check(TaskbarWindowTitle(&title_tab, 0, 0) == l10n::Get(l10n::StringId::ThisPc) + L" \u2014 FileP",
         "This PC uses the existing localized name");
     title_tab.virtual_title = L"搜索：示例";
-    check(TaskbarWindowTitle(&title_tab) == L"搜索：示例 — Pulse",
+    check(TaskbarWindowTitle(&title_tab, 0, 0) == L"搜索：示例 \u2014 FileP",
         "virtual folders and search results use their display title");
 
     WNDCLASSW wc{};

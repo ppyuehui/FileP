@@ -1241,6 +1241,8 @@ struct WindowViewModel {
     int settings_external_open = 0; // 0 smart, 1 tab, 2 new window (multi-window M7b)
     bool settings_close_last_tab = false;
     bool settings_close_tab_double_click = false;
+    int settings_taskbar_parent_chars = 5;
+    int settings_taskbar_current_chars = 5;
     bool settings_confirm_delete = false;
     std::wstring settings_home_folder; // default location; empty = This PC
     int settings_text_render = 0; // 0 auto, 1 sharp, 2 smooth
@@ -1485,6 +1487,8 @@ struct HitTestResult {
         SettingsNotifyIcon,
         SettingsNewTabOpen,
         SettingsExternalOpen,
+        SettingsTaskbarParent,
+        SettingsTaskbarCurrent,
         SettingsBlankClick,
         SettingsHomeFolder,
         SettingsLanCache,  // 发现结果保留: 0 10 min, 1 1 h, 2 this session

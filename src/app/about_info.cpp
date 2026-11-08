@@ -228,7 +228,7 @@ std::vector<AboutRow> BuildAboutRows(bool index_service, bool index_installed, f
 }
 
 std::wstring AboutRowsText(const std::vector<AboutRow>& rows) {
-    std::wstring text = L"Pulse\r\n";
+    std::wstring text = L"FileP\r\n";
     for (const auto& [label, value] : rows) text += label + L": " + value + L"\r\n";
     return text;
 }

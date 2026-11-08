@@ -517,6 +517,14 @@ HitTestResult MainRenderer::HitTest(const WindowViewModel& vm, const D2D1_RECT_F
                 if (ContainsPt(lay.close_last_tab_row, x, y)) {
                     r.region = HitTestResult::SettingsToggle; r.index = 26; return r;
                 }
+                for (int i = 0; i < 5; ++i) {
+                    if (ContainsPt(lay.taskbar_parent_row[i], x, y)) {
+                        r.region = HitTestResult::SettingsTaskbarParent; r.index = i; return r;
+                    }
+                    if (ContainsPt(lay.taskbar_current_row[i], x, y)) {
+                        r.region = HitTestResult::SettingsTaskbarCurrent; r.index = i; return r;
+                    }
+                }
                 if (ContainsPt(lay.close_tab_double_click_row, x, y)) {
                     r.region = HitTestResult::SettingsToggle; r.index = 35; return r;
                 }

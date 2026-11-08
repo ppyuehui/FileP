@@ -4411,6 +4411,16 @@ enum class StringId : UINT {
     OpAuthTitleDelete = IDS_OP_AUTH_TITLE_DELETE,
     OpAuthNotGrantedShort = IDS_OP_AUTH_NOT_GRANTED_SHORT,
     OpAuthorizationOnce = IDS_OP_AUTHORIZATION_ONCE,
+    SettingsSecTaskbar = IDS_SETTINGS_SEC_TASKBAR,
+    SettingsTaskbarParent = IDS_SETTINGS_TASKBAR_PARENT,
+    SettingsTaskbarParentDesc = IDS_SETTINGS_TASKBAR_PARENT_DESC,
+    SettingsTaskbarCurrent = IDS_SETTINGS_TASKBAR_CURRENT,
+    SettingsTaskbarCurrentDesc = IDS_SETTINGS_TASKBAR_CURRENT_DESC,
+    TaskbarChars3 = IDS_TASKBAR_CHARS_3,
+    TaskbarChars5 = IDS_TASKBAR_CHARS_5,
+    TaskbarChars8 = IDS_TASKBAR_CHARS_8,
+    TaskbarChars12 = IDS_TASKBAR_CHARS_12,
+    TaskbarCharsNone = IDS_TASKBAR_CHARS_NONE,
 };
 
 bool IsLanguageId(std::wstring_view id) noexcept;
