@@ -2,7 +2,6 @@
 // (ported from File+ M90 so both apps behave the same).
 #include "custom_commands.h"
 
-#include "session.h"
 #include "../common/json_value.h"
 #include "../common/utf8_file.h"
 #include <windows.h>
@@ -10,6 +9,10 @@
 #include <vector>
 
 namespace pulse::app {
+
+// session.cpp; declared here so the store links into tests without AppState.
+std::wstring GetPulseDataDir();
+
 namespace {
 
 std::wstring Pad(int value) {

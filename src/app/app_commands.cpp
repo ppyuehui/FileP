@@ -1602,6 +1602,29 @@ static void RunCloudPin(AppState& s, fs::CloudPinAction action) {
 
 static void FlipToolbarTool(AppState& s, size_t index);
 
+// 自定义命令: runs a command in the open folder, with the selected item's name
+// as {name}, then refreshes the list.
+void RunCustomCommandAt(AppState& s, size_t index) {
+    if (index >= s.customCommands.commands.size()) return;
+    const app::Tab* tab = ActiveTab(s);
+    if (!tab || tab->current_path.empty()) return;
+    app::CommandContext context;
+    context.dir = tab->current_path;
+    const std::vector<std::wstring> selection = SelectedFullPaths(*tab);
+    if (selection.size() == 1) {
+        const std::wstring& path = selection.front();
+        const size_t slash = path.find_last_of(L"\\/");
+        context.name = slash == std::wstring::npos ? path : path.substr(slash + 1);
+    }
+    std::wstring error;
+    if (!app::RunCustomCommand(s.customCommands.commands[index], context, error)) {
+        MessageBoxW(s.hwnd, error.c_str(), L"FileP", MB_OK | MB_ICONERROR);
+        return;
+    }
+    s.store.MarkDirty(tab->current_path);
+    RefreshActiveTab(s);
+}
+
 void DispatchMenuCommand(AppState& s, int cmd) {
     if (HandleNetworkPageCommand(s, cmd)) return;  // 连接服务器, 最近访问, ...
     if (cmd >= app::CmdToolbarToolBase && cmd < app::CmdNewPrimaryBase &&
@@ -1629,6 +1652,10 @@ void DispatchMenuCommand(AppState& s, int cmd) {
     const bool needs_files=cmd==app::CmdProperties || cmd==app::CmdOpenPath || cmd==app::CmdOpenInNewTab || cmd==app::CmdRename ||
         cmd==app::CmdGroupIntoFolder || cmd==app::CmdDissolveFolder || cmd==app::CmdSetAlias;
     if(needs_files && DeferContentSelection(s,[cmd](AppState& v){DispatchMenuCommand(v,cmd);})) return;
+    if (cmd >= app::CmdCustomCommandBase && cmd <= app::CmdCustomCommandLast) {
+        RunCustomCommandAt(s, static_cast<size_t>(cmd - app::CmdCustomCommandBase));
+        return;
+    }
     if (cmd >= app::CmdViewBase && cmd < app::CmdViewBase + 8) {
         ChooseViewMode(s, ui::ViewModeFromIndex(cmd - app::CmdViewBase));
         return;
@@ -1979,6 +2006,18 @@ void EraseCommand(std::vector<ui::FluentMenuItem>& items, int command) {
     std::erase_if(items, [command](const ui::FluentMenuItem& item) { return item.command == command; });
 }
 
+// 自定义命令 (commands.json): one row per command for the surface the menu
+// belongs to, then the dispatch that runs it in the open folder.
+void AppendCustomCommandRows(AppState& s, std::vector<ui::FluentMenuItem>& items, bool on_folder) {
+    const auto& commands = s.customCommands.commands;
+    for (size_t i = 0; i < commands.size() && i < 100; ++i) {
+        const app::CustomCommand& command = commands[i];
+        if (command.name.empty() || !command.ListedFor(on_folder)) continue;
+        items.push_back(VerbRow(static_cast<int>(app::CmdCustomCommandBase + i), command.name, L"\xE756"));
+    }
+}
+
+
 bool HasCommand(const std::vector<ui::FluentMenuItem>& items, int command) {
     return std::any_of(items.begin(), items.end(), [command](const ui::FluentMenuItem& item) { return item.command == command; });
 }
@@ -2154,6 +2193,7 @@ std::vector<ui::FluentMenuItem> BuildFinderItemMenu(
         }
     }
     std::vector<ui::FluentMenuItem> items = app::BuildItemMenu(can_undo, undo_label, folder);
+    if (folder) AppendCustomCommandRows(s, items, true);
     if (const auto* tab = ActiveTab(s))
         app::AppendRecentChangesCommand(items, app::RecentChangesMenuPath(*tab, false));
     ApplyWorkspacePinLabel(items, s);
@@ -2858,6 +2898,7 @@ void ShowBackgroundContextMenu(AppState& s, POINT screen_pt) {
     // In-app Git: pull / push / refresh for a folder inside a repository.
     const std::wstring git_root = tab->git_root;
     if (view_options.filesystem) AppendGitMenu(*tab, base_items);
+    AppendCustomCommandRows(s, base_items, false);
     s.context_menu.OpenMenu(std::move(base_items));
     auto display = ExplorerMenu(s, s.context_menu.base_items());
 

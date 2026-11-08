@@ -122,6 +122,9 @@ enum MenuCmd : int {
     CmdDisconnectDrive = 3901,  // mapped network drive: 断开连接
     CmdUnlockDrive = 3902,      // BitLocker-locked drive: 解锁
     CmdMapNetworkDrive = 3903,  // a share, or This PC background: 映射网络驱动器
+    // 自定义命令: one id per command (index into AppState::customCommands).
+    CmdCustomCommandBase = 4000,
+    CmdCustomCommandLast = 4099,
     CmdUnpinNetwork = 3904,     // Network view: remove the selected pins
     CmdCompressZip = 3905,      // toolbar 压缩: the selection into a .zip beside it
     CmdToggleFolderSizes = 3906, // toolbar 文件夹大小: size folders on their own (AppPrefs::folder_size_auto)

@@ -182,6 +182,7 @@ struct AppState : AppCoreOwner {
     decltype(AppCore::recycle_info_guard)& recycle_info_guard = core.recycle_info_guard;
     decltype(AppCore::tray)& tray = core.tray;
     decltype(AppCore::places)& places = core.places;
+    decltype(AppCore::customCommands)& customCommands = core.customCommands;
     decltype(AppCore::ctxMenuPrefs)& ctxMenuPrefs = core.ctxMenuPrefs;
     decltype(AppCore::context_menu)& context_menu = core.context_menu;
     decltype(AppCore::appPrefs)& appPrefs = core.appPrefs;

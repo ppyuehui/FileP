@@ -19,6 +19,7 @@
 #include "app_prefs.h"
 #include "app_worker.h"
 #include "closed_tabs.h"
+#include "custom_commands.h"
 #include "closed_windows.h"
 #include "context_menu_controller.h"
 #include "context_menu_prefs.h"
@@ -106,6 +107,7 @@ struct AppCore {
 
     app::StagingTray tray;
     app::PlacesCatalog places;
+    app::CustomCommandStore customCommands;  // 自定义命令 (commands.json)
     app::ContextMenuPrefs ctxMenuPrefs;
     // Explorer COM/static menu session, caches, and delayed refresh state.
     app::ContextMenuController context_menu;
