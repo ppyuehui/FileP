@@ -313,17 +313,19 @@ ToolbarLayout MainRenderer::ToolbarLayoutAt(float w, float create_width, float f
     if (!vertical_tabs_)
         return MakeToolbarLayout(w, scale_, title_bar_height_, margin_, create_width, left, filter_expand,
                                  search_hidden_ ? -1.0f : search_min_dip_, group_width, sort_width, filter_width, pin_count_,
-                                 selection_span, pins);
+                                 selection_span, pins, show_home_button_ && !embedded_);
     // Command row directly under the title bar; address row centered in it,
     // stopping short of the settings button.
     ToolbarLayout out = MakeToolbarLayout(w, scale_, title_bar_height_ - 46.0f * scale_, margin_,
                                           create_width, left, filter_expand, 0.0f, group_width, sort_width,
-                                          filter_width, pin_count_, selection_span, pins);
+                                          filter_width, pin_count_, selection_span, pins,
+                                          show_home_button_ && !embedded_);
     const TitleChrome chrome = MakeTitleChrome(w, scale_, title_bar_height_);
     const float row_top = (title_bar_height_ - 36.0f * scale_) * 0.5f - 4.0f * scale_;
     const ToolbarLayout row = MakeToolbarLayout(chrome.settings_left - 4.0f * scale_, scale_, row_top,
                                                 margin_, create_width, left, 0.0f, search_hidden_ ? -1.0f : search_min_dip_);
     out.navigation = row.navigation;
+    out.home = row.home;
     out.address = row.address;
     out.search = row.search;
     return out;

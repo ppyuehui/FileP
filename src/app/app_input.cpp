@@ -3672,10 +3672,10 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
             RecycleDuplicateGroup(*s, static_cast<size_t>(hit.index));
         } else if (hit.region == ui::HitTestResult::SettingsDupDeleteAll) {
             RecycleAllDuplicateExtras(*s);
-        } else if (hit.region == ui::HitTestResult::NavBack) {
-            GoBack(*s);
-        } else if (hit.region == ui::HitTestResult::NavForward) {
-            GoForward(*s);
+        } else if (hit.region == ui::HitTestResult::NavHome) {
+            NavigateTo(*s, L"");   // 此电脑
+        } else if (hit.region == ui::HitTestResult::NavBack || hit.region == ui::HitTestResult::NavForward) {
+            if (hit.region == ui::HitTestResult::NavBack) GoBack(*s); else GoForward(*s);
         } else if (hit.region == ui::HitTestResult::NavUp) {
             GoUp(*s);
         } else if (hit.region == ui::HitTestResult::NavRefresh) {

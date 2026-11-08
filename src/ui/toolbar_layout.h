@@ -28,6 +28,7 @@ struct ToolbarPinOptions {
 };
 struct ToolbarLayout {
     std::array<D2D1_RECT_F, 4> navigation{};
+    D2D1_RECT_F home{};   // 此电脑, left of the address bar (empty when hidden)
     D2D1_RECT_F address{}, search{}, create{};
     D2D1_RECT_F sort{}, filter{}, overflow{};
     D2D1_RECT_F group{};   // "Group" button / active chip (empty when not offered)
@@ -46,13 +47,18 @@ inline ToolbarLayout MakeToolbarLayout(float width, float scale, float top, floa
                                       float left, float filter_expand = 0.0f, float search_min_dip = 0.0f,
                                       float group_width = 0.0f, float sort_width = 0.0f,
                                       float filter_width = 0.0f, int pin_count = 0,
-                                      float selection_span = 0.0f, const ToolbarPinOptions& pin_options = {}) {
+                                      float selection_span = 0.0f, const ToolbarPinOptions& pin_options = {},
+                                      bool show_home = false) {
     ToolbarLayout out;
     const float available = width - left;
     const float nav_step = NavigationStep(available, scale);
     float x = left + margin;
     for (int i=0;i<3;++i) {
         out.navigation[i] = NavigationButtonAt(x, top + 6 * scale, scale, nav_step);
+        x += nav_step;
+    }
+    if (show_home) {
+        out.home = NavigationButtonAt(x, top + 6 * scale, scale, nav_step);
         x += nav_step;
     }
     // A negative search_min_dip hides the field (search master switch off).

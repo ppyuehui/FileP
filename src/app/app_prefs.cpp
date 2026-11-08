@@ -125,6 +125,7 @@ void AppPrefs::ResetToDefaults() {
     show_ai_entry = true;
     show_path_copy = true;
     auto_collapse_sidebar = true;
+    show_home_button = true;
     hover_card_size = kHoverCardMedium;
     taskbar_parent_chars = 5;
     taskbar_current_chars = 5;
@@ -321,6 +322,8 @@ std::wstring AppPrefs::ToJson() const {
     out += show_path_copy ? L"true" : L"false";
     out += L",\n  \"auto_collapse_sidebar\":";
     out += auto_collapse_sidebar ? L"true" : L"false";
+    out += L",\n  \"show_home_button\":";
+    out += show_home_button ? L"true" : L"false";
     out += L",\n  \"hover_card_size\":" + std::to_wstring(NormalizeHoverCardSize(hover_card_size));
     out += L",\n  \"taskbar_parent_chars\":" + std::to_wstring(NormalizeTaskbarChars(taskbar_parent_chars));
     out += L",\n  \"taskbar_current_chars\":" + std::to_wstring(NormalizeTaskbarChars(taskbar_current_chars));
@@ -587,6 +590,7 @@ bool AppPrefs::FromJson(const std::wstring& json) {
     show_ai_entry = pulse::json::ExtractBool(json, L"show_ai_entry", true);
     show_path_copy = pulse::json::ExtractBool(json, L"show_path_copy", true);
     auto_collapse_sidebar = pulse::json::ExtractBool(json, L"auto_collapse_sidebar", true);
+    show_home_button = pulse::json::ExtractBool(json, L"show_home_button", true);
     hover_card_size = NormalizeHoverCardSize(
         pulse::json::ExtractInt(json, L"hover_card_size", kHoverCardMedium));
     taskbar_parent_chars = NormalizeTaskbarChars(

@@ -414,6 +414,13 @@ void MainRenderer::DrawToolbar(const WindowViewModel& vm, const D2D1_RECT_F& rec
                 toolbar_moving=true;
             draw_plate(tm.nav);
         }
+        if (layout.home.right > layout.home.left) {
+            // 此电脑: back to the drives view in this tab.
+            const bool hot = !plates && IsHovered(vm, HitTestResult::NavHome);
+            if (hot) painter_.FillRoundedRect(layout.home, theme.radius_control * scale_, theme.fill_hover);
+            DrawIconText(layout.home.left + 6 * scale_, layout.home.top + 6 * scale_,
+                         20 * scale_, 20 * scale_, L"\xE977", L"", theme.text, 0.86f);
+        }
         for (int i=0;i<4;++i) {
             const auto r=layout.navigation[i];
             if (r.right<=r.left) continue;

@@ -287,6 +287,7 @@ HitTestResult MainRenderer::HitTest(const WindowViewModel& vm, const D2D1_RECT_F
             }
             if(ContainsPt(lay.performance_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=4;return r;}
             if(ContainsPt(lay.menu_acrylic_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=36;return r;}
+            if(ContainsPt(lay.show_home_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=84;return r;}
             if(ContainsPt(lay.auto_collapse_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=83;return r;}
             if(ContainsPt(lay.show_path_copy_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=82;return r;}
             if(ContainsPt(lay.show_ai_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=81;return r;}
@@ -967,8 +968,10 @@ HitTestResult MainRenderer::HitTest(const WindowViewModel& vm, const D2D1_RECT_F
         const HitTestResult::Region nav[] = {HitTestResult::NavBack, HitTestResult::NavForward,
             HitTestResult::NavUp, HitTestResult::NavRefresh};
         const bool searchOverlay=vm.address_searching && rect.right-EffectiveSidebarWidth(rect.right)<480*scale_;
-        if (!searchOverlay)
+        if (!searchOverlay) {
+            if (vm.show_home_button && ContainsPt(toolbar.home,x,y)) { r.region=HitTestResult::NavHome; return r; }
             for (int i=0; i<4; ++i) if (ContainsPt(toolbar.navigation[i],x,y)) {r.region=nav[i]; return r;}
+        }
         // Hit-test the same rect the chrome is drawn in; toolbar.search can be wider,
         // which shifted every chip target (e.g. the options icon toggled the mode).
         const auto searchBounds=searchOverlay || vm.address_searching ? SearchBarRect(rect.right) : toolbar.search;

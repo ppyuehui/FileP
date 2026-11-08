@@ -1302,6 +1302,7 @@ float MainRenderer::SettingsDestinationOffset(const WindowViewModel& vm, int set
     case I::SettingsThemeColor: target=l.accent_card;break;
     case I::SettingsWindowEffect: target=l.effect_card;break;
     case I::MenuAcrylic: target=l.menu_acrylic_row;break;
+    case I::SettingsShowHome: target=l.show_home_row;break;
     case I::SettingsAutoCollapse: target=l.auto_collapse_row;break;
     case I::SettingsShowPathCopy: target=l.show_path_copy_row;break;
     case I::SettingsShowAi: target=l.show_ai_row;break;

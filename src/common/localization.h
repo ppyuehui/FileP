@@ -4450,6 +4450,8 @@ enum class StringId : UINT {
     SettingsShowPathCopyDesc = IDS_SETTINGS_SHOW_PATH_COPY_DESC,
     SettingsAutoCollapse = IDS_SETTINGS_AUTO_COLLAPSE,
     SettingsAutoCollapseDesc = IDS_SETTINGS_AUTO_COLLAPSE_DESC,
+    SettingsShowHome = IDS_SETTINGS_SHOW_HOME,
+    SettingsShowHomeDesc = IDS_SETTINGS_SHOW_HOME_DESC,
 };
 
 bool IsLanguageId(std::wstring_view id) noexcept;

@@ -4458,5 +4458,7 @@
 #define IDS_SETTINGS_SHOW_PATH_COPY_DESC                                                 5671
 #define IDS_SETTINGS_AUTO_COLLAPSE                                                       5672
 #define IDS_SETTINGS_AUTO_COLLAPSE_DESC                                                  5673
+#define IDS_SETTINGS_SHOW_HOME                                                           5674
+#define IDS_SETTINGS_SHOW_HOME_DESC                                                      5675
 
 #endif  // PULSE_STRING_IDS_H

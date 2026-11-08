@@ -152,6 +152,7 @@ struct AppPrefs {
     bool show_ai_entry = true;
     bool show_path_copy = true;   // 地址栏右侧的复制路径按钮
     bool auto_collapse_sidebar = true;  // 窗口变窄时把侧栏收成图标栏
+    bool show_home_button = true;       // 地址栏左侧的「此电脑」按钮
     // The card's size step: 0 small, 1 medium, 2 large (kHoverCardSize*). The
     // card takes the content's shape within it; Ctrl enlarges it while held.
     int hover_card_size = 1;

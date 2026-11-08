@@ -141,6 +141,7 @@ public:
     // turns animations off). Re-setting the current state is a no-op.
     void SetSidebarCollapsed(bool on, bool animate = false);
     void SetAutoCollapseSidebar(bool on) { auto_collapse_sidebar_ = on; }
+    void SetShowHomeButton(bool on) { show_home_button_ = on; }
     bool SidebarCollapsed() const { return sidebar_collapsed_; }
     bool SidebarAnimating() const { return collapse_anim_; }
     // Hover peek: the collapsed rail shows the full sidebar as an overlay
@@ -1013,6 +1014,7 @@ private:
     bool sidebar_collapsed_ = false;   // effective: the user's choice or the docked assistant
     bool user_sidebar_collapsed_ = false;
     bool auto_collapse_sidebar_ = true;   // 设置：窗口变窄时是否自动收成图标栏
+    bool show_home_button_ = true;        // 设置：地址栏左侧的「此电脑」按钮
     bool user_forced_full_ = false;       // 手点展开后，窄窗口也不再自动收起
     bool ai_rail_ = false;             // docked Pulse 助手 holds the sidebar on its rail
     AiPanelView ai_panel_;
