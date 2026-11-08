@@ -119,7 +119,9 @@ public:
     }
     bool FavoritesBarShown() const { return favorites_bar_; }
     // The bar hidden, the address bar ends in ★⌄ (the favorites dropdown).
-    bool FavoritesButtonShown() const { return !favorites_bar_ && !embedded_; }
+    // The address bar's right-hand button. It used to vanish whenever the
+    // 收藏 bar moved into the command row, which hid 复制路径 for good.
+    bool FavoritesButtonShown() const { return !embedded_; }
     D2D1_RECT_F AddressFavoritesRect(float window_width) const {
         const D2D1_RECT_F a = AddressBarRect(window_width);
         return D2D1::RectF(a.right - 32 * scale_, a.top + 4 * scale_, a.right - 4 * scale_, a.bottom - 4 * scale_);
@@ -1011,6 +1013,7 @@ private:
     bool sidebar_collapsed_ = false;   // effective: the user's choice or the docked assistant
     bool user_sidebar_collapsed_ = false;
     bool auto_collapse_sidebar_ = true;   // 设置：窗口变窄时是否自动收成图标栏
+    bool user_forced_full_ = false;       // 手点展开后，窄窗口也不再自动收起
     bool ai_rail_ = false;             // docked Pulse 助手 holds the sidebar on its rail
     AiPanelView ai_panel_;
     void ApplySidebarCollapse(bool animate);
