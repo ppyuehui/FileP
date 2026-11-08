@@ -581,8 +581,18 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
                 vm.command_selected < static_cast<int>(vm.command_names.size());
             const bool has_step = vm.command_step_selected >= 0 &&
                 vm.command_step_selected < static_cast<int>(vm.command_step_texts.size());
-            // 名称 / 值: a drawn field frame, with the native edit sitting inside
-            // it (the frame's border is what makes the box readable as a field).
+            // Left column: 命令 header, the rows, 新建 / 删除.
+            {
+                std::wstring head = l10n::Get(I::CmdList);
+                if (!vm.command_names.empty()) head += L"  " + std::to_wstring(vm.command_names.size());
+                painter_.DrawText(head, lay.cmd_list_header, compositor_->SmallFormat(), theme.text_secondary);
+            }
+            // A hairline between the two columns.
+            MakeBrush(dc, theme.stroke_divider, brStrokeDivider_);
+            FillRect(dc, brStrokeDivider_.get(), lay.cmd_list.right + 12*scale_, lay.cmd_list.top + 4*scale_,
+                     1.0f, (std::max)(0.0f, lay.cmd_body.bottom - lay.cmd_body.top - 32*scale_));
+            painter_.DrawText(l10n::Get(I::CmdName), lay.cmd_name_label,
+                              compositor_->SmallFormat(), theme.text_secondary);
             {
                 fluent::ControlState name_st{};
                 name_st.focused = vm.command_name_focused;
@@ -591,8 +601,9 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
                 value_st.focused = vm.command_value_focused;
                 painter_.DrawTextFieldFrame(lay.cmd_value_field, value_st, true);
             }
-            label(lay.cmd_name_label,l10n::Get(I::CmdName),L"",L"\xE932");
-            // 出现位置: three check boxes, disabled without a command.
+            // 出现位置: three check boxes in one row, disabled without a command.
+            painter_.DrawText(l10n::Get(I::CmdPlaces), lay.cmd_places_label,
+                              compositor_->SmallFormat(), theme.text_secondary);
             const auto place=[&](D2D1_RECT_F r,I title,bool on,H::Region region,int index) {
                 if(r.bottom<=r.top) return;
                 const bool hot=has_cmd && IsHovered(vm,region,index);
@@ -602,12 +613,14 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
                         r.right-r.left-4*scale_,r.bottom-r.top-4*scale_,6*scale_);
                 }
                 fluent::ControlState st{}; st.checked=on; st.enabled=has_cmd; st.hovered=hot;
-                painter_.DrawCheckBox(D2D1::RectF(r.left+16*scale_,r.top+16*scale_,
-                    r.right-16*scale_,r.bottom-16*scale_),l10n::Get(title),st);
+                painter_.DrawCheckBox(D2D1::RectF(r.left+8*scale_,r.top+6*scale_,
+                    r.right-8*scale_,r.bottom-6*scale_),l10n::Get(title),st);
             };
-            place(lay.cmd_toolbar_row,I::CmdPlaceToolbar,vm.command_toolbar,H::SettingsCommandPlaces,0);
-            place(lay.cmd_folder_row,I::CmdPlaceFolder,vm.command_folder,H::SettingsCommandPlaces,1);
-            place(lay.cmd_background_row,I::CmdPlaceBackground,vm.command_background,H::SettingsCommandPlaces,2);
+            place(lay.cmd_place[0],I::CmdPlaceToolbar,vm.command_toolbar,H::SettingsCommandPlaces,0);
+            place(lay.cmd_place[1],I::CmdPlaceFolder,vm.command_folder,H::SettingsCommandPlaces,1);
+            place(lay.cmd_place[2],I::CmdPlaceBackground,vm.command_background,H::SettingsCommandPlaces,2);
+            painter_.DrawText(l10n::Get(I::CmdSteps), lay.cmd_steps_label,
+                              compositor_->SmallFormat(), theme.text_secondary);
             // 命令 list.
             for(int i=0;i<lay.cmd_row_count;++i) {
                 const auto& r=lay.cmd_row[i];
@@ -656,11 +669,26 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
                 painter_.DrawText(vm.command_step_texts[i],D2D1::RectF(r.left+16*scale_,r.top,r.right-16*scale_,r.bottom),
                     compositor_->TextFormat(),theme.text);
             }
+            painter_.DrawText(l10n::Get(I::CmdKindTitle), D2D1::RectF(
+                    lay.cmd_kind_row.left, lay.cmd_kind_row.top, lay.cmd_kind_row.right,
+                    lay.cmd_kind_row.top + 22*scale_),
+                compositor_->SmallFormat(), theme.text_secondary);
             static constexpr I kKinds[]={I::CmdKindFolder,I::CmdKindFile,I::CmdKindProgram,I::CmdKindScript};
-            static constexpr int kKindValues[]={0,1,2,3};
-            segmented(lay.cmd_kind_row,lay.cmd_kind,kKinds,kKindValues,vm.command_kind,
-                      H::SettingsCommandKind,I::CmdKindTitle,I::CmdKindDesc,4,L"\xE7C3");
-            label(lay.cmd_value_label,l10n::Get(I::CmdValue),L"",L"\xE8AC");
+            painter_.DrawSegmentedTrack(D2D1::RectF(lay.cmd_kind[0].left, lay.cmd_kind[0].top,
+                                                    lay.cmd_kind[3].right, lay.cmd_kind[3].bottom));
+            for (int i = 0; i < 4; ++i) {
+                fluent::SegmentedItemSpec item{};
+                item.bounds = lay.cmd_kind[i];
+                item.text = l10n::Get(kKinds[i]);
+                item.state.checked = vm.command_kind == i;
+                item.state.hovered = IsHovered(vm, H::SettingsCommandKind, i);
+                item.shared_track = true;
+                item.position = i == 0 ? fluent::SegmentPosition::First
+                              : i == 3 ? fluent::SegmentPosition::Last : fluent::SegmentPosition::Middle;
+                painter_.DrawSegmentedItem(item);
+            }
+            painter_.DrawText(l10n::Get(I::CmdValue), lay.cmd_value_label,
+                              compositor_->SmallFormat(), theme.text_secondary);
             button(lay.cmd_add,l10n::Get(I::CmdAddStep),H::SettingsCommandAddStep,0,true,has_cmd);
             button(lay.cmd_update,l10n::Get(I::CmdUpdateStep),H::SettingsCommandUpdateStep,0,false,has_step);
             button(lay.cmd_up,l10n::Get(I::CmdStepUp),H::SettingsCommandUp,0,false,has_step);

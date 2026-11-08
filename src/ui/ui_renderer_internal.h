@@ -2582,10 +2582,15 @@ struct SettingsLayout {
     D2D1_RECT_F effect_row[kWindowEffectCount]{};
     D2D1_RECT_F menu_acrylic_row{};
     D2D1_RECT_F show_ai_row{};
-    // 自定义命令 page (14): the editor's rows.
+    // 自定义命令 page (14): 主从双栏 — left the commands, right the selected one.
+    D2D1_RECT_F cmd_body{};                 // the whole two-column card
+    D2D1_RECT_F cmd_list{};                 // the left column
+    D2D1_RECT_F cmd_list_header{};
+    D2D1_RECT_F cmd_detail{};               // the right column
+    D2D1_RECT_F cmd_places_label{}, cmd_place[3]{};
+    D2D1_RECT_F cmd_steps_label{}, cmd_steps_box{};
     D2D1_RECT_F cmd_name_label{}, cmd_name_row{}, cmd_name_field{};
     D2D1_RECT_F cmd_value_label{}, cmd_value_field{};
-    D2D1_RECT_F cmd_toolbar_row{}, cmd_folder_row{}, cmd_background_row{};
     D2D1_RECT_F cmd_row[12]{};
     int cmd_row_count = 0;
     D2D1_RECT_F cmd_buttons{};

@@ -249,57 +249,91 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         l.close_last_tab_row=row(64);
 
     } else if (page == 14) {
-        // 自定义命令: a settings form — name, the three places, the command list,
-        // then the selected command's steps.
+        // 自定义命令: 主从双栏 — the command list on the left, the selected
+        // command on the right (name, where it shows, its steps). A narrow page
+        // stacks the two columns instead.
         section(I::SettingsPageCommands);
-        // 表单式：标题一行，下面整行是输入框（输入框太窄或太靠右都难找）。
-        l.cmd_name_label = row(30);
-        l.cmd_name_row = row(56);
-        l.cmd_name_field = D2D1::RectF(left + 16*scale, l.cmd_name_row.top + 6*scale,
-                                       right - 16*scale, l.cmd_name_row.bottom - 6*scale);
-        l.cmd_toolbar_row = row(56);
-        l.cmd_folder_row = row(56);
-        l.cmd_background_row = row(56);
-        section(I::CmdList);
+        const float pad2 = 16*scale;
+        const bool stack = right - left < 760*scale;
+        const int command_rows = (std::min)(static_cast<int>(vm.command_names.size()), 12);
+        const int step_rows = (std::min)(static_cast<int>(vm.command_step_texts.size()), 12);
+        // Column heights (the taller one sets the card).
+        const float list_h = 30*scale + (command_rows > 0 ? command_rows : 1)*44*scale + 8*scale + 40*scale;
+        const float right_h = 26*scale + 52*scale + 10*scale + 24*scale + 34*scale + 10*scale +
+                              26*scale + (step_rows > 0 ? step_rows : 1)*36*scale + 8*scale +
+                              40*scale + 8*scale + 56*scale + 30*scale + 52*scale + 8*scale + 40*scale;
+        const float body_h = (stack ? list_h + right_h : (std::max)(list_h, right_h)) + 24*scale;
+        l.cmd_body = row(body_h);
+        const float col_w = stack ? (right - left - 2*pad2) : (std::min)(300*scale, (right - left)*0.36f);
+        l.cmd_list = D2D1::RectF(left + pad2, l.cmd_body.top + 12*scale,
+                                 left + pad2 + (stack ? (right - left - 2*pad2) : col_w),
+                                 l.cmd_body.top + 12*scale + list_h);
+        l.cmd_detail = D2D1::RectF(stack ? left + pad2 : l.cmd_list.right + 24*scale,
+                                   stack ? l.cmd_list.bottom + 12*scale : l.cmd_body.top + 12*scale,
+                                   right - pad2,
+                                   (stack ? l.cmd_list.bottom + 12*scale : l.cmd_body.top + 12*scale) + right_h);
+        // Left column: header, the command rows, then 新建 / 删除.
+        float y = l.cmd_list.top;
+        l.cmd_list_header = D2D1::RectF(l.cmd_list.left, y, l.cmd_list.right, y + 30*scale);
+        y += 30*scale;
         l.cmd_row_count = 0;
-        {
-            const int rows = (std::min)(static_cast<int>(vm.command_names.size()), 12);
-            for (int i = 0; i < rows; ++i) l.cmd_row[l.cmd_row_count++] = row(40);
-            if (rows == 0) l.cmd_row[l.cmd_row_count++] = row(40);
+        for (int i = 0; i < (command_rows > 0 ? command_rows : 1); ++i) {
+            l.cmd_row[l.cmd_row_count++] = D2D1::RectF(l.cmd_list.left, y, l.cmd_list.right, y + 44*scale);
+            y += 44*scale;
         }
-        l.cmd_buttons = row(52);
+        y += 8*scale;
         {
-            const float mid = (l.cmd_buttons.top + l.cmd_buttons.bottom) * 0.5f;
-            const float bw1 = button_w(I::CmdNew, 96);
-            l.cmd_new = D2D1::RectF(left + 16*scale, mid - 16*scale, left + 16*scale + bw1, mid + 16*scale);
-            const float bw2 = button_w(I::CmdDelete, 96);
-            l.cmd_delete = D2D1::RectF(l.cmd_new.right + 8*scale, mid - 16*scale,
-                                       l.cmd_new.right + 8*scale + bw2, mid + 16*scale);
+            const float bw = (std::min)(110*scale, (l.cmd_list.right - l.cmd_list.left - 8*scale) * 0.5f);
+            l.cmd_new = D2D1::RectF(l.cmd_list.left, y, l.cmd_list.left + bw, y + 40*scale);
+            l.cmd_delete = D2D1::RectF(l.cmd_new.right + 8*scale, y, l.cmd_new.right + 8*scale + bw, y + 40*scale);
         }
-        section(I::CmdSteps);
+        // Right column: 名称, 出现位置 (one row of three), 步骤, 编辑步骤.
+        float ry = l.cmd_detail.top;
+        l.cmd_name_label = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 26*scale);
+        ry += 26*scale;
+        l.cmd_name_field = D2D1::RectF(l.cmd_detail.left, ry + 4*scale, l.cmd_detail.right, ry + 52*scale);
+        ry += 52*scale + 10*scale;
+        l.cmd_places_label = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 24*scale);
+        ry += 24*scale;
+        {
+            const float w = (l.cmd_detail.right - l.cmd_detail.left) / 3.0f;
+            for (int i = 0; i < 3; ++i)
+                l.cmd_place[i] = D2D1::RectF(l.cmd_detail.left + i*w, ry, l.cmd_detail.left + (i+1)*w, ry + 34*scale);
+        }
+        ry += 34*scale + 10*scale;
+        l.cmd_steps_label = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 26*scale);
+        ry += 26*scale;
         l.cmd_step_count = 0;
-        {
-            const int steps = (std::min)(static_cast<int>(vm.command_step_texts.size()), 12);
-            for (int i = 0; i < steps; ++i) l.cmd_step_row[l.cmd_step_count++] = row(36);
-            if (steps == 0) l.cmd_step_row[l.cmd_step_count++] = row(36);
+        for (int i = 0; i < (step_rows > 0 ? step_rows : 1); ++i) {
+            l.cmd_step_row[l.cmd_step_count++] = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 36*scale);
+            ry += 36*scale;
         }
-        l.cmd_kind_row = row(56);
-        segments(l.cmd_kind_row, l.cmd_kind, 4, narrow ? 320.0f : 400.0f);
-        l.cmd_value_label = row(30);
-        l.cmd_value_row = row(56);
-        l.cmd_value_field = D2D1::RectF(left + 16*scale, l.cmd_value_row.top + 6*scale,
-                                        right - 16*scale, l.cmd_value_row.bottom - 6*scale);
-        l.cmd_step_buttons = row(52);
+        ry += 8*scale;
+        l.cmd_add = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.left + 120*scale, ry + 40*scale);
+        ry += 40*scale + 8*scale;
+        l.cmd_kind_row = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 56*scale);
         {
-            const float mid = (l.cmd_step_buttons.top + l.cmd_step_buttons.bottom) * 0.5f;
-            float x = left + 16*scale;
+            const float cw = (std::min)(l.cmd_detail.right - l.cmd_detail.left, 420*scale);
+            const float each = cw / 4.0f;
+            for (int i = 0; i < 4; ++i)
+                l.cmd_kind[i] = D2D1::RectF(l.cmd_kind_row.left + i*each, l.cmd_kind_row.top + 26*scale,
+                                            l.cmd_kind_row.left + (i+1)*each, l.cmd_kind_row.bottom);
+        }
+        ry += 56*scale;
+        l.cmd_value_label = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 24*scale);
+        ry += 24*scale;
+        l.cmd_value_row = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 52*scale);
+        l.cmd_value_field = D2D1::RectF(l.cmd_detail.left, ry + 4*scale, l.cmd_detail.right, ry + 52*scale);
+        ry += 52*scale + 8*scale;
+        l.cmd_step_buttons = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 40*scale);
+        {
+            float x = l.cmd_step_buttons.left;
             const auto place = [&](l10n::StringId id, float fallback) {
                 const float bw = button_w(id, fallback) + 8*scale;
-                const D2D1_RECT_F r(x, mid - 16*scale, x + bw, mid + 16*scale);
+                const D2D1_RECT_F r(x, l.cmd_step_buttons.top, x + bw, l.cmd_step_buttons.bottom);
                 x += bw + 8*scale;
                 return r;
             };
-            l.cmd_add = place(I::CmdAddStep, 92);
             l.cmd_update = place(I::CmdUpdateStep, 68);
             l.cmd_up = place(I::CmdStepUp, 68);
             l.cmd_down = place(I::CmdStepDown, 68);

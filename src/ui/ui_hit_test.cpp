@@ -289,9 +289,9 @@ HitTestResult MainRenderer::HitTest(const WindowViewModel& vm, const D2D1_RECT_F
             if(ContainsPt(lay.menu_acrylic_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=36;return r;}
             if(ContainsPt(lay.show_ai_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=81;return r;}
             {
-                if(ContainsPt(lay.cmd_toolbar_row,x,y)) {r.region=HitTestResult::SettingsCommandPlaces;r.index=0;return r;}
-                if(ContainsPt(lay.cmd_folder_row,x,y)) {r.region=HitTestResult::SettingsCommandPlaces;r.index=1;return r;}
-                if(ContainsPt(lay.cmd_background_row,x,y)) {r.region=HitTestResult::SettingsCommandPlaces;r.index=2;return r;}
+                if(ContainsPt(lay.cmd_place[0],x,y)) {r.region=HitTestResult::SettingsCommandPlaces;r.index=0;return r;}
+                if(ContainsPt(lay.cmd_place[1],x,y)) {r.region=HitTestResult::SettingsCommandPlaces;r.index=1;return r;}
+                if(ContainsPt(lay.cmd_place[2],x,y)) {r.region=HitTestResult::SettingsCommandPlaces;r.index=2;return r;}
                 if(ContainsPt(lay.cmd_new,x,y)) {r.region=HitTestResult::SettingsCommandNew;r.index=0;return r;}
                 if(ContainsPt(lay.cmd_delete,x,y)) {r.region=HitTestResult::SettingsCommandDelete;r.index=0;return r;}
                 if(ContainsPt(lay.cmd_add,x,y)) {r.region=HitTestResult::SettingsCommandAddStep;r.index=0;return r;}
