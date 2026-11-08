@@ -361,6 +361,14 @@ D2D1_RECT_F MainRenderer::SettingsContentRect(const WindowViewModel& vm, const D
     return lay.content;
 }
 
+void MainRenderer::SettingsCommandFields(const WindowViewModel& vm, const D2D1_RECT_F& rect,
+                                         D2D1_RECT_F* name_field, D2D1_RECT_F* value_field) const {
+    const SettingsLayout lay = MakeSettingsLayout(vm, rect, scale_, title_bar_height_, status_height_,
+                                                  &painter_);
+    if (name_field) *name_field = lay.cmd_name_field;
+    if (value_field) *value_field = lay.cmd_value_field;
+}
+
 D2D1_RECT_F MainRenderer::SidebarToggleRect(float w) const {
     if (w / scale_ < kSidebarRailWindowDip) return {};
     const float size = 32.0f * scale_;

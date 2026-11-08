@@ -2582,8 +2582,19 @@ struct SettingsLayout {
     D2D1_RECT_F effect_row[kWindowEffectCount]{};
     D2D1_RECT_F menu_acrylic_row{};
     D2D1_RECT_F show_ai_row{};
-    D2D1_RECT_F commands_editor_row{};      // 自定义命令 page (14)
-    D2D1_RECT_F commands_editor_button{};
+    // 自定义命令 page (14): the editor's rows.
+    D2D1_RECT_F cmd_name_row{}, cmd_name_field{};
+    D2D1_RECT_F cmd_toolbar_row{}, cmd_folder_row{}, cmd_background_row{};
+    D2D1_RECT_F cmd_row[12]{};
+    int cmd_row_count = 0;
+    D2D1_RECT_F cmd_buttons{};
+    D2D1_RECT_F cmd_new{}, cmd_delete{};
+    D2D1_RECT_F cmd_step_row[12]{};
+    int cmd_step_count = 0;
+    D2D1_RECT_F cmd_kind_row{}, cmd_kind[4]{};
+    D2D1_RECT_F cmd_value_row{}, cmd_value_field{};
+    D2D1_RECT_F cmd_step_buttons{};
+    D2D1_RECT_F cmd_add{}, cmd_update{}, cmd_up{}, cmd_down{}, cmd_del_step{};
     D2D1_RECT_F density_card{};
     D2D1_RECT_F list_style_row[6]{};
     // 修改时间提示: the style picker; range, colors and switches while it is on.

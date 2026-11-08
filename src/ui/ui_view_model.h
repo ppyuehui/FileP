@@ -1210,6 +1210,18 @@ struct WindowViewModel {
     bool settings_list_tree_sticky = true;
     bool settings_menu_acrylic = true;
     bool settings_show_ai = true;   // 左下角的 AI 图标与入口
+    // 自定义命令 (settings page 14): the editor reads these; the app side owns
+    // the selection and the two text fields.
+    std::vector<std::wstring> command_names;
+    std::vector<std::wstring> command_places;      // 工具栏 · 右键空白处
+    std::vector<int> command_step_counts;
+    std::vector<std::wstring> command_step_texts;  // of the selected command
+    int command_selected = -1;
+    int command_step_selected = -1;
+    int command_kind = 0;
+    bool command_toolbar = false;
+    bool command_folder = false;
+    bool command_background = false;
     bool settings_list_size_bar = false;
     bool settings_list_tag_names = false;
     bool settings_list_selection_outline = false;
@@ -1490,6 +1502,17 @@ struct HitTestResult {
         SettingsExternalOpen,
         SettingsTaskbarChars,  // 任务栏标题: 0 上级-, 1 上级+, 2 当前-, 3 当前+
         SettingsCommandsEditor,  // 自定义命令页: 打开编辑器
+        SettingsCommandRow,      // 自定义命令页: 选中第 index 条命令
+        SettingsCommandStep,     // 自定义命令页: 选中第 index 步
+        SettingsCommandNew,      // 新建命令 / 删除命令
+        SettingsCommandDelete,
+        SettingsCommandPlaces,   // 出现位置: 0 工具栏, 1 右键文件夹, 2 右键空白处
+        SettingsCommandKind,     // 步骤类型 0..3
+        SettingsCommandAddStep,  // 添加步骤 / 更新 / 上移 / 下移 / 删除步骤
+        SettingsCommandUpdateStep,
+        SettingsCommandUp,
+        SettingsCommandDown,
+        SettingsCommandDeleteStep,
         SettingsBlankClick,
         SettingsHomeFolder,
         SettingsLanCache,  // 发现结果保留: 0 10 min, 1 1 h, 2 this session

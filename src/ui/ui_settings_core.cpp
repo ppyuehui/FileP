@@ -576,6 +576,88 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
         toggle(lay.close_tab_double_click_row,I::SettingsCloseTabDoubleClick,I::SettingsCloseTabDoubleClickDesc,L"\xEA39",vm.settings_close_tab_double_click,35);
         toggle(lay.close_last_tab_row,I::SettingsCloseLastTab,I::SettingsCloseLastTabDesc,L"\xE89F",vm.settings_close_last_tab,26);
         }
+        if(page==14) {
+            const bool has_cmd = vm.command_selected >= 0 &&
+                vm.command_selected < static_cast<int>(vm.command_names.size());
+            const bool has_step = vm.command_step_selected >= 0 &&
+                vm.command_step_selected < static_cast<int>(vm.command_step_texts.size());
+            // 名称: the value itself is the native edit parked over this row.
+            label(lay.cmd_name_row,l10n::Get(I::CmdName),L"",L"\xE932",lay.cmd_name_field.left-12*scale_);
+            // 出现位置: three check boxes, disabled without a command.
+            const auto place=[&](D2D1_RECT_F r,I title,bool on,H::Region region,int index) {
+                if(r.bottom<=r.top) return;
+                const bool hot=has_cmd && IsHovered(vm,region,index);
+                if(hot) {
+                    MakeBrush(dc,theme.fill_hover,brFillHover_);
+                    FillRoundedRect(dc,brFillHover_.get(),r.left+2*scale_,r.top+2*scale_,
+                        r.right-r.left-4*scale_,r.bottom-r.top-4*scale_,6*scale_);
+                }
+                fluent::ControlState st{}; st.checked=on; st.enabled=has_cmd; st.hovered=hot;
+                painter_.DrawCheckBox(D2D1::RectF(r.left+16*scale_,r.top+16*scale_,
+                    r.right-16*scale_,r.bottom-16*scale_),l10n::Get(title),st);
+            };
+            place(lay.cmd_toolbar_row,I::CmdPlaceToolbar,vm.command_toolbar,H::SettingsCommandPlaces,0);
+            place(lay.cmd_folder_row,I::CmdPlaceFolder,vm.command_folder,H::SettingsCommandPlaces,1);
+            place(lay.cmd_background_row,I::CmdPlaceBackground,vm.command_background,H::SettingsCommandPlaces,2);
+            // 命令 list.
+            for(int i=0;i<lay.cmd_row_count;++i) {
+                const auto& r=lay.cmd_row[i];
+                const bool listed=i<static_cast<int>(vm.command_names.size());
+                if(listed && i==vm.command_selected) {
+                    MakeBrush(dc,theme.fill_selected,brFillSelected_);
+                    FillRoundedRect(dc,brFillSelected_.get(),r.left+12*scale_,r.top+2*scale_,
+                        r.right-r.left-24*scale_,r.bottom-r.top-4*scale_,6*scale_);
+                } else if(listed && IsHovered(vm,H::SettingsCommandRow,i)) {
+                    MakeBrush(dc,theme.fill_hover,brFillHover_);
+                    FillRoundedRect(dc,brFillHover_.get(),r.left+12*scale_,r.top+2*scale_,
+                        r.right-r.left-24*scale_,r.bottom-r.top-4*scale_,6*scale_);
+                }
+                if(!listed) {
+                    painter_.DrawText(l10n::Get(I::CmdEmpty),D2D1::RectF(r.left+16*scale_,r.top,r.right-16*scale_,r.bottom),
+                        compositor_->SmallFormat(),theme.text_secondary);
+                    continue;
+                }
+                painter_.DrawText(vm.command_names[i],D2D1::RectF(r.left+16*scale_,r.top,r.right-120*scale_,r.bottom),
+                    compositor_->TextFormat(),theme.text);
+                const std::wstring count=std::to_wstring(vm.command_step_counts[i]);
+                painter_.DrawText(count,D2D1::RectF(r.left,r.top,r.right-16*scale_,r.bottom),
+                    compositor_->SmallFormat(),theme.text_secondary,fluent::HorizontalAlignment::Right);
+            }
+            button(lay.cmd_new,l10n::Get(I::CmdNew),H::SettingsCommandNew,0,true,true);
+            button(lay.cmd_delete,l10n::Get(I::CmdDelete),H::SettingsCommandDelete,0,false,has_cmd);
+            // 步骤 of the selected command.
+            for(int i=0;i<lay.cmd_step_count;++i) {
+                const auto& r=lay.cmd_step_row[i];
+                const bool listed=i<static_cast<int>(vm.command_step_texts.size());
+                if(listed && i==vm.command_step_selected) {
+                    MakeBrush(dc,theme.fill_selected,brFillSelected_);
+                    FillRoundedRect(dc,brFillSelected_.get(),r.left+12*scale_,r.top+2*scale_,
+                        r.right-r.left-24*scale_,r.bottom-r.top-4*scale_,6*scale_);
+                } else if(listed && IsHovered(vm,H::SettingsCommandStep,i)) {
+                    MakeBrush(dc,theme.fill_hover,brFillHover_);
+                    FillRoundedRect(dc,brFillHover_.get(),r.left+12*scale_,r.top+2*scale_,
+                        r.right-r.left-24*scale_,r.bottom-r.top-4*scale_,6*scale_);
+                }
+                if(!listed) {
+                    painter_.DrawText(has_cmd ? l10n::Get(I::CmdEmpty) : L"",
+                        D2D1::RectF(r.left+16*scale_,r.top,r.right-16*scale_,r.bottom),
+                        compositor_->SmallFormat(),theme.text_secondary);
+                    continue;
+                }
+                painter_.DrawText(vm.command_step_texts[i],D2D1::RectF(r.left+16*scale_,r.top,r.right-16*scale_,r.bottom),
+                    compositor_->TextFormat(),theme.text);
+            }
+            static constexpr I kKinds[]={I::CmdKindFolder,I::CmdKindFile,I::CmdKindProgram,I::CmdKindScript};
+            static constexpr int kKindValues[]={0,1,2,3};
+            segmented(lay.cmd_kind_row,lay.cmd_kind,kKinds,kKindValues,vm.command_kind,
+                      H::SettingsCommandKind,I::CmdKindTitle,I::CmdKindDesc,4,L"\xE7C3");
+            label(lay.cmd_value_row,l10n::Get(I::CmdValue),L"",L"\xE8AC",lay.cmd_value_field.left-12*scale_);
+            button(lay.cmd_add,l10n::Get(I::CmdAddStep),H::SettingsCommandAddStep,0,true,has_cmd);
+            button(lay.cmd_update,l10n::Get(I::CmdUpdateStep),H::SettingsCommandUpdateStep,0,false,has_step);
+            button(lay.cmd_up,l10n::Get(I::CmdStepUp),H::SettingsCommandUp,0,false,has_step);
+            button(lay.cmd_down,l10n::Get(I::CmdStepDown),H::SettingsCommandDown,0,false,has_step);
+            button(lay.cmd_del_step,l10n::Get(I::CmdStepDelete),H::SettingsCommandDeleteStep,0,false,has_step);
+        }
         if(page==9) {
         const I density[]={I::SettingsDensityCompact,I::SettingsDensityStandard,I::SettingsDensityRoomy};const int heights[]={28,34,40};
         segmented(lay.density_card,lay.density_row,density,heights,vm.settings_row_height,H::SettingsDensity,I::SettingsRowHeight,I::SettingsRowHeightDesc,3,L"\xECE7");

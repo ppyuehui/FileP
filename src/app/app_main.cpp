@@ -1,4 +1,5 @@
 #include "app_diagnostics.h"
+#include "custom_commands_page.h"
 #include "partial_redraw.h"
 #include "git_ui.h"
 #include "mtime_hint_prefs.h"
@@ -547,7 +548,7 @@ void Render(AppState& s) {
     UpdateProcessMetrics(s);
     ui::WindowViewModel vm = BuildVm(s);
     pulse::app::startup_trace::Mark("frame_vm");
-    SyncCustomCommandsPanel(s, vm);
+    app::SyncCommandsPage(s, vm);
     vm.backdrop_enabled = !hc && s.compositor.UsesTransparentComposition() && s.backdropActive;
     vm.pane.hover_index = s.hoverRow;
 
@@ -2701,6 +2702,12 @@ LRESULT CALLBACK WndProcImpl(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) 
         break;
 
     case WM_COMMAND: {
+        if (s && app::CommandsPageOwnsEdit(*s, reinterpret_cast<HWND>(lParam))) {
+            // 自定义命令 page: the name and step value fields save as typed.
+            if (HIWORD(wParam) == EN_CHANGE)
+                app::CommandsPageTextChanged(*s, reinterpret_cast<HWND>(lParam));
+            return 0;
+        }
         if (s && reinterpret_cast<HWND>(lParam) == s->hwndFilterEdit &&
             HIWORD(wParam) == EN_CHANGE) {
             SyncFilterEditor(*s);

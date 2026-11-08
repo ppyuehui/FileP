@@ -288,6 +288,30 @@ HitTestResult MainRenderer::HitTest(const WindowViewModel& vm, const D2D1_RECT_F
             if(ContainsPt(lay.performance_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=4;return r;}
             if(ContainsPt(lay.menu_acrylic_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=36;return r;}
             if(ContainsPt(lay.show_ai_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=81;return r;}
+            {
+                if(ContainsPt(lay.cmd_toolbar_row,x,y)) {r.region=HitTestResult::SettingsCommandPlaces;r.index=0;return r;}
+                if(ContainsPt(lay.cmd_folder_row,x,y)) {r.region=HitTestResult::SettingsCommandPlaces;r.index=1;return r;}
+                if(ContainsPt(lay.cmd_background_row,x,y)) {r.region=HitTestResult::SettingsCommandPlaces;r.index=2;return r;}
+                if(ContainsPt(lay.cmd_new,x,y)) {r.region=HitTestResult::SettingsCommandNew;r.index=0;return r;}
+                if(ContainsPt(lay.cmd_delete,x,y)) {r.region=HitTestResult::SettingsCommandDelete;r.index=0;return r;}
+                if(ContainsPt(lay.cmd_add,x,y)) {r.region=HitTestResult::SettingsCommandAddStep;r.index=0;return r;}
+                if(ContainsPt(lay.cmd_update,x,y)) {r.region=HitTestResult::SettingsCommandUpdateStep;r.index=0;return r;}
+                if(ContainsPt(lay.cmd_up,x,y)) {r.region=HitTestResult::SettingsCommandUp;r.index=0;return r;}
+                if(ContainsPt(lay.cmd_down,x,y)) {r.region=HitTestResult::SettingsCommandDown;r.index=0;return r;}
+                if(ContainsPt(lay.cmd_del_step,x,y)) {r.region=HitTestResult::SettingsCommandDeleteStep;r.index=0;return r;}
+                for (int i = 0; i < lay.cmd_row_count; ++i)
+                    if (ContainsPt(lay.cmd_row[i], x, y)) {
+                        r.region = HitTestResult::SettingsCommandRow; r.index = i; return r;
+                    }
+                for (int i = 0; i < lay.cmd_step_count; ++i)
+                    if (ContainsPt(lay.cmd_step_row[i], x, y)) {
+                        r.region = HitTestResult::SettingsCommandStep; r.index = i; return r;
+                    }
+                for (int i = 0; i < 4; ++i)
+                    if (ContainsPt(lay.cmd_kind[i], x, y)) {
+                        r.region = HitTestResult::SettingsCommandKind; r.index = i; return r;
+                    }
+            }
             for(int list_row=0;list_row<6;++list_row)
                 if(ContainsPt(lay.list_style_row[list_row],x,y)) {r.region=HitTestResult::SettingsToggle;r.index=list_row<3 ? 17+list_row : (list_row==3 ? 22 : list_row==4 ? 33 : 34);return r;}
             // 鼠标与选择 (the rows hidden without single-click are empty rects).

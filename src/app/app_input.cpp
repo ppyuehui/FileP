@@ -25,6 +25,7 @@
 #include "app_internal.h"
 #include "app_window_title.h"
 #include "../ui/custom_commands_dialog.h"
+#include "custom_commands_page.h"
 #include "global_search_controller.h"
 #include "selection_caps.h"
 #include "app_input.h"
@@ -3514,7 +3515,18 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
                    hit.region == ui::HitTestResult::SettingsHomeFolder ||
                    hit.region == ui::HitTestResult::SettingsLanCache ||
                    hit.region == ui::HitTestResult::SettingsThumbCache ||
-                   hit.region == ui::HitTestResult::SettingsCommandsEditor) {
+                   hit.region == ui::HitTestResult::SettingsCommandsEditor ||
+                   hit.region == ui::HitTestResult::SettingsCommandRow ||
+                   hit.region == ui::HitTestResult::SettingsCommandStep ||
+                   hit.region == ui::HitTestResult::SettingsCommandNew ||
+                   hit.region == ui::HitTestResult::SettingsCommandDelete ||
+                   hit.region == ui::HitTestResult::SettingsCommandPlaces ||
+                   hit.region == ui::HitTestResult::SettingsCommandKind ||
+                   hit.region == ui::HitTestResult::SettingsCommandAddStep ||
+                   hit.region == ui::HitTestResult::SettingsCommandUpdateStep ||
+                   hit.region == ui::HitTestResult::SettingsCommandUp ||
+                   hit.region == ui::HitTestResult::SettingsCommandDown ||
+                   hit.region == ui::HitTestResult::SettingsCommandDeleteStep) {
             // One branch on purpose: this else-if chain sits at MSVC's block
             // nesting limit (C1061), so new settings must not lengthen it.
             switch (hit.region) {
@@ -3528,6 +3540,19 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
             case ui::HitTestResult::SettingsCommandsEditor:
                 if (ui::ShowCustomCommandsDialog(hwnd, s->customCommands))
                     InvalidateRect(hwnd, nullptr, FALSE);
+                break;
+            case ui::HitTestResult::SettingsCommandRow:
+            case ui::HitTestResult::SettingsCommandStep:
+            case ui::HitTestResult::SettingsCommandNew:
+            case ui::HitTestResult::SettingsCommandDelete:
+            case ui::HitTestResult::SettingsCommandPlaces:
+            case ui::HitTestResult::SettingsCommandKind:
+            case ui::HitTestResult::SettingsCommandAddStep:
+            case ui::HitTestResult::SettingsCommandUpdateStep:
+            case ui::HitTestResult::SettingsCommandUp:
+            case ui::HitTestResult::SettingsCommandDown:
+            case ui::HitTestResult::SettingsCommandDeleteStep:
+                pulse::app::CommandsPageAction(*s, hit.region, hit.index);
                 break;
             case ui::HitTestResult::SettingsTaskbarChars: {
                 const int which = 6 + std::clamp(hit.sub_index, 0, 1);

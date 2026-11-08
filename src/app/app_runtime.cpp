@@ -1,6 +1,7 @@
 // app_runtime.cpp — extracted from app_main.cpp.
 #include "app_window_title.h"
 #include "app_navigation.h"
+#include "custom_commands_page.h"
 #include "../ui/custom_commands_dialog.h"
 #include "../fs/drive_kind.h"
 #include "../fs/device_path.h"
@@ -655,6 +656,7 @@ void FillPaneSlots(AppState& s, ui::WindowViewModel& vm) {
             vm.settings_expanded = s.appPrefs.search_enabled ? s.settingsExpanded : (s.settingsExpanded & ~2u);
             FillShortcutsVm(s, vm);  // 快捷键: sidebar badge everywhere, the page view on page 7
             if (vm.settings_page == ui::kSettingsPageAi) pulse::FillAiSettingsVm(s, vm);   // 增强包 > AI 与 MCP
+            if (vm.settings_page == ui::kSettingsPageCommands) pulse::app::FillCommandsPage(s, vm);
             if (vm.settings_page == 5) vm.settings_preview_codecs = ui::DetectPreviewCodecs(false, s.hwnd);
             if (vm.settings_page == 9) {
                 const auto cache = s.settings.ThumbCache(s.hwnd);

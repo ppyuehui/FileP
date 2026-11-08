@@ -4439,3 +4439,25 @@ SettingsSecCommands	IDS_SETTINGS_SEC_COMMANDS	5644	自定义命令	Custom comman
 SettingsCommandsDesc	IDS_SETTINGS_COMMANDS_DESC	5645	把一串常用操作存成命令，右键菜单或工具栏一键执行	Save a run of steps as a command and run it from the context menu or the toolbar	把一串常用操作存成命令，右鍵選單或工具列一鍵執行
 SettingsCommandsOpen	IDS_SETTINGS_COMMANDS_OPEN	5646	编辑命令…	Edit commands…	編輯命令…
 SettingsCommandsIntro	IDS_SETTINGS_COMMANDS_INTRO	5647	命令可以用右键菜单一键执行，也可以加到工具栏上。	Commands run from the context menu, or from the toolbar once added there.	命令可以用右鍵選單一鍵執行，也可以加到工具列上。
+CmdName	IDS_CMD_NAME	5648	名称	Name	名稱
+CmdPlaces	IDS_CMD_PLACES	5649	出现位置	Where it shows	出現位置
+CmdPlaceToolbar	IDS_CMD_PLACE_TOOLBAR	5650	工具栏	Toolbar	工具列
+CmdPlaceFolder	IDS_CMD_PLACE_FOLDER	5651	右键文件夹	Context menu on a folder	右鍵資料夾
+CmdPlaceBackground	IDS_CMD_PLACE_BACKGROUND	5652	右键空白处	Context menu on the background	右鍵空白處
+CmdList	IDS_CMD_LIST	5653	命令	Commands	命令
+CmdSteps	IDS_CMD_STEPS	5654	步骤（按顺序执行）	Steps (run in order)	步驟（依序執行）
+CmdNew	IDS_CMD_NEW	5655	新建命令	New command	新增命令
+CmdDelete	IDS_CMD_DELETE	5656	删除命令	Delete command	刪除命令
+CmdAddStep	IDS_CMD_ADD_STEP	5657	添加步骤	Add step	新增步驟
+CmdUpdateStep	IDS_CMD_UPDATE_STEP	5658	更新	Update	更新
+CmdStepUp	IDS_CMD_STEP_UP	5659	上移	Move up	上移
+CmdStepDown	IDS_CMD_STEP_DOWN	5660	下移	Move down	下移
+CmdStepDelete	IDS_CMD_STEP_DELETE	5661	删除步骤	Delete step	刪除步驟
+CmdKindFolder	IDS_CMD_KIND_FOLDER	5662	新建文件夹	New folder	新增資料夾
+CmdKindFile	IDS_CMD_KIND_FILE	5663	新建文件	New file	新增檔案
+CmdKindProgram	IDS_CMD_KIND_PROGRAM	5664	运行程序	Run a program	執行程式
+CmdKindScript	IDS_CMD_KIND_SCRIPT	5665	批处理脚本	Script	批次腳本
+CmdEmpty	IDS_CMD_EMPTY	5666	还没有命令，点「新建命令」开始	No commands yet — pick 新建命令	還沒有命令，點「新增命令」開始
+CmdKindTitle	IDS_CMD_KIND_TITLE	5667	步骤类型	Step type	步驟類型
+CmdKindDesc	IDS_CMD_KIND_DESC	5668	选好类型，再填下面的值	Pick the type, then fill the value below	選好類型，再填下面的值
+CmdValue	IDS_CMD_VALUE	5669	值	Value	值

@@ -4432,5 +4432,27 @@
 #define IDS_SETTINGS_COMMANDS_DESC                                                       5645
 #define IDS_SETTINGS_COMMANDS_OPEN                                                       5646
 #define IDS_SETTINGS_COMMANDS_INTRO                                                      5647
+#define IDS_CMD_NAME                                                                     5648
+#define IDS_CMD_PLACES                                                                   5649
+#define IDS_CMD_PLACE_TOOLBAR                                                            5650
+#define IDS_CMD_PLACE_FOLDER                                                             5651
+#define IDS_CMD_PLACE_BACKGROUND                                                         5652
+#define IDS_CMD_LIST                                                                     5653
+#define IDS_CMD_STEPS                                                                    5654
+#define IDS_CMD_NEW                                                                      5655
+#define IDS_CMD_DELETE                                                                   5656
+#define IDS_CMD_ADD_STEP                                                                 5657
+#define IDS_CMD_UPDATE_STEP                                                              5658
+#define IDS_CMD_STEP_UP                                                                  5659
+#define IDS_CMD_STEP_DOWN                                                                5660
+#define IDS_CMD_STEP_DELETE                                                              5661
+#define IDS_CMD_KIND_FOLDER                                                              5662
+#define IDS_CMD_KIND_FILE                                                                5663
+#define IDS_CMD_KIND_PROGRAM                                                             5664
+#define IDS_CMD_KIND_SCRIPT                                                              5665
+#define IDS_CMD_EMPTY                                                                    5666
+#define IDS_CMD_KIND_TITLE                                                               5667
+#define IDS_CMD_KIND_DESC                                                                5668
+#define IDS_CMD_VALUE                                                                    5669
 
 #endif  // PULSE_STRING_IDS_H

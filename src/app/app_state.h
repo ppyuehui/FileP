@@ -500,6 +500,14 @@ struct AppState : AppCoreOwner {
     bool edit_commands = false;  // --edit-commands: open the 自定义命令 editor
     // --shot-settings <page>: open Settings on that page before --shot writes.
     int shot_settings_page = -1;
+    // 自定义命令 (settings page 14): the page's own selection and the step value
+    // being typed; the two text fields are native edits parked over the page.
+    int command_sel = -1;
+    int command_step_sel = -1;
+    int command_kind = 0;
+    std::wstring command_value;
+    HWND command_name_edit = nullptr;
+    HWND command_value_edit = nullptr;
     // GUI verification for the tray card deck: stage a few files pre-shot.
     bool shot_tray = false;
     int shot_tray_count = 4;

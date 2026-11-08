@@ -249,8 +249,57 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         l.close_last_tab_row=row(64);
 
     } else if (page == 14) {
-        // 自定义命令: the header stays, the editor itself is the embedded panel
-        // (app::SyncCustomCommandsPanel) that fills the rest of the column.
+        // 自定义命令: a settings form — name, the three places, the command list,
+        // then the selected command's steps.
+        section(I::SettingsPageCommands);
+        l.cmd_name_row = row(64);
+        l.cmd_name_field = choice(l.cmd_name_row, narrow ? (right - left) * 0.5f : 420.0f);
+        l.cmd_toolbar_row = row(56);
+        l.cmd_folder_row = row(56);
+        l.cmd_background_row = row(56);
+        section(I::CmdList);
+        l.cmd_row_count = 0;
+        {
+            const int rows = (std::min)(static_cast<int>(vm.command_names.size()), 12);
+            for (int i = 0; i < rows; ++i) l.cmd_row[l.cmd_row_count++] = row(40);
+            if (rows == 0) l.cmd_row[l.cmd_row_count++] = row(40);
+        }
+        l.cmd_buttons = row(52);
+        {
+            const float mid = (l.cmd_buttons.top + l.cmd_buttons.bottom) * 0.5f;
+            const float bw1 = button_w(I::CmdNew, 96);
+            l.cmd_new = D2D1::RectF(left + 16*scale, mid - 16*scale, left + 16*scale + bw1, mid + 16*scale);
+            const float bw2 = button_w(I::CmdDelete, 96);
+            l.cmd_delete = D2D1::RectF(l.cmd_new.right + 8*scale, mid - 16*scale,
+                                       l.cmd_new.right + 8*scale + bw2, mid + 16*scale);
+        }
+        section(I::CmdSteps);
+        l.cmd_step_count = 0;
+        {
+            const int steps = (std::min)(static_cast<int>(vm.command_step_texts.size()), 12);
+            for (int i = 0; i < steps; ++i) l.cmd_step_row[l.cmd_step_count++] = row(36);
+            if (steps == 0) l.cmd_step_row[l.cmd_step_count++] = row(36);
+        }
+        l.cmd_kind_row = row(56);
+        segments(l.cmd_kind_row, l.cmd_kind, 4, narrow ? 320.0f : 400.0f);
+        l.cmd_value_row = row(64);
+        l.cmd_value_field = choice(l.cmd_value_row, narrow ? (right - left) * 0.5f : 420.0f);
+        l.cmd_step_buttons = row(52);
+        {
+            const float mid = (l.cmd_step_buttons.top + l.cmd_step_buttons.bottom) * 0.5f;
+            float x = left + 16*scale;
+            const auto place = [&](l10n::StringId id, float fallback) {
+                const float bw = button_w(id, fallback) + 8*scale;
+                const D2D1_RECT_F r(x, mid - 16*scale, x + bw, mid + 16*scale);
+                x += bw + 8*scale;
+                return r;
+            };
+            l.cmd_add = place(I::CmdAddStep, 92);
+            l.cmd_update = place(I::CmdUpdateStep, 68);
+            l.cmd_up = place(I::CmdStepUp, 68);
+            l.cmd_down = place(I::CmdStepDown, 68);
+            l.cmd_del_step = place(I::CmdStepDelete, 92);
+        }
     } else if (page == 11) {
         section(I::SettingsIntegration);
         end_group();   // the integration card is laid out and drawn on its own
