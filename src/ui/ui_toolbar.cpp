@@ -621,16 +621,13 @@ void MainRenderer::DrawToolbar(const WindowViewModel& vm, const D2D1_RECT_F& rec
             }
         }
         if (FavoritesButtonShown() && !vm.address_editing && !vm.address_searching) {
-            // ★⌄: the favorites dropdown while the 收藏栏 is hidden; filled
-            // when the current folder is starred.
+            // 复制路径: the address bar's right-hand button (was the ★ favourites
+            // menu; copy path is the one people reach for).
             const D2D1_RECT_F fb = AddressFavoritesRect(rect.right);
             if (IsHovered(vm, HitTestResult::AddressFavorites))
                 painter_.FillRoundedRect(fb, theme.radius_control * scale_, theme.fill_hover);
             DrawIconText(fb.left + 2 * scale_, fb.top, 16 * scale_, fb.bottom - fb.top,
-                         vm.favorites_here ? L"\xE735" : L"\xE734", L"",
-                         vm.favorites_here ? theme.accent : theme.text_secondary, kIconField);
-            DrawIconText(fb.left + 15 * scale_, fb.top, 12 * scale_, fb.bottom - fb.top, L"\xE70D", L"",
-                         theme.text_secondary, kIconSmall);
+                         L"\xE8C8", L"", theme.text_secondary, kIconField);
         }
         dc->PopAxisAlignedClip();
     }

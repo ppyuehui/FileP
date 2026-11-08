@@ -122,6 +122,7 @@ void AppPrefs::ResetToDefaults() {
     blank_click_action = kBlankClickOff;
     preview_trigger = kPreviewTriggerHover;
     hover_preview_delay_ms = 500;
+    show_ai_entry = true;
     hover_card_size = kHoverCardMedium;
     taskbar_parent_chars = 5;
     taskbar_current_chars = 5;
@@ -312,6 +313,8 @@ std::wstring AppPrefs::ToJson() const {
     out += blank_click_action != kBlankClickOff ? L"true" : L"false";
     out += L",\n  \"preview_trigger\":" + std::to_wstring(NormalizePreviewTrigger(preview_trigger));
     out += L",\n  \"hover_preview_delay_ms\":" + std::to_wstring(NormalizeHoverPreviewDelay(hover_preview_delay_ms));
+    out += L",\n  \"show_ai_entry\":";
+    out += show_ai_entry ? L"true" : L"false";
     out += L",\n  \"hover_card_size\":" + std::to_wstring(NormalizeHoverCardSize(hover_card_size));
     out += L",\n  \"taskbar_parent_chars\":" + std::to_wstring(NormalizeTaskbarChars(taskbar_parent_chars));
     out += L",\n  \"taskbar_current_chars\":" + std::to_wstring(NormalizeTaskbarChars(taskbar_current_chars));
@@ -575,6 +578,7 @@ bool AppPrefs::FromJson(const std::wstring& json) {
         pulse::json::ExtractInt(json, L"preview_trigger", kPreviewTriggerHover));
     hover_preview_delay_ms = NormalizeHoverPreviewDelay(
         pulse::json::ExtractInt(json, L"hover_preview_delay_ms", 500));
+    show_ai_entry = pulse::json::ExtractBool(json, L"show_ai_entry", true);
     hover_card_size = NormalizeHoverCardSize(
         pulse::json::ExtractInt(json, L"hover_card_size", kHoverCardMedium));
     taskbar_parent_chars = NormalizeTaskbarChars(

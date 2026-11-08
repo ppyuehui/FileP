@@ -4405,4 +4405,6 @@ BEGIN
     IDS_SETTINGS_TASKBAR_CURRENT "目前資料夾字元數"
     IDS_SETTINGS_TASKBAR_CURRENT_DESC "工作列標題裡「上層/目前」的目前部分，超過這個字數就截斷，末尾加 …；滑桿拉到最右邊是不限（按字元計，中文算一個字）"
     IDS_TASKBAR_CHARS_NONE "不限"
+    IDS_SETTINGS_SHOW_AI "顯示左下角 AI 圖示"
+    IDS_SETTINGS_SHOW_AI_DESC "關掉後狀態列不再顯示「✦ AI」入口"
 END

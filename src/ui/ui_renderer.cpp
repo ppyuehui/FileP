@@ -361,8 +361,8 @@ D2D1_RECT_F MainRenderer::SidebarToggleRect(float w) const {
         const float left = (kSidebarRailWidthDip * scale_ - size) * 0.5f;
         return D2D1::RectF(left, top, left + size, top + size);
     }
-    const float right = TitleSidebarWidth(w) - 8.0f * scale_;
-    return D2D1::RectF(right - size, top, right, top + size);
+    // 左上角只留这个开关：品牌与「文件管理器」搬到状态栏左下角。
+    return D2D1::RectF(12.0f * scale_, top, 12.0f * scale_ + size, top + size);
 }
 
 // Dot and name sit where the product name is, after the mark: 6 dip padding,
@@ -1509,10 +1509,7 @@ void MainRenderer::DrawTitleBar(const WindowViewModel& vm, const D2D1_RECT_F& re
     const float h = title_bar_height_;
     const float right = rect.right;
 
-    // Product mark: the packaged app icon; the monogram is the fallback.
-    float x = 12.0f * scale_;
-    const float mark = 24.0f * scale_;
-    const float markY = (h - mark) * 0.5f;
+    // 左上角只有侧栏开关，品牌字搬到了状态栏左下角。
     const D2D1_RECT_F toggleRc = SidebarToggleRect(right);
     const bool hasToggle = toggleRc.right > toggleRc.left;
     if (hasToggle) {
@@ -1538,30 +1535,6 @@ void MainRenderer::DrawTitleBar(const WindowViewModel& vm, const D2D1_RECT_F& re
                                 brTextSecondary_.get());
         }
     }
-    if (hasToggle && user_sidebar_collapsed_) {
-        // Rail: the toggle stands in for the brand mark.
-    } else if (ID2D1Bitmap* logo = LogoBitmap()) {
-        dc->DrawBitmap(logo, D2D1::RectF(x, markY, x + mark, markY + mark), 1.0f,
-                       D2D1_INTERPOLATION_MODE_HIGH_QUALITY_CUBIC, nullptr, nullptr);
-    } else {
-        MakeBrush(dc, theme.accent, brAccent_);
-        dc->FillEllipse(D2D1::Ellipse(D2D1::Point2F(x + mark * 0.5f, markY + mark * 0.5f),
-                                      mark * 0.5f, mark * 0.5f), brAccent_.get());
-        ComPtr<IDWriteTextFormat> markFmt;
-        typography::CreateTextFormat(compositor_->DwriteFactory(),
-            {typography::FontRole::Display, 11.0f * scale_, DWRITE_FONT_WEIGHT_SEMI_BOLD},
-            &markFmt);
-        if (markFmt.get()) {
-            markFmt->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
-            markFmt->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
-            MakeBrush(dc, theme.accent_text, brAccentText_);
-            DrawTextRect(dc, markFmt.get(), brAccentText_.get(), L"F", x, markY, mark, mark);
-        }
-    }
-    x += mark + 8.0f * scale_;
-    const float brandRight = TitleSidebarWidth(right) - 12.0f * scale_;
-    const float nameWidth = MeasureLayoutText(compositor_, compositor_->DwriteFactory(),
-        compositor_->HeaderFormat(), L"FileP");
     const WindowIdentityGeometry identity = WindowIdentityLayout(vm, right);
     if (identity.hit.right > identity.hit.left && !identity.compact) {
         // Multi-window M7c: this window's dot and name instead of the product name.
@@ -1576,19 +1549,6 @@ void MainRenderer::DrawTitleBar(const WindowViewModel& vm, const D2D1_RECT_F& re
         MakeBrush(dc, theme.text, brText_);
         DrawTextEndEllipsis(compositor_, compositor_->HeaderFormat(), brText_.get(),
                             vm.window_identity_name, text_x, 0.0f, identity.hit.right - 6.0f * scale_ - text_x, h);
-    } else if (x + nameWidth <= brandRight) {
-        MakeBrush(dc, theme.text, brText_);
-        DrawTextRect(dc, compositor_->HeaderFormat(), brText_.get(), L"FileP",
-            x, 0.0f, nameWidth + 1.0f * scale_, h);
-        x += nameWidth + 12.0f * scale_;
-        const auto description = l10n::Get(l10n::StringId::AppDescription);
-        const float descriptionWidth = MeasureLayoutText(compositor_, compositor_->DwriteFactory(),
-            compositor_->SmallFormat(), description);
-        if (x + descriptionWidth <= brandRight) {
-            MakeBrush(dc, theme.text_secondary, brTextSecondary_);
-            DrawTextRect(dc, compositor_->SmallFormat(), brTextSecondary_.get(), description,
-                x, 0.0f, descriptionWidth + 1.0f * scale_, h);
-        }
     }
 
     if (identity.compact && identity.hit.right > identity.hit.left) {
@@ -2063,7 +2023,7 @@ void MainRenderer::DrawTitleBar(const WindowViewModel& vm, const D2D1_RECT_F& re
                        true, true, 0.7f);
         }
     }
-    x = strip.new_x;
+    float x = strip.new_x;
     // New tab button follows the final rest slot (not the sliding tabs); a
     // scrolling strip pins it to the right edge.
     D2D1_RECT_F newRc = D2D1::RectF(x, tabY, x + 32 * scale_, tabY + tabH);
@@ -2206,6 +2166,17 @@ void MainRenderer::DrawStatusBar(const WindowViewModel& vm, const D2D1_RECT_F& f
     IDWriteTextFormat* small_fmt = compositor_->SmallFormat();
     const StatusBarMetrics sb = MakeStatusBarMetrics(
         vm, full, scale_, status_height_, factory, small_fmt);
+    // 左下角的品牌：原来在标题栏左上角，现在和 AI 按钮一起放在状态栏。
+    if (sb.brand.right > sb.brand.left) {
+        const float name_w = MeasureTextWidth(factory, small_fmt, L"FileP") * 1.06f + 1.0f;
+        MakeBrush(dc, theme.text, brText_);
+        DrawTextRect(dc, small_fmt, brText_.get(), L"FileP", sb.brand.left, sb.bar.top,
+                     name_w, status_height_);
+        MakeBrush(dc, theme.text_secondary, brTextSecondary_);
+        DrawTextRect(dc, small_fmt, brTextSecondary_.get(), l10n::Get(l10n::StringId::AppDescription),
+                     sb.brand.left + name_w + 6.0f * scale_, sb.bar.top,
+                     sb.brand.right - 6.0f * scale_ - (sb.brand.left + name_w), status_height_);
+    }
     // Everything but the AI chip ends left of it (MakeStatusBarMetrics).
     D2D1_RECT_F rect = full;
     rect.right = sb.content_right;

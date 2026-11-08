@@ -4432,3 +4432,5 @@ SettingsTaskbarParentDesc	IDS_SETTINGS_TASKBAR_PARENT_DESC	5632	任务栏标题�
 SettingsTaskbarCurrent	IDS_SETTINGS_TASKBAR_CURRENT	5633	当前文件夹字符数	Current folder characters	目前資料夾字元數
 SettingsTaskbarCurrentDesc	IDS_SETTINGS_TASKBAR_CURRENT_DESC	5634	任务栏标题里「上级/当前」的当前部分，超过这个字数就截断，末尾加 …；滑块拉到最右边是不限（按字符计，中文算一个字）	The current part of the taskbar title (parent\current) is cut at this many characters with […] at the end; the last stop means no limit.	工作列標題裡「上層/目前」的目前部分，超過這個字數就截斷，末尾加 …；滑桿拉到最右邊是不限（按字元計，中文算一個字）
 TaskbarCharsNone	IDS_TASKBAR_CHARS_NONE	5640	不限	No limit	不限
+SettingsShowAi	IDS_SETTINGS_SHOW_AI	5641	显示左下角 AI 图标	Show the AI icon at the bottom left	顯示左下角 AI 圖示
+SettingsShowAiDesc	IDS_SETTINGS_SHOW_AI_DESC	5642	关掉后状态栏不再显示「✦ AI」入口	Off hides the 「✦ AI」 chip in the status bar	關掉後狀態列不再顯示「✦ AI」入口

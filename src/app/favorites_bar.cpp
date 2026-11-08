@@ -601,7 +601,9 @@ bool HandleFavoritesBarPress(AppState& s, const ui::HitTestResult& hit) {
         return true;
     }
     if (hit.region == ui::HitTestResult::AddressFavorites) {
-        ShowFavoritesDropdown(s, BelowControl(s, hit));
+        // 复制路径 (the selected items, else the open folder).
+        DispatchMenuCommand(s, app::CmdCopyPath);
+        InvalidateRect(s.hwnd, nullptr, FALSE);
         return true;
     }
     // 改成横向收藏栏 / 放回侧边栏: the Ctrl+Shift+B switch, from either side.

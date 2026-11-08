@@ -1209,6 +1209,7 @@ struct WindowViewModel {
     bool settings_list_zebra_rows = true;
     bool settings_list_tree_sticky = true;
     bool settings_menu_acrylic = true;
+    bool settings_show_ai = true;   // 左下角的 AI 图标与入口
     bool settings_list_size_bar = false;
     bool settings_list_tag_names = false;
     bool settings_list_selection_outline = false;

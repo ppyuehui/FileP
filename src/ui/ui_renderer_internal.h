@@ -1972,7 +1972,8 @@ struct StatusBarMetrics {
     D2D1_RECT_F task{};
     D2D1_RECT_F cancel_search{};
     D2D1_RECT_F hint_action{};   // empty unless the hint carries a clickable action
-    D2D1_RECT_F ai_chip{};       // the AI chip at the far left; empty when hidden
+    D2D1_RECT_F brand{};         // FileP 文件管理器 at the far left; empty when narrow
+    D2D1_RECT_F ai_chip{};       // the AI chip, right of the brand; empty when hidden
     bool ai_chip_text = false;   // the chip has room for its words (else "✦ AI" only)
     float content_left = 0.0f;   // where everything else starts (right of the AI chip)
     float content_right = 0.0f;  // where everything else ends
@@ -1993,7 +1994,16 @@ StatusBarMetrics MakeStatusBarMetrics(const WindowViewModel& vm, const D2D1_RECT
     // right of it.
     D2D1_RECT_F rect = full;
     m.content_left = m.pad;
-    if (vm.status.ai_state != StatusAiState::Hidden) {
+    // 左下角的品牌：状态栏最左边是「FileP 文件管理器」。
+    if (factory && small_format && full.right - full.left > 720.0f * scale) {
+        const float name_w = MeasureTextWidth(factory, small_format, L"FileP") * 1.06f + 1.0f;
+        const float desc_w = MeasureTextWidth(factory, small_format,
+                                              l10n::Get(l10n::StringId::AppDescription));
+        const float left = full.left + m.pad;
+        m.brand = D2D1::RectF(left, m.bar.top, left + name_w + 6.0f * scale + desc_w, m.bar.bottom);
+        m.content_left = m.brand.right + 14.0f * scale;
+    }
+    if (vm.status.ai_state != StatusAiState::Hidden && vm.settings_show_ai) {
         // Widths measured in the small face, scaled to the chip's 12.5 DIP.
         float k = 1.0f;
         if (small_format && small_format->GetFontSize() > 0.0f) k = 12.5f * scale / small_format->GetFontSize();
@@ -2013,7 +2023,8 @@ StatusBarMetrics MakeStatusBarMetrics(const WindowViewModel& vm, const D2D1_RECT
                                               scale);
         const float h = 24.0f * scale;
         const float top = std::round(m.bar.top + (status_height - h) * 0.5f);
-        const float left = full.left + m.pad - 4.0f * scale;
+        const float left = m.brand.right > m.brand.left ? m.brand.right + 12.0f * scale
+                                                        : full.left + m.pad - 4.0f * scale;
         m.ai_chip = D2D1::RectF(left, top, left + width, top + h);
         m.content_left = m.ai_chip.right + 12.0f * scale;
     }
@@ -2567,6 +2578,7 @@ struct SettingsLayout {
     D2D1_RECT_F effect_card{};
     D2D1_RECT_F effect_row[kWindowEffectCount]{};
     D2D1_RECT_F menu_acrylic_row{};
+    D2D1_RECT_F show_ai_row{};
     D2D1_RECT_F density_card{};
     D2D1_RECT_F list_style_row[6]{};
     // 修改时间提示: the style picker; range, colors and switches while it is on.

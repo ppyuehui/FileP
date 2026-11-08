@@ -4407,6 +4407,8 @@ BEGIN
     IDS_SETTINGS_TASKBAR_CURRENT "当前文件夹字符数"
     IDS_SETTINGS_TASKBAR_CURRENT_DESC "任务栏标题里「上级/当前」的当前部分，超过这个字数就截断，末尾加 …；滑块拉到最右边是不限（按字符计，中文算一个字）"
     IDS_TASKBAR_CHARS_NONE "不限"
+    IDS_SETTINGS_SHOW_AI "显示左下角 AI 图标"
+    IDS_SETTINGS_SHOW_AI_DESC "关掉后状态栏不再显示「✦ AI」入口"
 END
 
 LANGUAGE 0x09, 0x01
@@ -8813,6 +8815,8 @@ BEGIN
     IDS_SETTINGS_TASKBAR_CURRENT "Current folder characters"
     IDS_SETTINGS_TASKBAR_CURRENT_DESC "The current part of the taskbar title (parent\current) is cut at this many characters with […] at the end; the last stop means no limit."
     IDS_TASKBAR_CHARS_NONE "No limit"
+    IDS_SETTINGS_SHOW_AI "Show the AI icon at the bottom left"
+    IDS_SETTINGS_SHOW_AI_DESC "Off hides the 「✦ AI」 chip in the status bar"
 END
 
 // Traditional Chinese (Taiwan), generated from the Simplified entries above.
