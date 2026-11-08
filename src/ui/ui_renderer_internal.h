@@ -2319,10 +2319,10 @@ constexpr float kSettingsNavW = 200.0f;
 // 5: 快速预览, 6: 系统右键菜单, 7: 快捷键, 8: 增强包; 0 and 9-12 split the former 通用 page:
 // 0 外观, 9 文件列表, 10 标签页与窗口, 11 启动与集成, 12 文件操作.
 constexpr int kSettingsNavCount = 13;
-inline bool IsGeneralSettingsPage(int page) noexcept { return page == 0 || (page >= 9 && page <= 12); }
+inline bool IsGeneralSettingsPage(int page) noexcept { return page == 0 || (page >= 9 && page <= 12) || page == 14; }
 // Sidebar order, top to bottom, in five groups (关于 3 sits at the bottom, 6 has no row).
-constexpr int kSettingsNavOrder[] = {0, 9, 10, 11, 12, 1, 5, 8, 2, 7, 4};
-constexpr int kSettingsNavGroupStart[] = {0, 1, 3, 5, 10};  // indexes into kSettingsNavOrder
+constexpr int kSettingsNavOrder[] = {0, 9, 10, 11, 12, 14, 1, 5, 8, 2, 7, 4};
+constexpr int kSettingsNavGroupStart[] = {0, 1, 3, 6, 11};  // indexes into kSettingsNavOrder
 constexpr int kSettingsNavGroups = 5;
 
 // System folder groups shown under Settings > Exclusions: 0-4 follow
@@ -2579,6 +2579,8 @@ struct SettingsLayout {
     D2D1_RECT_F effect_row[kWindowEffectCount]{};
     D2D1_RECT_F menu_acrylic_row{};
     D2D1_RECT_F show_ai_row{};
+    D2D1_RECT_F commands_editor_row{};      // 自定义命令 page (14)
+    D2D1_RECT_F commands_editor_button{};
     D2D1_RECT_F density_card{};
     D2D1_RECT_F list_style_row[6]{};
     // 修改时间提示: the style picker; range, colors and switches while it is on.

@@ -4427,5 +4427,9 @@
 #define IDS_TASKBAR_CHARS_NONE                                                           5640
 #define IDS_SETTINGS_SHOW_AI                                                             5641
 #define IDS_SETTINGS_SHOW_AI_DESC                                                        5642
+#define IDS_SETTINGS_PAGE_COMMANDS                                                       5643
+#define IDS_SETTINGS_SEC_COMMANDS                                                        5644
+#define IDS_SETTINGS_COMMANDS_DESC                                                       5645
+#define IDS_SETTINGS_COMMANDS_OPEN                                                       5646
 
 #endif  // PULSE_STRING_IDS_H

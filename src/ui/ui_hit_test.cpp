@@ -288,6 +288,7 @@ HitTestResult MainRenderer::HitTest(const WindowViewModel& vm, const D2D1_RECT_F
             if(ContainsPt(lay.performance_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=4;return r;}
             if(ContainsPt(lay.menu_acrylic_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=36;return r;}
             if(ContainsPt(lay.show_ai_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=81;return r;}
+            if(ContainsPt(lay.commands_editor_button,x,y)) {r.region=HitTestResult::SettingsCommandsEditor;r.index=0;return r;}
             for(int list_row=0;list_row<6;++list_row)
                 if(ContainsPt(lay.list_style_row[list_row],x,y)) {r.region=HitTestResult::SettingsToggle;r.index=list_row<3 ? 17+list_row : (list_row==3 ? 22 : list_row==4 ? 33 : 34);return r;}
             // 鼠标与选择 (the rows hidden without single-click are empty rects).

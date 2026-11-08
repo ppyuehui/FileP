@@ -24,6 +24,7 @@
 #include "app_updates.h"
 #include "app_internal.h"
 #include "app_window_title.h"
+#include "../ui/custom_commands_dialog.h"
 #include "global_search_controller.h"
 #include "selection_caps.h"
 #include "app_input.h"
@@ -3512,7 +3513,8 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
                    hit.region == ui::HitTestResult::SettingsBlankClick ||
                    hit.region == ui::HitTestResult::SettingsHomeFolder ||
                    hit.region == ui::HitTestResult::SettingsLanCache ||
-                   hit.region == ui::HitTestResult::SettingsThumbCache) {
+                   hit.region == ui::HitTestResult::SettingsThumbCache ||
+                   hit.region == ui::HitTestResult::SettingsCommandsEditor) {
             // One branch on purpose: this else-if chain sits at MSVC's block
             // nesting limit (C1061), so new settings must not lengthen it.
             switch (hit.region) {
@@ -3523,6 +3525,10 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
             case ui::HitTestResult::SettingsNotifyIcon: s->settings.NotifyIcon(hit.index); break;
             case ui::HitTestResult::SettingsBlankClick: s->settings.BlankClick(hit.index); break;
             case ui::HitTestResult::SettingsHomeFolder: s->settings.HomeFolder(hit.index); break;
+            case ui::HitTestResult::SettingsCommandsEditor:
+                if (ui::ShowCustomCommandsDialog(hwnd, s->customCommands))
+                    InvalidateRect(hwnd, nullptr, FALSE);
+                break;
             case ui::HitTestResult::SettingsTaskbarChars: {
                 const int which = 6 + std::clamp(hit.sub_index, 0, 1);
                 s->settings.BeginSlider(which);

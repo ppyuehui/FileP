@@ -4419,6 +4419,10 @@ enum class StringId : UINT {
     TaskbarCharsNone = IDS_TASKBAR_CHARS_NONE,
     SettingsShowAi = IDS_SETTINGS_SHOW_AI,
     SettingsShowAiDesc = IDS_SETTINGS_SHOW_AI_DESC,
+    SettingsPageCommands = IDS_SETTINGS_PAGE_COMMANDS,
+    SettingsSecCommands = IDS_SETTINGS_SEC_COMMANDS,
+    SettingsCommandsDesc = IDS_SETTINGS_COMMANDS_DESC,
+    SettingsCommandsOpen = IDS_SETTINGS_COMMANDS_OPEN,
 };
 
 bool IsLanguageId(std::wstring_view id) noexcept;

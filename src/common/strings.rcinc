@@ -4409,6 +4409,10 @@ BEGIN
     IDS_TASKBAR_CHARS_NONE "不限"
     IDS_SETTINGS_SHOW_AI "显示左下角 AI 图标"
     IDS_SETTINGS_SHOW_AI_DESC "关掉后状态栏不再显示「✦ AI」入口"
+    IDS_SETTINGS_PAGE_COMMANDS "自定义命令"
+    IDS_SETTINGS_SEC_COMMANDS "自定义命令"
+    IDS_SETTINGS_COMMANDS_DESC "把一串常用操作存成命令，右键菜单或工具栏一键执行"
+    IDS_SETTINGS_COMMANDS_OPEN "编辑命令…"
 END
 
 LANGUAGE 0x09, 0x01
@@ -8817,6 +8821,10 @@ BEGIN
     IDS_TASKBAR_CHARS_NONE "No limit"
     IDS_SETTINGS_SHOW_AI "Show the AI icon at the bottom left"
     IDS_SETTINGS_SHOW_AI_DESC "Off hides the 「✦ AI」 chip in the status bar"
+    IDS_SETTINGS_PAGE_COMMANDS "Custom commands"
+    IDS_SETTINGS_SEC_COMMANDS "Custom commands"
+    IDS_SETTINGS_COMMANDS_DESC "Save a run of steps as a command and run it from the context menu or the toolbar"
+    IDS_SETTINGS_COMMANDS_OPEN "Edit commands…"
 END
 
 // Traditional Chinese (Taiwan), generated from the Simplified entries above.

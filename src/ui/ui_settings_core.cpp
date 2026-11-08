@@ -576,6 +576,11 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
         toggle(lay.close_tab_double_click_row,I::SettingsCloseTabDoubleClick,I::SettingsCloseTabDoubleClickDesc,L"\xEA39",vm.settings_close_tab_double_click,35);
         toggle(lay.close_last_tab_row,I::SettingsCloseLastTab,I::SettingsCloseLastTabDesc,L"\xE89F",vm.settings_close_last_tab,26);
         }
+        if(page==14) {
+            label(lay.commands_editor_row,l10n::Get(I::SettingsSecCommands),l10n::Get(I::SettingsCommandsDesc),
+                  L"\xE756",lay.commands_editor_button.left-12*scale_);
+            button(lay.commands_editor_button,l10n::Get(I::SettingsCommandsOpen),H::SettingsCommandsEditor,0);
+        }
         if(page==9) {
         const I density[]={I::SettingsDensityCompact,I::SettingsDensityStandard,I::SettingsDensityRoomy};const int heights[]={28,34,40};
         segmented(lay.density_card,lay.density_row,density,heights,vm.settings_row_height,H::SettingsDensity,I::SettingsRowHeight,I::SettingsRowHeightDesc,3,L"\xECE7");

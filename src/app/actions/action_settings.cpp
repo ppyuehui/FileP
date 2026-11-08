@@ -164,6 +164,7 @@ std::wstring SettingsPageTitle(int page) {
     case 10: return Text(I::SettingsPageTabs);
     case 11: return Text(I::SettingsPageSystem);
     case 12: return Text(I::SettingsPageFileOps);
+    case 14: return Text(I::SettingsPageCommands);
     default: return Text(I::SettingsGeneral);
     }
 }

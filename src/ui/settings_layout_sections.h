@@ -248,6 +248,14 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         l.close_tab_double_click_row=row(64);
         l.close_last_tab_row=row(64);
 
+    } else if (page == 14) {
+        section(I::SettingsSecCommands);
+        l.commands_editor_row=row(64);
+        {
+            const float bw=button_w(I::SettingsCommandsOpen,140);
+            const float top=l.commands_editor_row.top+16*scale;
+            l.commands_editor_button=D2D1::RectF(right-16*scale-bw,top,right-16*scale,top+32*scale);
+        }
     } else if (page == 11) {
         section(I::SettingsIntegration);
         end_group();   // the integration card is laid out and drawn on its own

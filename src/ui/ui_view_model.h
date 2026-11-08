@@ -1489,6 +1489,7 @@ struct HitTestResult {
         SettingsNewTabOpen,
         SettingsExternalOpen,
         SettingsTaskbarChars,  // 任务栏标题: 0 上级-, 1 上级+, 2 当前-, 3 当前+
+        SettingsCommandsEditor,  // 自定义命令页: 打开编辑器
         SettingsBlankClick,
         SettingsHomeFolder,
         SettingsLanCache,  // 发现结果保留: 0 10 min, 1 1 h, 2 this session
