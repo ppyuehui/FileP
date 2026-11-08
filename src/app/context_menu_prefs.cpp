@@ -567,7 +567,7 @@ void ContextMenuPrefs::CoalesceCompressCatalog() {
 }
 
 bool ContextMenuPrefs::Load() {
-    const std::wstring dir = GetPulseDataDir();
+    const std::wstring dir = GetPulseConfigDir();
     if (dir.empty()) { load_failed = true; return false; }
     const std::wstring file = dir + L"\\context_menu.json";
     const DWORD attributes = GetFileAttributesW(file.c_str());
@@ -590,7 +590,7 @@ bool ContextMenuPrefs::Load() {
 bool ContextMenuPrefs::Save() const {
     if (!persist) return true;
     if (load_failed) return false;
-    const std::wstring dir = GetPulseDataDir();
+    const std::wstring dir = GetPulseConfigDir();
     if (dir.empty()) return false;
     return WriteUtf8FileAtomic(dir + L"\\context_menu.json", ToJson());
 }

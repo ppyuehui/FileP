@@ -47,7 +47,7 @@ struct Watch {
 std::vector<std::unique_ptr<Watch>> g_watches;
 HANDLE g_stop = nullptr;
 
-std::wstring RulesPath() { return app::GetPulseDataDir() + L"\\tag_rules.json"; }
+std::wstring RulesPath() { return app::GetPulseConfigDir() + L"\\tag_rules.json"; }
 
 bool SameText(std::wstring_view a, std::wstring_view b) {
     return a.size() == b.size() &&

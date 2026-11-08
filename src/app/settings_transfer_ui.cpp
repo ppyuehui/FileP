@@ -58,7 +58,7 @@ std::wstring LocalStamp(bool iso) {
 }
 
 void RefreshDisk() {
-    const std::wstring dir = app::GetPulseDataDir();
+    const std::wstring dir = app::GetPulseConfigDir();
     DiskState next;
     next.pending = st::HasPendingImport(dir);
     const auto backups = st::ListBackups(dir);
@@ -130,7 +130,7 @@ void Start(AppState& s, app::SettingsTask task, StringId failure) {
 }
 
 void ExportSettings(AppState& s) {
-    const uint32_t available = st::AvailableCategories(app::GetPulseDataDir());
+    const uint32_t available = st::AvailableCategories(app::GetPulseConfigDir());
     if (!available) {
         Toast(s, l10n::Get(StringId::SettingsExportFailed));
         return;
@@ -237,7 +237,7 @@ void SettingsTransferAction(AppState& s, int action) {
 }
 
 bool RunSettingsTransferTask(const app::SettingsTask& task, std::wstring& error) {
-    const std::wstring dir = app::GetPulseDataDir();
+    const std::wstring dir = app::GetPulseConfigDir();
     const uint32_t categories = static_cast<uint32_t>(wcstoul(task.key.c_str(), nullptr, 10));
     if (task.kind == app::SettingsTaskKind::SettingsExport) {
         std::wstring bundle;
@@ -311,7 +311,7 @@ void WaitForRestartingPulse(unsigned long process_id) {
 }
 
 void ApplyStagedSettingsAtStartup() {
-    const std::wstring dir = app::GetPulseDataDir();
+    const std::wstring dir = app::GetPulseConfigDir();
     if (!st::HasPendingImport(dir)) return;
     g_startup = st::ApplyPendingImport(dir, LocalStamp(false));
 }

@@ -1332,13 +1332,21 @@ LRESULT CALLBACK WndProcImpl(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) 
                 s->appPrefs.persist = s->isolatedTestPersist; // only into PULSE_TEST_DATA_DIR
                 s->ctxMenuPrefs.persist = s->isolatedTestPersist;
             }
+            // 设置文件在 %APPDATA%\FileP；首次启动把旧位置（%LOCALAPPDATA%）的文件搬过去。
+            if (!s->isolatedTest) {
+                const std::wstring roaming = app::RoamingConfigDir();
+                if (!roaming.empty()) {
+                    app::PulseConfigDirOverride() = roaming;
+                    app::MigrateConfigToRoaming();
+                }
+            }
             s->savedSearches.Load();
             SyncSavedSearchSidebar(*s);
             s->places.Load();
             if (s->isolatedTest) s->customCommands.persist = s->isolatedTestPersist;
             s->customCommands.Load();
             if (!s->isolatedTest || s->isolatedTestPersist)
-                app::AliasStore::Instance().Load(app::GetPulseDataDir() + L"\\aliases.json");
+                app::AliasStore::Instance().Load(app::GetPulseConfigDir() + L"\\aliases.json");
             app::AliasStore::PinyinHook() = [](std::wstring_view name, std::wstring_view query) {
                 return index::PinyinEligible(query) && static_cast<bool>(index::FindPinyinMatch(name, query));
             };

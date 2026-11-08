@@ -387,6 +387,37 @@ std::wstring GetPulseDataDir() {
     return L"";
 }
 
+std::wstring RoamingConfigDir() {
+    wchar_t path[MAX_PATH] = {};
+    if (SUCCEEDED(SHGetFolderPathW(nullptr, CSIDL_APPDATA, nullptr, 0, path))) {
+        std::wstring dir = std::wstring(path) + L"\\FileP";
+        CreateDirectoryW(dir.c_str(), nullptr);
+        return dir;
+    }
+    return L"";
+}
+
+void MigrateConfigToRoaming() {
+    // Every settings file the app writes; session.json and the caches stay put.
+    static const wchar_t* const kFiles[] = {
+        L"app.json", L"context_menu.json", L"commands.json", L"places.json",
+        L"tags.json", L"tags.pending.json", L"tag_rules.json", L"aliases.json",
+        L"saved_searches.json",
+    };
+    const std::wstring target = GetPulseConfigDir();
+    const std::wstring source = GetPulseDataDir();
+    if (target.empty() || source.empty() || _wcsicmp(target.c_str(), source.c_str()) == 0) return;
+    for (const wchar_t* name : kFiles) {
+        const std::wstring from = source + L"\\" + name;
+        const std::wstring to = target + L"\\" + name;
+        if (GetFileAttributesW(from.c_str()) == INVALID_FILE_ATTRIBUTES) continue;
+        if (GetFileAttributesW(to.c_str()) != INVALID_FILE_ATTRIBUTES) continue;
+        if (MoveFileExW(from.c_str(), to.c_str(), MOVEFILE_COPY_ALLOWED)) continue;
+        // A cross-volume move can fail: copy instead so nothing is lost.
+        CopyFileW(from.c_str(), to.c_str(), TRUE);
+    }
+}
+
 std::wstring SessionToJson(const SessionSnapshot& snap) {
     std::wstring trayJson;
     snap.tray.ToJson(trayJson);

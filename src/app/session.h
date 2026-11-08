@@ -1,6 +1,7 @@
 // session.h — Window/session snapshot save/load.
 #pragma once
 #include "app_model.h"
+#include "../common/app_dirs.h"
 #include "window_identity.h"
 #include <array>
 #include <functional>
@@ -108,7 +109,11 @@ struct SessionSnapshot {
     std::vector<ClosedWindowSessionSnapshot> closed_windows;
 };
 
-std::wstring GetPulseDataDir();
+// %APPDATA%\FileP, created; empty when Windows has no roaming folder.
+std::wstring RoamingConfigDir();
+// Moves the settings files the old layout left in the data dir into the roaming
+// folder; an existing file there is never overwritten.
+void MigrateConfigToRoaming();
 bool SaveSession(const SessionSnapshot& snap);
 // Autosave compares the serialized form with the last write and skips unchanged state.
 std::wstring SessionToJson(const SessionSnapshot& snap);

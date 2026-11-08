@@ -195,7 +195,7 @@ PlacesCatalog::~PlacesCatalog() {
 }
 
 bool PlacesCatalog::SaveTagFile(const std::vector<ColorTag>& snapshot, uint64_t generation) {
-    const std::wstring dir = GetPulseDataDir();
+    const std::wstring dir = GetPulseConfigDir();
     if (dir.empty()) return false;
     std::wostringstream file;
     auto write_array = [&](const std::vector<std::wstring>& values) {
@@ -382,7 +382,7 @@ bool PlacesCatalog::Load() {
     StopPlacesWriter();
     StopTagWriter();
     pending_tag_save_.reset();
-    const std::wstring dir = GetPulseDataDir();
+    const std::wstring dir = GetPulseConfigDir();
     std::wstring json, tag_json;
     auto read = [&](const wchar_t* name, std::wstring& text) {
         const std::wstring file = dir + name;
@@ -753,7 +753,7 @@ bool PlacesCatalog::Save() const {
 }
 
 bool PlacesCatalog::SaveSnapshotFile(const SaveSnapshot& snapshot) {
-    std::wstring dir = GetPulseDataDir();
+    std::wstring dir = GetPulseConfigDir();
     if (dir.empty()) return false;
     std::wostringstream f;
     auto writeArr = [&](const std::vector<std::wstring>& arr) {

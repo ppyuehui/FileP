@@ -901,7 +901,7 @@ bool AppPrefs::Load() {
         pulse::diagnostics::runtime::Event("shell_integration_legacy_repair", {{"success", repaired ? 1u : 0u}});
         SHChangeNotify(SHCNE_ASSOCCHANGED, SHCNF_IDLIST, nullptr, nullptr);
     }
-    const std::wstring dir = GetPulseDataDir();
+    const std::wstring dir = GetPulseConfigDir();
     if (dir.empty()) {
         launch_on_startup = ReadLaunchOnStartup();
         open_folders_in_pulse = ReadFolderOpen();
@@ -972,7 +972,7 @@ bool AppPrefs::RememberPickerFolder(std::wstring_view key, const std::wstring& f
 bool AppPrefs::Save() const {
     if (!persist) return true;
     if (load_failed) return false;
-    const std::wstring dir = GetPulseDataDir();
+    const std::wstring dir = GetPulseConfigDir();
     if (dir.empty()) return false;
     return WriteUtf8FileAtomic(dir + L"\\app.json", ToJson());
 }

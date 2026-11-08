@@ -76,7 +76,7 @@ std::vector<std::wstring> ExtractObjects(const std::wstring& json) {
 } // namespace
 
 std::wstring SavedSearchStore::DefaultPath() {
-    const std::wstring root = GetPulseDataDir();
+    const std::wstring root = GetPulseConfigDir();
     return root.empty() ? L"" : root + L"\\saved_searches.json";
 }
 
