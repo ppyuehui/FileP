@@ -252,6 +252,10 @@ std::vector<ShellMenuEntry> ApplyExplorerPrefs(const ContextMenuPrefs& prefs,
 
 inline constexpr int kMaxShellNewItems = 64;
 static_assert(CmdIndexBase + 48 <= CmdShellNewBase && CmdShellNewBase + kMaxShellNewItems <= CmdCopyToWindowBase);
+// 自定义命令 must not sit in the 新建 (Word/Excel) range again: that collision
+// sent every custom command to the first shell template.
+static_assert(CmdCustomCommandBase > CmdShellNewBase + kMaxShellNewItems);
+static_assert(CmdCustomCommandLast < CmdShellStaticBase);
 
 // Other windows' shown folders, most recently used window first (M6e).
 inline constexpr size_t kMaxWindowTransferTargets = 32;

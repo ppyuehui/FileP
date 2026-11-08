@@ -353,6 +353,14 @@ ID2D1Bitmap* MainRenderer::AppIconBitmap(const common::MenuIconRef& pixels) {
     return app_icon_bitmaps_.back().bitmap.get();
 }
 
+D2D1_RECT_F MainRenderer::SettingsContentRect(const WindowViewModel& vm, const D2D1_RECT_F& rect) const {
+    // Same layout the page paints from, so an embedded panel lands where the
+    // page's own rows would.
+    const SettingsLayout lay = MakeSettingsLayout(vm, rect, scale_, title_bar_height_, status_height_,
+                                                  &painter_);
+    return lay.content;
+}
+
 D2D1_RECT_F MainRenderer::SidebarToggleRect(float w) const {
     if (w / scale_ < kSidebarRailWindowDip) return {};
     const float size = 32.0f * scale_;

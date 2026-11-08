@@ -80,6 +80,49 @@ public:
         return dirty_;
     }
 
+public:
+    // Panel mode: the same controls, no caption and no modal loop, parked over
+    // the settings page. Edits are saved as they happen.
+    HWND ShowPanel(HWND owner, app::CustomCommandStore& store, const RECT& rc) {
+        owner_ = owner;
+        store_ = &store;
+        panel_ = true;
+        if (hwnd_ && IsWindow(hwnd_)) {
+            MoveWindow(hwnd_, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top, TRUE);
+            ShowWindow(hwnd_, SW_SHOWNOACTIVATE);
+            return hwnd_;
+        }
+        items_ = store.commands;
+        dpi_ = pulse::compat::WindowDpi(owner ? owner : GetDesktopWindow());
+        WNDCLASSEXW wc{sizeof(wc)};
+        wc.hInstance = GetModuleHandleW(nullptr);
+        wc.lpfnWndProc = &CommandDialog::WndProc;
+        wc.lpszClassName = kClass;
+        wc.hCursor = LoadCursorW(nullptr, IDC_ARROW);
+        wc.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
+        if (!GetClassInfoExW(wc.hInstance, kClass, &wc)) RegisterClassExW(&wc);
+        hwnd_ = CreateWindowExW(WS_EX_TOOLWINDOW, kClass, L"", WS_POPUP | WS_CLIPCHILDREN,
+                                rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top,
+                                owner, nullptr, wc.hInstance, this);
+        if (!hwnd_) return nullptr;
+        index_ = items_.empty() ? -1 : 0;
+        RefreshCommands();
+        LoadCommand(index_);
+        ShowWindow(hwnd_, SW_SHOWNOACTIVATE);
+        return hwnd_;
+    }
+    void MovePanel(const RECT& rc) {
+        if (!hwnd_ || !IsWindow(hwnd_)) return;
+        MoveWindow(hwnd_, rc.left, rc.top, rc.right - rc.left, rc.bottom - rc.top, TRUE);
+    }
+    void HidePanel() {
+        if (hwnd_ && IsWindow(hwnd_)) ShowWindow(hwnd_, SW_HIDE);
+    }
+    void DestroyPanel() {
+        if (hwnd_ && IsWindow(hwnd_)) { panel_ = false; DestroyWindow(hwnd_); }
+        hwnd_ = nullptr;
+    }
+
 private:
     static LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wparam, LPARAM lparam) {
         CommandDialog* self = reinterpret_cast<CommandDialog*>(GetWindowLongPtrW(hwnd, GWLP_USERDATA));
@@ -122,8 +165,17 @@ private:
             return 0;
         case WM_COMMAND:
             OnCommand(LOWORD(wparam), HIWORD(wparam));
+            if (panel_ && dirty_ && store_) {
+                store_->commands = items_;
+                store_->Save();
+                dirty_ = false;
+            }
             return 0;
         case WM_CLOSE:
+            if (panel_) {
+                ShowWindow(hwnd_, SW_HIDE);
+                return 0;
+            }
             DestroyWindow(hwnd_);
             return 0;
         case WM_DESTROY:
@@ -159,7 +211,8 @@ private:
         Make(L"BUTTON", L"上移", BS_PUSHBUTTON, IDC_UP, 454, 422, 68, 28);
         Make(L"BUTTON", L"下移", BS_PUSHBUTTON, IDC_DOWN, 530, 422, 68, 28);
         Make(L"BUTTON", L"删除步骤", BS_PUSHBUTTON, IDC_DELSTEP, 606, 422, 84, 28);
-        Make(L"BUTTON", L"关闭", BS_DEFPUSHBUTTON, IDC_CLOSE, 652, 476, 90, 30);
+        // Embedded: the settings page owns it, so no 关闭 button.
+        if (!panel_) Make(L"BUTTON", L"关闭", BS_DEFPUSHBUTTON, IDC_CLOSE, 652, 476, 90, 30);
 
         HWND kind = GetDlgItem(hwnd_, IDC_KIND);
         for (int i = 0; i < kKindCount; ++i)
@@ -335,7 +388,8 @@ private:
             break;
         }
         case IDC_CLOSE:
-            DestroyWindow(hwnd_);
+            if (panel_) ShowWindow(hwnd_, SW_HIDE);
+            else DestroyWindow(hwnd_);
             break;
         default:
             break;
@@ -351,6 +405,7 @@ private:
     int index_ = -1;
     bool loading_ = false;
     bool dirty_ = false;
+    bool panel_ = false;
 };
 
 } // namespace
@@ -358,6 +413,30 @@ private:
 bool ShowCustomCommandsDialog(HWND owner, app::CustomCommandStore& store) {
     CommandDialog dialog;
     return dialog.Show(owner, store);
+}
+
+namespace {
+CommandDialog* g_panel = nullptr;
+} // namespace
+
+HWND ShowCustomCommandsPanel(HWND owner, app::CustomCommandStore& store, const RECT& rc) {
+    if (!g_panel) g_panel = new CommandDialog();
+    return g_panel->ShowPanel(owner, store, rc);
+}
+
+void MoveCustomCommandsPanel(const RECT& rc) {
+    if (g_panel) g_panel->MovePanel(rc);
+}
+
+void HideCustomCommandsPanel() {
+    if (g_panel) g_panel->HidePanel();
+}
+
+void CloseCustomCommandsPanel() {
+    if (!g_panel) return;
+    g_panel->DestroyPanel();
+    delete g_panel;
+    g_panel = nullptr;
 }
 
 } // namespace pulse::ui

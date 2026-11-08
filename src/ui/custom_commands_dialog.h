@@ -12,4 +12,13 @@ namespace pulse::ui {
 // Modal. Returns true when the commands changed (the caller saves the store).
 bool ShowCustomCommandsDialog(HWND owner, app::CustomCommandStore& store);
 
+// The same editor, living inside the settings page instead of a window of its
+// own: a caption-less panel parked over the page's content area. Edits save as
+// they happen, so the menus pick them up immediately. Show parks/creates it,
+// Move follows the window, Hide is for leaving the page.
+HWND ShowCustomCommandsPanel(HWND owner, app::CustomCommandStore& store, const RECT& rc);
+void MoveCustomCommandsPanel(const RECT& rc);
+void HideCustomCommandsPanel();
+void CloseCustomCommandsPanel();
+
 } // namespace pulse::ui

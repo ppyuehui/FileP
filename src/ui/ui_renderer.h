@@ -704,6 +704,8 @@ public:
                      D2D1_RECT_F* out) const;
     // Current layout rect of a row, addressed by logical section id + row index
     // (for the quick-access pin drag).
+    // The settings page's content column (right of the nav), in device pixels.
+    D2D1_RECT_F SettingsContentRect(const WindowViewModel& vm, const D2D1_RECT_F& rect) const;
     bool SidebarRowRect(const WindowViewModel& vm, float w, float h, int section_id, int item,
                         D2D1_RECT_F* out) const;
     // Vertical span of every laid-out sidebar section, in display order (for the

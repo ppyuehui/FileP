@@ -547,6 +547,7 @@ void Render(AppState& s) {
     UpdateProcessMetrics(s);
     ui::WindowViewModel vm = BuildVm(s);
     pulse::app::startup_trace::Mark("frame_vm");
+    SyncCustomCommandsPanel(s, vm);
     vm.backdrop_enabled = !hc && s.compositor.UsesTransparentComposition() && s.backdropActive;
     vm.pane.hover_index = s.hoverRow;
 
@@ -3022,6 +3023,7 @@ LRESULT CALLBACK WndProcImpl(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) 
             switch (wParam) {
             case 0:
                 pulse::app::startup_trace::Mark("deferred_begin");
+                if (s->shot_settings_page >= 0) OpenSettingsTab(*s, s->shot_settings_page);
                 RegisterAssocChangeNotify(ServiceWindow(*s));
                 pulse::app::startup_trace::Mark("deferred_assoc");
                 break;
@@ -3728,19 +3730,6 @@ int ShotModeMain(AppState& state, HWND hwnd) {
     bool ok = false;
     __try {
         WaitForShotReady(state);
-        if (state.shot_settings_page >= 0) {
-            // --shot-settings <page>: render Settings itself, for UI checks.
-            OpenSettingsTab(state, state.shot_settings_page);
-            for (int i = 0; i < 8; ++i) {
-                Render(state);
-                MSG settings_msg{};
-                while (PeekMessageW(&settings_msg, nullptr, 0, 0, PM_REMOVE)) {
-                    TranslateMessage(&settings_msg);
-                    DispatchMessageW(&settings_msg);
-                }
-                Sleep(30);
-            }
-        }
         StageTagShotStates(state);
         StageSplitShot(state);
         if (state.shot_details && state.pane && state.pane->ActiveTab() &&

@@ -131,6 +131,8 @@ bool TrayEffectiveMove(const AppState& s);
 // Hashes of every staged path ("已暂存" row pills), cached per tray state.
 std::shared_ptr<const std::unordered_set<uint64_t>> StagedHashes(AppState& s);
 ui::WindowViewModel BuildVm(AppState& s, bool probe_details = true);
+// 自定义命令 page: parks the embedded editor over the settings content column.
+void SyncCustomCommandsPanel(AppState& s, const ui::WindowViewModel& vm);
 std::wstring TooltipForHover(AppState& s);
 // Records what the pointer is over. Both mouse-move paths (client and frame)
 // must call this, or a hover field silently stops updating.
