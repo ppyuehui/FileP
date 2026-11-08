@@ -4401,8 +4401,8 @@ BEGIN
     IDS_OP_AUTHORIZATION_ONCE "確認一次即可，本次操作的其餘項目不會再詢問。"
     IDS_SETTINGS_SEC_TASKBAR "工作列標題"
     IDS_SETTINGS_TASKBAR_PARENT "上層資料夾字元數"
-    IDS_SETTINGS_TASKBAR_PARENT_DESC "工作列標題裡「上層/目前」的上層部分，超過這個字數就截斷，末尾加 […]；滑桿拉到最右邊是不限（按字元計，中文算一個字）"
+    IDS_SETTINGS_TASKBAR_PARENT_DESC "工作列標題裡「上層/目前」的上層部分，超過這個字數就截斷，末尾加 …；滑桿拉到最右邊是不限（按字元計，中文算一個字）"
     IDS_SETTINGS_TASKBAR_CURRENT "目前資料夾字元數"
-    IDS_SETTINGS_TASKBAR_CURRENT_DESC "工作列標題裡「上層/目前」的目前部分，超過這個字數就截斷，末尾加 […]；滑桿拉到最右邊是不限（按字元計，中文算一個字）"
+    IDS_SETTINGS_TASKBAR_CURRENT_DESC "工作列標題裡「上層/目前」的目前部分，超過這個字數就截斷，末尾加 …；滑桿拉到最右邊是不限（按字元計，中文算一個字）"
     IDS_TASKBAR_CHARS_NONE "不限"
 END

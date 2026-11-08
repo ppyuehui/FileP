@@ -7,7 +7,7 @@ namespace pulse {
 namespace {
 
 // The taskbar title counts characters (a Chinese name costs one per character);
-// a name longer than its limit keeps the limit and ends with […].
+// a name longer than its limit keeps the limit and ends with an ellipsis.
 std::wstring LimitName(const std::wstring& name, int limit) {
     if (limit <= 0) return name;
     size_t characters = 0;
@@ -26,7 +26,7 @@ std::wstring LimitName(const std::wstring& name, int limit) {
         i += step;
         ++kept;
     }
-    return cut + L"[\u2026]";
+    return cut + L"\u2026";
 }
 
 // The folder above `path`: empty for a drive root, a UNC share root or a

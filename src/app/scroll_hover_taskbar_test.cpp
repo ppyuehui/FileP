@@ -64,8 +64,8 @@ bool RunScrollHoverTaskbarTest() {
     title_tab.current_path = L"C:\\fixture\\中文 项目\\";
     check(TaskbarWindowTitle(&title_tab, 40, 40) == L"fixture\\中文 项目",
         "taskbar title uses the parent and the Unicode folder leaf, spaces and trailing slash included");
-    check(TaskbarWindowTitle(&title_tab, 4, 2) == L"fixt[\u2026]\\中文[\u2026]",
-        "each name is cut to its own character limit with […] at the end");
+    check(TaskbarWindowTitle(&title_tab, 4, 2) == L"fixt\u2026\\中文\u2026",
+        "each name is cut to its own character limit with an ellipsis at the end");
     title_tab.current_path = L"C:\\";
     check(TaskbarWindowTitle(&title_tab, 40, 40) == L"C:", "drive roots retain their display name");
     title_tab.current_path = L"\\\\server\\share\\";
