@@ -784,7 +784,9 @@ void ClearTextWidthCache() {
                 SidebarSlot slot;
                 slot.kind = item.is_drive ? SidebarSlot::Drive
                           : item.is_tag ? SidebarSlot::Tag : SidebarSlot::Item;
-                slot.rc = D2D1::RectF(innerL + item.indent * 16.0f * scale, y, innerR, y + h);
+                // 有标题的分组，条目缩进一级，和收藏夹的层级效果一致。
+                const int indent_units = has_header ? (std::max)(1, item.indent) : item.indent;
+                slot.rc = D2D1::RectF(innerL + indent_units * 16.0f * scale, y, innerR, y + h);
                 slot.group = g;
                 slot.item = i;
                 slot.run = run++;
