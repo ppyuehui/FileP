@@ -146,7 +146,7 @@ void MainRenderer::SetEmbedded(float top_dip, float bottom_dip) {
 float MainRenderer::SidebarOwnWidth(float window_width) const {
     const float window_dip = window_width / scale_;
     const float rail = kSidebarRailWidthDip * scale_;
-    if (window_dip < kSidebarRailWindowDip || collapse_value_ >= 1.0f) return rail;
+    if ((auto_collapse_sidebar_ && window_dip < kSidebarRailWindowDip) || collapse_value_ >= 1.0f) return rail;
     const float full = SidebarFullWidth(window_width);
     return collapse_value_ <= 0.0f ? full : full + (rail - full) * collapse_value_;
 }
@@ -370,10 +370,11 @@ void MainRenderer::SettingsCommandFields(const WindowViewModel& vm, const D2D1_R
 }
 
 D2D1_RECT_F MainRenderer::SidebarToggleRect(float w) const {
-    if (w / scale_ < kSidebarRailWindowDip) return {};
     const float size = 32.0f * scale_;
     const float top = (title_bar_height_ - size) * 0.5f;
-    if (user_sidebar_collapsed_) {
+    // Narrow window (snapped to half a screen) or a folded sidebar: the button
+    // stays, centred in the rail, so the sidebar can always be reopened.
+    if (user_sidebar_collapsed_ || (auto_collapse_sidebar_ && w / scale_ < kSidebarRailWindowDip)) {
         const float left = (kSidebarRailWidthDip * scale_ - size) * 0.5f;
         return D2D1::RectF(left, top, left + size, top + size);
     }

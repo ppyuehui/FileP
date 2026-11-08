@@ -4438,6 +4438,8 @@ BEGIN
     IDS_CMD_VALUE "值"
     IDS_SETTINGS_SHOW_PATH_COPY "地址栏复制按钮"
     IDS_SETTINGS_SHOW_PATH_COPY_DESC "在地址栏右侧显示「复制路径」按钮"
+    IDS_SETTINGS_AUTO_COLLAPSE "自动收起侧栏"
+    IDS_SETTINGS_AUTO_COLLAPSE_DESC "窗口变窄时自动把侧栏收成图标栏；关掉后侧栏保持完整宽度"
 END
 
 LANGUAGE 0x09, 0x01
@@ -8875,6 +8877,8 @@ BEGIN
     IDS_CMD_VALUE "Value"
     IDS_SETTINGS_SHOW_PATH_COPY "Copy path button"
     IDS_SETTINGS_SHOW_PATH_COPY_DESC "Show a 复制路径 button at the right of the address bar"
+    IDS_SETTINGS_AUTO_COLLAPSE "Auto-collapse sidebar"
+    IDS_SETTINGS_AUTO_COLLAPSE_DESC "Fold the sidebar to icons when the window gets narrow; off keeps it full width"
 END
 
 // Traditional Chinese (Taiwan), generated from the Simplified entries above.

@@ -2717,6 +2717,8 @@ ui::WindowViewModel BuildVm(AppState& s, bool probe_details) {
     vm.settings_menu_acrylic = s.appPrefs.menu_acrylic;
     vm.settings_show_ai = s.appPrefs.show_ai_entry;
     vm.show_path_copy = s.appPrefs.show_path_copy;
+    vm.settings_auto_collapse_sidebar = s.appPrefs.auto_collapse_sidebar;
+    s.renderer.SetAutoCollapseSidebar(s.appPrefs.auto_collapse_sidebar);
     vm.settings_list_size_bar = s.appPrefs.list_size_bar;
     vm.settings_list_tag_names = s.appPrefs.list_tag_name_color;
     vm.settings_list_selection_outline = s.appPrefs.list_selection_outline;

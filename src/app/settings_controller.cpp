@@ -1258,6 +1258,11 @@ void SettingsController::ToggleUi(int index) {
         SaveAndApply(SettingsEffect::ListStyle);
         return;
     }
+    if (index == 83) {
+        prefs_->auto_collapse_sidebar = !prefs_->auto_collapse_sidebar;
+        SaveAndApply(SettingsEffect::None);
+        return;
+    }
     if (index == 82) {
         prefs_->show_path_copy = !prefs_->show_path_copy;
         SaveAndApply(SettingsEffect::None);

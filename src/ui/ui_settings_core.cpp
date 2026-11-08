@@ -349,6 +349,8 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
             dim_end(frame_dim);
         }
         toggle(lay.menu_acrylic_row,I::MenuAcrylic,I::MenuAcrylicDesc,L"\xE700",vm.settings_menu_acrylic,36);
+        toggle(lay.auto_collapse_row,I::SettingsAutoCollapse,I::SettingsAutoCollapseDesc,
+               L"\xE8A0",vm.settings_auto_collapse_sidebar,83);
         toggle(lay.show_path_copy_row,I::SettingsShowPathCopy,I::SettingsShowPathCopyDesc,
                L"\xE8C8",vm.show_path_copy,82);
         toggle(lay.show_ai_row,I::SettingsShowAi,I::SettingsShowAiDesc,L"\xECAA",vm.settings_show_ai,81);

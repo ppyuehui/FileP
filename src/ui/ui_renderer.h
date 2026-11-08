@@ -138,6 +138,7 @@ public:
     // Collapse/expand; `animate` eases the width (skipped when the system
     // turns animations off). Re-setting the current state is a no-op.
     void SetSidebarCollapsed(bool on, bool animate = false);
+    void SetAutoCollapseSidebar(bool on) { auto_collapse_sidebar_ = on; }
     bool SidebarCollapsed() const { return sidebar_collapsed_; }
     bool SidebarAnimating() const { return collapse_anim_; }
     // Hover peek: the collapsed rail shows the full sidebar as an overlay
@@ -1009,6 +1010,7 @@ private:
     int selection_actions_ = 0;
     bool sidebar_collapsed_ = false;   // effective: the user's choice or the docked assistant
     bool user_sidebar_collapsed_ = false;
+    bool auto_collapse_sidebar_ = true;   // 设置：窗口变窄时是否自动收成图标栏
     bool ai_rail_ = false;             // docked Pulse 助手 holds the sidebar on its rail
     AiPanelView ai_panel_;
     void ApplySidebarCollapse(bool animate);

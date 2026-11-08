@@ -4456,5 +4456,7 @@
 #define IDS_CMD_VALUE                                                                    5669
 #define IDS_SETTINGS_SHOW_PATH_COPY                                                      5670
 #define IDS_SETTINGS_SHOW_PATH_COPY_DESC                                                 5671
+#define IDS_SETTINGS_AUTO_COLLAPSE                                                       5672
+#define IDS_SETTINGS_AUTO_COLLAPSE_DESC                                                  5673
 
 #endif  // PULSE_STRING_IDS_H

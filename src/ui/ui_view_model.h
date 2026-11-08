@@ -1210,7 +1210,8 @@ struct WindowViewModel {
     bool settings_list_tree_sticky = true;
     bool settings_menu_acrylic = true;
     bool settings_show_ai = true;
-    bool show_path_copy = true;   // 地址栏右侧的复制路径按钮   // 左下角的 AI 图标与入口
+    bool show_path_copy = true;   // 地址栏右侧的复制路径按钮
+    bool settings_auto_collapse_sidebar = true;   // 左下角的 AI 图标与入口
     // 自定义命令 (settings page 14): the editor reads these; the app side owns
     // the selection and the two text fields.
     std::vector<std::wstring> command_names;
