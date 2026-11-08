@@ -1632,11 +1632,7 @@ void DispatchMenuCommand(AppState& s, int cmd) {
         cmd < app::CmdToolbarToolBase + static_cast<int>(app::kToolbarToolCount)) {
         const size_t tool = static_cast<size_t>(cmd - app::CmdToolbarToolBase);
         if (app::kToolbarToolIds[tool] == L"split") ShowSplitDropdown(s);
-        else if (app::kToolbarToolIds[tool] == L"split_two") {
-            // 左右双栏: one click straight to the layout; a second click folds it.
-            ApplyLayoutPreset(s, LayoutOf(s) == app::LayoutPreset::TwoVertical
-                ? app::LayoutPreset::Single : app::LayoutPreset::TwoVertical);
-        } else FlipToolbarTool(s, tool);
+        else FlipToolbarTool(s, tool);
         return;
     }
     if (cmd == app::CmdManageAliases) {
@@ -2981,7 +2977,8 @@ constexpr ToolbarToolDef kToolbarTools[] = {
     {app::CmdCompressZip, L"\xF012", l10n::StringId::ToolbarToolZip, L"", false},
     {app::CmdToggleFolderSizes, L"\xEDA2", l10n::StringId::ToolbarToolFolderSizes, L"", true},
     {0, L"\xE7C3", l10n::StringId::ToolbarToolExtensions, L"", true},
-    {0, ui::command_icons::kGlyphSplitSideBySide, l10n::StringId::LayoutVertical, L"Ctrl+Alt+2", false},
+    {app::CmdLayoutTwoVertical, ui::command_icons::kGlyphSplitSideBySide, l10n::StringId::LayoutVertical,
+     L"Ctrl+Alt+2", false},
 };
 static_assert(std::size(kToolbarTools) == app::kToolbarToolCount, "one catalog row per toolbar_tools.h id");
 
@@ -3066,6 +3063,8 @@ std::wstring WithoutEllipsis(std::wstring label) {
 // Tools with a command of their own run it (details / columns too, which are
 // toggles); the others (the setting switches, split) run as
 // CmdToolbarToolBase + index, kept below CmdNewPrimaryBase.
+static_assert(app::CmdToolbarToolBase + static_cast<int>(app::kToolbarToolCount) <= app::CmdNewPrimaryBase,
+              "every toolbar tool id needs a command id of its own");
 int ToolbarToolCommand(size_t index) {
     return kToolbarTools[index].command ? kToolbarTools[index].command
                                         : app::CmdToolbarToolBase + static_cast<int>(index);

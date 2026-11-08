@@ -500,6 +500,8 @@ struct AppState : AppCoreOwner {
     bool edit_commands = false;  // --edit-commands: open the 自定义命令 editor
     // --shot-settings <page>: open Settings on that page before --shot writes.
     int shot_settings_page = -1;
+    // --shot-run <command id>: dispatch it before the snapshot is written.
+    int shot_run_command = 0;
     // 自定义命令 (settings page 14): the page's own selection and the step value
     // being typed; the two text fields are native edits parked over the page.
     int command_sel = -1;

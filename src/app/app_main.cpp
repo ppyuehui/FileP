@@ -3764,6 +3764,20 @@ int ShotModeMain(AppState& state, HWND hwnd) {
             Render(state);   // the snapshot reads the frame before the last Present
         }
         StageLinkPillShot(state);
+        if (state.shot_run_command > 0) {
+            // --shot-run <command id>: a toolbar / menu command, then a frame
+            // to show what it did.
+            DispatchMenuCommand(state, state.shot_run_command);
+            for (int i = 0; i < 10; ++i) {
+                Render(state);
+                MSG run_msg{};
+                while (PeekMessageW(&run_msg, nullptr, 0, 0, PM_REMOVE)) {
+                    TranslateMessage(&run_msg);
+                    DispatchMessageW(&run_msg);
+                }
+                Sleep(40);
+            }
+        }
         if (state.shot_tooltip) {
             // After the pump: a mouse move during startup would clear this.
             state.hoverRegion = static_cast<int>(ui::HitTestResult::SidebarItem);
@@ -4067,6 +4081,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
             state.edit_commands = true;
         } else if (wcscmp(__wargv[i], L"--shot-settings") == 0 && i + 1 < __argc) {
             state.shot_settings_page = _wtoi(__wargv[++i]);
+        } else if (wcscmp(__wargv[i], L"--shot-run") == 0 && i + 1 < __argc) {
+            state.shot_run_command = _wtoi(__wargv[++i]);
         } else if (wcscmp(__wargv[i], L"--shot-tray") == 0) {
             state.shot_tray = true;
             // Optional item count: --shot-tray 1 stages a single file.
