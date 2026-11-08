@@ -21,6 +21,9 @@ struct ToolBroker::Call {
 
 struct ToolBroker::Connection {
     HANDLE pipe = INVALID_HANDLE_VALUE;
+    // Stop cancels whatever I/O is pending while the connection thread may be
+    // closing the handle: the value must not be read or reused unlocked.
+    std::mutex pipe_mu;
     uint64_t id = 0;
     std::wstring client;
     std::atomic<bool> closing{false};
@@ -95,7 +98,8 @@ void ToolBroker::Stop() {
             std::lock_guard lock(c->calls_mu);
             for (auto& call : c->calls) call->cancelled = true;
         }
-        CancelIoEx(c->pipe, nullptr);
+        std::lock_guard pipe_lock(c->pipe_mu);
+        if (c->pipe != INVALID_HANDLE_VALUE) CancelIoEx(c->pipe, nullptr);
     }
     for (auto& c : connections)
         if (c->thread.joinable()) c->thread.join();
@@ -280,8 +284,11 @@ void ToolBroker::Serve(std::shared_ptr<Connection> c) {
         if (call->thread.joinable()) call->thread.join();
     // CloseHandle, not DisconnectNamedPipe: a disconnect discards what the
     // client has not read yet (e.g. client_not_approved); a close lets it drain.
-    CloseHandle(c->pipe);
-    c->pipe = INVALID_HANDLE_VALUE;
+    {
+        std::lock_guard pipe_lock(c->pipe_mu);
+        CloseHandle(c->pipe);
+        c->pipe = INVALID_HANDLE_VALUE;
+    }
     if (connected) Emit(*c, BrokerEventKind::Disconnected);
     c->finished = true;
 }

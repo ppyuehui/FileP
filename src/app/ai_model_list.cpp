@@ -126,6 +126,20 @@ void Save() {
     if (!ok || !MoveFileExW(temp.c_str(), path.c_str(), MOVEFILE_REPLACE_EXISTING)) DeleteFileW(temp.c_str());
 }
 
+// Takes a finished probe off g_job and caches it. The timer below is the normal
+// caller; RefreshListedModels calls it too, because that timer lives on one
+// window: once that window closes, g_job would stay set and no later refresh
+// would ever run again.
+bool Harvest() {
+    if (!g_job || !g_job->done.load(std::memory_order_acquire)) return false;
+    const std::shared_ptr<Job> job = std::move(g_job);
+    g_job.reset();
+    if (job->result.http_status != 200 || job->result.models.empty()) return false;
+    StoreListedModels(job->url, job->result.models);
+    g_tried_url.clear();
+    return true;
+}
+
 void CALLBACK RefreshTimer(HWND hwnd, UINT, UINT_PTR id, DWORD) {
     if (!g_job) {
         KillTimer(hwnd, id);
@@ -133,12 +147,7 @@ void CALLBACK RefreshTimer(HWND hwnd, UINT, UINT_PTR id, DWORD) {
     }
     if (!g_job->done.load(std::memory_order_acquire)) return;
     KillTimer(hwnd, id);
-    const std::shared_ptr<Job> job = std::move(g_job);
-    if (job->result.http_status == 200 && !job->result.models.empty()) {
-        StoreListedModels(job->url, job->result.models);
-        g_tried_url.clear();
-        if (hwnd) InvalidateRect(hwnd, nullptr, FALSE);
-    }
+    if (Harvest() && hwnd) InvalidateRect(hwnd, nullptr, FALSE);
 }
 
 } // namespace
@@ -167,7 +176,11 @@ void StoreListedModels(const std::wstring& base_url, const std::vector<std::stri
 }
 
 void RefreshListedModels(HWND hwnd, const std::wstring& base_url) {
-    if (g_job) return;
+    if (g_job) {
+        // A finished probe whose timer window is gone (see Harvest).
+        if (Harvest() && hwnd) InvalidateRect(hwnd, nullptr, FALSE);
+        if (g_job) return;
+    }
     Load();
     const std::wstring url = Normalize(base_url);
     if (url.empty()) return;

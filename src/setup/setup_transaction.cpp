@@ -25,15 +25,23 @@ bool AppendJournal(HANDLE journal, bool had_old, const std::wstring& rel) {
            written == utf8.size() && FlushFileBuffers(journal);
 }
 
-// Undo of one journaled step; safe whether or not the step completed.
-void UndoStep(const std::wstring& app, const std::wstring& backup, bool had_old, const std::wstring& rel) {
+// Undo of one journaled step; safe whether or not the step completed. False
+// means the backup could not be put back, so the journal must stay for a retry.
+bool UndoStep(const std::wstring& app, const std::wstring& backup, bool had_old, const std::wstring& rel) {
     const std::wstring dst = app + L"\\" + rel, old = backup + L"\\" + rel;
     if (had_old) {
-        if (Exists(old) && !MoveFileExW(old.c_str(), dst.c_str(), MOVEFILE_REPLACE_EXISTING))
+        if (!Exists(old)) return true;   // its move never started
+        if (!MoveFileExW(old.c_str(), dst.c_str(), MOVEFILE_REPLACE_EXISTING)) {
             Log(L"Rollback could not restore " + dst + L": " + Win32Error(GetLastError()));
-    } else if (Exists(dst) && !DeleteFileW(dst.c_str())) {
-        Log(L"Rollback could not remove " + dst + L": " + Win32Error(GetLastError()));
+            return false;
+        }
+        return true;
     }
+    if (Exists(dst) && !DeleteFileW(dst.c_str())) {
+        Log(L"Rollback could not remove " + dst + L": " + Win32Error(GetLastError()));
+        return false;
+    }
+    return true;
 }
 
 }  // namespace
@@ -59,7 +67,13 @@ bool FileTransaction::RecoverInterrupted(const std::wstring& app_dir, std::wstri
         if (line.size() < 3 || line[1] != '\t' || end == journal.size()) continue;
         steps.push_back({Utf8ToWide(line.substr(2)), line[0] == '1'});
     }
-    for (auto it = steps.rbegin(); it != steps.rend(); ++it) UndoStep(t.app_, t.backup_, it->had_old, it->rel);
+    bool restored = true;
+    for (auto it = steps.rbegin(); it != steps.rend(); ++it)
+        if (!UndoStep(t.app_, t.backup_, it->had_old, it->rel)) restored = false;
+    if (!restored) {
+        error = L"Could not restore every file of the interrupted update; the backup is kept";
+        return false;
+    }
     if (!DeleteFileW(t.journal_.c_str())) {
         error = L"Cannot clear interrupted update journal: " + Win32Error(GetLastError());
         return false;
@@ -127,7 +141,15 @@ bool FileTransaction::Commit(const std::vector<std::wstring>& files, std::wstrin
 }
 
 void FileTransaction::Rollback(size_t done) {
-    for (size_t i = done; i-- > 0;) UndoStep(app_, backup_, steps_[i].had_old, steps_[i].rel);
+    bool restored = true;
+    for (size_t i = done; i-- > 0;)
+        if (!UndoStep(app_, backup_, steps_[i].had_old, steps_[i].rel)) restored = false;
+    if (!restored) {
+        // Keep the journal and the backups: deleting them here would turn a
+        // restore that failed (a locked file, an ACL) into a lost old version.
+        Log(L"Rollback incomplete; the journal and backups are kept for the next start");
+        return;
+    }
     DeleteFileW(journal_.c_str());
     RemoveTree(work_);
 }

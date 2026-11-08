@@ -981,6 +981,18 @@ static void ExitPulse(AppState& s) {
     if (self && IsWindow(self)) DestroyWindow(self);
 }
 
+bool pulse::CloseWindowsForUpdate(AppState& s) {
+    // The caller saved the session already (updateSessionPrepared). Every window
+    // has to go or the installer keeps finding one that is still alive.
+    s.core.exiting = true;
+    bool ok = true;
+    const HWND self = s.hwnd;
+    for (HWND window : s.core.windows.ExitOrder())
+        if (window != self && IsWindow(window)) ok = DestroyWindow(window) != 0 && ok;
+    if (self && IsWindow(self)) ok = DestroyWindow(self) != 0 && ok;
+    return ok;
+}
+
 static LRESULT HandleSystemBroadcast(AppState& s, app::SystemBroadcast kind, WPARAM wParam) {
     switch (kind) {
     case app::SystemBroadcast::Theme:
@@ -3962,6 +3974,18 @@ int RunUiModuleAuditTest();
 int RunQuickPreviewAuditTest();
 #endif
 
+namespace {
+// OleInitialize can fail (RPC_E_CHANGED_MODE: something put this thread in an MTA
+// first). Drag & drop, the shell link and the clipboard listener then silently do
+// nothing, and OleUninitialize must not run or it would unbalance a COM apartment
+// this process never entered. Say so in the startup trace instead.
+bool g_ole_ready = false;
+void OleShutdown() {
+    if (g_ole_ready) OleUninitialize();
+    g_ole_ready = false;
+}
+}  // namespace
+
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
     // pulse.exe --mcp-stdio, started by AI clients: only the launcher, before
     // anything of the app (no window, no D2D, no single instance).
@@ -3995,18 +4019,20 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
     pulse::app::startup_trace::Mark("crash_handler");
     pulse::compat::EnableDpiAwareness();
     // OLE init (drag & drop + clipboard); implies STA COM init.
-    OleInitialize(nullptr);
-    pulse::app::startup_trace::Mark("ole");
+    g_ole_ready = SUCCEEDED(OleInitialize(nullptr));
+    if (!g_ole_ready)
+        diagnostics::runtime::Event("ole_init_failed", {}, diagnostics::runtime::Level::Error);
+    pulse::app::startup_trace::Mark(g_ole_ready ? "ole" : "ole_failed");
     for (int i = 1; i < __argc; ++i) {
         if (wcscmp(__wargv[i], L"--material-selftest") == 0) {
             const int rc = ui::RunMaterialSelfTest();
-            OleUninitialize();
+            OleShutdown();
             return rc;
         }
         if (wcscmp(__wargv[i], L"--picker-live") == 0) {
             l10n::Initialize(hInstance, L"system");
             const int rc = RunPickerLive(i + 1);
-            OleUninitialize();
+            OleShutdown();
             return rc;
         }
         if (wcscmp(__wargv[i], L"--seed-shell-verbs") == 0) {
@@ -4015,7 +4041,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
             // rows that the menu then dropped.
             l10n::Initialize(hInstance, L"system");
             const int rc = app::SeedMachineStaticVerbCache() ? 0 : 1;
-            OleUninitialize();
+            OleShutdown();
             return rc;
         }
     }
@@ -4041,7 +4067,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
     for (int i = 1; i < __argc; ++i) {
         if (wcscmp(__wargv[i], L"--selftest") == 0) {
             int rc = app::RunSelfTest1B2();
-            OleUninitialize();
+            OleShutdown();
             return rc;
         }
     }
@@ -4273,7 +4299,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
                 const std::wstring message = l10n::HantText(l10n::Get(l10n::StringId::PulseIsBusyTheFolderWillShowUpInTheOpenPulseWindowShortlyIfI).c_str());
                 MessageBoxW(nullptr, message.c_str(), L"Pulse", MB_OK | MB_ICONINFORMATION);
             }
-            OleUninitialize();
+            OleShutdown();
             return forwarded ? 0 : 1;
         }
     }
@@ -4450,8 +4476,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
 #endif
     if (tag_com_allowed && state.appPrefs.shell_tag_menu) {
         const HRESULT registered = app::shell_tags::RegisterCommandServer(tag_com_class);
-        if (shell_tag_com && FAILED(registered)) { DestroyWindow(hwnd); OleUninitialize(); return 1; }
-    } else if (shell_tag_com) { DestroyWindow(hwnd); OleUninitialize(); return 1; }
+        if (shell_tag_com && FAILED(registered)) { DestroyWindow(hwnd); OleShutdown(); return 1; }
+    } else if (shell_tag_com) { DestroyWindow(hwnd); OleShutdown(); return 1; }
     // Sign-in launch with 开机自启时隐藏到托盘: only the tray icon shows; a
     // click restores the window (maximized if the session was).
     const bool start_in_tray = !test_hidden && !shell_tag && !shell_tag_com && !state.shot.active && !state.menushot &&
@@ -4575,7 +4601,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
             }
         }
         DestroyWindow(hwnd);
-        OleUninitialize();
+        OleShutdown();
         return ok ? 0 : 1;
     }
 
@@ -4587,13 +4613,13 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
                   &state.compositor, state.colorpickshot_out.c_str(),
                   state.colorpickshot_dark, state.accentColor, state.scale);
         DestroyWindow(hwnd);
-        OleUninitialize();
+        OleShutdown();
         return ok ? 0 : 1;
     }
 
     if (false) {
         DestroyWindow(hwnd);
-        OleUninitialize();
+        OleShutdown();
         return 0;
     }
 
@@ -4606,7 +4632,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
         ui::ColorPickerPopup::Pick(hwnd, &state.compositor, nullptr, state.scale, pt,
                                    rgb, state.darkMode, rgb);
         DestroyWindow(hwnd);
-        OleUninitialize();
+        OleShutdown();
         return 0;
     }
 
@@ -4617,7 +4643,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
         extern int RunP1RegressionProbe(AppState&, const wchar_t*);
         const int result = WaitForShotReady(state) ? RunP1RegressionProbe(state, p1_probe) : 4;
         DestroyWindow(hwnd);
-        OleUninitialize();
+        OleShutdown();
         return result;
     }
 #endif
@@ -4627,14 +4653,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
         if (state.isolatedTest && GetEnvironmentVariableW(L"PULSE_TEST_FOLDER_SIZE_EXPERIENCE", experience_probe, ARRAYSIZE(experience_probe))) {
             extern int RunFolderSizeExperienceProbe(AppState&, const wchar_t*);
             const int result = WaitForShotReady(state) ? RunFolderSizeExperienceProbe(state, experience_probe) : 4;
-            DestroyWindow(hwnd); OleUninitialize(); return result;
+            DestroyWindow(hwnd); OleShutdown(); return result;
         }
         wchar_t folder_probe[32768]{};
         if (state.isolatedTest && GetEnvironmentVariableW(L"PULSE_TEST_FOLDER_THUMB_FLOW", folder_probe, ARRAYSIZE(folder_probe))) {
             extern int RunFolderThumbnailProbe(AppState&, const wchar_t*);
             const int result = WaitForShotReady(state) ? RunFolderThumbnailProbe(state, folder_probe) : 4;
             DestroyWindow(hwnd);
-            OleUninitialize();
+            OleShutdown();
             return result;
         }
         wchar_t selection_probe[32768]{};
@@ -4642,7 +4668,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
             extern int RunSelectionInputProbe(AppState&, const wchar_t*);
             const int result = WaitForShotReady(state) ? RunSelectionInputProbe(state, selection_probe) : 4;
             DestroyWindow(hwnd);
-            OleUninitialize();
+            OleShutdown();
             return result;
         }
 #endif
@@ -4671,25 +4697,25 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
         if (state.isolatedTest && GetEnvironmentVariableW(L"PULSE_TEST_QUICKLOOK_SETTINGS", quicklook_settings, ARRAYSIZE(quicklook_settings))) {
             extern int RunQuickLookSettingsTest(AppState&, const wchar_t*);
             const int result = RunQuickLookSettingsTest(state, quicklook_settings);
-            DestroyWindow(hwnd); OleUninitialize(); return result;
+            DestroyWindow(hwnd); OleShutdown(); return result;
         }
         if (state.isolatedTest && GetEnvironmentVariableW(L"PULSE_TEST_SETTINGS_INTERACTIONS",settings_interactions,ARRAYSIZE(settings_interactions))) {
             extern int RunSettingsInteractionTest(AppState&,const wchar_t*);
             const int result=RunSettingsInteractionTest(state,settings_interactions);
-            DestroyWindow(hwnd);OleUninitialize();return result;
+            DestroyWindow(hwnd);OleShutdown();return result;
         }
         wchar_t settings_flow[32768]{};
         if (state.isolatedTest && GetEnvironmentVariableW(L"PULSE_TEST_SETTINGS_FLOW",settings_flow,ARRAYSIZE(settings_flow))) {
             extern int RunSettingsFlowTest(AppState&,const wchar_t*);
             const int result=RunSettingsFlowTest(state,settings_flow);
-            DestroyWindow(hwnd);OleUninitialize();return result;
+            DestroyWindow(hwnd);OleShutdown();return result;
         }
         wchar_t flow_output[32768]{};
         if (state.isolatedTest && GetEnvironmentVariableW(L"PULSE_TEST_SEARCH_FLOW", flow_output, ARRAYSIZE(flow_output))) {
             extern int RunSearchFlowTest(AppState&, const wchar_t*);
             const int result = RunSearchFlowTest(state, flow_output);
             DestroyWindow(hwnd);
-            OleUninitialize();
+            OleShutdown();
             return result;
         }
 #endif
@@ -4767,7 +4793,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
             state.renderer.SetDetailsPanelVisible(true);
         }
         int rc = ShotModeMain(state, hwnd);
-        OleUninitialize();
+        OleShutdown();
         return rc;
     }
 
@@ -4785,7 +4811,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
     const uint64_t windows_ms = tail.Lap();
     pulse::app::hang::Stop();
     const uint64_t hang_ms = tail.Lap();
-    OleUninitialize();
+    OleShutdown();
     const uint64_t ole_ms = tail.Lap();
     if (g_exitStarted)
         diagnostics::runtime::Event("exit_tail", {{"windows", windows_ms}, {"hang", hang_ms},

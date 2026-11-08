@@ -60,7 +60,6 @@ void CheckForUpdates(AppState& state) {
 }
 
 LRESULT CloseForUpdate(AppState& state) {
-    const HWND window = state.hwnd;
     const auto operation_id = diagnostics::runtime::NextId();
     const auto started = GetTickCount64();
     diagnostics::runtime::Event("update_shutdown_request", {{"operation", operation_id}});
@@ -72,10 +71,13 @@ LRESULT CloseForUpdate(AppState& state) {
             {"ok", saved}, {"elapsed_ms", GetTickCount64() - started}});
         if (!saved) { save_failed = true; return false; }
         diagnostics::runtime::Event("update_shutdown_destroy", {{"operation", operation_id}});
-        if (DestroyWindow(window)) return true;
+        // Every window goes, not just this one: the shared update freeze stays
+        // set, so any window left behind could only answer Busy and an
+        // unattended setup would wait on a process that never exits.
+        // Past this call this window may already be gone: touch no state after it.
+        if (pulse::CloseWindowsForUpdate(state)) return true;
         const DWORD error = GetLastError();
         diagnostics::runtime::Event("update_shutdown_destroy_failed", {{"operation", operation_id}, {"code", error}});
-        state.updateSessionPrepared = false;
         return false;
     });
     diagnostics::runtime::Event("update_shutdown_result", {{"operation", operation_id},

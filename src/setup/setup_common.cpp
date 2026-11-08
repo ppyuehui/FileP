@@ -155,7 +155,15 @@ void RemoveTree(const std::wstring& dir) {
             if (name == L"." || name == L"..") continue;
             const std::wstring p = dir + L"\\" + name;
             if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
-                RemoveTree(p);
+                if (fd.dwFileAttributes & FILE_ATTRIBUTE_REPARSE_POINT) {
+                    // A junction or symlink: remove the link, never walk into it
+                    // (an unelevated user can plant one and have setup delete
+                    // whatever it points at, with administrator rights).
+                    if (!RemoveDirectoryW(p.c_str()) && !DeleteFileW(p.c_str()))
+                        MoveFileExW(p.c_str(), nullptr, MOVEFILE_DELAY_UNTIL_REBOOT);
+                } else {
+                    RemoveTree(p);
+                }
             } else {
                 SetFileAttributesW(p.c_str(), FILE_ATTRIBUTE_NORMAL);
                 if (!DeleteFileW(p.c_str())) MoveFileExW(p.c_str(), nullptr, MOVEFILE_DELAY_UNTIL_REBOOT);

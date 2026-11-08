@@ -36,11 +36,21 @@ std::wstring SelfPath() {
 }
 
 std::wstring TempPath() {
-    wchar_t buffer[MAX_PATH + 1];
-    const DWORD n = GetTempPathW(MAX_PATH + 1, buffer);
-    std::wstring p(buffer, n);
-    while (!p.empty() && p.back() == L'\\') p.pop_back();
-    return p;
+    // GetTempPathW returns the required length when the buffer is too small, and
+    // leaves the buffer untouched: reading it as the answer would copy stack
+    // garbage (long user names, redirected TEMP). Grow instead.
+    std::wstring buffer(MAX_PATH + 1, L'\0');
+    for (;;) {
+        const DWORD n = GetTempPathW(static_cast<DWORD>(buffer.size()), buffer.data());
+        if (n == 0) return {};
+        if (n < buffer.size()) {
+            buffer.resize(n);
+            break;
+        }
+        buffer.resize(n + 1);
+    }
+    while (!buffer.empty() && buffer.back() == L'\\') buffer.pop_back();
+    return buffer;
 }
 
 std::wstring DefaultLogPath() {

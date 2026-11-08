@@ -8,6 +8,12 @@ namespace pulse {
 // The updater must keep the window open if session/preferences cannot be saved.
 bool PrepareSessionForUpdate(AppState& s);
 
+// An accepted update handshake closes every window, not just the one the
+// installer asked: the freeze stays set while the process exits, so a second
+// window could only answer Busy and an unattended setup would wait forever.
+// False when a window refused to go.
+bool CloseWindowsForUpdate(AppState& s);
+
 inline app::LayoutTab& LiveLayout(AppState& s) {
     s.window_tabs.EnsureDefault();
     return *s.window_tabs.Active();

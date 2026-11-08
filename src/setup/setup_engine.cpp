@@ -140,10 +140,14 @@ std::wstring ReplaceExe(std::wstring command, const std::wstring& old_exe, const
     return command;
 }
 
-void RestoreUpgradePrefs(const UpgradePrefs& p, const std::wstring& app) {
+// keep_startup is the user's choice (or an in-place update, which never changes
+// it): restoring the captured Run value after 启动 was unchecked would silently
+// turn it back on.
+void RestoreUpgradePrefs(const UpgradePrefs& p, const std::wstring& app, bool keep_startup) {
     if (!p.captured) return;
     const std::wstring exe = app + L"\\pulse.exe";
-    if (p.startup) WriteString(HKEY_CURRENT_USER, 0, kRunKey, L"Pulse", ReplaceExe(*p.startup, p.previous_exe, exe));
+    if (!keep_startup) DeleteValue(HKEY_CURRENT_USER, 0, kRunKey, L"Pulse");
+    else if (p.startup) WriteString(HKEY_CURRENT_USER, 0, kRunKey, L"Pulse", ReplaceExe(*p.startup, p.previous_exe, exe));
     else DeleteValue(HKEY_CURRENT_USER, 0, kRunKey, L"Pulse");
     const auto flags = p.Flags();
     if (flags.empty()) return;
@@ -425,7 +429,7 @@ InstallResult RunInstall(Payload& payload, const std::wstring& self_path, const 
     // 5. Post-install configuration (CurStepChanged ssPostInstall + [Run]).
     result.startup = real && req.tasks.startup;
     if (real) {
-        RestoreUpgradePrefs(prefs, app);
+        RestoreUpgradePrefs(prefs, app, o.pulse_update || req.tasks.startup);
         if (req.tasks.index_service) ctx.Phase(Phase::IndexService, L"Configuring the index service");
         const std::wstring index_exe = app + L"\\Pulse.Index.exe";
         if (!req.tasks.index_service) {

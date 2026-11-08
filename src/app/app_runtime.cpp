@@ -4034,6 +4034,11 @@ void FireDeviceFolderWatch(AppState& s) {
 }
 
 void ReleaseDeviceFolderWatch(HWND hwnd) {
+    // A PIDL still on its way to this window would be dropped with the message
+    // when the window is destroyed (or its ticket went stale): free it here.
+    MSG pending{};
+    while (PeekMessageW(&pending, hwnd, WM_DEVICE_WATCH_READY, WM_DEVICE_WATCH_READY, PM_REMOVE))
+        CoTaskMemFree(reinterpret_cast<void*>(pending.lParam));
     const auto found = g_device_folder_watches.find(hwnd);
     if (found == g_device_folder_watches.end()) return;
     if (found->second.id) SHChangeNotifyDeregister(found->second.id);

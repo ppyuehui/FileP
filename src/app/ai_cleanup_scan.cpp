@@ -598,6 +598,9 @@ void FindCleanup(wchar_t drive, CleanupScan& out, CleanProgress& progress, const
         const std::wstring ext = ExtOf(f.name);
         if (ext != L"zip" && ext != L"7z" && ext != L"rar") continue;
         const std::wstring stem = f.name.substr(0, f.name.size() - ext.size() - 1);
+        // ".zip" has no stem: Join(dir, "") is the downloads folder itself, which
+        // would then look like every archive's extracted folder.
+        if (stem.empty()) continue;
         std::wstring folder = Join(f.dir, stem);
         DWORD a = GetFileAttributesW(folder.c_str());
         if (a == INVALID_FILE_ATTRIBUTES || !(a & FILE_ATTRIBUTE_DIRECTORY)) {

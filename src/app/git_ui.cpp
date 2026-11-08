@@ -32,6 +32,11 @@ struct GitRootState {
     const void* seen_listing = nullptr;
     size_t seen_count = 0;
     GitJobKind op = GitJobKind::Status; // Status = no pull / push running
+    // The reply is posted to the window that asked, so the state can only be
+    // cleared by that window arriving. Remember it: a window closed mid-job would
+    // otherwise leave this repo busy (or status_running) until Pulse restarts.
+    HWND op_window = nullptr;
+    HWND status_window = nullptr;
 };
 
 std::unordered_map<std::wstring, GitRootState>& Roots() {
@@ -48,10 +53,14 @@ void Post(HWND hwnd, std::unique_ptr<GitJob> job) {
 void RequestStatus(AppState& s, const std::wstring& root) {
     GitRootState& state = RootState(root);
     if (state.status_running) {
-        state.status_again = true;
-        return;
+        if (!state.status_window || IsWindow(state.status_window)) {
+            state.status_again = true;
+            return;
+        }
+        state.status_running = false;   // the window it would report to is gone
     }
     state.status_running = true;
+    state.status_window = s.hwnd;
     std::thread([hwnd = s.hwnd, root] {
         auto job = std::make_unique<GitJob>();
         job->kind = GitJobKind::Status;
@@ -145,10 +154,15 @@ std::wstring Format(l10n::StringId id, const std::wstring& arg) {
 void StartRemoteOp(AppState& s, GitJobKind kind, const std::wstring& root) {
     GitRootState& state = RootState(root);
     if (state.op != GitJobKind::Status) {
-        s.notification_toast.ShowSnack(s.hwnd, ui::SnackIcon::Merge, l10n::Get(l10n::StringId::GitBusy), L"", {});
-        return;
+        if (!state.op_window || IsWindow(state.op_window)) {
+            s.notification_toast.ShowSnack(s.hwnd, ui::SnackIcon::Merge, l10n::Get(l10n::StringId::GitBusy), L"", {});
+            return;
+        }
+        state.op = GitJobKind::Status;   // its window is gone; the reply never arrives
+        state.op_window = nullptr;
     }
     state.op = kind;
+    state.op_window = s.hwnd;
     const auto status = app::GitStatusFor(root);
     const std::wstring branch = status ? status->branch : std::wstring();
     // The first push of a new branch sets its upstream, as most people mean it to.
@@ -355,6 +369,7 @@ void ReceiveGitResult(AppState& s, LPARAM lparam) {
     GitRootState& state = RootState(job->root);
     if (job->kind == GitJobKind::Status) {
         state.status_running = false;
+        state.status_window = nullptr;
         state.last_done = GetTickCount64();
         state.last_cost = job->ms;
         if (job->status) app::StoreGitStatus(std::move(job->status));
@@ -363,6 +378,7 @@ void ReceiveGitResult(AppState& s, LPARAM lparam) {
         return;
     }
     state.op = GitJobKind::Status;
+    state.op_window = nullptr;
     const bool pull = job->kind == GitJobKind::Pull;
     if (!job->run.started) {
         s.notification_toast.ShowError(s.hwnd, l10n::Get(l10n::StringId::GitNotFound),

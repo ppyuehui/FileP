@@ -643,10 +643,13 @@ void Wizard::Paint() {
     const float t = std::min(1.f, (GetTickCount64() - page_time_) / 420.f);
     const float ease = EaseOut(t);
     rt_->PushAxisAlignedClip({0, kTitle, kW, kH}, D2D1_ANTIALIAS_MODE_ALIASED);
-    if (t < 1 && prev_page_ != page_) PaintPage(prev_page_, -24 * ease, 1 - std::min(1.f, t * 1.6f));
+    // No clicks on either page while sliding: taken before the old page is
+    // painted, or its buttons stay live and a second click lands on the page
+    // being left (安装 twice, the second while the engine runs).
     const size_t first_hit = hits_.size();
+    if (t < 1 && prev_page_ != page_) PaintPage(prev_page_, -24 * ease, 1 - std::min(1.f, t * 1.6f));
     PaintPage(page_, 24 * (1 - ease), std::min(1.f, t * 1.3f));
-    if (t < 1) hits_.resize(first_hit);  // no clicks while sliding
+    if (t < 1) hits_.resize(first_hit);
     rt_->PopAxisAlignedClip();
     if (dialog_ != Dialog::None) PaintDialog();
 
@@ -1327,7 +1330,16 @@ void Wizard::Activate(int id) {
                 else if (un_state_ == UnState::Idle) CloseWith(kExitCancelledBefore);
                 break;
             }
-            if (page_ == Page::Install) { if (!committing_) { paused_ = true; dialog_ = Dialog::Cancel; dialog_time_ = GetTickCount64(); } }
+            if (page_ == Page::Install) {
+                // The engine waits on the busy prompt: a close request that takes
+                // the prompt away must answer it, or nothing can unblock it.
+                if (dialog_ == Dialog::Busy) {
+                    busy_retry_ = false;
+                    busy_given_up_ = true;
+                    SetEvent(busy_answer_event_);
+                }
+                if (!committing_) { paused_ = true; dialog_ = Dialog::Cancel; dialog_time_ = GetTickCount64(); }
+            }
             else if (page_ == Page::Done) CloseWith(kExitOk);
             else if (page_ == Page::Error) CloseWith(outcome_.exit_code);
             else CloseWith(kExitCancelledBefore);

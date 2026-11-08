@@ -154,24 +154,34 @@ void StopShellWindows(AppState& s) {
 }
 
 void HandleShellSelect(AppState& s, const app::ShellSelectRequest& request) {
-    size_t layout_index = 0;
-    app::Pane* target = nullptr;
-    for (size_t i = 0; i < s.window_tabs.items.size() && !target; ++i) {
-        if (!s.window_tabs.items[i]) continue;
-        for (auto& pane : s.window_tabs.items[i]->panes) {
-            if (pane && PaneKey(*pane, s.hwnd) == request.key) {
-                layout_index = i;
-                target = pane.get();
-                break;
-            }
+    // The pane is looked up by key, not kept across RevealWindow: that restores
+    // the window and may start fresh (every old tab and pane is destroyed), so a
+    // pointer taken before it dangles by the time FocusPane would use it.
+    const auto find_pane = [&s, &request](size_t& layout_index) -> app::Pane* {
+        for (size_t i = 0; i < s.window_tabs.items.size(); ++i) {
+            if (!s.window_tabs.items[i]) continue;
+            for (auto& pane : s.window_tabs.items[i]->panes)
+                if (pane && PaneKey(*pane, s.hwnd) == request.key) {
+                    layout_index = i;
+                    return pane.get();
+                }
         }
+        return nullptr;
+    };
+    size_t layout_index = 0;
+    if (!find_pane(layout_index)) {
+        app::TraceShellWindows(L"select request key=%llx path=%s flags=0x%x found=0",
+                               static_cast<unsigned long long>(request.key), request.path.c_str(),
+                               request.flags);
+        return;   // pane closed after the shell looked it up
     }
-    app::TraceShellWindows(L"select request key=%llx path=%s flags=0x%x found=%d",
-                           static_cast<unsigned long long>(request.key), request.path.c_str(), request.flags,
-                           target ? 1 : 0);
-    if (!target) return;   // pane closed after the shell looked it up
+    app::TraceShellWindows(L"select request key=%llx path=%s flags=0x%x found=1",
+                           static_cast<unsigned long long>(request.key), request.path.c_str(), request.flags);
 
     RevealWindow(s);
+    layout_index = 0;
+    app::Pane* target = find_pane(layout_index);
+    if (!target) return;   // the reveal rebuilt the layouts and this pane is gone
     if (layout_index != s.window_tabs.active) SwitchTab(s, layout_index);
     FocusPane(s, target);
     app::Tab* tab = ActiveTab(s);

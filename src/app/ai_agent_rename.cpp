@@ -70,7 +70,8 @@ ToolOutcome ReadRenameSources(RenameJob& job, const std::atomic<bool>& cancelled
     std::unordered_map<std::wstring, std::wstring> dirs;   // lower -> as written
     for (rn::Source& src : job.sources) {
         WIN32_FILE_ATTRIBUTE_DATA fad{};
-        if (GetFileAttributesExW(src.path.c_str(), GetFileExInfoStandard, &fad)) src.modified = LocalTicksOf(fad.ftLastWriteTime);
+        if (GetFileAttributesExW(app::ai::Win32Path(src.path).c_str(), GetFileExInfoStandard, &fad))
+            src.modified = LocalTicksOf(fad.ftLastWriteTime);
         const std::wstring dir = ParentDir(src.path);
         selected[rn::Lower(dir)].insert(rn::Lower(src.name));
         dirs.emplace(rn::Lower(dir), dir);
@@ -79,8 +80,8 @@ ToolOutcome ReadRenameSources(RenameJob& job, const std::atomic<bool>& cancelled
         if (cancelled.load()) break;
         auto& names = job.existing[kv.first];
         WIN32_FIND_DATAW fd{};
-        HANDLE h = FindFirstFileExW((dirs[kv.first] + L"\\*").c_str(), FindExInfoBasic, &fd, FindExSearchNameMatch, nullptr,
-                                    FIND_FIRST_EX_LARGE_FETCH);
+        HANDLE h = FindFirstFileExW(app::ai::Win32Path(dirs[kv.first] + L"\\*").c_str(), FindExInfoBasic, &fd,
+                                    FindExSearchNameMatch, nullptr, FIND_FIRST_EX_LARGE_FETCH);
         if (h == INVALID_HANDLE_VALUE) continue;
         do {
             if (fd.cFileName[0] == L'.' && (!fd.cFileName[1] || (fd.cFileName[1] == L'.' && !fd.cFileName[2]))) continue;
@@ -859,7 +860,8 @@ void ToolRename(AppState& s, const app::ai::ModelToolCall& call, const json::Val
     std::unordered_set<std::wstring> seen;
     for (const std::wstring& p : paths) {
         if (p.size() < 3 || fs::IsVirtualPath(p)) return fail("invalid_path", "not an absolute path: " + Utf8(p));
-        const DWORD attr = GetFileAttributesW(p.c_str());
+        // A path past MAX_PATH needs the \\?\\ form here like every other AI tool.
+        const DWORD attr = GetFileAttributesW(app::ai::Win32Path(p).c_str());
         if (attr == INVALID_FILE_ATTRIBUTES) return fail("not_found", "no such file: " + Utf8(p));
         if (attr & FILE_ATTRIBUTE_DIRECTORY) return fail("not_a_file", "only files can be renamed here: " + Utf8(p));
         if (!seen.insert(rn::Lower(p)).second) continue;
