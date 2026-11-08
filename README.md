@@ -30,6 +30,20 @@ cmake --build build --target pulse
 
 产物为 `build\FileP.exe`。
 
+## 跟进上游
+
+官方更新后合并进来（只是看看有什么新东西，不合并）：
+
+```powershell
+pwsh -File tools/merge-upstream.ps1
+```
+
+真的合并、编译并推送到三个远端：
+
+```powershell
+pwsh -File tools/merge-upstream.ps1 -Merge -Build -Push
+```
+
 ## 许可
 
 Apache License 2.0，全文见 [LICENSE](LICENSE)。本仓库的所有修改同样以该协议发布；
