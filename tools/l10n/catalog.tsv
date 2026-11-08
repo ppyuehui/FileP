@@ -4428,6 +4428,7 @@ OpAuthNotGrantedShort	IDS_OP_AUTH_NOT_GRANTED_SHORT	5628	没有获得管理员�
 OpAuthorizationOnce	IDS_OP_AUTHORIZATION_ONCE	5629	确认一次即可，本次操作的其余项目不会再问。	You only need to approve once; the rest of this operation won't ask again.	確認一次即可，本次操作的其餘項目不會再詢問。
 SettingsSecTaskbar	IDS_SETTINGS_SEC_TASKBAR	5630	任务栏标题	Taskbar title	工作列標題
 SettingsTaskbarParent	IDS_SETTINGS_TASKBAR_PARENT	5631	上级文件夹字符数	Parent folder characters	上層資料夾字元數
-SettingsTaskbarParentDesc	IDS_SETTINGS_TASKBAR_PARENT_DESC	5632	任务栏标题里「上级/当前」的上级部分，超过这个字数（1-40，中文算一个字）就截断，末尾加 […]	The parent part of the taskbar title (parent\current) is cut at this many characters (1-40), ending with […].	工作列標題裡「上層/目前」的上層部分，超過這個字數（1-40，中文算一個字）就截斷，末尾加 […]
+SettingsTaskbarParentDesc	IDS_SETTINGS_TASKBAR_PARENT_DESC	5632	任务栏标题里「上级/当前」的上级部分，超过这个字数就截断，末尾加 […]；滑块拉到最右边是不限（按字符计，中文算一个字）	The parent part of the taskbar title (parent\current) is cut at this many characters with […] at the end; the last stop means no limit.	工作列標題裡「上層/目前」的上層部分，超過這個字數就截斷，末尾加 […]；滑桿拉到最右邊是不限（按字元計，中文算一個字）
 SettingsTaskbarCurrent	IDS_SETTINGS_TASKBAR_CURRENT	5633	当前文件夹字符数	Current folder characters	目前資料夾字元數
-SettingsTaskbarCurrentDesc	IDS_SETTINGS_TASKBAR_CURRENT_DESC	5634	任务栏标题里「上级/当前」的当前部分，超过这个字数（1-40，中文算一个字）就截断，末尾加 […]	The current part of the taskbar title (parent\current) is cut at this many characters (1-40), ending with […].	工作列標題裡「上層/目前」的目前部分，超過這個字數（1-40，中文算一個字）就截斷，末尾加 […]
+SettingsTaskbarCurrentDesc	IDS_SETTINGS_TASKBAR_CURRENT_DESC	5634	任务栏标题里「上级/当前」的当前部分，超过这个字数就截断，末尾加 […]；滑块拉到最右边是不限（按字符计，中文算一个字）	The current part of the taskbar title (parent\current) is cut at this many characters with […] at the end; the last stop means no limit.	工作列標題裡「上層/目前」的目前部分，超過這個字數就截斷，末尾加 […]；滑桿拉到最右邊是不限（按字元計，中文算一個字）
+TaskbarCharsNone	IDS_TASKBAR_CHARS_NONE	5640	不限	No limit	不限

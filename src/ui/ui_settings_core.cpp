@@ -355,21 +355,35 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
         const I ui_font_size[]={I::UiFontSmall,I::UiFontDefault,I::UiFontLarge,I::UiFontLarger};const int ui_font_size_values[]={90,100,112,125};
         segmented(lay.ui_font_size_card,lay.ui_font_size_row,ui_font_size,ui_font_size_values,vm.settings_ui_font_scale,H::SettingsUiFontSize,I::SettingsUiFontSize,I::SettingsUiFontSizeDesc,4,L"\xE8E9");
         {
-            // 任务栏标题: 上级\当前, each name cut to its own 1..40 character limit.
-            const auto stepper=[&](D2D1_RECT_F card,const std::wstring& title,const std::wstring& desc,
-                                   D2D1_RECT_F minus,D2D1_RECT_F value,D2D1_RECT_F plus,int current,int hit_index) {
-                label(card,title,desc,L"\xE8AC",minus.left-8*scale_);
-                painter_.DrawText(std::to_wstring(current),value,compositor_->TextFormat(),theme.text,
-                    fluent::HorizontalAlignment::Center);
-                button(minus,L"",H::SettingsTaskbarChars,hit_index,false,current>1,L"\xE738");
-                button(plus,L"",H::SettingsTaskbarChars,hit_index+1,false,current<40,L"\xE710");
+            // 任务栏标题: one slider per name, 1..12 characters and 不限 at the end.
+            const auto taskbar_slider=[&](D2D1_RECT_F card,D2D1_RECT_F const* cells,int chars,I title,I desc) {
+                if(card.bottom<=card.top) return;
+                label(card,l10n::Get(title),l10n::Get(desc),L"\xE8AC",cells[0].left-12*scale_);
+                const auto g=SettingsSlider(cells,scale_);
+                const int value=chars<=0 ? 12 : std::clamp(chars,1,12)-1;   // stop 12 = 不限
+                const float span=(std::max)(1.0f,g.right-g.left);
+                const auto x_of=[&](int v){return g.left+span*std::clamp(static_cast<float>(v)/12.0f,0.0f,1.0f);};
+                const float x=x_of(value), th=4*scale_;
+                MakeBrush(dc,WithAlpha(theme.text,0.16f),brFillHover_);
+                dc->FillRoundedRectangle(D2D1::RoundedRect(D2D1::RectF(g.left,g.cy-th/2,g.right,g.cy+th/2),th/2,th/2),brFillHover_.get());
+                MakeBrush(dc,theme.accent,brAccent_);
+                if(x>g.left) dc->FillRoundedRectangle(D2D1::RoundedRect(D2D1::RectF(g.left,g.cy-th/2,x,g.cy+th/2),th/2,th/2),brAccent_.get());
+                MakeBrush(dc,theme.surface_card,brFillInput_);
+                MakeBrush(dc,theme.stroke_card,brStrokeCard_);
+                const float outer=9*scale_;
+                dc->FillEllipse(D2D1::Ellipse(D2D1::Point2F(x,g.cy),outer,outer),brFillInput_.get());
+                dc->DrawEllipse(D2D1::Ellipse(D2D1::Point2F(x,g.cy),outer,outer),brStrokeCard_.get(),1);
+                MakeBrush(dc,theme.accent,brAccent_);
+                const float inner=(vm.hover_region==static_cast<int>(H::SettingsTaskbarChars) ? 6.0f : 5.0f)*scale_;
+                dc->FillEllipse(D2D1::Ellipse(D2D1::Point2F(x,g.cy),inner,inner),brAccent_.get());
+                const std::wstring value_text=chars<=0 ? l10n::Get(I::TaskbarCharsNone) : std::to_wstring(chars);
+                painter_.DrawText(value_text,D2D1::RectF(g.right+10*scale_,g.cy-10*scale_,cells[2].right,g.cy+10*scale_),
+                    compositor_->TextFormat(),theme.text,fluent::HorizontalAlignment::Right);
             };
-            stepper(lay.taskbar_parent_card,l10n::Get(I::SettingsTaskbarParent),l10n::Get(I::SettingsTaskbarParentDesc),
-                    lay.taskbar_parent_minus,lay.taskbar_parent_value,lay.taskbar_parent_plus,
-                    vm.settings_taskbar_parent_chars,0);
-            stepper(lay.taskbar_current_card,l10n::Get(I::SettingsTaskbarCurrent),l10n::Get(I::SettingsTaskbarCurrentDesc),
-                    lay.taskbar_current_minus,lay.taskbar_current_value,lay.taskbar_current_plus,
-                    vm.settings_taskbar_current_chars,2);
+            taskbar_slider(lay.taskbar_parent_card,lay.taskbar_parent_row,vm.settings_taskbar_parent_chars,
+                           I::SettingsTaskbarParent,I::SettingsTaskbarParentDesc);
+            taskbar_slider(lay.taskbar_current_card,lay.taskbar_current_row,vm.settings_taskbar_current_chars,
+                           I::SettingsTaskbarCurrent,I::SettingsTaskbarCurrentDesc);
         }
         if(lay.wallpaper_card.bottom>lay.wallpaper_card.top) {
         const auto& preview = lay.wallpaper_preview;

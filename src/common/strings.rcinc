@@ -4403,9 +4403,10 @@ BEGIN
     IDS_OP_AUTHORIZATION_ONCE "确认一次即可，本次操作的其余项目不会再问。"
     IDS_SETTINGS_SEC_TASKBAR "任务栏标题"
     IDS_SETTINGS_TASKBAR_PARENT "上级文件夹字符数"
-    IDS_SETTINGS_TASKBAR_PARENT_DESC "任务栏标题里「上级/当前」的上级部分，超过这个字数（1-40，中文算一个字）就截断，末尾加 […]"
+    IDS_SETTINGS_TASKBAR_PARENT_DESC "任务栏标题里「上级/当前」的上级部分，超过这个字数就截断，末尾加 […]；滑块拉到最右边是不限（按字符计，中文算一个字）"
     IDS_SETTINGS_TASKBAR_CURRENT "当前文件夹字符数"
-    IDS_SETTINGS_TASKBAR_CURRENT_DESC "任务栏标题里「上级/当前」的当前部分，超过这个字数（1-40，中文算一个字）就截断，末尾加 […]"
+    IDS_SETTINGS_TASKBAR_CURRENT_DESC "任务栏标题里「上级/当前」的当前部分，超过这个字数就截断，末尾加 […]；滑块拉到最右边是不限（按字符计，中文算一个字）"
+    IDS_TASKBAR_CHARS_NONE "不限"
 END
 
 LANGUAGE 0x09, 0x01
@@ -8808,9 +8809,10 @@ BEGIN
     IDS_OP_AUTHORIZATION_ONCE "You only need to approve once; the rest of this operation won't ask again."
     IDS_SETTINGS_SEC_TASKBAR "Taskbar title"
     IDS_SETTINGS_TASKBAR_PARENT "Parent folder characters"
-    IDS_SETTINGS_TASKBAR_PARENT_DESC "The parent part of the taskbar title (parent\current) is cut at this many characters (1-40), ending with […]."
+    IDS_SETTINGS_TASKBAR_PARENT_DESC "The parent part of the taskbar title (parent\current) is cut at this many characters with […] at the end; the last stop means no limit."
     IDS_SETTINGS_TASKBAR_CURRENT "Current folder characters"
-    IDS_SETTINGS_TASKBAR_CURRENT_DESC "The current part of the taskbar title (parent\current) is cut at this many characters (1-40), ending with […]."
+    IDS_SETTINGS_TASKBAR_CURRENT_DESC "The current part of the taskbar title (parent\current) is cut at this many characters with […] at the end; the last stop means no limit."
+    IDS_TASKBAR_CHARS_NONE "No limit"
 END
 
 // Traditional Chinese (Taiwan), generated from the Simplified entries above.

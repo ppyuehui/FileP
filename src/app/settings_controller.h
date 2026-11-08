@@ -265,8 +265,8 @@ public:
     // Optional Details columns (ui/details_column_set.h bits), every folder.
     void DetailsColumns(uint32_t mask);
     void StartupOpen(int index);
-    // 任务栏标题: 0 上级-, 1 上级+, 2 当前-, 3 当前+ (1..40 characters).
-    void TaskbarChars(int index);
+    // 任务栏标题 slider: which 6 上级 / 7 当前, stop 0..12 (12 = 不限).
+    void TaskbarChars(int which, int value);
     void NotifyIcon(int index);
     void NewTabOpen(int index);
     void ExternalOpen(int index);  // plan §6 policy (multi-window M7b)

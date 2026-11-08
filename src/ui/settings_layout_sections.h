@@ -170,17 +170,8 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         l.ui_font_size_card=row(seg_h); segments(l.ui_font_size_card,l.ui_font_size_row,4,340);
 
         section(I::SettingsSecTaskbar);
-        for(int side=0;side<2;++side) {
-            auto& card=side==0 ? l.taskbar_parent_card : l.taskbar_current_card;
-            auto& minus=side==0 ? l.taskbar_parent_minus : l.taskbar_current_minus;
-            auto& value=side==0 ? l.taskbar_parent_value : l.taskbar_current_value;
-            auto& plus=side==0 ? l.taskbar_parent_plus : l.taskbar_current_plus;
-            card=row(seg_h);
-            const float mid=(card.top+card.bottom)/2;
-            plus=D2D1::RectF(right-16*scale-40*scale,mid-16*scale,right-16*scale,mid+16*scale);
-            minus=D2D1::RectF(plus.left-6*scale-40*scale,mid-16*scale,plus.left-6*scale,mid+16*scale);
-            value=D2D1::RectF(minus.left-8*scale-56*scale,mid-16*scale,minus.left-8*scale,mid+16*scale);
-        }
+        l.taskbar_parent_card=row(seg_h); segments(l.taskbar_parent_card,l.taskbar_parent_row,3,360);
+        l.taskbar_current_card=row(seg_h); segments(l.taskbar_current_card,l.taskbar_current_row,3,360);
     } else if (page == 9) {
         section(I::SettingsSecOpenSelect);
         l.click_open_card=row(seg_h); segments(l.click_open_card,l.click_open_row,2,282);

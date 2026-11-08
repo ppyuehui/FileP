@@ -4416,6 +4416,7 @@ enum class StringId : UINT {
     SettingsTaskbarParentDesc = IDS_SETTINGS_TASKBAR_PARENT_DESC,
     SettingsTaskbarCurrent = IDS_SETTINGS_TASKBAR_CURRENT,
     SettingsTaskbarCurrentDesc = IDS_SETTINGS_TASKBAR_CURRENT_DESC,
+    TaskbarCharsNone = IDS_TASKBAR_CHARS_NONE,
 };
 
 bool IsLanguageId(std::wstring_view id) noexcept;

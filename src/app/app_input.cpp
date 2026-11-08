@@ -2050,7 +2050,9 @@ LRESULT HandleMouseMove(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
         }
         if (s->settings.slider_drag() >= 0) {
             if (!(wParam & MK_LBUTTON)) {
+                const int which = s->settings.slider_drag();
                 s->settings.EndSlider(); // capture lost without WM_LBUTTONUP
+                if (which == 6 || which == 7) SyncTaskbarWindowTitle(*s);
             } else {
                 const int which = s->settings.slider_drag();
                 ui::WindowViewModel vm = BuildVm(*s, false);
@@ -2059,6 +2061,7 @@ LRESULT HandleMouseMove(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
                 if (s->settings.SliderValue(which,
                         s->renderer.SettingsSliderValueAt(vm, rect, which, (float)mx)))
                     InvalidateRect(hwnd, nullptr, FALSE);
+                if (which == 6 || which == 7) SyncTaskbarWindowTitle(*s);
                 return 0;
             }
         }
@@ -3520,10 +3523,13 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
             case ui::HitTestResult::SettingsNotifyIcon: s->settings.NotifyIcon(hit.index); break;
             case ui::HitTestResult::SettingsBlankClick: s->settings.BlankClick(hit.index); break;
             case ui::HitTestResult::SettingsHomeFolder: s->settings.HomeFolder(hit.index); break;
-            case ui::HitTestResult::SettingsTaskbarChars:
-                s->settings.TaskbarChars(hit.index);
-                SyncTaskbarWindowTitle(*s);
+            case ui::HitTestResult::SettingsTaskbarChars: {
+                const int which = 6 + std::clamp(hit.sub_index, 0, 1);
+                s->settings.BeginSlider(which);
+                s->settings.TaskbarChars(which, hit.index);
+                SetCapture(hwnd);
                 break;
+            }
             case ui::HitTestResult::SettingsLanCache: SetLanCacheMode(*s, hit.index); break;
             case ui::HitTestResult::SettingsThumbCache: s->settings.ClearThumbCache(); break;
             case ui::HitTestResult::SettingsMtimeStyle: s->settings.MtimeStyle(hit.index); break;

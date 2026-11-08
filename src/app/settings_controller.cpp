@@ -894,13 +894,14 @@ void SettingsController::DetailsColumns(uint32_t mask) {
     SaveAndApply(SettingsEffect::ListStyle);
 }
 
-void SettingsController::TaskbarChars(int index) {
-    if (!prefs_ || index < 0 || index > 3) return;
-    int& value = index < 2 ? prefs_->taskbar_parent_chars : prefs_->taskbar_current_chars;
-    const int next = (std::max)(1, (std::min)(40, value + (index % 2 == 0 ? -1 : 1)));
-    if (next == value) return;
-    value = next;
-    SaveAndApply(SettingsEffect::None);
+void SettingsController::TaskbarChars(int which, int value) {
+    if (!prefs_ || (which != 6 && which != 7)) return;
+    value = std::clamp(value, 0, 12);
+    const int chars = value >= 12 ? 0 : value + 1;   // stop 12 = 不限
+    int& target = which == 6 ? prefs_->taskbar_parent_chars : prefs_->taskbar_current_chars;
+    if (target == chars) return;
+    target = chars;
+    Apply(SettingsEffect::None);   // the drag saves once, in EndSlider
 }
 
 // Startup and new-tab locations are read when they are used; nothing to apply.

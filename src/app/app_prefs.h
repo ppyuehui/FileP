@@ -287,10 +287,10 @@ constexpr int kHoverCardLarge = 2;
 inline int NormalizeHoverCardSize(int value) noexcept {
     return value == kHoverCardSmall || value == kHoverCardLarge ? value : kHoverCardMedium;
 }
-// 任务栏标题: characters shown per folder name (0 = no limit). The settings
-// offer 3 / 5 / 8 / 12; anything else falls back to the default of 5.
+// 任务栏标题: characters shown per folder name. 0 = no limit (the slider's last
+// stop), 1..12 are the numbered stops; anything else falls back to 5.
 inline int NormalizeTaskbarChars(int value) noexcept {
-    return value >= 1 && value <= 40 ? value : 5;
+    return value >= 1 && value <= 12 ? value : value == 0 ? 0 : 5;
 }
 
 std::wstring FolderOpenCommandLine(const std::wstring& exe);

@@ -89,6 +89,8 @@ int MainRenderer::SettingsSliderValueAt(const WindowViewModel& vm, const D2D1_RE
     if (which >= 2 && which <= 4)
         return SettingsSliderValue(SettingsSlider(lay.accent_slider_cells[which - 2], scale_), x, which == 2 ? 360 : 100);
     if (which == 5) return SettingsSliderValue(SettingsSlider(lay.frame_look_row, scale_), x, kFrameTransparencyMax);
+    if (which == 6) return SettingsSliderValue(SettingsSlider(lay.taskbar_parent_row, scale_), x, 12);
+    if (which == 7) return SettingsSliderValue(SettingsSlider(lay.taskbar_current_row, scale_), x, 12);
     return which == 0
         ? SettingsSliderValue(SettingsSlider(lay.wallpaper_look_row, scale_), x, kPanelTransparencyMax)
         : SettingsSliderValue(SettingsSlider(lay.wallpaper_blur_row, scale_), x, kWallpaperBlurMax);
@@ -517,17 +519,22 @@ HitTestResult MainRenderer::HitTest(const WindowViewModel& vm, const D2D1_RECT_F
                 if (ContainsPt(lay.close_last_tab_row, x, y)) {
                     r.region = HitTestResult::SettingsToggle; r.index = 26; return r;
                 }
-                if (ContainsPt(lay.taskbar_parent_minus, x, y)) {
-                    r.region = HitTestResult::SettingsTaskbarChars; r.index = 0; return r;
-                }
-                if (ContainsPt(lay.taskbar_parent_plus, x, y)) {
-                    r.region = HitTestResult::SettingsTaskbarChars; r.index = 1; return r;
-                }
-                if (ContainsPt(lay.taskbar_current_minus, x, y)) {
-                    r.region = HitTestResult::SettingsTaskbarChars; r.index = 2; return r;
-                }
-                if (ContainsPt(lay.taskbar_current_plus, x, y)) {
-                    r.region = HitTestResult::SettingsTaskbarChars; r.index = 3; return r;
+                {
+                    // 任务栏标题 sliders: sub_index 0 上级, 1 当前; index is the stop.
+                    const auto taskbar_zone=[&](const D2D1_RECT_F* cells) {
+                        return D2D1::RectF(cells[0].left-12.0f*scale_,cells[0].top-8.0f*scale_,
+                                           cells[2].right,cells[2].bottom+8.0f*scale_);
+                    };
+                    if (ContainsPt(taskbar_zone(lay.taskbar_parent_row),x,y)) {
+                        r.region = HitTestResult::SettingsTaskbarChars; r.sub_index = 0;
+                        r.index = SettingsSliderValue(SettingsSlider(lay.taskbar_parent_row,scale_),x,12);
+                        return r;
+                    }
+                    if (ContainsPt(taskbar_zone(lay.taskbar_current_row),x,y)) {
+                        r.region = HitTestResult::SettingsTaskbarChars; r.sub_index = 1;
+                        r.index = SettingsSliderValue(SettingsSlider(lay.taskbar_current_row,scale_),x,12);
+                        return r;
+                    }
                 }
                 if (ContainsPt(lay.close_tab_double_click_row, x, y)) {
                     r.region = HitTestResult::SettingsToggle; r.index = 35; return r;
