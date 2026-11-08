@@ -4452,6 +4452,7 @@ enum class StringId : UINT {
     SettingsAutoCollapseDesc = IDS_SETTINGS_AUTO_COLLAPSE_DESC,
     SettingsShowHome = IDS_SETTINGS_SHOW_HOME,
     SettingsShowHomeDesc = IDS_SETTINGS_SHOW_HOME_DESC,
+    CmdSummaryFormat = IDS_CMD_SUMMARY_FORMAT,
 };
 
 bool IsLanguageId(std::wstring_view id) noexcept;

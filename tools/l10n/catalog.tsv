@@ -4467,3 +4467,4 @@ SettingsAutoCollapse	IDS_SETTINGS_AUTO_COLLAPSE	5672	自动收起侧栏	Auto-col
 SettingsAutoCollapseDesc	IDS_SETTINGS_AUTO_COLLAPSE_DESC	5673	窗口变窄时自动把侧栏收成图标栏；关掉后侧栏保持完整宽度	Fold the sidebar to icons when the window gets narrow; off keeps it full width	視窗變窄時自動收合側欄
 SettingsShowHome	IDS_SETTINGS_SHOW_HOME	5674	地址栏主页按钮	Address bar home button	位址列首頁按鈕
 SettingsShowHomeDesc	IDS_SETTINGS_SHOW_HOME_DESC	5675	在地址栏左侧显示「此电脑」按钮，点一下回到此电脑	Show a 此电脑 button left of the address bar	顯示「此電腦」按鈕
+CmdSummaryFormat	IDS_CMD_SUMMARY_FORMAT	5676	将执行：{steps}	Will run: {steps}	將執行：{steps}

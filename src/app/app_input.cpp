@@ -710,8 +710,11 @@ static bool CreateDropShortcuts(AppState& s, const std::vector<std::wstring>& so
         std::wstring name = fs::StripLnkSuffix(BaseName(target));
         if (name.empty() && target.size() >= 2 && target[1] == L':') name = target.substr(0, 1);
         if (name.empty()) { ++failed; continue; }
-        wchar_t base[MAX_PATH]{};
-        swprintf_s(base, l10n::Get(l10n::StringId::ShortcutNameFormat).c_str(), name.c_str());
+        // Built as a string: swprintf_s aborts the process when a long name
+        // does not fit its buffer instead of truncating.
+        std::wstring base = l10n::Get(l10n::StringId::ShortcutNameFormat);
+        if (const size_t slot = base.find(L"%s"); slot != std::wstring::npos)
+            base.replace(slot, 2, name);
         std::wstring file = dir + L"\\" + base + L".lnk";
         for (int n = 2; GetFileAttributesW(file.c_str()) != INVALID_FILE_ATTRIBUTES && n < 1000; ++n)
             file = dir + L"\\" + base + L" (" + std::to_wstring(n) + L").lnk";

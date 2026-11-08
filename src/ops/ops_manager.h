@@ -556,7 +556,9 @@ private:
     std::thread thread_;
     bool running_ = false;
     std::atomic<bool> stopping_{false};
-    uint64_t next_seq_ = 1;
+    // Taken under two different locks (open_mutex_ / mutex_): the counter itself
+    // must be atomic or Submit can race EnqueueOpen for the same number.
+    std::atomic<uint64_t> next_seq_{1};
 
     std::atomic<uint32_t> current_req_id_{0};
     std::atomic<bool> shell_cancel_requested_{false};

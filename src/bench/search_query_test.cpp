@@ -185,6 +185,17 @@ int wmain() {
     Check(!index::QueryHasExtFilter(index::ParseQuery(app::CompileSearchQuery(literal))),
           L"advanced literal name does not gain native operators when another word is added");
 
+    // A bare keyword is a file name, not an empty filter: "type" used to compile
+    // to a Term with no condition, so the whole index matched.
+    for (const wchar_t* bare : {L"type", L"kind", L"ext", L"size", L"dm", L"path", L"content"}) {
+        const auto bare_q = index::ParseQuery(bare);
+        bool named = false;
+        for (const auto& group : bare_q.groups)
+            for (const auto& term : group)
+                if (term.name_how != index::NameHow::Any && !term.name.empty()) named = true;
+        const std::wstring label = L"bare \"" + std::wstring(bare) + L"\" searches names, not everything";
+        Check(named && !bare_q.content.present(), label.c_str());
+    }
     if (failures) {
         std::wcout << L"FAILED " << failures << L"\n";
         return 1;

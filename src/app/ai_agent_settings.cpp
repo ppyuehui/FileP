@@ -95,7 +95,10 @@ void ToolChangeSettings(AppState& s, const app::ai::ModelToolCall& call, const j
         sc.to = d->get(s);
         if (sc.to != want) {
             // The setter refused (a hidden prerequisite, a failed registry write).
-            if (sc.to != sc.from) ApplySetting(s, *d, ChoiceIndex(*d, sc.from));
+            // A hand-edited value (say row_height=30) has no choice index: nothing to
+            // restore, and ApplySetting must never see -1.
+            if (const int back = ChoiceIndex(*d, sc.from); back >= 0 && sc.to != sc.from)
+                ApplySetting(s, *d, back);
             fail("Pulse could not change it");
             continue;
         }

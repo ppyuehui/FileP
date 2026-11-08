@@ -1222,12 +1222,15 @@ void FluentMenu::OpenSubmenu(int row) {
 
     HMONITOR mon = MonitorFromWindow(hwnd_, MONITOR_DEFAULTTONEAREST);
     MONITORINFO mi{ sizeof(mi) };
-    GetMonitorInfoW(mon, &mi);
-    if (x + kShadowMargin + content_w > mi.rcWork.right)
-        x = base_x_ - content_w + overlap; // open to the left instead
-    if (y + h - kShadowMargin > mi.rcWork.bottom)
-        y = mi.rcWork.bottom - h + kShadowMargin;
-    if (y < mi.rcWork.top - kShadowMargin) y = mi.rcWork.top - kShadowMargin;
+    // A failed query leaves rcWork zeroed: place it unclamped instead of at 0.
+    if (GetMonitorInfoW(mon, &mi)) {
+        if (x + kShadowMargin + content_w > mi.rcWork.right)
+            x = base_x_ - content_w + overlap; // open to the left instead
+        if (x < mi.rcWork.left - kShadowMargin) x = mi.rcWork.left - kShadowMargin;
+        if (y + h - kShadowMargin > mi.rcWork.bottom)
+            y = mi.rcWork.bottom - h + kShadowMargin;
+        if (y < mi.rcWork.top - kShadowMargin) y = mi.rcWork.top - kShadowMargin;
+    }
     sub_x_ = x;
     sub_y_ = y;
     sub_surf_.plate.reset();

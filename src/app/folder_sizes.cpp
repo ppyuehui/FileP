@@ -119,10 +119,14 @@ struct FolderSizes::Impl {
         std::atomic<bool> value{false}, posted{false};
         std::atomic<HWND> hwnd{nullptr};
         std::atomic<UINT> message{0};
+        std::atomic<uint64_t> revisions{0};
         ChangeFlag& operator=(bool set) noexcept {
             value.store(set);
-            if (set && !posted.exchange(true))
-                if (const HWND target = hwnd.load()) PostMessageW(target, message.load(), 0, 0);
+            if (set) {
+                revisions.fetch_add(1);
+                if (!posted.exchange(true))
+                    if (const HWND target = hwnd.load()) PostMessageW(target, message.load(), 0, 0);
+            }
             return *this;
         }
         bool exchange(bool set) noexcept { posted.store(false); return value.exchange(set); }
@@ -909,6 +913,7 @@ bool FolderLooksEmpty(uint8_t content, bool show_hidden, bool show_protected) {
     return !(show_hidden && show_protected && (content & FolderContentSystem));
 }
 bool FolderSizes::TakeChanged() { return impl_->changed.exchange(false); }
+uint64_t FolderSizes::Revision() const { return impl_->changed.revisions.load(); }
 void FolderSizes::SetChangeNotify(HWND hwnd, UINT message) {
     impl_->changed.message.store(message);
     impl_->changed.hwnd.store(hwnd);

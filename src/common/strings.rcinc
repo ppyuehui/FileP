@@ -4442,6 +4442,7 @@ BEGIN
     IDS_SETTINGS_AUTO_COLLAPSE_DESC "窗口变窄时自动把侧栏收成图标栏；关掉后侧栏保持完整宽度"
     IDS_SETTINGS_SHOW_HOME "地址栏主页按钮"
     IDS_SETTINGS_SHOW_HOME_DESC "在地址栏左侧显示「此电脑」按钮，点一下回到此电脑"
+    IDS_CMD_SUMMARY_FORMAT "将执行：{steps}"
 END
 
 LANGUAGE 0x09, 0x01
@@ -8883,6 +8884,7 @@ BEGIN
     IDS_SETTINGS_AUTO_COLLAPSE_DESC "Fold the sidebar to icons when the window gets narrow; off keeps it full width"
     IDS_SETTINGS_SHOW_HOME "Address bar home button"
     IDS_SETTINGS_SHOW_HOME_DESC "Show a 此电脑 button left of the address bar"
+    IDS_CMD_SUMMARY_FORMAT "Will run: {steps}"
 END
 
 // Traditional Chinese (Taiwan), generated from the Simplified entries above.

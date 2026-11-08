@@ -81,6 +81,9 @@ public:
     void Probe(std::vector<std::wstring> paths);
     uint8_t Content(const std::wstring& path) const; // FolderContentBits, 0 = unknown
     bool TakeChanged();
+    // Number of changes so far: a per-window watermark (AppState) compares it
+    // instead of taking the shared one-shot flag.
+    uint64_t Revision() const;
     // The first change after each TakeChanged also posts `message` to `hwnd`.
     void SetChangeNotify(HWND hwnd, UINT message);
     FolderSizeStats ReadStats() const;

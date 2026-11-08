@@ -1064,7 +1064,7 @@ bool OpsManager::RetryRecovery() {
                 continue;
             }
             QueueItem item;
-            item.seq = next_seq_++;
+            item.seq = next_seq_.fetch_add(1);
             item.req = std::move(recovery.request);
             queue_.push_back(std::move(item));
         }
@@ -1218,7 +1218,7 @@ uint64_t OpsManager::Submit(OpRequest req) {
     {
         std::lock_guard<std::mutex> lock(mutex_);
         if (update_preparing_) return 0;
-        seq = next_seq_++;
+        seq = next_seq_.fetch_add(1);
         item.seq = seq;
         queue_.push_back(std::move(item));
     }
@@ -1981,7 +1981,7 @@ void OpsManager::EnqueueOpen(QueueItem item, bool front) {
     {
         std::lock_guard<std::mutex> lock(open_mutex_);
         if (!open_running_) return;
-        item.seq = next_seq_++;
+        item.seq = next_seq_.fetch_add(1);
         item.enqueued_at = GetTickCount64();
         if (front) open_queue_.push_front(std::move(item));
         else open_queue_.push_back(std::move(item));
@@ -2291,7 +2291,10 @@ void OpsManager::ConfigureShellCallbacks() {
 }
 
 void OpsManager::WorkerThread() {
-    CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+    // RPC_E_CHANGED_MODE leaves this thread without COM: the shell client then
+    // fails every IFileOperation, so remember and only uninitialize what took.
+    const HRESULT com = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+    const bool com_ready = SUCCEEDED(com);
 
     ConfigureShellCallbacks();
 
@@ -2396,7 +2399,7 @@ void OpsManager::WorkerThread() {
 #ifndef PULSE_ELEVATED_HOST
     if (own_shell_client_) ipc::ShellClient::Instance().Stop();
 #endif
-    CoUninitialize();
+    if (com_ready) CoUninitialize();
 }
 
 // ---------------------------------------------------------------------------
@@ -4001,6 +4004,11 @@ void OpsManager::RunTransfer(const OpRequest& req, uint64_t task_id) {
             continue;
         }
         if (conflict && choice == ConflictChoice::KeepBoth) {
+            // A small file still in the copy pool owns its name: let it land
+            // before picking a " - 副本" name, or both picks choose the same one
+            // and the second pooled copy fails with FILE_EXISTS.
+            if (pool) drain_pool();
+            if (!failure.empty()) break;
             const std::wstring old_destination = entry.destination;
             const std::wstring unique = UniqueCopyPath(entry.destination, entry.directory);
             entry.destination = unique;

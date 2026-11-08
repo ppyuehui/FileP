@@ -86,6 +86,9 @@ LRESULT CALLBACK FieldProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam,
     return ui::DefPresentedChildEditProc(s->compositor, format, ink, paper, hwnd, msg, wparam, lparam);
 }
 
+// One length for both fields and both read-back buffers (kCommandEditChars).
+constexpr int kCommandEditChars = 1024;
+
 HWND MakeEdit(HWND parent, int id, AppState& s) {
     // A redirected child surface: plain child windows sit behind the
     // DirectComposition surface, so the fields use the same host as the
@@ -96,6 +99,10 @@ HWND MakeEdit(HWND parent, int id, AppState& s) {
     SetWindowSubclass(edit, FieldProc, 1, reinterpret_cast<DWORD_PTR>(&s));
     // A hair of side margin: the caret should not touch the frame's border.
     SendMessageW(edit, EM_SETMARGINS, EC_LEFTMARGIN | EC_RIGHTMARGIN, MAKELPARAM(2, 2));
+    // The text handlers read the field into a buffer this size: a longer name or
+    // command line would be read back cut short, rewritten every frame and saved
+    // truncated. The control must not accept more than they can hold.
+    SendMessageW(edit, EM_SETLIMITTEXT, kCommandEditChars - 1, 0);
     SetWindowTheme(edit, L"", L"");
     // The app's own edit font, not the stock GUI font: the fields must match
     // the text around them (size and family alike).
@@ -217,12 +224,12 @@ void SyncCommandsPage(AppState& s, const ui::WindowViewModel& vm) {
     if (s.command_name_edit && GetFocus() != s.command_name_edit) {
         const app::CustomCommand* command = Selected(s);
         const std::wstring wanted = command ? command->name : std::wstring();
-        wchar_t now[512]{};
+        wchar_t now[kCommandEditChars]{};
         GetWindowTextW(s.command_name_edit, now, ARRAYSIZE(now));
         if (wanted != now) SetWindowTextW(s.command_name_edit, wanted.c_str());
     }
     if (s.command_value_edit && GetFocus() != s.command_value_edit) {
-        wchar_t now[1024]{};
+        wchar_t now[kCommandEditChars]{};
         GetWindowTextW(s.command_value_edit, now, ARRAYSIZE(now));
         if (s.command_value != now) SetWindowTextW(s.command_value_edit, s.command_value.c_str());
     }
@@ -230,7 +237,7 @@ void SyncCommandsPage(AppState& s, const ui::WindowViewModel& vm) {
 
 bool CommandsPageTextChanged(AppState& s, HWND edit) {
     if (!CommandsPageOwnsEdit(s, edit)) return false;
-    wchar_t buffer[1024]{};
+    wchar_t buffer[kCommandEditChars]{};
     GetWindowTextW(edit, buffer, ARRAYSIZE(buffer));
     if (edit == s.command_name_edit) {
         if (app::CustomCommand* command = Selected(s)) command->name = buffer;
@@ -289,6 +296,8 @@ void CommandsPageAction(AppState& s, ui::HitTestResult::Region region, int index
         auto& list = s.customCommands.commands;
         if (index >= 0 && index < static_cast<int>(list.size())) {
             list.erase(list.begin() + index);
+            // Rows below the deleted one slide up: keep the selection on its command.
+            if (index < s.command_sel) --s.command_sel;
             if (s.command_sel >= static_cast<int>(list.size())) s.command_sel = static_cast<int>(list.size()) - 1;
             if (s.command_sel < 0 && !list.empty()) s.command_sel = 0;
             s.command_step_sel = -1;

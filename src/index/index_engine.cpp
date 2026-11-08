@@ -3309,11 +3309,14 @@ bool Engine::CatchUpVolume(VolState& v, bool* changed, bool* structural) {
     }
 
     std::unique_lock<std::shared_mutex> lock(mutex_);
-    const BYTE* p = blob.empty() ? nullptr : blob.data();
+    // An empty blob has no range: adding its (zero) size to a null pointer is
+    // not something the standard defines, so the end is null too.
+    const BYTE* const p = blob.empty() ? nullptr : blob.data();
+    const BYTE* const p_end = blob.empty() ? nullptr : blob.data() + blob.size();
     bool any_struct = false;
     bool any_attr = false;
     uint64_t applied = 0;
-    const UsnBatch batch = ApplyUsnBatchLocked(v, p, p + blob.size(), applied, any_struct, any_attr);
+    const UsnBatch batch = ApplyUsnBatchLocked(v, p, p_end, applied, any_struct, any_attr);
     if (batch == UsnBatch::Stopped) return false;
     if (batch == UsnBatch::InvalidParent) {
         filename_timing_.End(FilenameStage::Journal, timing, applied, ERROR_INVALID_DATA, "invalid_parent", letter);

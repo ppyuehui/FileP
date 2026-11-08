@@ -90,5 +90,6 @@ constexpr UINT WM_DOUBLE_CTRL = WM_APP + 118;  // two Ctrl taps anywhere: toggle
 constexpr UINT WM_DIALOG_JUMP_CONTEXT = WM_APP + 119;  // the dialog jump bar wants the open folders
 constexpr UINT WM_DEVICE_WATCH_READY = WM_APP + 120;  // worker: wParam ticket, lParam PIDLIST_ABSOLUTE of the phone folder to watch (app_runtime.h)
 constexpr UINT WM_DEVICE_FOLDER_CHANGED = WM_APP + 121;  // SHChangeNotify on the watched phone folder (SHCNRF_NewDelivery)
+constexpr UINT WM_CUSTOM_COMMAND_DONE = WM_APP + 122;  // 自定义命令 steps finished: lParam owns a CustomCommandOutcome
 
 }  // namespace pulse

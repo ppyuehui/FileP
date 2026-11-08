@@ -3234,6 +3234,14 @@ private:
     void Click(const Hit& h) {
         if (executing_) return;
         if (c_edit_ >= 0 && !(h.k == H::CName && h.a == c_edit_)) CommitRowEdit(true);
+        // hits_ comes from the last paint; steps_ can shrink before the click is
+        // handled (an AI reply applies a preset). A row hit that is gone now must
+        // not index the lists.
+        const bool step_hit = h.k == H::Toggle || h.k == H::Card || h.k == H::Grip ||
+                              h.k == H::Field || h.k == H::Chip || h.k == H::Seg;
+        if (step_hit && (h.a < 0 || static_cast<size_t>(h.a) >= steps_.size() ||
+                         static_cast<size_t>(h.a) >= steps_ui_.size()))
+            return;
         const bool had_menu = menu_ != Menu::None;
         const Menu was = menu_;
         if (h.k != H::Menu) menu_ = Menu::None;

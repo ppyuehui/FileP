@@ -585,8 +585,6 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
         if(page==14) {
             const bool has_cmd = vm.command_selected >= 0 &&
                 vm.command_selected < static_cast<int>(vm.command_names.size());
-            const bool has_step = vm.command_step_selected >= 0 &&
-                vm.command_step_selected < static_cast<int>(vm.command_step_texts.size());
             // Left column: 命令 header, the rows, 新建 / 删除.
             {
                 std::wstring head = l10n::Get(I::CmdList);
@@ -735,11 +733,14 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
             button(lay.cmd_add,l10n::Get(I::CmdAddStep),H::SettingsCommandAddStep,0,true,has_cmd);
             if (has_cmd && !vm.command_step_values.empty()) {
                 // 将执行：一条命令会做什么，一眼看完。
-                std::wstring summary = L"将执行：";
+                std::wstring steps;
                 for (size_t i = 0; i < vm.command_step_values.size(); ++i) {
-                    if (i) summary += L" \u2192 ";
-                    summary += vm.command_step_values[i];
+                    if (i) steps += L" \u2192 ";
+                    steps += vm.command_step_values[i];
                 }
+                std::wstring summary = l10n::Get(I::CmdSummaryFormat);
+                if (const size_t slot = summary.find(L"{steps}"); slot != std::wstring::npos)
+                    summary.replace(slot, 7, steps);
                 painter_.DrawText(summary, lay.cmd_summary, compositor_->SmallFormat(),
                                   theme.text_secondary);
             }

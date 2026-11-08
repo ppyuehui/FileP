@@ -90,7 +90,12 @@ inline bool WriteUtf8FileAtomic(const std::wstring& path, const std::wstring& te
         SetLastError(ERROR_FILE_TOO_LARGE);
         return false;
     }
-    const std::wstring temp = path + L".tmp";
+    // A unique temp name: two windows (or two processes) saving the same
+    // settings file must not share, and so overwrite, one temp file.
+    static volatile LONG save_serial = 0;
+    const std::wstring temp = path + L"." +
+        std::to_wstring(GetCurrentProcessId()) + L"-" +
+        std::to_wstring(InterlockedIncrement(&save_serial)) + L".tmp";
     HANDLE file = CreateFileW(temp.c_str(), GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS,
                               FILE_ATTRIBUTE_NORMAL | FILE_FLAG_WRITE_THROUGH, nullptr);
     if (file == INVALID_HANDLE_VALUE) return false;

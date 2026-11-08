@@ -263,6 +263,11 @@ bool IsContentKey(std::wstring_view tok, std::wstring_view& val) {
            IsModifier(tok, L"\u5305\u542b", val);
 }
 
+// A bare word ("type", "ext", "size") is a file name, not an empty filter:
+// only the key: form asks for the attribute. Bare "type" used to compile to a
+// Term with no condition at all, which listed the whole index.
+bool HasKeyColon(std::wstring_view tok) { return tok.find(L':') != std::wstring_view::npos; }
+
 bool IsTypeKey(std::wstring_view tok, std::wstring_view& val) {
     return IsModifier(tok, L"type", val) || IsModifier(tok, L"kind", val) ||
            IsModifier(tok, L"\u7c7b\u578b", val) || IsModifier(tok, L"\u79cd\u7c7b", val);
@@ -307,6 +312,7 @@ bool ConsumeContentOrFlag(const RawToken& tok, CompiledQuery& q) {
     if (!tok.negated && Fold(tok.text) == L"nopinyin:") { q.pinyin_enabled = false; return true; }
     if (IsFlagToken(tok.text, q.content)) return true;
     if (IsContentKey(tok.text, val)) {
+        if (val.empty() && !HasKeyColon(tok.text)) return false;  // a file named "content"
         std::wstring needle(val);
         if (needle.empty()) return true;
         if (tok.negated) q.content.excluded.push_back(std::move(needle));
@@ -337,18 +343,20 @@ bool SkipFromFilenameNeedle(const RawToken& tok) {
 Term ParseTerm(std::wstring_view tok, bool quoted, bool negated) {
     Term t;
     std::wstring_view val;
-    if (!quoted && (IsModifier(tok, L"ext", val))) {
+    if (!quoted && (IsModifier(tok, L"ext", val)) && (!val.empty() || HasKeyColon(tok))) {
         ApplyExt(t, val);
         t.ext_not = negated;
         return t;
     }
-    if (!quoted && (IsModifier(tok, L"size", val) || IsModifier(tok, L"\u5927\u5c0f", val))) {
+    if (!quoted && (IsModifier(tok, L"size", val) || IsModifier(tok, L"\u5927\u5c0f", val)) &&
+        (!val.empty() || HasKeyColon(tok))) {
         ApplySizeToken(t, val);
         t.size_not = negated;
         return t;
     }
     if (!quoted && (IsModifier(tok, L"dm", val) || IsModifier(tok, L"datemodified", val) ||
-                    IsModifier(tok, L"\u4fee\u6539", val) || IsModifier(tok, L"\u65e5\u671f", val))) {
+                    IsModifier(tok, L"\u4fee\u6539", val) || IsModifier(tok, L"\u65e5\u671f", val)) &&
+        (!val.empty() || HasKeyColon(tok))) {
         ApplyDateToken(t, val);
         t.date_not = negated;
         return t;
@@ -366,13 +374,14 @@ Term ParseTerm(std::wstring_view tok, bool quoted, bool negated) {
         if (negated && val.empty()) { t.file = false; t.folder = true; }
         return t;
     }
-    if (!quoted && (IsModifier(tok, L"path", val) || IsModifier(tok, L"\u8def\u5f84", val))) {
+    if (!quoted && (IsModifier(tok, L"path", val) || IsModifier(tok, L"\u8def\u5f84", val)) &&
+        (!val.empty() || HasKeyColon(tok))) {
         ApplyName(t, val, false);
         t.name_in_path = true;
         t.name_not = negated;
         return t;
     }
-    if (!quoted && IsTypeKey(tok, val)) {
+    if (!quoted && IsTypeKey(tok, val) && (!val.empty() || HasKeyColon(tok))) {
         bool folders_only = false;
         if (ExpandKindToken(val, t.exts, folders_only)) {
             if (folders_only) t.folder = true;

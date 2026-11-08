@@ -288,7 +288,10 @@ bool PublishShardBase(const ShardPaths& paths, const std::wstring& temp_path,
     next.active_wal_bytes = wal_bytes;
     next.active_slot = target;
     next.previous_slot = current.source_id.empty() ? static_cast<uint8_t>(1 - target) : current.active_slot;
-    next.active_bytes = static_cast<uint64_t>(-1);
+    // 0 = the size probe failed (an unknown size skips the check); the CRC below
+    // still guards the file. A -1 sentinel here never matched on the next start,
+    // so a transient probe failure threw the fresh base away.
+    next.active_bytes = 0;
     HANDLE h = CreateFileW(target_path.c_str(), GENERIC_READ,
                            FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
                            nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);

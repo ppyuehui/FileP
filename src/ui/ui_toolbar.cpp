@@ -410,6 +410,10 @@ void MainRenderer::DrawToolbar(const WindowViewModel& vm, const D2D1_RECT_F& rec
                 const bool enabled=i==0 ? vm.can_go_back : i==1 ? vm.can_go_forward : true;
                 if (r.right>r.left && enabled && IsHovered(vm,nav_hits[i])) { hot=&r; hot_i=i; }
             }
+            // 此电脑 sits in the same run of buttons, so it glides with them.
+            if (layout.home.right>layout.home.left && IsHovered(vm,HitTestResult::NavHome)) {
+                hot=&layout.home; hot_i=4;
+            }
             if (tm.nav.Step(hot_i,hot,theme.radius_control*scale_,motion_frame_,motion_now_,tm.animations))
                 toolbar_moving=true;
             draw_plate(tm.nav);

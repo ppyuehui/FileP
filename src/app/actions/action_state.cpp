@@ -548,7 +548,9 @@ bool ParseByteSize(std::wstring_view text, uint64_t& out) {
     else if (unit == L"t" || unit == L"tb" || unit == L"tib") mult = 1024.0 * 1024.0 * 1024.0 * 1024.0;
     else return false;
     const double bytes = value * mult;
-    if (bytes < 0.0 || bytes > 1.8e19) return false;
+    // Stay inside llround's domain (|x| <= 2^63); above it the call is UB and
+    // MSVC hands back LLONG_MIN, which would read as a huge lower bound.
+    if (bytes < 0.0 || bytes > 9.2e18) return false;
     out = static_cast<uint64_t>(std::llround(bytes));
     return true;
 }

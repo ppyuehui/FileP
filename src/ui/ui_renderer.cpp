@@ -322,8 +322,12 @@ ToolbarLayout MainRenderer::ToolbarLayoutAt(float w, float create_width, float f
                                           show_home_button_ && !embedded_);
     const TitleChrome chrome = MakeTitleChrome(w, scale_, title_bar_height_);
     const float row_top = (title_bar_height_ - 36.0f * scale_) * 0.5f - 4.0f * scale_;
+    // The command row lays out its own navigation / address / search: keep the
+    // pin, sort and filter widths it always used, and only add the 此电脑 slot.
     const ToolbarLayout row = MakeToolbarLayout(chrome.settings_left - 4.0f * scale_, scale_, row_top,
-                                                margin_, create_width, left, 0.0f, search_hidden_ ? -1.0f : search_min_dip_);
+                                                margin_, create_width, left, 0.0f, search_hidden_ ? -1.0f : search_min_dip_,
+                                                0.0f, 0.0f, 0.0f, 0, 0.0f, ToolbarPinOptions{},
+                                                show_home_button_ && !embedded_);
     out.navigation = row.navigation;
     out.home = row.home;
     out.address = row.address;

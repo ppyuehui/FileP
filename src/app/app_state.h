@@ -565,7 +565,12 @@ struct AppState : AppCoreOwner {
     const app::LayoutTab* tabFlashKey = nullptr;
     ULONGLONG tabFlashAt = 0;
     uint64_t tagGroupsRevision = 0;
-    uint64_t cloudSyncRevision = 0;  // CloudSyncProbe answers this window has painted  // tag catalog revision last published for grouping
+    uint64_t cloudSyncRevision = 0;  // CloudSyncProbe answers this window has painted
+    // Folder totals are shared by every window: each window keeps its own
+    // watermark so a window that took the last change cannot hide it from the
+    // others (their Size sorts would then stay in the old order).
+    uint64_t folderSizesRevision = 0;
+    bool folderSizeResortWaiting = false;
     float addressSearchAnimation = 0.0f;
     float addressScopeAnimation = 0.0f;
     ULONGLONG addressAnimationTick = 0;

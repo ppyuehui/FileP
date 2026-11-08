@@ -61,6 +61,9 @@ std::wstring CreateTagGroupInteractive(AppState& s, POINT screen_pt);
 // Folds or unfolds a sidebar tag group header row.
 void ToggleTagGroupRow(AppState& s, const std::wstring& path);
 void DispatchMenuCommand(AppState& s, int cmd);
+// WM_CUSTOM_COMMAND_DONE: the 自定义命令 steps ran on the I/O worker
+// (app_commands.cpp); the receiver deletes the outcome.
+void ReceiveCustomCommandResult(AppState& s, LPARAM lparam);
 bool ClipboardHasFiles();
 // What the active selection can do by what it is (selection_caps.h): the
 // toolbar, the chip, the item menu and the shortcuts all ask this.

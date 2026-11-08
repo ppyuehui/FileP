@@ -75,9 +75,13 @@ bool StartProcess(const std::wstring& command_line, const std::wstring& director
 int RunScript(const std::wstring& script, const std::wstring& directory) {
     wchar_t temp[MAX_PATH]{};
     if (!GetTempPathW(MAX_PATH, temp)) return -1;
+    // Every run gets its own file: two commands can run at the same time, and
+    // GetTickCount64 alone repeats within its ~15 ms step.
+    static volatile LONG script_serial = 0;
     const std::wstring path = std::wstring(temp) + L"filep-command-" +
         std::to_wstring(GetCurrentProcessId()) + L"-" +
-        std::to_wstring(GetTickCount64()) + L".cmd";
+        std::to_wstring(GetTickCount64()) + L"-" +
+        std::to_wstring(InterlockedIncrement(&script_serial)) + L".cmd";
     const std::wstring body = L"@echo off\r\nchcp 65001 >nul\r\n" + script + L"\r\n";
     if (!WriteUtf8FileAtomic(path, body)) return -1;
     STARTUPINFOW si{};
@@ -91,13 +95,16 @@ int RunScript(const std::wstring& script, const std::wstring& directory) {
         DeleteFileW(path.c_str());
         return -1;
     }
-    WaitForSingleObject(pi.hProcess, 120000);
+    // A script may take minutes: the caller runs this on the I/O worker. When the
+    // wait times out the script is still running, so its .cmd must stay on disk
+    // (cmd.exe reads a batch file as it goes) instead of being deleted under it.
+    const bool finished = WaitForSingleObject(pi.hProcess, 120000) == WAIT_OBJECT_0;
     DWORD code = 1;
-    GetExitCodeProcess(pi.hProcess, &code);
+    if (finished) GetExitCodeProcess(pi.hProcess, &code);
     CloseHandle(pi.hThread);
     CloseHandle(pi.hProcess);
-    DeleteFileW(path.c_str());
-    return static_cast<int>(code);
+    if (finished) DeleteFileW(path.c_str());
+    return finished ? static_cast<int>(code) : -1;
 }
 
 std::wstring StorePath() {

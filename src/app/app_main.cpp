@@ -2091,6 +2091,9 @@ LRESULT CALLBACK WndProcImpl(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) 
     case WM_GIT_RESULT:
         if (s) ReceiveGitResult(*s, lParam);
         return 0;
+    case WM_CUSTOM_COMMAND_DONE:
+        if (s) ReceiveCustomCommandResult(*s, lParam);
+        return 0;
     case WM_CLOUD_PIN_DONE:
         // Toast for 始终保留在此设备上 / 释放空间 (app_commands.cpp RunCloudPin).
         if (s && s->hwnd) {
@@ -2294,15 +2297,19 @@ LRESULT CALLBACK WndProcImpl(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) 
             bool dirty = false;
             if (TickChangeTracking(*s)) dirty = true;
             if (s->renderer.MtimeBoundaryDue()) dirty = true;   // 修改时间提示: a mark aged
-            static bool folderSizeResortWaiting = false;
-            if (s->folderSizes.TakeChanged()) {
+            // 文件夹大小 lives in the shared AppCore; each window compares its own
+            // watermark, so the window whose timer runs first cannot swallow the
+            // change for the others.
+            if (const uint64_t sizes_rev = s->folderSizes.Revision();
+                sizes_rev != s->folderSizesRevision) {
+                s->folderSizesRevision = sizes_rev;
                 dirty = true;
-                folderSizeResortWaiting = true;
+                s->folderSizeResortWaiting = true;
                 if (s->hoverRegion == static_cast<int>(ui::HitTestResult::RowFolderSize) && !s->tooltipText.empty())
                     s->tooltipText = TooltipForHover(*s);
             }
             // New totals re-sort Size-ordered listings, paced (#58).
-            if (folderSizeResortWaiting) folderSizeResortWaiting = ResortForFolderSizes(*s);
+            if (s->folderSizeResortWaiting) s->folderSizeResortWaiting = ResortForFolderSizes(*s);
             if (DrainDirNotifies(*s)) {
                 s->uiTimerPacer.NoteActivity(GetTickCount64());
                 SyncUiTimerRate(*s, hwnd, IsWindowVisible(hwnd) && !IsIconic(hwnd));

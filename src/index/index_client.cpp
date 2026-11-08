@@ -343,7 +343,9 @@ void IndexClient::HandleSearch(uint32_t id, const uint8_t* p, size_t n) {
     if (!r.GetU32(total) || !r.GetU32(nh)) return;
     SearchResult sr;
     sr.total = total;
-    sr.hits.reserve(nh);
+    // The count comes off the pipe: a malformed frame must not ask for hundreds
+    // of gigabytes before a single hit parses. The loop grows the vector anyway.
+    sr.hits.reserve((std::min)(nh, 4096u));
     for (uint32_t i = 0; i < nh; ++i) {
         Hit h;
         uint32_t flags = 0, size_lo = 0, size_hi = 0, mt_lo = 0, mt_hi = 0;
@@ -371,7 +373,7 @@ void IndexClient::HandleVolumes(const uint8_t* p, size_t n) {
     std::wstring path;
     if (!r.GetU32(service) || !r.GetString(path) || !r.GetU32(count)) return;
     std::vector<VolumeInfo> volumes;
-    volumes.reserve(count);
+    volumes.reserve((std::min)(count, 1024u));   // the count is untrusted: no huge reserve
     for (uint32_t i = 0; i < count; ++i) {
         VolumeInfo volume;
         uint32_t flags = 0, kind = 0, progress = 0, lo = 0, hi = 0;

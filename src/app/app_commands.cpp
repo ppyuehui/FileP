@@ -1604,8 +1604,15 @@ static void RunCloudPin(AppState& s, fs::CloudPinAction action) {
 
 static void FlipToolbarTool(AppState& s, size_t index);
 
+struct CustomCommandOutcome {
+    std::wstring dir;    // the folder the steps ran in
+    std::wstring error;  // empty when every step ran
+};
+
 // 自定义命令: runs a command in the open folder, with the selected item's name
-// as {name}, then refreshes the list.
+// as {name}. The steps create files, start programs and wait for scripts, so
+// they run on the I/O worker; a 批处理脚本 can take minutes and must never
+// freeze the window. WM_CUSTOM_COMMAND_DONE reports the end.
 void RunCustomCommandAt(AppState& s, size_t index) {
     if (index >= s.customCommands.commands.size()) return;
     const app::Tab* tab = ActiveTab(s);
@@ -1618,13 +1625,29 @@ void RunCustomCommandAt(AppState& s, size_t index) {
         const size_t slash = path.find_last_of(L"\\/");
         context.name = slash == std::wstring::npos ? path : path.substr(slash + 1);
     }
-    std::wstring error;
-    if (!app::RunCustomCommand(s.customCommands.commands[index], context, error)) {
-        MessageBoxW(s.hwnd, error.c_str(), L"FileP", MB_OK | MB_ICONERROR);
+    const app::CustomCommand command = s.customCommands.commands[index];
+    const HWND hwnd = s.hwnd;
+    s.worker.EnqueueIo([command, context, hwnd] {
+        auto outcome = std::make_unique<CustomCommandOutcome>();
+        outcome->dir = context.dir;
+        app::RunCustomCommand(command, context, outcome->error);
+        if (!PostMessageW(hwnd, WM_CUSTOM_COMMAND_DONE, 0, reinterpret_cast<LPARAM>(outcome.get())))
+            return;  // the window is gone: the outcome dies with this scope
+        outcome.release();
+    });
+}
+
+void ReceiveCustomCommandResult(AppState& s, LPARAM lparam) {
+    std::unique_ptr<CustomCommandOutcome> outcome(reinterpret_cast<CustomCommandOutcome*>(lparam));
+    if (!outcome || !s.hwnd) return;
+    if (!outcome->error.empty()) {
+        MessageBoxW(s.hwnd, outcome->error.c_str(), L"FileP", MB_OK | MB_ICONERROR);
         return;
     }
-    s.store.MarkDirty(tab->current_path);
-    RefreshActiveTab(s);
+    if (const app::Tab* tab = ActiveTab(s); tab && tab->current_path == outcome->dir)
+        RefreshActiveTab(s);
+    else
+        s.store.MarkDirty(outcome->dir);
 }
 
 void DispatchMenuCommand(AppState& s, int cmd) {
