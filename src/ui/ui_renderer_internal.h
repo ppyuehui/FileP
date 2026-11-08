@@ -2582,6 +2582,7 @@ struct SettingsLayout {
     D2D1_RECT_F effect_row[kWindowEffectCount]{};
     D2D1_RECT_F menu_acrylic_row{};
     D2D1_RECT_F show_ai_row{};
+    D2D1_RECT_F show_path_copy_row{};
     // 自定义命令 page (14): 主从双栏 — left the commands, right the selected one.
     D2D1_RECT_F cmd_body{};                 // the whole two-column card
     D2D1_RECT_F cmd_list{};                 // the left column

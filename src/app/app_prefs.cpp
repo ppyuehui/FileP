@@ -123,6 +123,7 @@ void AppPrefs::ResetToDefaults() {
     preview_trigger = kPreviewTriggerHover;
     hover_preview_delay_ms = 500;
     show_ai_entry = true;
+    show_path_copy = true;
     hover_card_size = kHoverCardMedium;
     taskbar_parent_chars = 5;
     taskbar_current_chars = 5;
@@ -315,6 +316,8 @@ std::wstring AppPrefs::ToJson() const {
     out += L",\n  \"hover_preview_delay_ms\":" + std::to_wstring(NormalizeHoverPreviewDelay(hover_preview_delay_ms));
     out += L",\n  \"show_ai_entry\":";
     out += show_ai_entry ? L"true" : L"false";
+    out += L",\n  \"show_path_copy\":";
+    out += show_path_copy ? L"true" : L"false";
     out += L",\n  \"hover_card_size\":" + std::to_wstring(NormalizeHoverCardSize(hover_card_size));
     out += L",\n  \"taskbar_parent_chars\":" + std::to_wstring(NormalizeTaskbarChars(taskbar_parent_chars));
     out += L",\n  \"taskbar_current_chars\":" + std::to_wstring(NormalizeTaskbarChars(taskbar_current_chars));
@@ -579,6 +582,7 @@ bool AppPrefs::FromJson(const std::wstring& json) {
     hover_preview_delay_ms = NormalizeHoverPreviewDelay(
         pulse::json::ExtractInt(json, L"hover_preview_delay_ms", 500));
     show_ai_entry = pulse::json::ExtractBool(json, L"show_ai_entry", true);
+    show_path_copy = pulse::json::ExtractBool(json, L"show_path_copy", true);
     hover_card_size = NormalizeHoverCardSize(
         pulse::json::ExtractInt(json, L"hover_card_size", kHoverCardMedium));
     taskbar_parent_chars = NormalizeTaskbarChars(

@@ -4454,5 +4454,7 @@
 #define IDS_CMD_KIND_TITLE                                                               5667
 #define IDS_CMD_KIND_DESC                                                                5668
 #define IDS_CMD_VALUE                                                                    5669
+#define IDS_SETTINGS_SHOW_PATH_COPY                                                      5670
+#define IDS_SETTINGS_SHOW_PATH_COPY_DESC                                                 5671
 
 #endif  // PULSE_STRING_IDS_H

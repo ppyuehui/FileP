@@ -620,7 +620,7 @@ void MainRenderer::DrawToolbar(const WindowViewModel& vm, const D2D1_RECT_F& rec
                     addrRc.bottom - addrRc.top);
             }
         }
-        if (FavoritesButtonShown() && !vm.address_editing && !vm.address_searching) {
+        if (FavoritesButtonShown() && vm.show_path_copy && !vm.address_editing && !vm.address_searching) {
             // 复制路径: the address bar's right-hand button (was the ★ favourites
             // menu; copy path is the one people reach for).
             const D2D1_RECT_F fb = AddressFavoritesRect(rect.right);

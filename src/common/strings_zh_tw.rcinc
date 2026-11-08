@@ -4434,4 +4434,6 @@ BEGIN
     IDS_CMD_KIND_TITLE "步驟類型"
     IDS_CMD_KIND_DESC "選好類型，再填下面的值"
     IDS_CMD_VALUE "值"
+    IDS_SETTINGS_SHOW_PATH_COPY "位址列複製按鈕"
+    IDS_SETTINGS_SHOW_PATH_COPY_DESC "顯示「複製路徑」按鈕"
 END

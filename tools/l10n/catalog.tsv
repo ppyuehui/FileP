@@ -4461,3 +4461,5 @@ CmdEmpty	IDS_CMD_EMPTY	5666	还没有命令，点「新建命令」开始	No com
 CmdKindTitle	IDS_CMD_KIND_TITLE	5667	步骤类型	Step type	步驟類型
 CmdKindDesc	IDS_CMD_KIND_DESC	5668	选好类型，再填下面的值	Pick the type, then fill the value below	選好類型，再填下面的值
 CmdValue	IDS_CMD_VALUE	5669	值	Value	值
+SettingsShowPathCopy	IDS_SETTINGS_SHOW_PATH_COPY	5670	地址栏复制按钮	Copy path button	位址列複製按鈕
+SettingsShowPathCopyDesc	IDS_SETTINGS_SHOW_PATH_COPY_DESC	5671	在地址栏右侧显示「复制路径」按钮	Show a 复制路径 button at the right of the address bar	顯示「複製路徑」按鈕

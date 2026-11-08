@@ -1258,6 +1258,11 @@ void SettingsController::ToggleUi(int index) {
         SaveAndApply(SettingsEffect::ListStyle);
         return;
     }
+    if (index == 82) {
+        prefs_->show_path_copy = !prefs_->show_path_copy;
+        SaveAndApply(SettingsEffect::None);
+        return;
+    }
     if (index == 81) {
         prefs_->show_ai_entry = !prefs_->show_ai_entry;
         SaveAndApply(SettingsEffect::None);

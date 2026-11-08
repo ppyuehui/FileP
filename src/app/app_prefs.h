@@ -150,6 +150,7 @@ struct AppPrefs {
     int hover_preview_delay_ms = 500; // 300 / 500 / 800
     // 左下角的 AI 图标与入口 (status bar chip): off hides the chip.
     bool show_ai_entry = true;
+    bool show_path_copy = true;   // 地址栏右侧的复制路径按钮
     // The card's size step: 0 small, 1 medium, 2 large (kHoverCardSize*). The
     // card takes the content's shape within it; Ctrl enlarges it while held.
     int hover_card_size = 1;

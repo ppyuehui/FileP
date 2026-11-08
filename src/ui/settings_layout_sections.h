@@ -151,6 +151,7 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         }
         l.frame_look_card=row(seg_h,true); segments(l.frame_look_card,l.frame_look_row,3,282);
         l.menu_acrylic_row=row(64);
+        l.show_path_copy_row=row(64);
         l.show_ai_row=row(64);
 
         section(I::SettingsSecBackground);

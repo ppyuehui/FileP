@@ -287,6 +287,7 @@ HitTestResult MainRenderer::HitTest(const WindowViewModel& vm, const D2D1_RECT_F
             }
             if(ContainsPt(lay.performance_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=4;return r;}
             if(ContainsPt(lay.menu_acrylic_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=36;return r;}
+            if(ContainsPt(lay.show_path_copy_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=82;return r;}
             if(ContainsPt(lay.show_ai_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=81;return r;}
             {
                 if(ContainsPt(lay.cmd_place[0],x,y)) {r.region=HitTestResult::SettingsCommandPlaces;r.index=0;return r;}
@@ -988,7 +989,7 @@ HitTestResult MainRenderer::HitTest(const WindowViewModel& vm, const D2D1_RECT_F
         if (ContainsPt(toolbar.address,x,y)) {
             r.region=HitTestResult::AddressBar;
             if (FavoritesButtonShown() && !vm.address_editing && !vm.address_searching &&
-                ContainsPt(AddressFavoritesRect(rect.right),x,y)) {
+                vm.show_path_copy && ContainsPt(AddressFavoritesRect(rect.right),x,y)) {
                 r.region=HitTestResult::AddressFavorites;
                 r.control_bounds=AddressFavoritesRect(rect.right);
                 return r;

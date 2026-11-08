@@ -4436,6 +4436,8 @@ BEGIN
     IDS_CMD_KIND_TITLE "步骤类型"
     IDS_CMD_KIND_DESC "选好类型，再填下面的值"
     IDS_CMD_VALUE "值"
+    IDS_SETTINGS_SHOW_PATH_COPY "地址栏复制按钮"
+    IDS_SETTINGS_SHOW_PATH_COPY_DESC "在地址栏右侧显示「复制路径」按钮"
 END
 
 LANGUAGE 0x09, 0x01
@@ -8871,6 +8873,8 @@ BEGIN
     IDS_CMD_KIND_TITLE "Step type"
     IDS_CMD_KIND_DESC "Pick the type, then fill the value below"
     IDS_CMD_VALUE "Value"
+    IDS_SETTINGS_SHOW_PATH_COPY "Copy path button"
+    IDS_SETTINGS_SHOW_PATH_COPY_DESC "Show a 复制路径 button at the right of the address bar"
 END
 
 // Traditional Chinese (Taiwan), generated from the Simplified entries above.
