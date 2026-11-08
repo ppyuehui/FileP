@@ -8,6 +8,7 @@
 #include "../ui/ui_view_model.h"
 #include "../ui/settings_page_ids.h"
 #include "../ui/edit_host.h"
+#include "../ui/typography.h"
 #include "app_commands.h"
 #include "app_navigation.h"
 
@@ -82,7 +83,10 @@ HWND MakeEdit(HWND parent, int id, AppState& s) {
     SetWindowLongPtrW(edit, GWLP_ID, id);
     SetWindowSubclass(edit, FieldProc, 1, reinterpret_cast<DWORD_PTR>(&s));
     SetWindowTheme(edit, L"", L"");
-    SendMessageW(edit, WM_SETFONT, reinterpret_cast<WPARAM>(GetStockObject(DEFAULT_GUI_FONT)), TRUE);
+    // The app's own edit font, not the stock GUI font: the fields must match
+    // the text around them (size and family alike).
+    if (!s.editFont) s.editFont = ui::typography::CreateEditFont(s.scale);
+    SendMessageW(edit, WM_SETFONT, reinterpret_cast<WPARAM>(s.editFont), TRUE);
     return edit;
 }
 

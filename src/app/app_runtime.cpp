@@ -2,7 +2,7 @@
 #include "app_window_title.h"
 #include "app_navigation.h"
 #include "custom_commands_page.h"
-#include "../ui/custom_commands_dialog.h"
+
 #include "../fs/drive_kind.h"
 #include "../fs/device_path.h"
 #include "../common/shell_id.h"
@@ -2626,36 +2626,6 @@ static void FillTrayShelf(AppState& s, ui::TrayDeckView& deck, ULONGLONG now) {
     deck.conflicts = c.conflicts;
     if (deck.stage == static_cast<int>(ui::TrayStage::Open) || deck.prev_stage == static_cast<int>(ui::TrayStage::Open))
         FillTrayOpen(s, deck, now);
-}
-
-// 自定义命令 page: the editor is a caption-less panel parked over the page's
-// content column instead of a window of its own (called from Render, so it
-// follows the window and the page).
-void SyncCustomCommandsPanel(AppState& s, const ui::WindowViewModel& vm) {
-    const bool on = s.hwnd && s.pane && vm.settings_page == ui::kSettingsPageCommands &&
-                    IsSettingsTab(s.pane->ActiveTab());
-    if (!on) {
-        ui::HideCustomCommandsPanel();
-        return;
-    }
-    RECT client{};
-    GetClientRect(s.hwnd, &client);
-    const D2D1_RECT_F content = s.renderer.SettingsContentRect(
-        vm, D2D1::RectF(0.0f, 0.0f, static_cast<float>(client.right), static_cast<float>(client.bottom)));
-    const float inset = 16.0f * static_cast<float>(s.scale);
-    // Under the page's title and intro line.
-    RECT rc{};
-    rc.left = static_cast<LONG>(content.left + inset);
-    rc.top = static_cast<LONG>(content.top + 96.0f * static_cast<float>(s.scale));
-    rc.right = static_cast<LONG>(content.right - inset);
-    rc.bottom = static_cast<LONG>(content.bottom - inset);
-    if (rc.right - rc.left < 400 || rc.bottom - rc.top < 320) {
-        ui::HideCustomCommandsPanel();
-        return;
-    }
-    static HWND panel = nullptr;
-    if (!panel || !IsWindow(panel)) panel = ui::ShowCustomCommandsPanel(s.hwnd, s.customCommands, rc);
-    else ui::MoveCustomCommandsPanel(rc);
 }
 
 ui::WindowViewModel BuildVm(AppState& s, bool probe_details) {

@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
   把官方 Pulse 的新提交合并进 FileP。
 
@@ -76,7 +76,8 @@ $hotspots = @(
     @{ Path = 'src/ui/ui_sidebar.cpp';    Hint = '侧边栏缩进：保留 item.indent 那段' },
     @{ Path = 'src/ui/ui_toolbar.cpp';    Hint = '地址栏复制路径按钮：保留自己的' },
     @{ Path = 'src/app/app_prefs.cpp';    Hint = '新增的偏好（show_ai_entry 等）：两边字段都留' },
-    @{ Path = 'README.md';                Hint = '保持本仓库版本：git checkout --ours README.md' }
+    @{ Path = 'README.md';                Hint = '保持本仓库版本：git checkout --ours README.md' },
+    @{ Path = '.github/workflows';        Hint = '本仓库有意删除了 CI（不在 GitHub 跑 Actions）：保持删除，别让上游的恢复回来' }
 )
 $changed = git diff --name-only "$Branch...$upRef"
 $hit = $hotspots | Where-Object { $changed -contains $_.Path }

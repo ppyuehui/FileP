@@ -9,6 +9,7 @@
 #include "../ui/ui_motion.h"
 #include "../ui/ui_renderer.h"
 #include "../ui/known_extensions.h"
+#include "../ui/settings_page_ids.h"
 #include <atomic>
 #include "../ui/shortcut_help.h"
 // app_commands.cpp — extracted from app_main.cpp.
@@ -29,7 +30,7 @@
 #include "../ui/file_operation_dialog.h"
 #include "../ui/folder_picker_dialog.h"
 #include "../ui/batch_rename_dialog.h"
-#include "../ui/custom_commands_dialog.h"
+
 #include "../ui/toolbar_picker.h"
 #include "../ui/toolbar_pin_drag.h"
 #include "../ui/advanced_search_dialog.h"
@@ -1654,7 +1655,7 @@ void DispatchMenuCommand(AppState& s, int cmd) {
         cmd==app::CmdGroupIntoFolder || cmd==app::CmdDissolveFolder || cmd==app::CmdSetAlias;
     if(needs_files && DeferContentSelection(s,[cmd](AppState& v){DispatchMenuCommand(v,cmd);})) return;
     if (cmd == app::CmdCustomCommandManage) {
-        ui::ShowCustomCommandsDialog(s.hwnd, s.customCommands);
+        OpenSettingsTab(s, ui::kSettingsPageCommands);
         return;
     }
     if (cmd >= app::CmdCustomCommandBase && cmd <= app::CmdCustomCommandLast) {
@@ -2022,19 +2023,6 @@ void EraseCommand(std::vector<ui::FluentMenuItem>& items, int command) {
     std::erase_if(items, [command](const ui::FluentMenuItem& item) { return item.command == command; });
 }
 
-// 自定义命令 (commands.json): one row per command for the surface the menu
-// belongs to, then the dispatch that runs it in the open folder.
-void AppendCustomCommandRows(AppState& s, std::vector<ui::FluentMenuItem>& items, bool on_folder) {
-    const auto& commands = s.customCommands.commands;
-    for (size_t i = 0; i < commands.size() && i < 100; ++i) {
-        const app::CustomCommand& command = commands[i];
-        if (command.name.empty() || !command.ListedFor(on_folder)) continue;
-        items.push_back(VerbRow(static_cast<int>(app::CmdCustomCommandBase + i), command.name, L"\xE756"));
-    }
-    // The editor stays reachable even before the first command exists.
-    items.push_back(VerbRow(app::CmdCustomCommandManage, L"管理自定义命令…", L"\xE713"));
-}
-
 
 bool HasCommand(const std::vector<ui::FluentMenuItem>& items, int command) {
     return std::any_of(items.begin(), items.end(), [command](const ui::FluentMenuItem& item) { return item.command == command; });
@@ -2211,7 +2199,7 @@ std::vector<ui::FluentMenuItem> BuildFinderItemMenu(
         }
     }
     std::vector<ui::FluentMenuItem> items = app::BuildItemMenu(can_undo, undo_label, folder);
-    if (folder) AppendCustomCommandRows(s, items, true);
+
     if (const auto* tab = ActiveTab(s))
         app::AppendRecentChangesCommand(items, app::RecentChangesMenuPath(*tab, false));
     ApplyWorkspacePinLabel(items, s);
@@ -2916,7 +2904,7 @@ void ShowBackgroundContextMenu(AppState& s, POINT screen_pt) {
     // In-app Git: pull / push / refresh for a folder inside a repository.
     const std::wstring git_root = tab->git_root;
     if (view_options.filesystem) AppendGitMenu(*tab, base_items);
-    AppendCustomCommandRows(s, base_items, false);
+
     s.context_menu.OpenMenu(std::move(base_items));
     auto display = ExplorerMenu(s, s.context_menu.base_items());
 
