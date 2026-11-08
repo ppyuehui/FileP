@@ -1216,6 +1216,7 @@ struct WindowViewModel {
     std::vector<std::wstring> command_places;      // 工具栏 · 右键空白处
     std::vector<int> command_step_counts;
     std::vector<std::wstring> command_step_texts;  // of the selected command
+    std::vector<std::wstring> command_step_values; // just the values, for 将执行
     int command_selected = -1;
     int command_step_selected = -1;
     int command_kind = 0;

@@ -2589,6 +2589,8 @@ struct SettingsLayout {
     D2D1_RECT_F cmd_detail{};               // the right column
     D2D1_RECT_F cmd_places_label{}, cmd_place[3]{};
     D2D1_RECT_F cmd_steps_label{}, cmd_steps_box{};
+    D2D1_RECT_F cmd_step_edit{};            // value field inside the selected row
+    D2D1_RECT_F cmd_summary{};              // 将执行：a → b → c
     D2D1_RECT_F cmd_name_label{}, cmd_name_row{}, cmd_name_field{};
     D2D1_RECT_F cmd_value_label{}, cmd_value_field{};
     D2D1_RECT_F cmd_row[12]{};

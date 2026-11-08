@@ -260,8 +260,8 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         // Column heights (the taller one sets the card).
         const float list_h = 30*scale + (command_rows > 0 ? command_rows : 1)*44*scale + 8*scale + 40*scale;
         const float right_h = 26*scale + 52*scale + 10*scale + 24*scale + 34*scale + 10*scale +
-                              26*scale + (step_rows > 0 ? step_rows : 1)*36*scale + 8*scale +
-                              40*scale + 8*scale + 56*scale + 30*scale + 52*scale + 8*scale + 40*scale;
+                              26*scale + (step_rows > 0 ? step_rows : 1)*42*scale + 8*scale +
+                              40*scale + 8*scale + 56*scale + 26*scale + 40*scale;
         const float body_h = (stack ? list_h + right_h : (std::max)(list_h, right_h)) + 24*scale;
         l.cmd_body = row(body_h);
         const float col_w = stack ? (right - left - 2*pad2) : (std::min)(300*scale, (right - left)*0.36f);
@@ -273,19 +273,19 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
                                    right - pad2,
                                    (stack ? l.cmd_list.bottom + 12*scale : l.cmd_body.top + 12*scale) + right_h);
         // Left column: header, the command rows, then 新建 / 删除.
-        float y = l.cmd_list.top;
-        l.cmd_list_header = D2D1::RectF(l.cmd_list.left, y, l.cmd_list.right, y + 30*scale);
-        y += 30*scale;
+        float cursor = l.cmd_list.top;
+        l.cmd_list_header = D2D1::RectF(l.cmd_list.left, cursor, l.cmd_list.right, cursor + 30*scale);
+        cursor += 30*scale;
         l.cmd_row_count = 0;
         for (int i = 0; i < (command_rows > 0 ? command_rows : 1); ++i) {
-            l.cmd_row[l.cmd_row_count++] = D2D1::RectF(l.cmd_list.left, y, l.cmd_list.right, y + 44*scale);
-            y += 44*scale;
+            l.cmd_row[l.cmd_row_count++] = D2D1::RectF(l.cmd_list.left, cursor, l.cmd_list.right, cursor + 44*scale);
+            cursor += 44*scale;
         }
-        y += 8*scale;
+        cursor += 8*scale;
         {
             const float bw = (std::min)(110*scale, (l.cmd_list.right - l.cmd_list.left - 8*scale) * 0.5f);
-            l.cmd_new = D2D1::RectF(l.cmd_list.left, y, l.cmd_list.left + bw, y + 40*scale);
-            l.cmd_delete = D2D1::RectF(l.cmd_new.right + 8*scale, y, l.cmd_new.right + 8*scale + bw, y + 40*scale);
+            l.cmd_new = D2D1::RectF(l.cmd_list.left, cursor, l.cmd_list.left + bw, cursor + 40*scale);
+            l.cmd_delete = D2D1::RectF(l.cmd_new.right + 8*scale, cursor, l.cmd_new.right + 8*scale + bw, cursor + 40*scale);
         }
         // Right column: 名称, 出现位置 (one row of three), 步骤, 编辑步骤.
         float ry = l.cmd_detail.top;
@@ -304,27 +304,31 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         l.cmd_steps_label = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 26*scale);
         ry += 26*scale;
         l.cmd_step_count = 0;
+        l.cmd_step_edit = D2D1::RectF();
         for (int i = 0; i < (step_rows > 0 ? step_rows : 1); ++i) {
-            l.cmd_step_row[l.cmd_step_count++] = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 36*scale);
-            ry += 36*scale;
+            l.cmd_step_row[l.cmd_step_count++] = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 42*scale);
+            ry += 42*scale;
+        }
+        if (vm.command_step_selected >= 0 && vm.command_step_selected < l.cmd_step_count) {
+            const D2D1_RECT_F& step_rect = l.cmd_step_row[vm.command_step_selected];
+            l.cmd_step_edit = D2D1::RectF(step_rect.left + 150*scale, step_rect.top + 6*scale,
+                                          step_rect.right - 40*scale, step_rect.bottom - 6*scale);
         }
         ry += 8*scale;
-        l.cmd_add = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.left + 120*scale, ry + 40*scale);
-        ry += 40*scale + 8*scale;
-        l.cmd_kind_row = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 56*scale);
+        l.cmd_kind_row = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 62*scale);
         {
-            const float cw = (std::min)(l.cmd_detail.right - l.cmd_detail.left, 420*scale);
+            const float cw = l.cmd_detail.right - l.cmd_detail.left;
             const float each = cw / 4.0f;
             for (int i = 0; i < 4; ++i)
-                l.cmd_kind[i] = D2D1::RectF(l.cmd_kind_row.left + i*each, l.cmd_kind_row.top + 26*scale,
-                                            l.cmd_kind_row.left + (i+1)*each, l.cmd_kind_row.bottom);
+                l.cmd_kind[i] = D2D1::RectF(l.cmd_kind_row.left + i*each, l.cmd_kind_row.top + 24*scale,
+                                            l.cmd_kind_row.left + (i+1)*each, l.cmd_kind_row.bottom - 2*scale);
         }
-        ry += 56*scale;
-        l.cmd_value_label = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 24*scale);
-        ry += 24*scale;
-        l.cmd_value_row = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 52*scale);
-        l.cmd_value_field = D2D1::RectF(l.cmd_detail.left, ry + 4*scale, l.cmd_detail.right, ry + 52*scale);
-        ry += 52*scale + 8*scale;
+        ry += 62*scale;
+        l.cmd_add = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.left + 120*scale, ry + 40*scale);
+        ry += 40*scale + 8*scale;
+        // 将执行：一句话摘要，小号次要色，排在编辑区下面。
+        l.cmd_summary = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 26*scale);
+        ry += 26*scale;
         l.cmd_step_buttons = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 40*scale);
         {
             float x = l.cmd_step_buttons.left;

@@ -597,9 +597,6 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
                 fluent::ControlState name_st{};
                 name_st.focused = vm.command_name_focused;
                 painter_.DrawTextFieldFrame(lay.cmd_name_field, name_st, true);
-                fluent::ControlState value_st{};
-                value_st.focused = vm.command_value_focused;
-                painter_.DrawTextFieldFrame(lay.cmd_value_field, value_st, true);
             }
             // 出现位置: three check boxes in one row, disabled without a command.
             painter_.DrawText(l10n::Get(I::CmdPlaces), lay.cmd_places_label,
@@ -666,8 +663,12 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
                         compositor_->SmallFormat(),theme.text_secondary);
                     continue;
                 }
-                painter_.DrawText(vm.command_step_texts[i],D2D1::RectF(r.left+16*scale_,r.top,r.right-16*scale_,r.bottom),
-                    compositor_->TextFormat(),theme.text);
+                // 选中那一行的值由输入框盖着，不重复画字。
+                if (i != vm.command_step_selected) {
+                    painter_.DrawText(vm.command_step_texts[i],
+                        D2D1::RectF(r.left + 16*scale_, r.top, r.right - 16*scale_, r.bottom),
+                        compositor_->TextFormat(), theme.text);
+                }
             }
             painter_.DrawText(l10n::Get(I::CmdKindTitle), D2D1::RectF(
                     lay.cmd_kind_row.left, lay.cmd_kind_row.top, lay.cmd_kind_row.right,
@@ -687,10 +688,17 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
                               : i == 3 ? fluent::SegmentPosition::Last : fluent::SegmentPosition::Middle;
                 painter_.DrawSegmentedItem(item);
             }
-            painter_.DrawText(l10n::Get(I::CmdValue), lay.cmd_value_label,
-                              compositor_->SmallFormat(), theme.text_secondary);
             button(lay.cmd_add,l10n::Get(I::CmdAddStep),H::SettingsCommandAddStep,0,true,has_cmd);
-            button(lay.cmd_update,l10n::Get(I::CmdUpdateStep),H::SettingsCommandUpdateStep,0,false,has_step);
+            if (has_cmd && !vm.command_step_values.empty()) {
+                // 将执行：一条命令会做什么，一眼看完。
+                std::wstring summary = L"将执行：";
+                for (size_t i = 0; i < vm.command_step_values.size(); ++i) {
+                    if (i) summary += L" \u2192 ";
+                    summary += vm.command_step_values[i];
+                }
+                painter_.DrawText(summary, lay.cmd_summary, compositor_->SmallFormat(),
+                                  theme.text_secondary);
+            }
             button(lay.cmd_up,l10n::Get(I::CmdStepUp),H::SettingsCommandUp,0,false,has_step);
             button(lay.cmd_down,l10n::Get(I::CmdStepDown),H::SettingsCommandDown,0,false,has_step);
             button(lay.cmd_del_step,l10n::Get(I::CmdStepDelete),H::SettingsCommandDeleteStep,0,false,has_step);

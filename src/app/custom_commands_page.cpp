@@ -119,6 +119,7 @@ void FillCommandsPage(AppState& s, ui::WindowViewModel& vm) {
     vm.command_places.clear();
     vm.command_step_counts.clear();
     vm.command_step_texts.clear();
+    vm.command_step_values.clear();
     for (const auto& command : s.customCommands.commands) {
         vm.command_names.push_back(command.name.empty() ? l10n::Get(I::SettingsPageCommands) : command.name);
         std::wstring places;
@@ -135,8 +136,10 @@ void FillCommandsPage(AppState& s, ui::WindowViewModel& vm) {
         vm.command_toolbar = command->toolbar;
         vm.command_folder = command->folder_menu;
         vm.command_background = command->background_menu;
-        for (size_t i = 0; i < command->steps.size(); ++i)
+        for (size_t i = 0; i < command->steps.size(); ++i) {
             vm.command_step_texts.push_back(StepText(command->steps[i], static_cast<int>(i)));
+            vm.command_step_values.push_back(command->steps[i].value);
+        }
     }
 }
 
@@ -190,12 +193,25 @@ void SyncCommandsPage(AppState& s, const ui::WindowViewModel& vm) {
                      SWP_SHOWWINDOW | SWP_NOACTIVATE);
     };
     place(s.command_name_edit, name_rc);
-    place(s.command_value_edit, value_rc);
+    // The step row's field: its rect already excludes the row's padding, so it
+    // is placed as-is, and hidden when no step is selected.
+    if (s.command_value_edit) {
+        if (value_rc.right - value_rc.left > 20.0f * s.scale && value_rc.bottom > value_rc.top &&
+            value_rc.top >= column.top && value_rc.bottom <= column.bottom) {
+            SetWindowPos(s.command_value_edit, HWND_TOP, static_cast<int>(value_rc.left),
+                         static_cast<int>(value_rc.top), static_cast<int>(value_rc.right - value_rc.left),
+                         static_cast<int>(value_rc.bottom - value_rc.top),
+                         SWP_SHOWWINDOW | SWP_NOACTIVATE);
+        } else {
+            ShowWindow(s.command_value_edit, SW_HIDE);
+        }
+    }
     // The page draws the frame; it lights up while its field has the caret.
     const HWND focus = GetFocus();
     const_cast<ui::WindowViewModel&>(vm).command_name_focused = focus && focus == s.command_name_edit;
     const_cast<ui::WindowViewModel&>(vm).command_value_focused = focus && focus == s.command_value_edit;
-    // Text: the selected command's name and the step value being typed.
+    // The step's value field sits in the selected step row, not in a block of
+    // its own: the row reads as one line you can type into.
     if (s.command_name_edit && GetFocus() != s.command_name_edit) {
         const app::CustomCommand* command = Selected(s);
         const std::wstring wanted = command ? command->name : std::wstring();
@@ -218,6 +234,12 @@ bool CommandsPageTextChanged(AppState& s, HWND edit) {
         if (app::CustomCommand* command = Selected(s)) command->name = buffer;
     } else {
         s.command_value = buffer;
+        // In-row editing: the value goes straight into the selected step, so
+        // there is no 更新 step to forget.
+        if (app::CustomCommand* command = Selected(s)) {
+            if (s.command_step_sel >= 0 && s.command_step_sel < static_cast<int>(command->steps.size()))
+                command->steps[static_cast<size_t>(s.command_step_sel)].value = buffer;
+        }
     }
     s.customCommands.Save();
     InvalidateRect(s.hwnd, nullptr, FALSE);
@@ -270,6 +292,14 @@ void CommandsPageAction(AppState& s, ui::HitTestResult::Region region, int index
         break;
     case R::SettingsCommandKind:
         s.command_kind = index;
+        // The chips edit the selected step directly; with none selected they
+        // set the kind the next 添加步骤 will use.
+        if (command && s.command_step_sel >= 0 &&
+            s.command_step_sel < static_cast<int>(command->steps.size())) {
+            command->steps[static_cast<size_t>(s.command_step_sel)].kind =
+                static_cast<app::CommandStepKind>(std::clamp(index, 0, 3));
+            s.customCommands.Save();
+        }
         break;
     case R::SettingsCommandAddStep:
         if (command) {

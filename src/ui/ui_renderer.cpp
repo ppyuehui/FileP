@@ -362,11 +362,11 @@ D2D1_RECT_F MainRenderer::SettingsContentRect(const WindowViewModel& vm, const D
 }
 
 void MainRenderer::SettingsCommandFields(const WindowViewModel& vm, const D2D1_RECT_F& rect,
-                                         D2D1_RECT_F* name_field, D2D1_RECT_F* value_field) const {
+                                         D2D1_RECT_F* name_field, D2D1_RECT_F* step_field) const {
     const SettingsLayout lay = MakeSettingsLayout(vm, rect, scale_, title_bar_height_, status_height_,
                                                   &painter_);
     if (name_field) *name_field = lay.cmd_name_field;
-    if (value_field) *value_field = lay.cmd_value_field;
+    if (step_field) *step_field = lay.cmd_step_edit;
 }
 
 D2D1_RECT_F MainRenderer::SidebarToggleRect(float w) const {
