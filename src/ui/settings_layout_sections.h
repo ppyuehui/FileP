@@ -278,7 +278,11 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         cursor += 30*scale;
         l.cmd_row_count = 0;
         for (int i = 0; i < (command_rows > 0 ? command_rows : 1); ++i) {
-            l.cmd_row[l.cmd_row_count++] = D2D1::RectF(l.cmd_list.left, cursor, l.cmd_list.right, cursor + 44*scale);
+            const D2D1_RECT_F row_rect(l.cmd_list.left, cursor, l.cmd_list.right, cursor + 44*scale);
+            const int at = l.cmd_row_count++;
+            l.cmd_row[at] = row_rect;
+            l.cmd_row_delete[at] = D2D1::RectF(row_rect.right - 36*scale, row_rect.top + 8*scale,
+                                               row_rect.right - 8*scale, row_rect.bottom - 8*scale);
             cursor += 44*scale;
         }
         cursor += 8*scale;
@@ -306,7 +310,16 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         l.cmd_step_count = 0;
         l.cmd_step_edit = D2D1::RectF();
         for (int i = 0; i < (step_rows > 0 ? step_rows : 1); ++i) {
-            l.cmd_step_row[l.cmd_step_count++] = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 42*scale);
+            const D2D1_RECT_F step_rect(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 42*scale);
+            const int at = l.cmd_step_count++;
+            l.cmd_step_row[at] = step_rect;
+            const float mid = (step_rect.top + step_rect.bottom) * 0.5f;
+            l.cmd_step_delete[at] = D2D1::RectF(step_rect.right - 32*scale, mid - 12*scale,
+                                                step_rect.right - 8*scale, mid + 12*scale);
+            l.cmd_step_down[at] = D2D1::RectF(step_rect.right - 60*scale, mid - 12*scale,
+                                              step_rect.right - 36*scale, mid + 12*scale);
+            l.cmd_step_up[at] = D2D1::RectF(step_rect.right - 88*scale, mid - 12*scale,
+                                            step_rect.right - 64*scale, mid + 12*scale);
             ry += 42*scale;
         }
         if (vm.command_step_selected >= 0 && vm.command_step_selected < l.cmd_step_count) {
@@ -333,20 +346,7 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         // 将执行：一句话摘要，小号次要色，排在编辑区下面。
         l.cmd_summary = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 26*scale);
         ry += 26*scale;
-        l.cmd_step_buttons = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 40*scale);
-        {
-            float x = l.cmd_step_buttons.left;
-            const auto place = [&](l10n::StringId id, float fallback) {
-                const float bw = button_w(id, fallback) + 8*scale;
-                const D2D1_RECT_F r(x, l.cmd_step_buttons.top, x + bw, l.cmd_step_buttons.bottom);
-                x += bw + 8*scale;
-                return r;
-            };
-            l.cmd_update = place(I::CmdUpdateStep, 68);
-            l.cmd_up = place(I::CmdStepUp, 68);
-            l.cmd_down = place(I::CmdStepDown, 68);
-            l.cmd_del_step = place(I::CmdStepDelete, 92);
-        }
+
     } else if (page == 11) {
         section(I::SettingsIntegration);
         end_group();   // the integration card is laid out and drawn on its own

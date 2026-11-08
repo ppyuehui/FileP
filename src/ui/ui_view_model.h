@@ -1517,6 +1517,10 @@ struct HitTestResult {
         SettingsCommandUp,
         SettingsCommandDown,
         SettingsCommandDeleteStep,
+        SettingsCommandDeleteAt,      // ✕ on a command row (index = row)
+        SettingsCommandStepUpAt,      // ↑ / ↓ / ✕ on a step row (index = row)
+        SettingsCommandStepDownAt,
+        SettingsCommandStepDeleteAt,
         SettingsBlankClick,
         SettingsHomeFolder,
         SettingsLanCache,  // 发现结果保留: 0 10 min, 1 1 h, 2 this session

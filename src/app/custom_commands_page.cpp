@@ -284,6 +284,37 @@ void CommandsPageAction(AppState& s, ui::HitTestResult::Region region, int index
             s.customCommands.Save();
         }
         break;
+    case R::SettingsCommandDeleteAt: {
+        // ✕ on a command row: no need to select it first.
+        auto& list = s.customCommands.commands;
+        if (index >= 0 && index < static_cast<int>(list.size())) {
+            list.erase(list.begin() + index);
+            if (s.command_sel >= static_cast<int>(list.size())) s.command_sel = static_cast<int>(list.size()) - 1;
+            if (s.command_sel < 0 && !list.empty()) s.command_sel = 0;
+            s.command_step_sel = -1;
+            s.command_value.clear();
+            s.customCommands.Save();
+        }
+        break;
+    }
+    case R::SettingsCommandStepUpAt:
+    case R::SettingsCommandStepDownAt:
+    case R::SettingsCommandStepDeleteAt: {
+        if (!command) break;
+        auto& steps = command->steps;
+        if (index < 0 || index >= static_cast<int>(steps.size())) break;
+        if (region_id == R::SettingsCommandStepDeleteAt) {
+            steps.erase(steps.begin() + index);
+            if (s.command_step_sel >= static_cast<int>(steps.size())) s.command_step_sel = static_cast<int>(steps.size()) - 1;
+        } else {
+            const int to = region_id == R::SettingsCommandStepUpAt ? index - 1 : index + 1;
+            if (to < 0 || to >= static_cast<int>(steps.size())) break;
+            std::swap(steps[static_cast<size_t>(index)], steps[static_cast<size_t>(to)]);
+            s.command_step_sel = to;
+        }
+        s.customCommands.Save();
+        break;
+    }
     case R::SettingsCommandPlaces:
         if (command) {
             if (index == 0) command->toolbar = !command->toolbar;

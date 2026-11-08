@@ -2594,10 +2594,12 @@ struct SettingsLayout {
     D2D1_RECT_F cmd_name_label{}, cmd_name_row{}, cmd_name_field{};
     D2D1_RECT_F cmd_value_label{}, cmd_value_field{};
     D2D1_RECT_F cmd_row[12]{};
+    D2D1_RECT_F cmd_row_delete[12]{};   // ✕ at the row's right edge
     int cmd_row_count = 0;
     D2D1_RECT_F cmd_buttons{};
     D2D1_RECT_F cmd_new{}, cmd_delete{};
     D2D1_RECT_F cmd_step_row[12]{};
+    D2D1_RECT_F cmd_step_up[12]{}, cmd_step_down[12]{}, cmd_step_delete[12]{};
     int cmd_step_count = 0;
     D2D1_RECT_F cmd_kind_row{}, cmd_kind[4]{};
     D2D1_RECT_F cmd_value_row{};

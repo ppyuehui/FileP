@@ -639,8 +639,22 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
                 painter_.DrawText(vm.command_names[i],D2D1::RectF(r.left+16*scale_,r.top,r.right-120*scale_,r.bottom),
                     compositor_->TextFormat(),theme.text);
                 const std::wstring count=std::to_wstring(vm.command_step_counts[i]);
-                painter_.DrawText(count,D2D1::RectF(r.left,r.top,r.right-16*scale_,r.bottom),
-                    compositor_->SmallFormat(),theme.text_secondary,fluent::HorizontalAlignment::Right);
+                const bool show_delete = i == vm.command_selected || IsHovered(vm, H::SettingsCommandRow, i);
+                painter_.DrawText(count, D2D1::RectF(r.left, r.top, r.right - (show_delete ? 44*scale_ : 16*scale_), r.bottom),
+                    compositor_->SmallFormat(), theme.text_secondary, fluent::HorizontalAlignment::Right);
+                if (show_delete) {
+                    if (IsHovered(vm, H::SettingsCommandDeleteAt, i)) {
+                        MakeBrush(dc, theme.fill_hover, brFillHover_);
+                        FillRoundedRect(dc, brFillHover_.get(), lay.cmd_row_delete[i].left,
+                                        lay.cmd_row_delete[i].top,
+                                        lay.cmd_row_delete[i].right - lay.cmd_row_delete[i].left,
+                                        lay.cmd_row_delete[i].bottom - lay.cmd_row_delete[i].top, 4*scale_);
+                    }
+                    DrawIconText(lay.cmd_row_delete[i].left, lay.cmd_row_delete[i].top,
+                                 lay.cmd_row_delete[i].right - lay.cmd_row_delete[i].left,
+                                 lay.cmd_row_delete[i].bottom - lay.cmd_row_delete[i].top,
+                                 L"\xE711", L"x", theme.text_secondary, 0.8f);
+                }
             }
             button(lay.cmd_new,l10n::Get(I::CmdNew),H::SettingsCommandNew,0,true,true);
             button(lay.cmd_delete,l10n::Get(I::CmdDelete),H::SettingsCommandDelete,0,false,has_cmd);
@@ -669,10 +683,29 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
                         D2D1::RectF(r.left + 16*scale_, r.top, r.left + 148*scale_, r.bottom),
                         compositor_->TextFormat(), theme.text);
                 }
+                const bool row_hot = i == vm.command_step_selected || IsHovered(vm, H::SettingsCommandStep, i);
                 if (i != vm.command_step_selected) {
                     painter_.DrawText(vm.command_step_values[i],
-                        D2D1::RectF(r.left + 158*scale_, r.top, r.right - 16*scale_, r.bottom),
+                        D2D1::RectF(r.left + 158*scale_, r.top, r.right - (row_hot ? 100*scale_ : 16*scale_), r.bottom),
                         compositor_->TextFormat(), theme.text);
+                }
+                if (row_hot) {
+                    const struct { const D2D1_RECT_F* rc; const wchar_t* glyph; H::Region region; bool enabled; } kTools[] = {
+                        {&lay.cmd_step_up[i], L"\xE70E", H::SettingsCommandStepUpAt, i > 0},
+                        {&lay.cmd_step_down[i], L"\xE70D", H::SettingsCommandStepDownAt,
+                         i + 1 < static_cast<int>(vm.command_step_values.size())},
+                        {&lay.cmd_step_delete[i], L"\xE711", H::SettingsCommandStepDeleteAt, true},
+                    };
+                    for (const auto& tool : kTools) {
+                        if (IsHovered(vm, tool.region, i)) {
+                            MakeBrush(dc, theme.fill_hover, brFillHover_);
+                            FillRoundedRect(dc, brFillHover_.get(), tool.rc->left, tool.rc->top,
+                                            tool.rc->right - tool.rc->left, tool.rc->bottom - tool.rc->top, 4*scale_);
+                        }
+                        DrawIconText(tool.rc->left, tool.rc->top, tool.rc->right - tool.rc->left,
+                                     tool.rc->bottom - tool.rc->top, tool.glyph, L"",
+                                     tool.enabled ? theme.text_secondary : WithAlpha(theme.text_secondary, 0.3f), 0.78f);
+                    }
                 }
             }
             painter_.DrawText(l10n::Get(I::CmdKindTitle), D2D1::RectF(
@@ -704,9 +737,6 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
                 painter_.DrawText(summary, lay.cmd_summary, compositor_->SmallFormat(),
                                   theme.text_secondary);
             }
-            button(lay.cmd_up,l10n::Get(I::CmdStepUp),H::SettingsCommandUp,0,false,has_step);
-            button(lay.cmd_down,l10n::Get(I::CmdStepDown),H::SettingsCommandDown,0,false,has_step);
-            button(lay.cmd_del_step,l10n::Get(I::CmdStepDelete),H::SettingsCommandDeleteStep,0,false,has_step);
         }
         if(page==9) {
         const I density[]={I::SettingsDensityCompact,I::SettingsDensityStandard,I::SettingsDensityRoomy};const int heights[]={28,34,40};

@@ -295,14 +295,25 @@ HitTestResult MainRenderer::HitTest(const WindowViewModel& vm, const D2D1_RECT_F
                 if(ContainsPt(lay.cmd_new,x,y)) {r.region=HitTestResult::SettingsCommandNew;r.index=0;return r;}
                 if(ContainsPt(lay.cmd_delete,x,y)) {r.region=HitTestResult::SettingsCommandDelete;r.index=0;return r;}
                 if(ContainsPt(lay.cmd_add,x,y)) {r.region=HitTestResult::SettingsCommandAddStep;r.index=0;return r;}
-                if(ContainsPt(lay.cmd_update,x,y)) {r.region=HitTestResult::SettingsCommandUpdateStep;r.index=0;return r;}
-                if(ContainsPt(lay.cmd_up,x,y)) {r.region=HitTestResult::SettingsCommandUp;r.index=0;return r;}
-                if(ContainsPt(lay.cmd_down,x,y)) {r.region=HitTestResult::SettingsCommandDown;r.index=0;return r;}
-                if(ContainsPt(lay.cmd_del_step,x,y)) {r.region=HitTestResult::SettingsCommandDeleteStep;r.index=0;return r;}
+                for (int i = 0; i < lay.cmd_row_count; ++i)
+                    if (ContainsPt(lay.cmd_row_delete[i], x, y)) {
+                        r.region = HitTestResult::SettingsCommandDeleteAt; r.index = i; return r;
+                    }
                 for (int i = 0; i < lay.cmd_row_count; ++i)
                     if (ContainsPt(lay.cmd_row[i], x, y)) {
                         r.region = HitTestResult::SettingsCommandRow; r.index = i; return r;
                     }
+                for (int i = 0; i < lay.cmd_step_count; ++i) {
+                    if (ContainsPt(lay.cmd_step_delete[i], x, y)) {
+                        r.region = HitTestResult::SettingsCommandStepDeleteAt; r.index = i; return r;
+                    }
+                    if (ContainsPt(lay.cmd_step_up[i], x, y)) {
+                        r.region = HitTestResult::SettingsCommandStepUpAt; r.index = i; return r;
+                    }
+                    if (ContainsPt(lay.cmd_step_down[i], x, y)) {
+                        r.region = HitTestResult::SettingsCommandStepDownAt; r.index = i; return r;
+                    }
+                }
                 for (int i = 0; i < lay.cmd_step_count; ++i)
                     if (ContainsPt(lay.cmd_step_row[i], x, y)) {
                         r.region = HitTestResult::SettingsCommandStep; r.index = i; return r;
