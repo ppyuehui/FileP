@@ -1632,7 +1632,11 @@ void DispatchMenuCommand(AppState& s, int cmd) {
         cmd < app::CmdToolbarToolBase + static_cast<int>(app::kToolbarToolCount)) {
         const size_t tool = static_cast<size_t>(cmd - app::CmdToolbarToolBase);
         if (app::kToolbarToolIds[tool] == L"split") ShowSplitDropdown(s);
-        else FlipToolbarTool(s, tool);
+        else if (app::kToolbarToolIds[tool] == L"split_two") {
+            // 左右双栏: one click straight to the layout; a second click folds it.
+            ApplyLayoutPreset(s, LayoutOf(s) == app::LayoutPreset::TwoVertical
+                ? app::LayoutPreset::Single : app::LayoutPreset::TwoVertical);
+        } else FlipToolbarTool(s, tool);
         return;
     }
     if (cmd == app::CmdManageAliases) {
@@ -2977,6 +2981,7 @@ constexpr ToolbarToolDef kToolbarTools[] = {
     {app::CmdCompressZip, L"\xF012", l10n::StringId::ToolbarToolZip, L"", false},
     {app::CmdToggleFolderSizes, L"\xEDA2", l10n::StringId::ToolbarToolFolderSizes, L"", true},
     {0, L"\xE7C3", l10n::StringId::ToolbarToolExtensions, L"", true},
+    {0, L"\xE89F", l10n::StringId::LayoutVertical, L"Ctrl+Alt+2", false},
 };
 static_assert(std::size(kToolbarTools) == app::kToolbarToolCount, "one catalog row per toolbar_tools.h id");
 
@@ -4644,7 +4649,7 @@ static int ToolbarToolSection(std::wstring_view id) {
                                    L"paste", L"rename", L"delete", L"new_md", L"zip"})
         if (id == file) return 0;
     if (id == L"select_all" || id == L"invert" || id == L"select_wild") return 1;
-    for (std::wstring_view pane : {L"sidebar", L"split", L"details", L"columns", L"apply_all", L"recent"})
+    for (std::wstring_view pane : {L"sidebar", L"split", L"split_two", L"details", L"columns", L"apply_all", L"recent"})
         if (id == pane) return 3;
     for (std::wstring_view more : {L"terminal", L"search_all", L"adv_search", L"recycle", L"map_drive",
                                    L"shortcuts", L"settings"})
@@ -4658,7 +4663,7 @@ static std::vector<size_t> ToolbarPinsOrder(const AppState& s) {
     static constexpr std::wstring_view kCatalogOrder[] = {
         L"cut", L"copy", L"paste", L"rename", L"delete", L"undo", L"new_text", L"new_md", L"copy_path",
         L"properties", L"zip", L"select_all", L"invert", L"select_wild", L"hidden", L"protected", L"extensions", L"folder_size", L"compact",
-        L"zebra", L"size_bar", L"smart_date", L"outline", L"theme", L"split", L"details", L"columns",
+        L"zebra", L"size_bar", L"smart_date", L"outline", L"theme", L"split", L"split_two", L"details", L"columns",
         L"sidebar", L"apply_all", L"recent", L"terminal", L"search_all", L"adv_search", L"recycle",
         L"map_drive", L"shortcuts", L"settings"};
     static_assert(std::size(kCatalogOrder) == app::kToolbarToolCount, "every tool has a place");

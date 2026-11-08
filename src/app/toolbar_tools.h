@@ -32,6 +32,8 @@ inline constexpr std::wstring_view kToolbarToolIds[] = {
     L"zip", L"folder_size",
     // The 文件扩展名 switch.
     L"extensions",
+    // 左右双栏: one click straight to the side-by-side layout (no split menu).
+    L"split_two",
 };
 inline constexpr size_t kToolbarToolCount = std::size(kToolbarToolIds);
 inline constexpr size_t kLegacyToolbarPins = 5;
