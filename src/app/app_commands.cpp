@@ -2184,6 +2184,18 @@ void AppendCloudPinCommands(const app::Tab& tab, std::vector<ui::FluentMenuItem>
 }
 } // namespace
 
+// 自定义命令 in the context menus: one row per command, but only where that
+// command says it shows (设置 → 自定义命令 → 出现位置). A command with 工具栏 only
+// stays off both menus; no commands at all leaves the menu untouched.
+void AppendCustomCommandRows(AppState& s, std::vector<ui::FluentMenuItem>& items, bool on_folder) {
+    const auto& commands = s.customCommands.commands;
+    for (size_t i = 0; i < commands.size() && i < 100; ++i) {
+        const app::CustomCommand& command = commands[i];
+        if (command.name.empty() || !command.ListedFor(on_folder)) continue;
+        items.push_back(VerbRow(static_cast<int>(app::CmdCustomCommandBase + i), command.name, L"\xE756"));
+    }
+}
+
 std::vector<ui::FluentMenuItem> BuildFinderItemMenu(
         AppState& s, bool can_undo, const std::wstring& undo_label) {
     if (IsRecycleTab(ActiveTab(s)))
@@ -2200,6 +2212,8 @@ std::vector<ui::FluentMenuItem> BuildFinderItemMenu(
     }
     std::vector<ui::FluentMenuItem> items = app::BuildItemMenu(can_undo, undo_label, folder);
 
+    // 自定义命令 that ask for 右键文件夹 ride along with the folder verbs.
+    if (folder) AppendCustomCommandRows(s, items, true);
     if (const auto* tab = ActiveTab(s))
         app::AppendRecentChangesCommand(items, app::RecentChangesMenuPath(*tab, false));
     ApplyWorkspacePinLabel(items, s);
@@ -2905,6 +2919,8 @@ void ShowBackgroundContextMenu(AppState& s, POINT screen_pt) {
     const std::wstring git_root = tab->git_root;
     if (view_options.filesystem) AppendGitMenu(*tab, base_items);
 
+    // 自定义命令 that ask for 右键空白处.
+    AppendCustomCommandRows(s, base_items, false);
     s.context_menu.OpenMenu(std::move(base_items));
     auto display = ExplorerMenu(s, s.context_menu.base_items());
 
