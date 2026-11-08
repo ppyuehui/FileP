@@ -1915,7 +1915,13 @@ void DispatchMenuCommand(AppState& s, int cmd) {
         s.renderer.SetDetailsPanelVisible(s.showDetailsPanel, true);
         break;
     case app::CmdLayoutSingle: ApplyLayoutPreset(s, app::LayoutPreset::Single); break;
-    case app::CmdLayoutTwoVertical: ApplyLayoutPreset(s, app::LayoutPreset::TwoVertical); break;
+    case app::CmdLayoutTwoVertical:
+        // 左右分屏 as a switch (the toolbar button): side by side, and the next
+        // call folds back to one pane. The pane count is what the window
+        // actually shows, so the switch cannot disagree with the screen.
+        ApplyLayoutPreset(s, LiveLayout(s).VisiblePanes().size() > 1
+            ? app::LayoutPreset::Single : app::LayoutPreset::TwoVertical);
+        break;
     case app::CmdLayoutTwoHorizontal: ApplyLayoutPreset(s, app::LayoutPreset::TwoHorizontal); break;
     case app::CmdLayoutThree: ApplyLayoutPreset(s, app::LayoutPreset::Three); break;
     case app::CmdLayoutFourGrid: ApplyLayoutPreset(s, app::LayoutPreset::FourGrid); break;
@@ -4558,6 +4564,12 @@ std::vector<ui::SelectionChipAction> ToolbarPinActions(AppState& s) {
         action.glyph = def.glyph;
         action.label = l10n::Get(def.label);
         if (const auto key = app::ShownShortcut(def.shortcut); !key.empty()) action.label += L" (" + key + L")";
+        if (app::kToolbarToolIds[tool] == L"split_two") {
+            // 左右分屏: lit (accent) while the window is side by side.
+            action.checked = LiveLayout(s).VisiblePanes().size() > 1;
+            out.push_back(std::move(action));
+            continue;
+        }
         if (def.toggle) {
             action.checked = ToolbarToggleOn(s, static_cast<size_t>(tool));
             out.push_back(std::move(action));
