@@ -252,8 +252,11 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         // 自定义命令: a settings form — name, the three places, the command list,
         // then the selected command's steps.
         section(I::SettingsPageCommands);
-        l.cmd_name_row = row(64);
-        l.cmd_name_field = choice(l.cmd_name_row, narrow ? (right - left) * 0.5f : 420.0f);
+        // 表单式：标题一行，下面整行是输入框（输入框太窄或太靠右都难找）。
+        l.cmd_name_label = row(30);
+        l.cmd_name_row = row(56);
+        l.cmd_name_field = D2D1::RectF(left + 16*scale, l.cmd_name_row.top + 6*scale,
+                                       right - 16*scale, l.cmd_name_row.bottom - 6*scale);
         l.cmd_toolbar_row = row(56);
         l.cmd_folder_row = row(56);
         l.cmd_background_row = row(56);
@@ -282,8 +285,10 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         }
         l.cmd_kind_row = row(56);
         segments(l.cmd_kind_row, l.cmd_kind, 4, narrow ? 320.0f : 400.0f);
-        l.cmd_value_row = row(64);
-        l.cmd_value_field = choice(l.cmd_value_row, narrow ? (right - left) * 0.5f : 420.0f);
+        l.cmd_value_label = row(30);
+        l.cmd_value_row = row(56);
+        l.cmd_value_field = D2D1::RectF(left + 16*scale, l.cmd_value_row.top + 6*scale,
+                                        right - 16*scale, l.cmd_value_row.bottom - 6*scale);
         l.cmd_step_buttons = row(52);
         {
             const float mid = (l.cmd_step_buttons.top + l.cmd_step_buttons.bottom) * 0.5f;

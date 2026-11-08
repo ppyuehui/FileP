@@ -1222,6 +1222,8 @@ struct WindowViewModel {
     bool command_toolbar = false;
     bool command_folder = false;
     bool command_background = false;
+    bool command_name_focused = false;    // the field that has the caret
+    bool command_value_focused = false;
     bool settings_list_size_bar = false;
     bool settings_list_tag_names = false;
     bool settings_list_selection_outline = false;

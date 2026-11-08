@@ -2583,7 +2583,8 @@ struct SettingsLayout {
     D2D1_RECT_F menu_acrylic_row{};
     D2D1_RECT_F show_ai_row{};
     // 自定义命令 page (14): the editor's rows.
-    D2D1_RECT_F cmd_name_row{}, cmd_name_field{};
+    D2D1_RECT_F cmd_name_label{}, cmd_name_row{}, cmd_name_field{};
+    D2D1_RECT_F cmd_value_label{}, cmd_value_field{};
     D2D1_RECT_F cmd_toolbar_row{}, cmd_folder_row{}, cmd_background_row{};
     D2D1_RECT_F cmd_row[12]{};
     int cmd_row_count = 0;
@@ -2592,7 +2593,7 @@ struct SettingsLayout {
     D2D1_RECT_F cmd_step_row[12]{};
     int cmd_step_count = 0;
     D2D1_RECT_F cmd_kind_row{}, cmd_kind[4]{};
-    D2D1_RECT_F cmd_value_row{}, cmd_value_field{};
+    D2D1_RECT_F cmd_value_row{};
     D2D1_RECT_F cmd_step_buttons{};
     D2D1_RECT_F cmd_add{}, cmd_update{}, cmd_up{}, cmd_down{}, cmd_del_step{};
     D2D1_RECT_F density_card{};

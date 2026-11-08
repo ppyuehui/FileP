@@ -3764,6 +3764,20 @@ int ShotModeMain(AppState& state, HWND hwnd) {
             Render(state);   // the snapshot reads the frame before the last Present
         }
         StageLinkPillShot(state);
+        if (state.shot_settings_page >= 0) {
+            // --shot-settings <page>: put Settings on that page right before the
+            // snapshot (the restored session may have activated another tab).
+            OpenSettingsTab(state, state.shot_settings_page);
+            for (int i = 0; i < 6; ++i) {
+                Render(state);
+                MSG settings_msg{};
+                while (PeekMessageW(&settings_msg, nullptr, 0, 0, PM_REMOVE)) {
+                    TranslateMessage(&settings_msg);
+                    DispatchMessageW(&settings_msg);
+                }
+                Sleep(30);
+            }
+        }
         if (state.shot_run_command > 0) {
             // --shot-run <command id>: a toolbar / menu command, then a frame
             // to show what it did.

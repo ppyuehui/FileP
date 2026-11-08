@@ -581,8 +581,17 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
                 vm.command_selected < static_cast<int>(vm.command_names.size());
             const bool has_step = vm.command_step_selected >= 0 &&
                 vm.command_step_selected < static_cast<int>(vm.command_step_texts.size());
-            // 名称: the value itself is the native edit parked over this row.
-            label(lay.cmd_name_row,l10n::Get(I::CmdName),L"",L"\xE932",lay.cmd_name_field.left-12*scale_);
+            // 名称 / 值: a drawn field frame, with the native edit sitting inside
+            // it (the frame's border is what makes the box readable as a field).
+            {
+                fluent::ControlState name_st{};
+                name_st.focused = vm.command_name_focused;
+                painter_.DrawTextFieldFrame(lay.cmd_name_field, name_st, true);
+                fluent::ControlState value_st{};
+                value_st.focused = vm.command_value_focused;
+                painter_.DrawTextFieldFrame(lay.cmd_value_field, value_st, true);
+            }
+            label(lay.cmd_name_label,l10n::Get(I::CmdName),L"",L"\xE932");
             // 出现位置: three check boxes, disabled without a command.
             const auto place=[&](D2D1_RECT_F r,I title,bool on,H::Region region,int index) {
                 if(r.bottom<=r.top) return;
@@ -651,7 +660,7 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
             static constexpr int kKindValues[]={0,1,2,3};
             segmented(lay.cmd_kind_row,lay.cmd_kind,kKinds,kKindValues,vm.command_kind,
                       H::SettingsCommandKind,I::CmdKindTitle,I::CmdKindDesc,4,L"\xE7C3");
-            label(lay.cmd_value_row,l10n::Get(I::CmdValue),L"",L"\xE8AC",lay.cmd_value_field.left-12*scale_);
+            label(lay.cmd_value_label,l10n::Get(I::CmdValue),L"",L"\xE8AC");
             button(lay.cmd_add,l10n::Get(I::CmdAddStep),H::SettingsCommandAddStep,0,true,has_cmd);
             button(lay.cmd_update,l10n::Get(I::CmdUpdateStep),H::SettingsCommandUpdateStep,0,false,has_step);
             button(lay.cmd_up,l10n::Get(I::CmdStepUp),H::SettingsCommandUp,0,false,has_step);

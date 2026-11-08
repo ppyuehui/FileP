@@ -132,8 +132,18 @@ void SyncCommandsPage(AppState& s, const ui::WindowViewModel& vm) {
         if (s.command_value_edit) ShowWindow(s.command_value_edit, SW_HIDE);
         return;
     }
-    if (!s.command_name_edit) s.command_name_edit = MakeEdit(s.hwnd, kNameEditId, s);
-    if (!s.command_value_edit) s.command_value_edit = MakeEdit(s.hwnd, kValueEditId, s);
+    if (!s.command_name_edit) {
+        s.command_name_edit = MakeEdit(s.hwnd, kNameEditId, s);
+        // Grey hint inside the empty field (static string: the control keeps the
+        // pointer, so it must outlive the page).
+        SendMessageW(s.command_name_edit, EM_SETCUEBANNER, TRUE,
+                     reinterpret_cast<LPARAM>(L"输入命令名称"));
+    }
+    if (!s.command_value_edit) {
+        s.command_value_edit = MakeEdit(s.hwnd, kValueEditId, s);
+        SendMessageW(s.command_value_edit, EM_SETCUEBANNER, TRUE,
+                     reinterpret_cast<LPARAM>(L"文件夹名 / 文件名 / 命令行"));
+    }
     RECT client{};
     GetClientRect(s.hwnd, &client);
     D2D1_RECT_F name_rc{}, value_rc{};
@@ -144,18 +154,29 @@ void SyncCommandsPage(AppState& s, const ui::WindowViewModel& vm) {
     // would float over the header / status bar.
     const D2D1_RECT_F column = s.renderer.SettingsContentRect(
         vm, D2D1::RectF(0.0f, 0.0f, static_cast<float>(client.right), static_cast<float>(client.bottom)));
+    // The drawn frame is the field; the native edit sits inside its border.
+    const float pad_x = 10.0f * s.scale;
+    const float line = 28.0f * s.scale;
     const auto place = [&](HWND edit, const D2D1_RECT_F& rc) {
         if (!edit) return;
-        const int w = static_cast<int>(rc.right - rc.left), h = static_cast<int>(rc.bottom - rc.top);
-        if (w <= 0 || h <= 0 || rc.top < column.top || rc.bottom > column.bottom) {
+        if (rc.right - rc.left <= 2 * pad_x || rc.bottom <= rc.top ||
+            rc.top < column.top || rc.bottom > column.bottom) {
             ShowWindow(edit, SW_HIDE);
             return;
         }
-        SetWindowPos(edit, HWND_TOP, static_cast<int>(rc.left), static_cast<int>(rc.top),
-                     w - 2, h - 2, SWP_SHOWWINDOW | SWP_NOACTIVATE);
+        const float mid = (rc.top + rc.bottom) * 0.5f;
+        const int x = static_cast<int>(rc.left + pad_x);
+        const int y = static_cast<int>(mid - line * 0.5f);
+        const int w = static_cast<int>(rc.right - rc.left - 2 * pad_x);
+        SetWindowPos(edit, HWND_TOP, x, y, w, static_cast<int>(line),
+                     SWP_SHOWWINDOW | SWP_NOACTIVATE);
     };
     place(s.command_name_edit, name_rc);
     place(s.command_value_edit, value_rc);
+    // The page draws the frame; it lights up while its field has the caret.
+    const HWND focus = GetFocus();
+    const_cast<ui::WindowViewModel&>(vm).command_name_focused = focus && focus == s.command_name_edit;
+    const_cast<ui::WindowViewModel&>(vm).command_value_focused = focus && focus == s.command_value_edit;
     // Text: the selected command's name and the step value being typed.
     if (s.command_name_edit && GetFocus() != s.command_name_edit) {
         const app::CustomCommand* command = Selected(s);
