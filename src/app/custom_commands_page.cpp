@@ -7,6 +7,7 @@
 #include "../ui/ui_renderer.h"
 #include "../ui/ui_view_model.h"
 #include "../ui/settings_page_ids.h"
+#include "../ui/edit_host.h"
 #include "app_commands.h"
 #include "app_navigation.h"
 
@@ -61,12 +62,12 @@ void ClampSelection(AppState& s) {
 }
 
 HWND MakeEdit(HWND parent, int id) {
-    // A popup, owned by the main window: the DirectComposition surface paints
-    // over child windows, so the fields sit on top of it like the rename field.
-    HWND edit = CreateWindowExW(WS_EX_TOOLWINDOW, L"EDIT", L"", WS_POPUP | ES_AUTOHSCROLL, 0, 0, 10, 10,
-                                parent, reinterpret_cast<HMENU>(static_cast<INT_PTR>(id)),
-                                GetModuleHandleW(nullptr), nullptr);
+    // A redirected child surface: plain child windows sit behind the
+    // DirectComposition surface, so the fields use the same host as the
+    // rename / address editors (ui::edit_host.h).
+    HWND edit = ui::CreateRedirectedChildEdit(parent);
     if (!edit) return nullptr;
+    SetWindowLongPtrW(edit, GWLP_ID, id);
     SetWindowTheme(edit, L"", L"");
     SendMessageW(edit, WM_SETFONT, reinterpret_cast<WPARAM>(GetStockObject(DEFAULT_GUI_FONT)), TRUE);
     return edit;
@@ -130,10 +131,8 @@ void SyncCommandsPage(AppState& s, const ui::WindowViewModel& vm) {
         if (!edit) return;
         const int w = static_cast<int>(rc.right - rc.left), h = static_cast<int>(rc.bottom - rc.top);
         if (w <= 0 || h <= 0) { ShowWindow(edit, SW_HIDE); return; }
-        POINT at{static_cast<LONG>(rc.left), static_cast<LONG>(rc.top)};
-        ClientToScreen(s.hwnd, &at);
-        SetWindowPos(edit, HWND_TOP, at.x, at.y, w - 2, h - 2,
-                     SWP_SHOWWINDOW | SWP_NOACTIVATE);
+        SetWindowPos(edit, HWND_TOP, static_cast<int>(rc.left), static_cast<int>(rc.top),
+                     w - 2, h - 2, SWP_SHOWWINDOW | SWP_NOACTIVATE);
     };
     place(s.command_name_edit, name_rc);
     place(s.command_value_edit, value_rc);
