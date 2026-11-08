@@ -11,7 +11,9 @@ namespace pulse::ui {
 
 inline constexpr float kFavoritesBarHeightDip = 34.0f;
 // Narrower than this (the toolbar's width, DIP): icons only.
-inline constexpr float kFavoritesBarIconOnlyBelowDip = 820.0f;
+// Longest icon-only threshold: labels stay until the row is genuinely cramped
+// (two folders used to turn into icons on a half-screen window with room to spare).
+inline constexpr float kFavoritesBarIconOnlyBelowDip = 320.0f;
 
 struct FavoritesBarLayout {
     std::vector<D2D1_RECT_F> items;  // one per favorite; empty rect: folded into »
