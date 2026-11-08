@@ -120,6 +120,7 @@ void FillCommandsPage(AppState& s, ui::WindowViewModel& vm) {
     vm.command_step_counts.clear();
     vm.command_step_texts.clear();
     vm.command_step_values.clear();
+    vm.command_step_prefixes.clear();
     for (const auto& command : s.customCommands.commands) {
         vm.command_names.push_back(command.name.empty() ? l10n::Get(I::SettingsPageCommands) : command.name);
         std::wstring places;
@@ -139,6 +140,7 @@ void FillCommandsPage(AppState& s, ui::WindowViewModel& vm) {
         for (size_t i = 0; i < command->steps.size(); ++i) {
             vm.command_step_texts.push_back(StepText(command->steps[i], static_cast<int>(i)));
             vm.command_step_values.push_back(command->steps[i].value);
+            vm.command_step_prefixes.push_back(std::to_wstring(i + 1) + L". " + KindName(command->steps[i].kind));
         }
     }
 }

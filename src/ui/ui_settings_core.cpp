@@ -663,10 +663,15 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
                         compositor_->SmallFormat(),theme.text_secondary);
                     continue;
                 }
-                // 选中那一行的值由输入框盖着，不重复画字。
+                // 序号与类型始终画出来；选中那一行的「值」由输入框盖着。
+                if (i < static_cast<int>(vm.command_step_prefixes.size())) {
+                    painter_.DrawText(vm.command_step_prefixes[i],
+                        D2D1::RectF(r.left + 16*scale_, r.top, r.left + 148*scale_, r.bottom),
+                        compositor_->TextFormat(), theme.text);
+                }
                 if (i != vm.command_step_selected) {
-                    painter_.DrawText(vm.command_step_texts[i],
-                        D2D1::RectF(r.left + 16*scale_, r.top, r.right - 16*scale_, r.bottom),
+                    painter_.DrawText(vm.command_step_values[i],
+                        D2D1::RectF(r.left + 158*scale_, r.top, r.right - 16*scale_, r.bottom),
                         compositor_->TextFormat(), theme.text);
                 }
             }

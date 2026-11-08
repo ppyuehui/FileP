@@ -311,8 +311,12 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         }
         if (vm.command_step_selected >= 0 && vm.command_step_selected < l.cmd_step_count) {
             const D2D1_RECT_F& step_rect = l.cmd_step_row[vm.command_step_selected];
+            // A field, not a bar across the row: it grows with the text only up
+            // to a sensible width.
+            const float edit_right = (std::min)(step_rect.right - 40*scale,
+                                                step_rect.left + 150*scale + 520*scale);
             l.cmd_step_edit = D2D1::RectF(step_rect.left + 150*scale, step_rect.top + 6*scale,
-                                          step_rect.right - 40*scale, step_rect.bottom - 6*scale);
+                                          edit_right, step_rect.bottom - 6*scale);
         }
         ry += 8*scale;
         l.cmd_kind_row = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 62*scale);

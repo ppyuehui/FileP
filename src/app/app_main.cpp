@@ -1,5 +1,6 @@
 #include "app_diagnostics.h"
 #include "custom_commands_page.h"
+#include "../ui/settings_page_ids.h"
 #include "partial_redraw.h"
 #include "git_ui.h"
 #include "mtime_hint_prefs.h"
@@ -3768,6 +3769,12 @@ int ShotModeMain(AppState& state, HWND hwnd) {
             // --shot-settings <page>: put Settings on that page right before the
             // snapshot (the restored session may have activated another tab).
             OpenSettingsTab(state, state.shot_settings_page);
+            if (state.shot_settings_page == ui::kSettingsPageCommands) {
+                // Select the first command and step, so the shot shows the row
+                // being edited (--shot only; a normal run starts unselected).
+                state.command_sel = 0;
+                state.command_step_sel = 0;
+            }
             for (int i = 0; i < 6; ++i) {
                 Render(state);
                 MSG settings_msg{};
