@@ -38,14 +38,14 @@ ReleaseNotes	IDS_RELEASE_NOTES	2060	更新说明	What's new	更新說明
 ReleaseNotesDesc	IDS_RELEASE_NOTES_DESC	2061	每个版本的改进与修复，点击版本号展开	Improvements and fixes in each version. Click a version to expand it.	每個版本的改進與修復，點選版本號展開
 ReleaseCurrent	IDS_RELEASE_CURRENT	2062	当前版本	Current	目前版本
 ReleaseAll	IDS_RELEASE_ALL	2063	查看全部版本	All releases	檢視全部版本
-UpdatedTitleFormat	IDS_UPDATED_TITLE_FORMAT	2064	Pulse 已更新到 %s	Pulse was updated to %s	Pulse 已更新到 %s
+UpdatedTitleFormat	IDS_UPDATED_TITLE_FORMAT	2064	FileP 已更新到 %s	FileP was updated to %s	FileP 已更新到 %s
 UpdatedClick	IDS_UPDATED_CLICK	2065	点击查看本次更新内容	Click to see what changed	點選檢視本次更新內容
 CopiedShort	IDS_COPIED_SHORT	2066	已复制	Copied	已複製
 SettingsWinE	IDS_SETTINGS_WIN_E	2067	Win + E 和任务栏图标	Win + E and the taskbar icon	Win + E 和工作列圖示
 SettingsWinEDesc	IDS_SETTINGS_WIN_E_DESC	2068	按 Win + E，或点任务栏上的文件资源管理器图标时	When you press Win + E or click File Explorer on the taskbar	按 Win + E，或點工作列上的檔案總管圖示時
 SettingsShellTags	IDS_SETTINGS_SHELL_TAGS	2069	在资源管理器右键菜单中打标签	Tag from the File Explorer context menu	在檔案總管右鍵選單中打標籤
-SettingsShellTagsDesc	IDS_SETTINGS_SHELL_TAGS_DESC	2070	右键文件或文件夹 → 显示更多选项 → Pulse 标签（Shift+右键可直接出现）	Right-click a file or folder, Show more options, Pulse tags (Shift+right-click shows it directly)	右鍵檔案或資料夾 → 顯示更多選項 → Pulse 標籤（Shift+右鍵可直接出現）
-ShellTagMenu	IDS_SHELL_TAG_MENU	2071	Pulse 标签	Pulse tags	Pulse 標籤
+SettingsShellTagsDesc	IDS_SETTINGS_SHELL_TAGS_DESC	2070	右键文件或文件夹 → 显示更多选项 → FileP 标签（Shift+右键可直接出现）	Right-click a file or folder, Show more options, FileP tags (Shift+right-click shows it directly)	右鍵檔案或資料夾 → 顯示更多選項 → FileP 標籤（Shift+右鍵可直接出現）
+ShellTagMenu	IDS_SHELL_TAG_MENU	2071	FileP 标签	FileP tags	FileP 標籤
 ShellTagAdded	IDS_SHELL_TAG_ADDED	2072	已添加「%s」到 %d 项	Added "%s" to %d items	已新增「%s」到 %d 項
 ShellTagRemoved	IDS_SHELL_TAG_REMOVED	2073	已移除「%s」（%d 项）	Removed "%s" from %d items	已移除「%s」（%d 項）
 ListTagNameColor	IDS_LIST_TAG_NAME_COLOR	2074	文件名使用标签颜色	Tag-colored names	檔名使用標籤顏色
@@ -161,7 +161,7 @@ ContentCoverageHint	IDS_SEARCH_UI_1838	1838	仅搜索已加入索引的文件夹
 ContentManageShort	IDS_SEARCH_UI_1839	1839	管理索引	Manage index	管理索引
 SearchChooseScope	IDS_SEARCH_ENH_33	1833	选择搜索文件夹…	Choose search folder…	選擇搜尋資料夾…
 SettingsChangeTracking	IDS_SETTINGS_CHANGE_TRACKING	1720	文件夹最近变化	Recent folder changes	資料夾最近變化
-SettingsChangeTrackingDesc	IDS_SETTINGS_CHANGE_TRACKING_DESC	1721	默认关闭；开启后开始记录，保留 7 天；Pulse 关闭期间不记录	Off by default. Records after enabling; keeps 7 days. Pauses while Pulse is closed.	預設關閉；開啟後開始記錄，保留 7 天；Pulse 關閉期間不記錄
+SettingsChangeTrackingDesc	IDS_SETTINGS_CHANGE_TRACKING_DESC	1721	默认关闭；开启后开始记录，保留 7 天；FileP 关闭期间不记录	Off by default. Records after enabling; keeps 7 days. Pauses while FileP is closed.	預設關閉；開啟後開始記錄，保留 7 天；FileP 關閉期間不記錄
 SettingsChangeDays	IDS_SETTINGS_CHANGE_DAYS	1722	变化显示范围	Show changes from	變化顯示範圍
 ChangeTitle	IDS_CHANGE_TITLE	1723	文件夹最近变化	Recent folder changes	資料夾最近變化
 ChangeView	IDS_CHANGE_VIEW	1724	查看文件夹最近变化	View recent folder changes	檢視資料夾最近變化
@@ -181,7 +181,7 @@ ChangeMovedOut	IDS_CHANGE_MOVED_OUT	1737	移出	Moved out	移出
 ChangeInitialMtime	IDS_CHANGE_INITIAL_MTIME	1738	初始修改时间线索	Initial modification-time hint	初始修改時間線索
 ChangeGap	IDS_CHANGE_GAP	1739	追踪曾中断	Tracking interrupted	追蹤曾中斷
 ChangeGapDesc	IDS_CHANGE_GAP_DESC	1748	部分时段未能记录变化\n已记录的变化仍可查看	Changes may have been missed\nwhile tracking was stopped.\nSaved changes remain available.	部分時段未能記錄變化\n已記錄的變化仍可檢視
-ChangeScope	IDS_CHANGE_SCOPE	1749	仅显示 Pulse 已记录的变化，关闭期间的变化不包含在内。	Only changes recorded by Pulse are shown. Changes made while Pulse was closed are not included.	僅顯示 Pulse 已記錄的變化，關閉期間的變化不包含在內。
+ChangeScope	IDS_CHANGE_SCOPE	1749	仅显示 FileP 已记录的变化，关闭期间的变化不包含在内。	Only changes recorded by FileP are shown. Changes made while FileP was closed are not included.	僅顯示 FileP 已記錄的變化，關閉期間的變化不包含在內。
 ChangeNoRecords	IDS_CHANGE_NO_RECORDS	1750	此范围内暂无已记录的变化	No recorded changes in this range	此範圍內暫無已記錄的變化
 ChangeReadFailed	IDS_CHANGE_READ_FAILED	1751	暂时无法读取变化记录，请稍后重试	Cannot read change records right now. Please try again later.	暫時無法讀取變化記錄，請稍後重試
 ChangeRefreshFailed	IDS_CHANGE_REFRESH_FAILED	1752	暂时无法更新，当前显示上次读取的变化记录	Cannot update right now. Previously loaded change records are shown.	暫時無法更新，目前顯示上次讀取的變化記錄
@@ -227,7 +227,7 @@ SettingsBlankClickOff	IDS_SETTINGS_BLANK_CLICK_OFF	1479	不操作	Nothing	不操
 Settings	IDS_SETTINGS	1000	设置	Settings	設定
 SettingsGeneral	IDS_SETTINGS_GENERAL	1001	通用	General	通用
 SettingsSearchIndex	IDS_SETTINGS_SEARCH_INDEX	1002	搜索与索引	Search & indexing	搜尋與索引
-SettingsContextMenu	IDS_SETTINGS_CONTEXT_MENU	1003	Pulse 右键菜单	Pulse context menu	Pulse 右鍵選單
+SettingsContextMenu	IDS_SETTINGS_CONTEXT_MENU	1003	FileP 右键菜单	FileP context menu	FileP 右鍵選單
 SettingsAppearance	IDS_SETTINGS_APPEARANCE	1004	外观	Appearance	外觀
 SettingsThemeColor	IDS_SETTINGS_THEME_COLOR	1005	主题色	Accent color	主題色
 SettingsThemeColorDesc	IDS_SETTINGS_THEME_COLOR_DESC	1006	点选色点；中间白点跟随 Windows	Choose a color; the center follows Windows	點選色點；中間白點跟隨 Windows
@@ -248,7 +248,7 @@ TrayIconSmall	IDS_TRAY_ICON_SMALL	1020	小（40 像素）	Small (40 pixels)	小�
 TrayIconStandard	IDS_TRAY_ICON_STANDARD	1021	标准（48 像素）	Standard (48 pixels)	標準（48 像素）
 TrayIconLarge	IDS_TRAY_ICON_LARGE	1022	大（56 像素）	Large (56 pixels)	大（56 像素）
 SettingsLanguage	IDS_SETTINGS_LANGUAGE	1023	显示语言	Display language	顯示語言
-SettingsLanguageDesc	IDS_SETTINGS_LANGUAGE_DESC	1024	默认跟随 Windows，也可以为 Pulse 单独选择	Follow Windows or choose a language for Pulse	預設跟隨 Windows，也可以為 Pulse 單獨選擇
+SettingsLanguageDesc	IDS_SETTINGS_LANGUAGE_DESC	1024	默认跟随 Windows，也可以为 FileP 单独选择	Follow Windows or choose a language for FileP	預設跟隨 Windows，也可以為 FileP 單獨選擇
 LanguageSystem	IDS_LANGUAGE_SYSTEM	1025	跟随系统	Use system setting	跟隨系統
 LanguageZhCN	IDS_LANGUAGE_ZH_CN	1026	简体中文	简体中文	簡體中文
 LanguageZhTW	IDS_LANGUAGE_ZH_TW	2448	繁體中文	繁體中文	繁體中文
@@ -259,13 +259,13 @@ ChooseImage	IDS_CHOOSE_IMAGE	1030	选择图片	Choose image	選擇圖片
 Clear	IDS_CLEAR	1031	清除	Clear	清除
 SettingsStartupShutdown	IDS_SETTINGS_STARTUP_SHUTDOWN	1032	启动与关闭	Startup & shutdown	啟動與關閉
 SettingsLaunch	IDS_SETTINGS_LAUNCH	1033	开机自启	Launch at sign-in	開機自啟
-SettingsLaunchDesc	IDS_SETTINGS_LAUNCH_DESC	1034	登录 Windows 后自动打开 Pulse	Open Pulse automatically after signing in to Windows	登入 Windows 後自動開啟 Pulse
+SettingsLaunchDesc	IDS_SETTINGS_LAUNCH_DESC	1034	登录 Windows 后自动打开 FileP	Open FileP automatically after signing in to Windows	登入 Windows 後自動開啟 FileP
 SettingsKeepRunning	IDS_SETTINGS_KEEP_RUNNING	1035	关闭后继续运行	Keep running after close	關閉後繼續執行
 SettingsKeepRunningDesc	IDS_SETTINGS_KEEP_RUNNING_DESC	1036	点关闭时缩到托盘，复制等任务继续	Close to the tray so file operations can continue	點關閉時縮到系統匣，複製等任務繼續
 SettingsStartInTray	IDS_SETTINGS_START_IN_TRAY	1477	开机自启时隐藏到托盘	Start in the tray at sign-in	開機自啟時隱藏到系統匣
-SettingsStartInTrayDesc	IDS_SETTINGS_START_IN_TRAY_DESC	1478	随 Windows 启动时不弹出窗口，点托盘图标再打开	When Pulse opens at sign-in, stay in the tray until you click its icon	隨 Windows 啟動時不彈出視窗，點系統匣圖示再開啟
-SettingsOpenFolders	IDS_SETTINGS_OPEN_FOLDERS	1037	默认用 Pulse 打开文件夹	Open folders with Pulse by default	預設用 Pulse 開啟資料夾
-SettingsOpenFoldersDesc	IDS_SETTINGS_OPEN_FOLDERS_DESC	1038	接管文件夹和磁盘的双击打开	Double-click folders and drives to open in Pulse	接管資料夾和磁碟的按兩下開啟
+SettingsStartInTrayDesc	IDS_SETTINGS_START_IN_TRAY_DESC	1478	随 Windows 启动时不弹出窗口，点托盘图标再打开	When FileP opens at sign-in, stay in the tray until you click its icon	隨 Windows 啟動時不彈出視窗，點系統匣圖示再開啟
+SettingsOpenFolders	IDS_SETTINGS_OPEN_FOLDERS	1037	默认用 FileP 打开文件夹	Open folders with FileP by default	預設用 FileP 開啟資料夾
+SettingsOpenFoldersDesc	IDS_SETTINGS_OPEN_FOLDERS_DESC	1038	接管文件夹和磁盘的双击打开	Double-click folders and drives to open in FileP	接管資料夾和磁碟的按兩下開啟
 QuickPreview	IDS_QUICK_PREVIEW	1039	快速预览	Quick Look	快速預覽
 PreviewCloudOnly	IDS_PREVIEW_CLOUD_ONLY	1040	此文件仅在云端可用。快速预览不会自动下载。	This file is online-only. Quick Look will not download it.	此檔案僅在雲端可用。快速預覽不會自動下載。
 PreviewLoading	IDS_PREVIEW_LOADING	1041	正在加载预览...	Loading preview...	正在載入預覽...
@@ -399,7 +399,7 @@ NoExcludedFoldersDesc	IDS_NO_EXCLUDED_FOLDERS_DESC	1162	尚未排除文件夹，
 Remove	IDS_REMOVE	1163	移除	Remove	移除
 ServerFolders	IDS_SERVER_FOLDERS	1164	服务器文件夹	Server folders	伺服器資料夾
 Rescan	IDS_RESCAN	1165	重新扫描	Rescan	重新掃描
-NoServerFoldersDesc	IDS_NO_SERVER_FOLDERS_DESC	1166	尚未添加。可索引服务器共享中所选文件夹下的全部文件。	None added. Pulse can index all files below selected server folders.	尚未新增。可索引伺服器共用中所選資料夾下的全部檔案。
+NoServerFoldersDesc	IDS_NO_SERVER_FOLDERS_DESC	1166	尚未添加。可索引服务器共享中所选文件夹下的全部文件。	None added. FileP can index all files below selected server folders.	尚未新增。可索引伺服器共用中所選資料夾下的全部檔案。
 ContextMenuDesc	IDS_CONTEXT_MENU_DESC	1167	选择融合区显示哪些 Explorer 动词。改动在下次右键生效。	Choose which Explorer verbs appear in the merged menu. Changes apply next time.	選擇融合區顯示哪些 Explorer 動詞。改動在下次右鍵生效。
 ContextSoftware	IDS_CONTEXT_SOFTWARE	1168	软件功能	Software features	軟體功能
 ContextOpenWith	IDS_CONTEXT_OPEN_WITH	1169	打开方式	Open with	開啟方式
@@ -520,7 +520,7 @@ RemovableDisk	IDS_REMOVABLE_DISK	1279	移动磁盘	Removable drive	卸除式磁�
 FixedDisk	IDS_FIXED_DISK	1280	固定磁盘	Fixed drive	固定磁碟
 PerformanceFormat	IDS_PERFORMANCE_FORMAT	1281	DEV  %.2f ms  %.0f FPS  ·  枚举 %.1f ms  ·  排序 %.1f ms  ·  CPU %.1f%%  ·  %.1f MB	DEV  %.2f ms  %.0f FPS  ·  Enumerate %.1f ms  ·  Sort %.1f ms  ·  CPU %.1f%%  ·  %.1f MB	DEV  %.2f ms  %.0f FPS  ·  列舉 %.1f ms  ·  排序 %.1f ms  ·  CPU %.1f%%  ·  %.1f MB
 SettingsAboutDiagnostics	IDS_SETTINGS_ABOUT_DIAGNOSTICS	1282	关于与诊断	About & diagnostics	關於與診斷
-AboutPulse	IDS_ABOUT_PULSE	1283	关于 Pulse	About Pulse	關於 Pulse
+AboutPulse	IDS_ABOUT_PULSE	1283	关于 FileP	About FileP	關於 FileP
 VersionFormat	IDS_VERSION_FORMAT	1284	版本 %s	Version %s	版本 %s
 BuildIdFormat	IDS_BUILD_ID_FORMAT	1285	构建 ID：%s	Build ID: %s	組建 ID：%s
 Diagnostics	IDS_DIAGNOSTICS	1286	诊断	Diagnostics	診斷
@@ -528,7 +528,7 @@ DiagnosticsDesc	IDS_DIAGNOSTICS_DESC	1287	崩溃转储仅保存在本机，除�
 OpenDiagnostics	IDS_OPEN_DIAGNOSTICS	1288	打开目录	Open folder	開啟目錄
 ClearDiagnostics	IDS_CLEAR_DIAGNOSTICS	1289	清除诊断	Clear diagnostics	清除診斷
 ExportDiagnostics	IDS_EXPORT_DIAGNOSTICS	1290	导出诊断	Export diagnostics	匯出診斷
-DiagnosticsClearConfirm	IDS_DIAGNOSTICS_CLEAR_CONFIRM	1291	确定清除本机 Pulse 崩溃诊断吗？	Clear local Pulse crash diagnostics?	確定清除本機 Pulse 當機診斷嗎？
+DiagnosticsClearConfirm	IDS_DIAGNOSTICS_CLEAR_CONFIRM	1291	确定清除本机 FileP 崩溃诊断吗？	Clear local FileP crash diagnostics?	確定清除本機 FileP 當機診斷嗎？
 DiagnosticsPrivacyTitle	IDS_DIAGNOSTICS_PRIVACY_TITLE	1292	导出诊断	Export diagnostics	匯出診斷
 DiagnosticsPrivacyMessage	IDS_DIAGNOSTICS_PRIVACY_MESSAGE	1293	转储可能包含内存片段、文件名或其他私人信息。仅在你信任接收方时导出。继续吗？	Dumps may contain memory fragments, file names, or other private information. Export only to a recipient you trust. Continue?	傾印可能包含記憶體片段、檔名或其他私人資訊。僅在你信任接收方時匯出。繼續嗎？
 DiagnosticsIncludeService	IDS_DIAGNOSTICS_INCLUDE_SERVICE	1294	是否同时导出索引服务诊断？选择“同时导出”将仅为本次复制请求管理员授权。	Also export index-service diagnostics? Choosing Include service requests administrator access for this copy only.	是否同時匯出索引服務診斷？選擇「同時匯出」將僅為本次複製請求管理員授權。
@@ -539,8 +539,8 @@ UpdateDesc	IDS_UPDATE_DESC	1298	自动检查更新，点击一次即可更新并
 CheckForUpdates	IDS_CHECK_FOR_UPDATES	1299	检查更新	Check for updates	檢查更新
 CheckingUpdates	IDS_CHECKING_UPDATES	1300	正在检查更新...	Checking for updates...	正在檢查更新...
 UpdateDisabled	IDS_UPDATE_DISABLED	1301	当前构建未配置签名更新服务	Signed update service is not configured in this build	目前組建未設定簽名更新服務
-UpdateUpToDate	IDS_UPDATE_UP_TO_DATE	1302	已是最新版本	Pulse is up to date	已是最新版本
-UpdateAvailableFormat	IDS_UPDATE_AVAILABLE_FORMAT	1303	Pulse %s 可用	Pulse %s is available	Pulse %s 可用
+UpdateUpToDate	IDS_UPDATE_UP_TO_DATE	1302	已是最新版本	FileP is up to date	已是最新版本
+UpdateAvailableFormat	IDS_UPDATE_AVAILABLE_FORMAT	1303	FileP %s 可用	FileP %s is available	FileP %s 可用
 UpdateFailed	IDS_UPDATE_FAILED	1304	更新清单验证或下载失败	The update manifest could not be downloaded or verified	更新清單驗證或下載失敗
 UpdateUnsupportedWindows	IDS_UPDATE_UNSUPPORTED_WINDOWS	1305	新版本不支持当前 Windows 构建	The new release does not support this Windows build	新版本不支援目前 Windows 組建
 DownloadUpdate	IDS_DOWNLOAD_UPDATE	1306	更新并重启	Update and restart	更新並重新啟動
@@ -570,7 +570,7 @@ FolderSortMixed	IDS_FOLDER_SORT_MIXED	2011	不优先	Mixed	不優先
 SettingsHomeFolder	IDS_SETTINGS_HOME_FOLDER	2361	默认位置	Default location	預設位置
 SettingsHomeFolderPick	IDS_SETTINGS_HOME_FOLDER_PICK	2362	选择文件夹…	Choose folder…	選擇資料夾…
 SettingsHomeFolderTitle	IDS_SETTINGS_HOME_FOLDER_TITLE	2363	选择默认位置	Choose the default location	選擇預設位置
-SettingsStartupOpen	IDS_SETTINGS_STARTUP_OPEN	2364	启动时打开	When Pulse starts	啟動時開啟
+SettingsStartupOpen	IDS_SETTINGS_STARTUP_OPEN	2364	启动时打开	When FileP starts	啟動時開啟
 SettingsStartupOpenDesc	IDS_SETTINGS_STARTUP_OPEN_DESC	2365	恢复上次关闭时的标签页，或只打开默认位置	Reopen the tabs from last time, or only the default location	恢復上次關閉時的分頁，或只開啟預設位置
 StartupOpenLastTabs	IDS_STARTUP_OPEN_LAST_TABS	2366	上次的标签页	Last tabs	上次的分頁
 OpenDefaultLocation	IDS_OPEN_DEFAULT_LOCATION	2367	默认位置	Default location	預設位置
@@ -724,21 +724,21 @@ HelpNextPane	IDS_HELP_NEXT_PANE	2396	在文件栏之间切换	Move between panes
 HelpMarkTarget	IDS_HELP_MARK_TARGET	2397	设为目标栏	Set as the target pane	設為目標欄
 HelpTransferTarget	IDS_HELP_TRANSFER_TARGET	2398	复制 / 移动到目标栏	Copy / move to the target pane	複製 / 移動到目標欄
 HelpMoveFocus	IDS_HELP_MOVE_FOCUS	2399	移动焦点（Shift 扩选）	Move focus (Shift selects)	移動焦點（Shift 擴選）
-ContextBuiltin	IDS_CONTEXT_BUILTIN	2400	Pulse 自带项	Pulse commands	Pulse 自帶項
-ContextBuiltinDesc	IDS_CONTEXT_BUILTIN_DESC	2401	Pulse 自己的右键命令和文件行按钮	Pulse's own menu commands and row buttons	Pulse 自己的右鍵命令和檔案行按鈕
+ContextBuiltin	IDS_CONTEXT_BUILTIN	2400	FileP 自带项	FileP commands	FileP 自帶項
+ContextBuiltinDesc	IDS_CONTEXT_BUILTIN_DESC	2401	FileP 自己的右键命令和文件行按钮	FileP's own menu commands and row buttons	FileP 自己的右鍵命令和檔案行按鈕
 ContextBuiltinTags	IDS_CONTEXT_BUILTIN_TAGS	2402	标签（色块和“标签...”）	Tags (swatches and Tags...)	標籤（色塊和「標籤...」）
 ContextBuiltinSelect	IDS_CONTEXT_BUILTIN_SELECT	2403	全选 / 反选 / 按通配符选择	Select all / Invert / Select by pattern	全選 / 反向選取 / 按萬用字元選擇
 ContextRowNewTab	IDS_CONTEXT_ROW_NEW_TAB	2404	文件行按钮：在新标签页打开	Row button: Open in new tab	檔案行按鈕：在新分頁開啟
 ContextRowStar	IDS_CONTEXT_ROW_STAR	2405	文件行按钮：收藏	Row button: Star	檔案行按鈕：收藏
 ContextRowMore	IDS_CONTEXT_ROW_MORE	2406	文件行按钮：更多操作	Row button: More actions	檔案行按鈕：更多操作
-GlobalSearchHandoff	IDS_GLOBAL_SEARCH_HANDOFF	2410	在主界面搜索	Search in Pulse	在主介面搜尋
+GlobalSearchHandoff	IDS_GLOBAL_SEARCH_HANDOFF	2410	在主界面搜索	Search in FileP	在主介面搜尋
 GlobalSearchTruncatedShort	IDS_GLOBAL_SEARCH_TRUNCATED_SHORT	2411	仅显示前 200 个	First 200 shown	僅顯示前 200 個
 ConfirmMoreItemsFormat	IDS_CONFIRM_MORE_ITEMS_FORMAT	2420	还有 %zu 项	%zu more	還有 %zu 項
 RecycleDeleteConfirmFormat	IDS_RECYCLE_DELETE_CONFIRM_FORMAT	2421	选中的 %zu 项将从回收站中永久删除，无法还原。	The %zu selected items will be removed from the Recycle Bin for good. This can't be undone.	選取的 %zu 項將從資源回收筒中永久刪除，無法還原。
 PermanentDeleteOne	IDS_PERMANENT_DELETE_ONE	2422	此项目不会进入回收站，删除后无法还原。	This item skips the Recycle Bin and can't be restored.	此項目不會進入資源回收筒，刪除後無法還原。
 PermanentDeleteManyFormat	IDS_PERMANENT_DELETE_MANY_FORMAT	2423	这 %zu 个项目不会进入回收站，删除后无法还原。	These %zu items skip the Recycle Bin and can't be restored.	這 %zu 個項目不會進入資源回收筒，刪除後無法還原。
 DiagnosticsIncludeServiceYes	IDS_DIAGNOSTICS_INCLUDE_SERVICE_YES	2424	同时导出	Include service	同時匯出
-DiagnosticsIncludeServiceNo	IDS_DIAGNOSTICS_INCLUDE_SERVICE_NO	2425	只导出 Pulse	Pulse only	只匯出 Pulse
+DiagnosticsIncludeServiceNo	IDS_DIAGNOSTICS_INCLUDE_SERVICE_NO	2425	只导出 FileP	FileP only	只匯出 FileP
 ConfirmContinue	IDS_CONFIRM_CONTINUE	2426	继续	Continue	繼續
 RecoveryRetry	IDS_RECOVERY_RETRY	2427	重试	Retry	重試
 RecoveryDiscard	IDS_RECOVERY_DISCARD	2428	放弃	Discard	放棄
@@ -786,8 +786,8 @@ SettingsWallpaperBlurDesc	IDS_SETTINGS_WALLPAPER_BLUR_DESC	2018	模糊背景图�
 WallpaperBlurOff	IDS_WALLPAPER_BLUR_OFF	2019	关闭	Off	關閉
 WallpaperBlurLight	IDS_WALLPAPER_BLUR_LIGHT	2020	轻度	Light	輕度
 WallpaperBlurStrong	IDS_WALLPAPER_BLUR_STRONG	2021	强	Strong	強
-InstallingUpdate	IDS_INSTALLING_UPDATE	1451	正在静默更新，完成后会自动重新打开并恢复标签页。	Updating silently. Pulse will reopen and restore your tabs automatically.	正在無訊息更新，完成後會自動重新開啟並還原分頁。
-UpdateClickToInstall	IDS_UPDATE_CLICK_TO_INSTALL	1447	点击更新并重启：下载校验后等待任务完成，自动安装并恢复工作现场。	Click to update and restart. Pulse will verify the download, wait for tasks, and restore your workspace.	點選更新並重新啟動：下載驗證後等待工作完成，自動安裝並還原工作環境。
+InstallingUpdate	IDS_INSTALLING_UPDATE	1451	正在静默更新，完成后会自动重新打开并恢复标签页。	Updating silently. FileP will reopen and restore your tabs automatically.	正在無訊息更新，完成後會自動重新開啟並還原分頁。
+UpdateClickToInstall	IDS_UPDATE_CLICK_TO_INSTALL	1447	点击更新并重启：下载校验后等待任务完成，自动安装并恢复工作现场。	Click to update and restart. FileP will verify the download, wait for tasks, and restore your workspace.	點選更新並重新啟動：下載驗證後等待工作完成，自動安裝並還原工作環境。
 UpdateInstallFailed	IDS_UPDATE_INSTALL_FAILED	1448	安装包下载、校验或启动失败，请重试。	Could not download, verify, or start the installer. Please retry.	安裝檔下載、驗證或啟動失敗，請重試。
 UpdateCancelled	IDS_UPDATE_CANCELLED	1449	已取消更新，可以稍后重试。	Update cancelled. You can retry later.	已取消更新，可以稍後重試。
 UpdateBusy	IDS_UPDATE_BUSY	1450	请等待文件操作或索引迁移完成后，再点击下载安装。	Wait for file operations or index migration to finish, then retry.	請等待檔案操作或索引遷移完成後，再點選下載安裝。
@@ -1025,7 +1025,7 @@ SettingsAborted	IDS_SETTINGS_ABORTED	1669	设置操作异常终止。	The settin
 SettingsServiceStartError	IDS_SETTINGS_SERVICE_START_ERROR	1670	无法安装或启动 PulseIndex 服务。若刚覆盖安装，请查看 C:\\ProgramData\\Pulse\\index-service.log。	Could not install or start PulseIndex. After reinstalling, check C:\\ProgramData\\Pulse\\index-service.log.	無法安裝或啟動 PulseIndex 服務。若剛覆蓋安裝，請檢視 C:\\ProgramData\\Pulse\\index-service.log。
 SettingsServiceError	IDS_SETTINGS_SERVICE_ERROR	1671	无法安装或启动索引服务。管理员授权可能已取消，或服务启动后异常退出。	Could not install or start the indexing service. Administrator approval may have been cancelled, or the service stopped unexpectedly.	無法安裝或啟動索引服務。管理員授權可能已取消，或服務啟動後異常退出。
 // The configured index folder holds non-Pulse entries, so the service will not use it.
-SettingsIndexDirNotPrivate	IDS_SETTINGS_INDEX_DIR_NOT_PRIVATE	2535	索引位置里有不属于 Pulse 的文件或链接，为保护隐私，索引服务不会使用它。请在「索引位置」中改选一个空文件夹。	The index location contains files or links that are not Pulse's, so the indexing service will not use it, to protect your privacy. Choose an empty folder under Index location.	索引位置中有不屬於 Pulse 的檔案或連結，為保護隱私，索引服務不會使用它。請在「索引位置」中改選一個空資料夾。
+SettingsIndexDirNotPrivate	IDS_SETTINGS_INDEX_DIR_NOT_PRIVATE	2535	索引位置里有不属于 FileP 的文件或链接，为保护隐私，索引服务不会使用它。请在「索引位置」中改选一个空文件夹。	The index location contains files or links that are not FileP's, so the indexing service will not use it, to protect your privacy. Choose an empty folder under Index location.	索引位置中有不屬於 FileP 的檔案或連結，為保護隱私，索引服務不會使用它。請在「索引位置」中改選一個空資料夾。
 // Settings > Search and index: built-in system folder exclusions.
 SettingsSystemFolders	IDS_SETTINGS_SYSTEM_FOLDERS	2536	排除系统文件夹	Exclude system folders	排除系統資料夾
 SettingsSystemFoldersDesc	IDS_SETTINGS_SYSTEM_FOLDERS_DESC	2537	Windows 系统目录、临时文件、旧版 Windows 等不进入全盘索引	Keeps the Windows folder, temporary files, previous Windows installations and similar folders out of the index	Windows 系統目錄、暫存檔、舊版 Windows 等不進入全機索引
@@ -1045,8 +1045,8 @@ HelpContextMenu	IDS_HELP_CONTEXT_MENU	2574	打开右键菜单	Open the context m
 SettingsSystemFoldersTip	IDS_SETTINGS_SYSTEM_FOLDERS_TIP	2546	只影响搜索，文件夹照常浏览	Affects search only; you can still browse these folders	只影響搜尋，資料夾照常瀏覽
 ContextActionStrip	IDS_CONTEXT_ACTION_STRIP	2547	剪切 · 复制 · 删除 · 重命名	Cut · Copy · Delete · Rename	剪下 · 複製 · 刪除 · 重新命名
 ContextFolderProperties	IDS_CONTEXT_FOLDER_PROPERTIES	2548	属性（当前文件夹）	Properties (current folder)	內容（目前資料夾）
-ContextPulseMenu	IDS_CONTEXT_PULSE_MENU	2549	Pulse 菜单	Pulse menu	Pulse 選單
-ContextPulseMenuDesc	IDS_CONTEXT_PULSE_MENU_DESC	2550	选择 Pulse 自己的右键菜单显示哪些项	Choose which of Pulse's own menu items to show	選擇 Pulse 自己的右鍵選單顯示哪些項目
+ContextPulseMenu	IDS_CONTEXT_PULSE_MENU	2549	FileP 菜单	FileP menu	FileP 選單
+ContextPulseMenuDesc	IDS_CONTEXT_PULSE_MENU_DESC	2550	选择 FileP 自己的右键菜单显示哪些项	Choose which of FileP's own menu items to show	選擇 FileP 自己的右鍵選單顯示哪些項目
 ContextTabItem	IDS_CONTEXT_TAB_ITEM	2551	选中文件时	On a file	選取檔案時
 ContextTabBackground	IDS_CONTEXT_TAB_BACKGROUND	2552	空白处	Blank area	空白處
 ContextTabRow	IDS_CONTEXT_TAB_ROW	2553	文件行按钮	Row buttons	檔案列按鈕
@@ -1108,47 +1108,47 @@ ShellPreview	IDS_EXTRA_SHELLPREVIEW	1570	预览	Preview	預覽
 ShellRunAs	IDS_EXTRA_SHELLRUNAS	1571	以管理员身份运行	Run as administrator	以系統管理員身分執行
 ShellOpenWith	IDS_EXTRA_SHELLOPENWITH	1572	打开方式…	Open with…	開啟方式…
 ShellOpenApp	IDS_SHELL_OPEN_APP	1573	用 {app} 打开	Open with {app}	用 {app} 開啟
-SettingsDefaultManager	IDS_SETTINGS_DEFAULT_MANAGER	1480	设为默认文件管理器	Make Pulse the default file manager	設為預設檔案管理器
+SettingsDefaultManager	IDS_SETTINGS_DEFAULT_MANAGER	1480	设为默认文件管理器	Make FileP the default file manager	設為預設檔案管理器
 SettingsIntegration	IDS_SETTINGS_INTEGRATION	2460	默认文件管理器	Default file manager	預設檔案管理器
-IntegrationMasterDesc	IDS_INTEGRATION_MASTER_DESC	2461	平时打开文件夹都会用 Pulse，不再弹出文件资源管理器。关掉开关，一切恢复成 Windows 原样。	Folders you open anywhere in Windows show up in Pulse instead of File Explorer. Turn it off to put everything back the way Windows had it.	平常開啟資料夾都會用 Pulse，不再跳出檔案總管。關掉開關，一切恢復成 Windows 原樣。
-IntegrationScope	IDS_INTEGRATION_SCOPE	2462	这些现在都用 Pulse 打开	These open in Pulse now	這些現在都用 Pulse 開啟
-IntegrationScopeDesc	IDS_INTEGRATION_SCOPE_DESC	2463	开启后，这些都会用 Pulse 打开	When on, these open in Pulse	開啟後，這些都會用 Pulse 開啟
+IntegrationMasterDesc	IDS_INTEGRATION_MASTER_DESC	2461	平时打开文件夹都会用 FileP，不再弹出文件资源管理器。关掉开关，一切恢复成 Windows 原样。	Folders you open anywhere in Windows show up in FileP instead of File Explorer. Turn it off to put everything back the way Windows had it.	平常開啟資料夾都會用 FileP，不再跳出檔案總管。關掉開關，一切恢復成 Windows 原樣。
+IntegrationScope	IDS_INTEGRATION_SCOPE	2462	这些现在都用 FileP 打开	These open in FileP now	這些現在都用 FileP 開啟
+IntegrationScopeDesc	IDS_INTEGRATION_SCOPE_DESC	2463	开启后，这些都会用 FileP 打开	When on, these open in FileP	開啟後，這些都會用 FileP 開啟
 IntegrationFolders	IDS_INTEGRATION_FOLDERS	2464	双击文件夹和磁盘	Double-clicking folders and drives	按兩下資料夾和磁碟
 IntegrationFoldersDesc	IDS_INTEGRATION_FOLDERS_DESC	2465	在桌面等位置双击文件夹或磁盘时	When you double-click a folder or drive, for example on the desktop	在桌面等位置按兩下資料夾或磁碟時
 IntegrationExperimental	IDS_INTEGRATION_EXPERIMENTAL	2466	其他软件打开的文件夹	Folders opened by other apps	其他軟體開啟的資料夾
-IntegrationExperimentalDesc	IDS_INTEGRATION_EXPERIMENTAL_DESC	2467	例如浏览器下载完成后点「在文件夹中显示」。只在 Pulse 运行时有效，按住 Shift 可以留在资源管理器。	For example “Show in folder” after a download. Works only while Pulse is running; hold Shift to stay in File Explorer.	例如瀏覽器下載完成後點「在資料夾中顯示」。只在 Pulse 執行時有效，按住 Shift 可以留在檔案總管。
+IntegrationExperimentalDesc	IDS_INTEGRATION_EXPERIMENTAL_DESC	2467	例如浏览器下载完成后点「在文件夹中显示」。只在 FileP 运行时有效，按住 Shift 可以留在资源管理器。	For example “Show in folder” after a download. Works only while FileP is running; hold Shift to stay in File Explorer.	例如瀏覽器下載完成後點「在資料夾中顯示」。只在 FileP 執行時有效，按住 Shift 可以留在檔案總管。
 IntegrationOff	IDS_INTEGRATION_OFF	2468	未开启	Off	未開啟
 IntegrationOn	IDS_INTEGRATION_ON	2469	已开启	On	已開啟
 IntegrationPartial	IDS_INTEGRATION_PARTIAL	2470	需要处理	Needs attention	需要處理
 IntegrationFailed	IDS_INTEGRATION_FAILED	2471	没有设置成功	Not applied	沒有設定成功
 IntegrationInactiveHint	IDS_INTEGRATION_INACTIVE_HINT	2472	现在：文件夹由 Windows 文件资源管理器打开。	Right now folders open in Windows File Explorer.	目前：資料夾由 Windows 檔案總管開啟。
-IntegrationRunningHint	IDS_INTEGRATION_RUNNING_HINT	2473	“其他软件打开的文件夹”只在 Pulse 运行时有效。想一开机就生效，可以打开「开机自启」和「关闭后继续运行」。	“Folders opened by other apps” works only while Pulse is running. To have it from sign-in, turn on Launch at sign-in and Keep running after close.	「其他軟體開啟的資料夾」只在 Pulse 執行時有效。想一開機就生效，可以開啟「開機自啟」和「關閉後繼續執行」。
+IntegrationRunningHint	IDS_INTEGRATION_RUNNING_HINT	2473	“其他软件打开的文件夹”只在 FileP 运行时有效。想一开机就生效，可以打开「开机自启」和「关闭后继续运行」。	“Folders opened by other apps” works only while FileP is running. To have it from sign-in, turn on Launch at sign-in and Keep running after close.	「其他軟體開啟的資料夾」只在 FileP 執行時有效。想一開機就生效，可以開啟「開機自啟」和「關閉後繼續執行」。
 IntegrationRetry	IDS_INTEGRATION_RETRY	2474	重试	Try again	重試
 IntegrationRestore	IDS_INTEGRATION_RESTORE	2475	全部改回资源管理器	Switch everything back to File Explorer	全部改回檔案總管
-IntegrationMaster	IDS_INTEGRATION_MASTER	2476	用 Pulse 打开文件夹	Open folders with Pulse	用 Pulse 開啟資料夾
+IntegrationMaster	IDS_INTEGRATION_MASTER	2476	用 FileP 打开文件夹	Open folders with FileP	用 FileP 開啟資料夾
 IntegrationOnCount	IDS_INTEGRATION_ON_COUNT	2477	已开启 %d 项	On · %d selected	已開啟 %d 項
 IntegrationNone	IDS_INTEGRATION_NONE	2478	未选择项目	Nothing selected	未選擇項目
 IntegrationNoneHint	IDS_INTEGRATION_NONE_HINT	2479	至少勾选一项，开关才有作用。	Select at least one item for the switch to do anything.	至少勾選一項，開關才有作用。
 IntegrationExperimentalTag	IDS_INTEGRATION_EXPERIMENTAL_TAG	2480	实验	Experimental	實驗
-IntegrationFactRunning	IDS_INTEGRATION_FACT_RUNNING	2481	Pulse 需要正在运行	Pulse must be running	Pulse 需要正在執行
+IntegrationFactRunning	IDS_INTEGRATION_FACT_RUNNING	2481	FileP 需要正在运行	FileP must be running	FileP 需要正在執行
 IntegrationFactShift	IDS_INTEGRATION_FACT_SHIFT	2482	按住 Shift 可留在资源管理器	Hold Shift to stay in File Explorer	按住 Shift 可留在檔案總管
 IntegrationFactWin11	IDS_INTEGRATION_FACT_WIN11	2483	Windows 11 上原窗口不会关闭	On Windows 11 the Explorer window stays open	Windows 11 上原視窗不會關閉
-IntegrationHintLaunch	IDS_INTEGRATION_HINT_LAUNCH	2484	“其他软件打开的文件夹”只在 Pulse 运行时有效。想一开机就生效，可以打开「开机自启」。	“Folders opened by other apps” works only while Pulse is running. To have it from sign-in, turn on Launch at sign-in.	「其他軟體開啟的資料夾」只在 Pulse 執行時有效。想一開機就生效，可以開啟「開機自啟」。
-IntegrationHintKeep	IDS_INTEGRATION_HINT_KEEP	2485	“其他软件打开的文件夹”只在 Pulse 运行时有效。想关掉窗口后也生效，可以打开「关闭后继续运行」。	“Folders opened by other apps” works only while Pulse is running. To keep it working after you close the window, turn on Keep running after close.	「其他軟體開啟的資料夾」只在 Pulse 執行時有效。想關掉視窗後也生效，可以開啟「關閉後繼續執行」。
-IntegrationHintKeepCompat	IDS_INTEGRATION_HINT_KEEP_COMPAT	3659	「兼容打开方式」只在 Pulse 运行时有效。想关掉窗口后也生效，可以打开「关闭后继续运行」。	Compatibility mode works only while Pulse is running. To keep it working after you close the window, turn on Keep running after close.	「相容開啟方式」只在 Pulse 執行時有效。想關掉視窗後也生效，可以開啟「關閉後繼續執行」。
-IntegrationHintLaunchCompat	IDS_INTEGRATION_HINT_LAUNCH_COMPAT	3660	「兼容打开方式」只在 Pulse 运行时有效。想一开机就生效，可以打开「开机自启」。	Compatibility mode works only while Pulse is running. To have it from sign-in, turn on Launch at sign-in.	「相容開啟方式」只在 Pulse 執行時有效。想一開機就生效，可以開啟「開機自啟」。
+IntegrationHintLaunch	IDS_INTEGRATION_HINT_LAUNCH	2484	“其他软件打开的文件夹”只在 FileP 运行时有效。想一开机就生效，可以打开「开机自启」。	“Folders opened by other apps” works only while FileP is running. To have it from sign-in, turn on Launch at sign-in.	「其他軟體開啟的資料夾」只在 FileP 執行時有效。想一開機就生效，可以開啟「開機自啟」。
+IntegrationHintKeep	IDS_INTEGRATION_HINT_KEEP	2485	“其他软件打开的文件夹”只在 FileP 运行时有效。想关掉窗口后也生效，可以打开「关闭后继续运行」。	“Folders opened by other apps” works only while FileP is running. To keep it working after you close the window, turn on Keep running after close.	「其他軟體開啟的資料夾」只在 FileP 執行時有效。想關掉視窗後也生效，可以開啟「關閉後繼續執行」。
+IntegrationHintKeepCompat	IDS_INTEGRATION_HINT_KEEP_COMPAT	3659	「兼容打开方式」只在 FileP 运行时有效。想关掉窗口后也生效，可以打开「关闭后继续运行」。	Compatibility mode works only while FileP is running. To keep it working after you close the window, turn on Keep running after close.	「相容開啟方式」只在 FileP 執行時有效。想關掉視窗後也生效，可以開啟「關閉後繼續執行」。
+IntegrationHintLaunchCompat	IDS_INTEGRATION_HINT_LAUNCH_COMPAT	3660	「兼容打开方式」只在 FileP 运行时有效。想一开机就生效，可以打开「开机自启」。	Compatibility mode works only while FileP is running. To have it from sign-in, turn on Launch at sign-in.	「相容開啟方式」只在 FileP 執行時有效。想一開機就生效，可以開啟「開機自啟」。
 IntegrationCompat	IDS_INTEGRATION_COMPAT	3661	兼容打开方式	Compatibility mode	相容開啟方式
-IntegrationCompatDesc	IDS_INTEGRATION_COMPAT_DESC	3662	双击文件夹没反应时勾选：Pulse 不再改动文件夹的双击动作，改为资源管理器先打开，再马上转到 Pulse，可能会闪一下。	Turn on if double-clicking a folder does nothing: Pulse leaves the double-click action alone, lets File Explorer open the folder, then moves it into Pulse right away. It may flash briefly.	按兩下資料夾沒反應時勾選：Pulse 不再改動資料夾的按兩下動作，改為檔案總管先開啟，再馬上轉到 Pulse，可能會閃一下。
+IntegrationCompatDesc	IDS_INTEGRATION_COMPAT_DESC	3662	双击文件夹没反应时勾选：FileP 不再改动文件夹的双击动作，改为资源管理器先打开，再马上转到 FileP，可能会闪一下。	Turn on if double-clicking a folder does nothing: FileP leaves the double-click action alone, lets File Explorer open the folder, then moves it into FileP right away. It may flash briefly.	按兩下資料夾沒反應時勾選：FileP 不再改動資料夾的按兩下動作，改為檔案總管先開啟，再馬上轉到 FileP，可能會閃一下。
 IntegrationFailTitle	IDS_INTEGRATION_FAIL_TITLE	2486	设置没有完成	The change didn’t go through	設定沒有完成
 IntegrationDriftTitle	IDS_INTEGRATION_DRIFT_TITLE	2487	有入口被改回了文件资源管理器	Something was switched back to File Explorer	有入口被改回了檔案總管
-IntegrationDriftDesc	IDS_INTEGRATION_DRIFT_DESC	2488	可能是系统更新或其他软件改的。点「恢复」重新交给 Pulse。	A Windows update or another app may have changed it. Choose Restore to hand it back to Pulse.	可能是系統更新或其他軟體改的。點「恢復」重新交給 Pulse。
+IntegrationDriftDesc	IDS_INTEGRATION_DRIFT_DESC	2488	可能是系统更新或其他软件改的。点「恢复」重新交给 FileP。	A Windows update or another app may have changed it. Choose Restore to hand it back to Pulse.	可能是系統更新或其他軟體改的。點「恢復」重新交給 FileP。
 IntegrationReapply	IDS_INTEGRATION_REAPPLY	2489	恢复	Restore	恢復
 IntegrationOptions	IDS_INTEGRATION_OPTIONS	2720	还可以	Also	還可以
 IntegrationTry	IDS_INTEGRATION_TRY	2721	试一试：打开「此电脑」	Try it: open This PC	試一試：開啟「本機」
 IntegrationOnFoot	IDS_INTEGRATION_ON_FOOT	2722	想换回来？关掉上面的开关就行。	Changed your mind? Just turn off the switch above.	想換回來？關掉上面的開關就行。
-IntegrationJustOn	IDS_INTEGRATION_JUST_ON	2723	好了。现在双击文件夹会用 Pulse 打开。	Done. Folders you double-click now open in Pulse.	好了。現在按兩下資料夾會用 Pulse 開啟。
-IntegrationRecycleOption	IDS_INTEGRATION_RECYCLE_OPTION	2724	回收站也用 Pulse 打开	Open the Recycle Bin in Pulse too	資源回收筒也用 Pulse 開啟
-IntegrationOtherTitle	IDS_INTEGRATION_OTHER_TITLE	2725	现在用的是另一个位置的 Pulse	Another copy of Pulse is in use	目前用的是另一個位置的 Pulse
+IntegrationJustOn	IDS_INTEGRATION_JUST_ON	2723	好了。现在双击文件夹会用 FileP 打开。	Done. Folders you double-click now open in Pulse.	好了。現在按兩下資料夾會用 FileP 開啟。
+IntegrationRecycleOption	IDS_INTEGRATION_RECYCLE_OPTION	2724	回收站也用 FileP 打开	Open the Recycle Bin in FileP too	資源回收筒也用 FileP 開啟
+IntegrationOtherTitle	IDS_INTEGRATION_OTHER_TITLE	2725	现在用的是另一个位置的 FileP	Another copy of FileP is in use	目前用的是另一個位置的 FileP
 IntegrationUseThis	IDS_INTEGRATION_USE_THIS	2726	改用这一个	Use this one	改用這一個
 BannerGoUp	IDS_BANNER_GO_UP	2727	返回上一级	Go up	回到上一層
 BannerReconnect	IDS_BANNER_RECONNECT	2728	重新连接	Reconnect	重新連線
@@ -1165,7 +1165,7 @@ NetworkLiveAddedMessage	IDS_NETWORK_LIVE_ADDED_MSG	2497	正在建立索引；完
 NetworkLiveAddFailed	IDS_NETWORK_LIVE_ADD_FAILED	2498	无法加入网络索引	Couldn't add to the network index	無法加入網路索引
 // Network view warning when Windows Firewall's Network Discovery group is off.
 NetworkDiscoveryOffTitle	IDS_NETWORK_DISCOVERY_OFF_TITLE	2731	网络发现已关闭	Network discovery is off	網路探索已關閉
-NetworkDiscoveryOffDesc	IDS_NETWORK_DISCOVERY_OFF_DESC	2732	Windows 防火墙中，所有活动网络配置文件的“网络发现”规则组都已关闭。局域网设备可能因此无法显示；Pulse 不会扫描子网。可在“高级共享设置”中检查。	Windows Firewall's Network Discovery rules are disabled on every active network profile. LAN devices may not appear; Pulse does not scan the subnet. Check Advanced sharing settings.	Windows 防火牆中，所有使用中的網路設定檔之「網路探索」規則群組都已關閉。區域網路裝置可能因此不會顯示；Pulse 不會掃描子網路。可在「進階共用設定」中檢查。
+NetworkDiscoveryOffDesc	IDS_NETWORK_DISCOVERY_OFF_DESC	2732	Windows 防火墙中，所有活动网络配置文件的“网络发现”规则组都已关闭。局域网设备可能因此无法显示；FileP 不会扫描子网。可在“高级共享设置”中检查。	Windows Firewall's Network Discovery rules are disabled on every active network profile. LAN devices may not appear; FileP does not scan the subnet. Check Advanced sharing settings.	Windows 防火牆中，所有使用中的網路設定檔之「網路探索」規則群組都已關閉。區域網路裝置可能因此不會顯示；FileP 不會掃描子網路。可在「進階共用設定」中檢查。
 SettingsConfirmDelete	IDS_SETTINGS_CONFIRM_DELETE	2499	删除前确认	Confirm before deleting	刪除前確認
 SettingsConfirmDeleteDesc	IDS_SETTINGS_CONFIRM_DELETE_DESC	2500	按 Delete 移到回收站前先询问；永久删除始终会确认	Ask before Delete moves items to the Recycle Bin. Permanent deletes always ask.	按 Delete 移到資源回收筒前先詢問；永久刪除始終會確認
 RecycleConfirmOne	IDS_RECYCLE_CONFIRM_ONE	2501	要把此项目移到回收站吗？	Move this item to the Recycle Bin?	要把此項目移到資源回收筒嗎？
@@ -1175,23 +1175,23 @@ ApplyGroupAllShort	IDS_APPLY_GROUP_ALL_SHORT	2504	应用到所有文件夹	Apply
 ApplyGroupAllMessageFormat	IDS_APPLY_GROUP_ALL_MESSAGE_FORMAT	2505	所有文件夹都将按“%s”分组。之前为各个文件夹单独保存的分组会被清除，视图和排序不受影响；最近使用、搜索结果和回收站保留各自的分组。	All folders will be grouped by “%s”. Grouping saved for individual folders will be cleared. View and sort are not changed; Recent, search results and the Recycle Bin keep their own grouping.	所有資料夾都將按「%s」分組。之前為各個資料夾單獨儲存的分組會被清除，檢視和排序不受影響；最近使用、搜尋結果和資源回收筒保留各自的分組。
 ApplyGroupNoneMessage	IDS_APPLY_GROUP_NONE_MESSAGE	2506	所有文件夹都将不分组。之前为各个文件夹单独保存的分组会被清除，视图和排序不受影响；最近使用、搜索结果和回收站保留各自的分组。	No folder will be grouped. Grouping saved for individual folders will be cleared. View and sort are not changed; Recent, search results and the Recycle Bin keep their own grouping.	所有資料夾都將不分組。之前為各個資料夾單獨儲存的分組會被清除，檢視和排序不受影響；最近使用、搜尋結果和資源回收筒保留各自的分組。
 SettingsNotifyIcon	IDS_SETTINGS_NOTIFY_ICON	2507	托盘图标	Notification area icon	系統匣圖示
-SettingsNotifyIconDesc	IDS_SETTINGS_NOTIFY_ICON_DESC	2508	隐藏后，再次打开 Pulse 可恢复窗口	When hidden, open Pulse again to bring it back	隱藏後，再次開啟 Pulse 可恢復視窗
+SettingsNotifyIconDesc	IDS_SETTINGS_NOTIFY_ICON_DESC	2508	隐藏后，再次打开 FileP 可恢复窗口	When hidden, open FileP again to bring it back	隱藏後，再次開啟 FileP 可恢復視窗
 NotifyIconAlways	IDS_NOTIFY_ICON_ALWAYS	2509	始终显示	Always	始終顯示
 NotifyIconBackground	IDS_NOTIFY_ICON_BACKGROUND	2510	仅后台运行时	In background	僅背景執行時
 NotifyIconNever	IDS_NOTIFY_ICON_NEVER	2511	不显示	Never	不顯示
-ExitPulse	IDS_EXIT_PULSE	2512	退出 Pulse	Exit Pulse	結束 Pulse
+ExitPulse	IDS_EXIT_PULSE	2512	退出 FileP	Exit FileP	結束 FileP
 ListSelectionOutline	IDS_LIST_SELECTION_OUTLINE	2513	选中项描边	Outline selected items	選取項目外框
 ListSelectionOutlineDesc	IDS_LIST_SELECTION_OUTLINE_DESC	2514	选中的文件和文件夹外加一圈强调色描边，长列表里更容易分辨	Draw an accent outline around selected items so they stand out in long lists	選取的檔案和資料夾外加一圈強調色外框，在長清單中更容易辨識
 SidebarHideCloud	IDS_SIDEBAR_HIDE_CLOUD	2515	在侧边栏中隐藏网盘	Hide cloud drives in the sidebar	在側邊欄中隱藏雲端硬碟
 SidebarCloudHiddenHint	IDS_SIDEBAR_CLOUD_HIDDEN_HINT	2516	已从侧边栏隐藏。右键任一分区标题或侧边栏底部空白处，可以重新显示。	Hidden from the sidebar. Right-click any section title or the empty space at the bottom of the sidebar to show it again.	已從側邊欄隱藏。在任一區段標題或側邊欄底部空白處按右鍵，即可重新顯示。
 SidebarShowHidden	IDS_SIDEBAR_SHOW_HIDDEN	2517	显示已隐藏的分区	Show hidden sections	顯示已隱藏的區段
-SettingsDefaultManagerDesc	IDS_SETTINGS_DEFAULT_MANAGER_DESC	1481	文件夹、磁盘、此电脑和 Win+E 都用 Pulse 打开；关闭即恢复资源管理器	Folders, drives, This PC and Win+E open in Pulse; turn off to restore File Explorer	資料夾、磁碟、本機和 Win+E 都用 Pulse 開啟；關閉即恢復檔案總管
+SettingsDefaultManagerDesc	IDS_SETTINGS_DEFAULT_MANAGER_DESC	1481	文件夹、磁盘、此电脑和 Win+E 都用 FileP 打开；关闭即恢复资源管理器	Folders, drives, This PC and Win+E open in FileP; turn off to restore File Explorer	資料夾、磁碟、本機和 Win+E 都用 FileP 開啟；關閉即恢復檔案總管
 SettingsDefaultManagerPartial	IDS_SETTINGS_DEFAULT_MANAGER_PARTIAL	1482	仍由资源管理器打开：%s。打开开关即可全部接管	Still opening in File Explorer: %s. Turn on to take over all of them	仍由檔案總管開啟：%s。開啟開關即可全部接管
 SettingsTakeoverFolders	IDS_SETTINGS_TAKEOVER_FOLDERS	1483	文件夹和磁盘	folders and drives	資料夾和磁碟
 SettingsThisPc	IDS_SETTINGS_THIS_PC	1484	桌面上的「此电脑」	This PC on the desktop	桌面上的「本機」
 SettingsThisPcDesc	IDS_SETTINGS_THIS_PC_DESC	1485	双击桌面上的「此电脑」图标时	When you double-click the This PC icon on the desktop	按兩下桌面上的「本機」圖示時
 SettingsExplorerWindows	IDS_SETTINGS_EXPLORER_WINDOWS	1486	接管其他程序打开的资源管理器窗口（实验）	Take over File Explorer windows opened by other apps (experimental)	接管其他程式開啟的檔案總管視窗（實驗）
-SettingsExplorerWindowsDesc	IDS_SETTINGS_EXPLORER_WINDOWS_DESC	1487	程序直接打开的资源管理器窗口改由 Pulse 显示；按住 Shift 可保留	Explorer windows that apps open directly show in Pulse; hold Shift to keep them	程式直接開啟的檔案總管視窗改由 Pulse 顯示；按住 Shift 可保留
+SettingsExplorerWindowsDesc	IDS_SETTINGS_EXPLORER_WINDOWS_DESC	1487	程序直接打开的资源管理器窗口改由 FileP 显示；按住 Shift 可保留	Explorer windows that apps open directly show in FileP; hold Shift to keep them	程式直接開啟的檔案總管視窗改由 FileP 顯示；按住 Shift 可保留
 TagNetworkLocation	IDS_TAG_NETWORK_LOCATION	1500	网络位置	Network location	網路位置
 TagThisLocation	IDS_TAG_THIS_LOCATION	1501	此位置	This location	此位置
 TagCreateFormat	IDS_TAG_CREATE_FORMAT	1502	创建标签“%s”	Create tag “%s”	建立標籤「%s」
@@ -1221,7 +1221,7 @@ IndexMigrationIncomplete	IDS_INDEX_MIGRATION_INCOMPLETE	1700	索引迁移未完�
 IndexMigrationNoSpace	IDS_INDEX_MIGRATION_NO_SPACE	1701	目标磁盘空间不足，原索引已保留。请释放空间后重试。	The destination disk is full. The original index was kept. Free up space and try again.	目標磁碟空間不足，原索引已保留。請釋放空間後重試。
 RecoveryPromptFormat	IDS_RECOVERY_PROMPT_FORMAT	1702	检测到上次退出时未完成的文件操作（%zu 项）。\n\n是否重试可安全恢复的项目？	Found %zu unfinished file operations from the previous session.\n\nRetry the items that can be safely recovered?	偵測到上次退出時未完成的檔案操作（%zu 項）。\n\n是否重試可安全恢復的項目？
 RecoveryDestructiveWarning	IDS_RECOVERY_DESTRUCTIVE_WARNING	1703	\n\n未确认状态的永久删除不会重试。	\n\nPermanent deletions with uncertain status will not be retried.	\n\n未確認狀態的永久刪除不會重試。
-RecoveryTitle	IDS_RECOVERY_TITLE	1704	Pulse 文件操作恢复	Pulse file operation recovery	Pulse 檔案操作恢復
+RecoveryTitle	IDS_RECOVERY_TITLE	1704	FileP 文件操作恢复	FileP file operation recovery	FileP 檔案操作恢復
 OfflineSnapshot	IDS_OFFLINE_SNAPSHOT	1705	只读浏览上次快照	Browsing the last snapshot in read-only mode	唯讀瀏覽上次快照
 TagsSavedLocally	IDS_TAGS_SAVED_LOCALLY	1706	标签已保存在本机	Tags saved on this computer	標籤已儲存在本機
 TagMetadataUnsupported	IDS_TAG_METADATA_UNSUPPORTED	1707	{path} 不支持文件标签元数据；换电脑后可能不可见。	{path} does not support file tag metadata. Tags may not appear on another computer.	{path} 不支援檔案標籤後設資料；換電腦後可能不可見。
@@ -1238,7 +1238,7 @@ ManageContext	IDS_AUDIT_MANAGECONTEXT	1716	管理右键项…	Manage context men
 EnableFullIndex	IDS_AUDIT_ENABLEFULLINDEX	1717	启用全盘索引（安装服务）	Enable full-disk indexing (install service)	啟用全磁碟索引（安裝服務）
 ConfirmDefault	IDS_AUDIT_CONFIRMDEFAULT	1718	确定	OK	確定
 SettingsFind	IDS_SETTINGS_UI_1900	1900	查找设置	Find a setting	查詢設定
-SettingsGeneralIntro	IDS_SETTINGS_UI_1901	1901	按你的习惯，调整 Pulse 的外观与行为。	Make Pulse look and work the way you prefer.	按你的習慣，調整 Pulse 的外觀與行為。
+SettingsGeneralIntro	IDS_SETTINGS_UI_1901	1901	按你的习惯，调整 FileP 的外观与行为。	Make FileP look and work the way you prefer.	按你的習慣，調整 FileP 的外觀與行為。
 SettingsSearchIntro	IDS_SETTINGS_UI_1902	1902	选择搜索方式，管理可以快速找到的文件。	Choose how to search and which files to index.	選擇搜尋方式，管理可以快速找到的檔案。
 SettingsTheme	IDS_SETTINGS_UI_1903	1903	主题	Theme	主題
 SettingsThemeDesc	IDS_SETTINGS_UI_1904	1904	选择应用的外观主题	Choose the appearance of the app	選擇應用程式的外觀主題
@@ -1557,10 +1557,10 @@ OpticalDrive	IDS_OPTICAL_DRIVE	2755	光盘驱动器	Optical drive
 LocalDisk_2	IDS_LOCAL_DISK_2	2756	本地磁盘	Local disk	
 OpenWith	IDS_OPEN_WITH	2757	用 	Open with 	
 Text2758	IDS_TEXT2758	2758	 打开		
-TheOriginalSettingsCouldNotBeReadSavingIsBlockedToProtectThe	IDS_THE_ORIGINAL_SETTINGS_COULD_NOT_BE_READ_SAVING_IS_BLOCKED_TO_PROTECT_THE	2759	原设置未能读取，已阻止覆盖。请关闭后重试打开 Pulse。	The original settings could not be read. Saving is blocked to protect them. Restart Pulse to retry.	
+TheOriginalSettingsCouldNotBeReadSavingIsBlockedToProtectThe	IDS_THE_ORIGINAL_SETTINGS_COULD_NOT_BE_READ_SAVING_IS_BLOCKED_TO_PROTECT_THE	2759	原设置未能读取，已阻止覆盖。请关闭后重试打开 FileP。	The original settings could not be read. Saving is blocked to protect them. Restart FileP to retry.	
 AllFiles_2	IDS_ALL_FILES_2	2760	所有文件 (*.*)	All files (*.*)	
 TextDocumentsTxtMd	IDS_TEXT_DOCUMENTS_TXT_MD	2761	文本文档 (*.txt; *.md)	Text documents (*.txt; *.md)	
-PulseIsBusyTheFolderWillShowUpInTheOpenPulseWindowShortlyIfI	IDS_PULSE_IS_BUSY_THE_FOLDER_WILL_SHOW_UP_IN_THE_OPEN_PULSE_WINDOW_SHORTLY_IF_I	2762	Pulse 正在忙，文件夹会稍后在已打开的 Pulse 窗口里出现。\n\n如果过一会儿还没出现，再打开一次就行。	Pulse is busy. The folder will show up in the open Pulse window shortly.\n\nIf it doesn't appear after a while, just open it again.	
+PulseIsBusyTheFolderWillShowUpInTheOpenPulseWindowShortlyIfI	IDS_PULSE_IS_BUSY_THE_FOLDER_WILL_SHOW_UP_IN_THE_OPEN_PULSE_WINDOW_SHORTLY_IF_I	2762	FileP 正在忙，文件夹会稍后在已打开的 FileP 窗口里出现。\n\n如果过一会儿还没出现，再打开一次就行。	FileP is busy. The folder will show up in the open FileP window shortly.\n\nIf it doesn't appear after a while, just open it again.	
 TagDeleted	IDS_TAG_DELETED	2763	标签已删除	Tag deleted	
 Connecting	IDS_CONNECTING	2764	正在连接	Connecting	
 IfTheServerAsksYouToSignInEnterTheUserNameAndPasswordInTheWi	IDS_IF_THE_SERVER_ASKS_YOU_TO_SIGN_IN_ENTER_THE_USER_NAME_AND_PASSWORD_IN_THE_WI	2765	如果服务器要求登录，请在弹出的窗口中输入用户名和密码。	If the server asks you to sign in, enter the user name and password in the window that opens.	
@@ -1666,10 +1666,10 @@ RAWCameraPhotos	IDS_RAWCAMERA_PHOTOS	2864	RAW 相机照片	RAW camera photos
 CopyRegistryPath	IDS_COPY_REGISTRY_PATH	2865	复制注册表路径	Copy registry path	
 CopyProgramPath	IDS_COPY_PROGRAM_PATH	2866	复制程序路径	Copy program path	
 OpenItsFolderInANewTab	IDS_OPEN_ITS_FOLDER_IN_ANEW_TAB	2867	在新标签页打开所在文件夹	Open its folder in a new tab	
-HideInPulseSMenuOnly	IDS_HIDE_IN_PULSE_SMENU_ONLY	2868	只在 Pulse 右键菜单中隐藏	Hide in Pulse's menu only	
+HideInPulseSMenuOnly	IDS_HIDE_IN_PULSE_SMENU_ONLY	2868	只在 FileP 右键菜单中隐藏	Hide in FileP's menu only	
 KeepIt	IDS_KEEP_IT	2869	取消删除	Keep it	
 DeleteLeftoverOnApplyChanges	IDS_DELETE_LEFTOVER_ON_APPLY_CHANGES	2870	删除残留项（点“应用更改”后生效）	Delete leftover (on Apply changes)	
-UndoEveryChangeMadeSincePulseStarted	IDS_UNDO_EVERY_CHANGE_MADE_SINCE_PULSE_STARTED	2871	撤销这次打开 Pulse 以来的全部改动	Undo every change made since Pulse started	
+UndoEveryChangeMadeSincePulseStarted	IDS_UNDO_EVERY_CHANGE_MADE_SINCE_PULSE_STARTED	2871	撤销这次打开 FileP 以来的全部改动	Undo every change made since FileP started	
 ChooseFfmpegExe	IDS_CHOOSE_FFMPEG_EXE	2872	选择 ffmpeg.exe	Choose ffmpeg.exe	
 TheCompleteSelectionCouldNotBeProcessedCheckTheTagsBeforeTry	IDS_THE_COMPLETE_SELECTION_COULD_NOT_BE_PROCESSED_CHECK_THE_TAGS_BEFORE_TRY	2873	未能处理完整选择，标签未完成更新。请检查后重试。	The complete selection could not be processed. Check the tags before trying again.	
 Text2874	IDS_TEXT2874	2874	「	“	
@@ -1684,7 +1684,7 @@ CopySettingsToTheClipboard	IDS_COPY_SETTINGS_TO_THE_CLIPBOARD	2882	复制设置�
 ImportFromTheClipboard	IDS_IMPORT_FROM_THE_CLIPBOARD	2883	从剪贴板导入	Import from the clipboard	
 ResetAllToDefaults	IDS_RESET_ALL_TO_DEFAULTS	2884	全部恢复默认	Reset all to defaults	
 KeyTester	IDS_KEY_TESTER	2885	按键测试	Key tester	
-PressAnyKeysToSeeWhatPulseDoesEscCloses	IDS_PRESS_ANY_KEYS_TO_SEE_WHAT_PULSE_DOES_ESC_CLOSES	2886	按下任意组合键，看 Pulse 会执行什么。Esc 关闭。	Press any keys to see what Pulse does. Esc closes.	
+PressAnyKeysToSeeWhatPulseDoesEscCloses	IDS_PRESS_ANY_KEYS_TO_SEE_WHAT_PULSE_DOES_ESC_CLOSES	2886	按下任意组合键，看 FileP 会执行什么。Esc 关闭。	Press any keys to see what FileP does. Esc closes.	
 Got	IDS_GOT	2887	收到 	Got 	
 NoteAnotherProgramAlsoRegisteredIt	IDS_NOTE_ANOTHER_PROGRAM_ALSO_REGISTERED_IT	2888	注意：它也被另一个程序注册成了全局热键。	Note: another program also registered it.	
 NoteMicrosoftPinyinUsesItFor	IDS_NOTE_MICROSOFT_PINYIN_USES_IT_FOR	2889	注意：微软拼音用它做	Note: Microsoft Pinyin uses it for 	
@@ -1706,7 +1706,7 @@ AllAvailable	IDS_ALL_AVAILABLE	2904	 全部可用	: all available
 Save	IDS_SAVE	2905	保存	Save	
 CurrentKey	IDS_CURRENT_KEY	2906	当前按键：	Current key: 	
 IsHeldByAnotherProgram	IDS_IS_HELD_BY_ANOTHER_PROGRAM	2907	 被另一个程序占用	 is held by another program	
-AnotherProgramRegisteredItAsAHotkeySoPulseNeverReceivesItPic	IDS_ANOTHER_PROGRAM_REGISTERED_IT_AS_AHOTKEY_SO_PULSE_NEVER_RECEIVES_IT_PIC	2908	另一个程序把它注册成了全局热键，按下时 Pulse 收不到。换一个按键，或在那个程序里关掉这个热键。	Another program registered it as a hotkey, so Pulse never receives it. Pick another key, or switch the hotkey off in that program.	
+AnotherProgramRegisteredItAsAHotkeySoPulseNeverReceivesItPic	IDS_ANOTHER_PROGRAM_REGISTERED_IT_AS_AHOTKEY_SO_PULSE_NEVER_RECEIVES_IT_PIC	2908	另一个程序把它注册成了全局热键，按下时 FileP 收不到。换一个按键，或在那个程序里关掉这个热键。	Another program registered it as a hotkey, so FileP never receives it. Pick another key, or switch the hotkey off in that program.	
 MicrosoftPinyinUsesItFor	IDS_MICROSOFT_PINYIN_USES_IT_FOR	2909	微软拼音用它做	Microsoft Pinyin uses it for 	
 WhileTheChineseIMEIsOnItTakesThisKeyFirstSwitchTheIMEHotkeyO	IDS_WHILE_THE_CHINESE_IMEIS_ON_IT_TAKES_THIS_KEY_FIRST_SWITCH_THE_IMEHOTKEY_O	2910	中文输入法开着时，这个键会先被输入法拿走。关掉输入法的这个热键，或者换一个按键。	While the Chinese IME is on it takes this key first. Switch the IME hotkey off, or pick another key.	
 OpenSettingsTimeLanguageLanguageRegion	IDS_OPEN_SETTINGS_TIME_LANGUAGE_LANGUAGE_REGION	2911	打开 Windows 设置 → 时间和语言 → 语言和区域	Open Settings → Time & language → Language & region	
@@ -1728,7 +1728,7 @@ IsUsedBy	IDS_IS_USED_BY	2926	 已被	 is used by
 Text2927	IDS_TEXT2927	2927	使用		
 ItIsTheSystemWideHotkeyAndCannotBeShared	IDS_IT_IS_THE_SYSTEM_WIDE_HOTKEY_AND_CANNOT_BE_SHARED	2928	它是全局热键，不能同时用作程序内快捷键。	It is the system-wide hotkey and cannot be shared.	
 ThatIsAFixedKeyOrANumberedGroupItCannotBeReplaced	IDS_THAT_IS_AFIXED_KEY_OR_ANUMBERED_GROUP_IT_CANNOT_BE_REPLACED	2929	那是固定按键或带序号的组合，不能替换。	That is a fixed key or a numbered group; it cannot be replaced.	
-AnotherProgramRegisteredItSoPulseNeverReceivesIt	IDS_ANOTHER_PROGRAM_REGISTERED_IT_SO_PULSE_NEVER_RECEIVES_IT	2930	另一个程序把它注册成了全局热键，按下时 Pulse 收不到。	Another program registered it, so Pulse never receives it.	
+AnotherProgramRegisteredItSoPulseNeverReceivesIt	IDS_ANOTHER_PROGRAM_REGISTERED_IT_SO_PULSE_NEVER_RECEIVES_IT	2930	另一个程序把它注册成了全局热键，按下时 FileP 收不到。	Another program registered it, so FileP never receives it.	
 ASystemWideHotkeyNeedsCtrlAltOrWin	IDS_ASYSTEM_WIDE_HOTKEY_NEEDS_CTRL_ALT_OR_WIN	2931	全局热键至少要有 Ctrl、Alt 或 Win	A system-wide hotkey needs Ctrl, Alt or Win	
 ASingleLetterOrDigitCannotBeAShortcut	IDS_ASINGLE_LETTER_OR_DIGIT_CANNOT_BE_ASHORTCUT	2932	单个字母或数字不能做快捷键	A single letter or digit cannot be a shortcut	
 TheyJumpToFileNamesAddCtrlOrAlt	IDS_THEY_JUMP_TO_FILE_NAMES_ADD_CTRL_OR_ALT	2933	它们用于按文件名首字母跳转，请加上 Ctrl 或 Alt。	They jump to file names; add Ctrl or Alt.	
@@ -1758,11 +1758,11 @@ SendToTarget	IDS_SEND_TO_TARGET	2956	发送到目标	Send to target
 OpenWithProgram	IDS_OPEN_WITH_PROGRAM	2957	打开方式程序	Open with program	
 MenuCommand	IDS_MENU_COMMAND	2958	菜单命令	Menu command	
 En	IDS_EN	2959	zh	en	
-WindowsManagesThisEntryItselfTrustedInstallerPulseLeavesItAl	IDS_WINDOWS_MANAGES_THIS_ENTRY_ITSELF_TRUSTED_INSTALLER_PULSE_LEAVES_IT_AL	2960	这一项由 Windows 自己管理（TrustedInstaller），Pulse 不会去改它。	Windows manages this entry itself (TrustedInstaller); Pulse leaves it alone.	
+WindowsManagesThisEntryItselfTrustedInstallerPulseLeavesItAl	IDS_WINDOWS_MANAGES_THIS_ENTRY_ITSELF_TRUSTED_INSTALLER_PULSE_LEAVES_IT_AL	2960	这一项由 Windows 自己管理（TrustedInstaller），FileP 不会去改它。	Windows manages this entry itself (TrustedInstaller); FileP leaves it alone.	
 ABasicWindowsCommandSwitchingItOffBreaksFileExplorerSoThereI	IDS_ABASIC_WINDOWS_COMMAND_SWITCHING_IT_OFF_BREAKS_FILE_EXPLORER_SO_THERE_I	2961	这是 Windows 的基础命令，关掉会让资源管理器不好用，所以不提供开关。	A basic Windows command; switching it off breaks File Explorer, so there is no switch.	
 SwitchesForNewSendToAndOpenWithComeInALaterVersionForNowYouC	IDS_SWITCHES_FOR_NEW_SEND_TO_AND_OPEN_WITH_COME_IN_ALATER_VERSION_FOR_NOW_YOU_C	2962	新建、发送到、打开方式的开关会在后续版本提供，现在可以查看和定位。	Switches for New, Send to and Open with come in a later version; for now you can inspect them.	
-SwitchedOffTheCommandLeavesTheContextMenuPulseOnlyAddsHideMa	IDS_SWITCHED_OFF_THE_COMMAND_LEAVES_THE_CONTEXT_MENU_PULSE_ONLY_ADDS_HIDE_MA	2963	关闭后，这个命令不再出现在右键菜单里。Pulse 只给它加上隐藏标记（和 ContextMenuManager 的做法相同），重新打开就去掉标记，原有设置不会丢。	Switched off, the command leaves the context menu. Pulse only adds hide markers (as ContextMenuManager does); switching it on removes them and nothing else changes.	
-SwitchedOffWindowsStopsLoadingTheExtensionAndItsRowsLeaveThe	IDS_SWITCHED_OFF_WINDOWS_STOPS_LOADING_THE_EXTENSION_AND_ITS_ROWS_LEAVE_THE	2964	关闭后，Windows 不再加载这个扩展，它添加的菜单项也随之消失。Pulse 只是把它的注册表项挪到旁边的“-”分组（和 ContextMenuManager 的做法相同），重新打开就挪回来。	Switched off, Windows stops loading the extension and its rows leave the menu. Pulse moves its key to the sibling ""-"" group (as ContextMenuManager does); switching it on moves it back.	
+SwitchedOffTheCommandLeavesTheContextMenuPulseOnlyAddsHideMa	IDS_SWITCHED_OFF_THE_COMMAND_LEAVES_THE_CONTEXT_MENU_PULSE_ONLY_ADDS_HIDE_MA	2963	关闭后，这个命令不再出现在右键菜单里。FileP 只给它加上隐藏标记（和 ContextMenuManager 的做法相同），重新打开就去掉标记，原有设置不会丢。	Switched off, the command leaves the context menu. FileP only adds hide markers (as ContextMenuManager does); switching it on removes them and nothing else changes.	
+SwitchedOffWindowsStopsLoadingTheExtensionAndItsRowsLeaveThe	IDS_SWITCHED_OFF_WINDOWS_STOPS_LOADING_THE_EXTENSION_AND_ITS_ROWS_LEAVE_THE	2964	关闭后，Windows 不再加载这个扩展，它添加的菜单项也随之消失。FileP 只是把它的注册表项挪到旁边的“-”分组（和 ContextMenuManager 的做法相同），重新打开就挪回来。	Switched off, Windows stops loading the extension and its rows leave the menu. FileP moves its key to the sibling ""-"" group (as ContextMenuManager does); switching it on moves it back.	
 ItsProgramIsGoneUsuallyLeftBehindByAnUninstallerSoTheEntryCa	IDS_ITS_PROGRAM_IS_GONE_USUALLY_LEFT_BEHIND_BY_AN_UNINSTALLER_SO_THE_ENTRY_CA	2965	\n它指向的程序已经不存在（多半是卸载时没清理干净），可以直接删除这个残留项。删除前会导出 .reg 备份，之后也能撤销。	\nIts program is gone (usually left behind by an uninstaller), so the entry can be deleted. A .reg backup is exported first and the delete can be undone.	
 NothingIsWrittenUntilYouChooseApplyChanges	IDS_NOTHING_IS_WRITTEN_UNTIL_YOU_CHOOSE_APPLY_CHANGES	2966	\n所有改动点“应用更改”后才会写入注册表。	\nNothing is written until you choose Apply changes.	
 PulseIntegrationExeIsMissing	IDS_PULSE_INTEGRATION_EXE_IS_MISSING	2967	找不到 pulse_integration.exe	pulse_integration.exe is missing	
@@ -1800,7 +1800,7 @@ JustNow_2	IDS_JUST_NOW_2	2998	刚才	Just now
 SecAgo	IDS_SEC_AGO	2999	 秒前	 sec ago	
 MinAgo	IDS_MIN_AGO	3000	 分钟前	 min ago	
 HrAgo	IDS_HR_AGO	3001	 小时前	 hr ago	
-PulseShellExeNotFoundItMustBeInTheSameFolderAsPulse	IDS_PULSE_SHELL_EXE_NOT_FOUND_IT_MUST_BE_IN_THE_SAME_FOLDER_AS_PULSE	3002	找不到 pulse_shell.exe（需与 Pulse 放在同一目录）	pulse_shell.exe not found (it must be in the same folder as Pulse)	
+PulseShellExeNotFoundItMustBeInTheSameFolderAsPulse	IDS_PULSE_SHELL_EXE_NOT_FOUND_IT_MUST_BE_IN_THE_SAME_FOLDER_AS_PULSE	3002	找不到 pulse_shell.exe（需与 FileP 放在同一目录）	pulse_shell.exe not found (it must be in the same folder as FileP)	
 CouldNotStartPulseShellExeError	IDS_COULD_NOT_START_PULSE_SHELL_EXE_ERROR	3003	无法启动 pulse_shell.exe（错误 	Could not start pulse_shell.exe (error 	
 PulseShellExePipeIsBusy	IDS_PULSE_SHELL_EXE_PIPE_IS_BUSY	3004	pulse_shell.exe 管道忙碌	pulse_shell.exe pipe is busy	
 PulseShellExeExitedRightAfterStarting	IDS_PULSE_SHELL_EXE_EXITED_RIGHT_AFTER_STARTING	3005	pulse_shell.exe 启动后立即退出	pulse_shell.exe exited right after starting	
@@ -2027,15 +2027,15 @@ Use7ZipToPreviewArchiveContentsIncluding7zRARISOCABAndWIM	IDS_USE7_ZIP_TO_PREVIE
 DownloadAndInstall	IDS_DOWNLOAD_AND_INSTALL	3226	下载并安装	Download and install	
 Remove_2	IDS_REMOVE_2	3227	卸载	Remove	
 UseExistingFFmpeg	IDS_USE_EXISTING_FFMPEG	3228	使用已有 FFmpeg	Use existing FFmpeg	
-OptionalSourceTurnOffToUseThePulseManagedPack	IDS_OPTIONAL_SOURCE_TURN_OFF_TO_USE_THE_PULSE_MANAGED_PACK	3229	可选来源；关闭后使用 Pulse 管理的增强包	Optional source; turn off to use the Pulse-managed pack	
+OptionalSourceTurnOffToUseThePulseManagedPack	IDS_OPTIONAL_SOURCE_TURN_OFF_TO_USE_THE_PULSE_MANAGED_PACK	3229	可选来源；关闭后使用 FileP 管理的增强包	Optional source; turn off to use the FileP-managed pack	
 NoFfmpegExeChosen	IDS_NO_FFMPEG_EXE_CHOSEN	3230	尚未选择 ffmpeg.exe	No ffmpeg.exe chosen	
 Browse	IDS_BROWSE	3231	浏览…	Browse…	
 UseFound	IDS_USE_FOUND	3232	使用检测到的	Use found	
-RemovePacksWhenUninstallingPulse	IDS_REMOVE_PACKS_WHEN_UNINSTALLING_PULSE	3233	卸载 Pulse 时删除增强包	Remove packs when uninstalling Pulse	解除安裝 Pulse 時刪除增強包
-OtherwiseTheyStayAndWorkAgainAfterReinstallingPulse	IDS_OTHERWISE_THEY_STAY_AND_WORK_AGAIN_AFTER_REINSTALLING_PULSE	3234	否则保留，重新安装 Pulse 后可直接使用	Otherwise they stay and work again after reinstalling Pulse	
+RemovePacksWhenUninstallingPulse	IDS_REMOVE_PACKS_WHEN_UNINSTALLING_PULSE	3233	卸载 FileP 时删除增强包	Remove packs when uninstalling FileP	解除安裝 FileP 時刪除增強包
+OtherwiseTheyStayAndWorkAgainAfterReinstallingPulse	IDS_OTHERWISE_THEY_STAY_AND_WORK_AGAIN_AFTER_REINSTALLING_PULSE	3234	否则保留，重新安装 FileP 后可直接使用	Otherwise they stay and work again after reinstalling FileP	
 UpdatePreviewPacksAutomatically	IDS_UPDATE_PREVIEW_PACKS_AUTOMATICALLY	3235	自动更新增强包	Update packs automatically	自動更新增強包
-RunsWithThePulseUpdateCheckAndDownloadsInTheBackground	IDS_RUNS_WITH_THE_PULSE_UPDATE_CHECK_AND_DOWNLOADS_IN_THE_BACKGROUND	3236	随 Pulse 更新检查一起进行，在后台下载	Runs with the Pulse update check and downloads in the background	
-PacksRunInTheIsolatedPreviewProcessACrashOrTimeoutOnlyAffect	IDS_PACKS_RUN_IN_THE_ISOLATED_PREVIEW_PROCESS_ACRASH_OR_TIMEOUT_ONLY_AFFECT	3237	预览增强包在隔离的预览进程中运行：崩溃或超时只影响当前预览，Pulse 会回退到内置的缩略图和文本视图。	Packs run in the isolated preview process: a crash or timeout only affects that preview, and Pulse falls back to its built-in views.	
+RunsWithThePulseUpdateCheckAndDownloadsInTheBackground	IDS_RUNS_WITH_THE_PULSE_UPDATE_CHECK_AND_DOWNLOADS_IN_THE_BACKGROUND	3236	随 FileP 更新检查一起进行，在后台下载	Runs with the FileP update check and downloads in the background	
+PacksRunInTheIsolatedPreviewProcessACrashOrTimeoutOnlyAffect	IDS_PACKS_RUN_IN_THE_ISOLATED_PREVIEW_PROCESS_ACRASH_OR_TIMEOUT_ONLY_AFFECT	3237	预览增强包在隔离的预览进程中运行：崩溃或超时只影响当前预览，FileP 会回退到内置的缩略图和文本视图。	Packs run in the isolated preview process: a crash or timeout only affects that preview, and FileP falls back to its built-in views.	
 NoPreviewPacksInstalled	IDS_NO_PREVIEW_PACKS_INSTALLED	3238	尚未安装增强包	No packs installed	尚未安裝增強包
 UInstalledS	IDS_UINSTALLED_S	3239	已安装 %u 个 · 占用 %s	%u installed · %s	
 Found	IDS_FOUND	3240	检测到：	Found: 	
@@ -2050,9 +2050,9 @@ NoMediaSourceAvailableDownloadAPackOrChooseExistingFFmpeg	IDS_NO_MEDIA_SOURCE_AV
 NoMediaSourceAvailableChooseExistingFFmpeg	IDS_NO_MEDIA_SOURCE_AVAILABLE_CHOOSE_EXISTING_FFMPEG	3249	尚无可用媒体来源；可选择已有 FFmpeg	No media source available; choose existing FFmpeg	
 SourceExistingFFmpegInvalidPathChooseAgain	IDS_SOURCE_EXISTING_FFMPEG_INVALID_PATH_CHOOSE_AGAIN	3250	当前来源：已有 FFmpeg（路径无效，请重新选择）	Source: existing FFmpeg (invalid path; choose again)	
 OffSelectedSourceExistingFFmpeg	IDS_OFF_SELECTED_SOURCE_EXISTING_FFMPEG	3251	已停用；所选来源：已有 FFmpeg	Off; selected source: existing FFmpeg	
-OffSelectedSourcePulseManagedPack	IDS_OFF_SELECTED_SOURCE_PULSE_MANAGED_PACK	3252	已停用；所选来源：Pulse 管理的增强包	Off; selected source: Pulse-managed pack	
+OffSelectedSourcePulseManagedPack	IDS_OFF_SELECTED_SOURCE_PULSE_MANAGED_PACK	3252	已停用；所选来源：FileP 管理的增强包	Off; selected source: FileP-managed pack	
 SourceExistingFFmpegUserFileNotVerified	IDS_SOURCE_EXISTING_FFMPEG_USER_FILE_NOT_VERIFIED	3253	当前来源：已有 FFmpeg（用户文件，不做完整性校验）	Source: existing FFmpeg (user file, not verified)	
-SourcePulseManagedPack	IDS_SOURCE_PULSE_MANAGED_PACK	3254	当前来源：Pulse 管理的增强包	Source: Pulse-managed pack	
+SourcePulseManagedPack	IDS_SOURCE_PULSE_MANAGED_PACK	3254	当前来源：FileP 管理的增强包	Source: FileP-managed pack	
 Downloading	IDS_DOWNLOADING	3255	正在下载… 	Downloading… 	
 Checking	IDS_CHECKING	3256	检测中	Checking	
 NotInstalled	IDS_NOT_INSTALLED	3257	未安装	Not installed	
@@ -2080,7 +2080,7 @@ SystemContextMenu	IDS_SYSTEM_CONTEXT_MENU	3278	系统右键菜单	System context
 ChangesApplyToTheContextMenuInFileExplorerAndEveryAppSwitche	IDS_CHANGES_APPLY_TO_THE_CONTEXT_MENU_IN_FILE_EXPLORER_AND_EVERY_APP_SWITCHE	3279	改动作用于资源管理器和所有应用的右键菜单。开关先记下，点“应用更改”才写入注册表；写入前自动导出 .reg 备份，随时可以撤销或全部还原。	Changes apply to the context menu in File Explorer and every app. Switches are only noted until you choose Apply changes; a .reg backup is exported first, and you can undo or restore everything at any time.	
 ActivityLog	IDS_ACTIVITY_LOG	3280	操作日志	Activity log	
 RestoreAll_2	IDS_RESTORE_ALL_2	3281	全部还原…	Restore all…	
-OnlyInsidePulseNoPermissionNeededAlwaysReversible	IDS_ONLY_INSIDE_PULSE_NO_PERMISSION_NEEDED_ALWAYS_REVERSIBLE	3282	只影响 Pulse · 不需要权限 · 随时恢复	Only inside Pulse · no permission needed · always reversible	
+OnlyInsidePulseNoPermissionNeededAlwaysReversible	IDS_ONLY_INSIDE_PULSE_NO_PERMISSION_NEEDED_ALWAYS_REVERSIBLE	3282	只影响 FileP · 不需要权限 · 随时恢复	Only inside FileP · no permission needed · always reversible	
 Switch	IDS_SWITCH	3283	切换 →	Switch →	
 FileExplorerAndEveryAppWrittenWhenYouApplyAllUserChangesNeed	IDS_FILE_EXPLORER_AND_EVERY_APP_WRITTEN_WHEN_YOU_APPLY_ALL_USER_CHANGES_NEED	3284	影响资源管理器和所有应用 · 点“应用更改”后写入，涉及所有用户时只需确认一次管理员权限	File Explorer and every app · written when you apply; all-user changes need one admin confirmation	
 BasicObjects	IDS_BASIC_OBJECTS	3285	基本对象	Basic objects	
@@ -2096,7 +2096,7 @@ Extension	IDS_EXTENSION	3294	扩展名	Extension
 ReadingTheRegistry	IDS_READING_THE_REGISTRY	3295	正在读取注册表…	Reading the registry…	
 Text3296	IDS_TEXT3296	3296			
 ChangeSWaiting	IDS_CHANGE_SWAITING	3297	 项更改待应用	 change(s) waiting	
-PulseSOwnMenuOnlyWindowsIsUnchanged	IDS_PULSE_SOWN_MENU_ONLY_WINDOWS_IS_UNCHANGED	3298	只改 Pulse 自己的右键菜单，Windows 不变	Pulse's own menu only; Windows is unchanged	
+PulseSOwnMenuOnlyWindowsIsUnchanged	IDS_PULSE_SOWN_MENU_ONLY_WINDOWS_IS_UNCHANGED	3298	只改 FileP 自己的右键菜单，Windows 不变	FileP's own menu only; Windows is unchanged	
 Text3299	IDS_TEXT3299	3299	其中 		
 AffectAllUsersOneAdministratorConfirmationARegBackupFirst	IDS_AFFECT_ALL_USERS_ONE_ADMINISTRATOR_CONFIRMATION_AREG_BACKUP_FIRST	3300	 项涉及所有用户，需确认一次管理员权限 · 写入前先导出 .reg 备份	 affect all users: one administrator confirmation · a .reg backup first	
 YourUserOnlyNoAdminNeededARegBackupFirstUndoAnyTime	IDS_YOUR_USER_ONLY_NO_ADMIN_NEEDED_AREG_BACKUP_FIRST_UNDO_ANY_TIME	3301	只改当前用户，无需管理员权限 · 写入前先导出 .reg 备份，可以撤销	Your user only, no admin needed · a .reg backup first; undo any time	
@@ -2124,9 +2124,9 @@ AllUsersOneAdminConfirmationWhenApplied	IDS_ALL_USERS_ONE_ADMIN_CONFIRMATION_WHE
 YourUserOnlyNoAdminNeeded	IDS_YOUR_USER_ONLY_NO_ADMIN_NEEDED	3323	只影响当前用户 · 无需管理员权限	Your user only · no admin needed	
 EnabledInWindows	IDS_ENABLED_IN_WINDOWS	3324	在系统里启用	Enabled in Windows	
 FileExplorerAndEveryApp	IDS_FILE_EXPLORER_AND_EVERY_APP	3325	资源管理器和所有应用	File Explorer and every app	
-ShownInPulseSMenu	IDS_SHOWN_IN_PULSE_SMENU	3326	在 Pulse 右键菜单中显示	Shown in Pulse's menu	
-PulseOnlyWindowsIsUnchanged	IDS_PULSE_ONLY_WINDOWS_IS_UNCHANGED	3327	只影响 Pulse，不改动 Windows	Pulse only; Windows is unchanged	
-HiddenInPulse	IDS_HIDDEN_IN_PULSE	3328	Pulse 中隐藏	Hidden in Pulse	
+ShownInPulseSMenu	IDS_SHOWN_IN_PULSE_SMENU	3326	在 FileP 右键菜单中显示	Shown in FileP's menu	
+PulseOnlyWindowsIsUnchanged	IDS_PULSE_ONLY_WINDOWS_IS_UNCHANGED	3327	只影响 FileP，不改动 Windows	FileP only; Windows is unchanged	
+HiddenInPulse	IDS_HIDDEN_IN_PULSE	3328	FileP 中隐藏	Hidden in FileP	
 OpenFolder_2	IDS_OPEN_FOLDER_2	3329	打开所在文件夹	Open folder	
 PickAnEntryInTheListToSeeItsDetails	IDS_PICK_AN_ENTRY_IN_THE_LIST_TO_SEE_ITS_DETAILS	3330	在左侧列表里点一个条目查看详情。	Pick an entry in the list to see its details.	
 Files_2	IDS_FILES_2	3331	 文件	 files	
@@ -2154,12 +2154,12 @@ Scenes	IDS_SCENES	3352	 个场景	 scenes
 SwitchedOff	IDS_SWITCHED_OFF	3353	已禁用	Switched off	
 OffByContextMenuManager	IDS_OFF_BY_CONTEXT_MENU_MANAGER	3354	由 ContextMenuManager 禁用	Off by ContextMenuManager	
 ExtensionsSlowingTheMenu150Ms	IDS_EXTENSIONS_SLOWING_THE_MENU150_MS	3355	拖慢右键 ≥150 ms 的扩展	Extensions slowing the menu ≥150 ms	
-ChangesMadeByPulse	IDS_CHANGES_MADE_BY_PULSE	3356	Pulse 做过的改动	Changes made by Pulse	
+ChangesMadeByPulse	IDS_CHANGES_MADE_BY_PULSE	3356	FileP 做过的改动	Changes made by FileP	
 SlowestExtensions	IDS_SLOWEST_EXTENSIONS	3357	慢扩展排行	Slowest extensions	
-MeasuredWhilePulseBuiltItsOwnMenuTheLastQueryPerSceneSwitchi	IDS_MEASURED_WHILE_PULSE_BUILT_ITS_OWN_MENU_THE_LAST_QUERY_PER_SCENE_SWITCHI	3358	来自 Pulse 右键菜单的实测数据（每个场景最近一次）。禁用后，资源管理器和 Pulse 的右键都会变快。	Measured while Pulse built its own menu (the last query per scene). Switching one off speeds up File Explorer and Pulse alike.	
-NoDataYetRightClickAFewFilesOrFoldersInPulseAndTheTimesShowU	IDS_NO_DATA_YET_RIGHT_CLICK_AFEW_FILES_OR_FOLDERS_IN_PULSE_AND_THE_TIMES_SHOW_U	3359	还没有数据。在 Pulse 里右键几次文件或文件夹，这里就会显示各扩展的耗时。	No data yet. Right-click a few files or folders in Pulse and the times show up here.	
-SkipInPulse	IDS_SKIP_IN_PULSE	3360	Pulse 跳过	Skip in Pulse	
-SkippedInPulse	IDS_SKIPPED_IN_PULSE	3361	Pulse 已跳过	Skipped in Pulse	
+MeasuredWhilePulseBuiltItsOwnMenuTheLastQueryPerSceneSwitchi	IDS_MEASURED_WHILE_PULSE_BUILT_ITS_OWN_MENU_THE_LAST_QUERY_PER_SCENE_SWITCHI	3358	来自 FileP 右键菜单的实测数据（每个场景最近一次）。禁用后，资源管理器和 FileP 的右键都会变快。	Measured while FileP built its own menu (the last query per scene). Switching one off speeds up File Explorer and FileP alike.	
+NoDataYetRightClickAFewFilesOrFoldersInPulseAndTheTimesShowU	IDS_NO_DATA_YET_RIGHT_CLICK_AFEW_FILES_OR_FOLDERS_IN_PULSE_AND_THE_TIMES_SHOW_U	3359	还没有数据。在 FileP 里右键几次文件或文件夹，这里就会显示各扩展的耗时。	No data yet. Right-click a few files or folders in FileP and the times show up here.	
+SkipInPulse	IDS_SKIP_IN_PULSE	3360	FileP 跳过	Skip in FileP	
+SkippedInPulse	IDS_SKIPPED_IN_PULSE	3361	FileP 已跳过	Skipped in FileP	
 TurnOff	IDS_TURN_OFF	3362	禁用	Turn off	
 MarksLeftByOtherTools	IDS_MARKS_LEFT_BY_OTHER_TOOLS	3363	来自其他工具的禁用标记	Marks left by other tools	
 MarksWrittenByContextMenuManagerShowInTheirScenesAndCanBeRes	IDS_MARKS_WRITTEN_BY_CONTEXT_MENU_MANAGER_SHOW_IN_THEIR_SCENES_AND_CAN_BE_RES	3364	识别 ContextMenuManager 写下的标记，显示在对应场景里，也可以在这里一键还原。	Marks written by ContextMenuManager show in their scenes and can be restored here.	
@@ -2169,7 +2169,7 @@ EveryBatchHasItsRegBackupAndCanBeUndoneStepByStep	IDS_EVERY_BATCH_HAS_ITS_REG_BA
 NoChangesYetPickASceneOnTheLeftToStart	IDS_NO_CHANGES_YET_PICK_ASCENE_ON_THE_LEFT_TO_START	3368	还没有改动。在左侧选择一个场景开始。	No changes yet. Pick a scene on the left to start.	
 Undone_2	IDS_UNDONE_2	3369	已撤销 · 	Undone · 	
 PickASceneOnTheLeftToSeeItsMenuHereLiveWithYourChanges	IDS_PICK_ASCENE_ON_THE_LEFT_TO_SEE_ITS_MENU_HERE_LIVE_WITH_YOUR_CHANGES	3370	在左侧选择一个场景，这里会显示它的右键菜单，并实时反映你的改动。	Pick a scene on the left to see its menu here, live with your changes.	
-TheOverviewUsesWhatPulseMeasuredOnRealRightClicksNothingElse	IDS_THE_OVERVIEW_USES_WHAT_PULSE_MEASURED_ON_REAL_RIGHT_CLICKS_NOTHING_ELSE	3371	概览页的数据来自 Pulse 实际右键时的测量，不需要额外运行任何东西。	The overview uses what Pulse measured on real right-clicks; nothing else needs to run.	
+TheOverviewUsesWhatPulseMeasuredOnRealRightClicksNothingElse	IDS_THE_OVERVIEW_USES_WHAT_PULSE_MEASURED_ON_REAL_RIGHT_CLICKS_NOTHING_ELSE	3371	概览页的数据来自 FileP 实际右键时的测量，不需要额外运行任何东西。	The overview uses what FileP measured on real right-clicks; nothing else needs to run.	
 EnterDoubleClick	IDS_ENTER_DOUBLE_CLICK	3372	Enter / 双击	Enter / Double-click	
 Tab	IDS_TAB	3373	Tab 分隔	Tab	
 Semicolon	IDS_SEMICOLON	3374	分号	Semicolon	
@@ -2212,7 +2212,7 @@ SizeCounting	IDS_SIZE_COUNTING	3410	大小 · 计算中	Size · counting
 WheelToScrollSpaceForQuickLook	IDS_WHEEL_TO_SCROLL_SPACE_FOR_QUICK_LOOK	3411	滚轮浏览列表 · Space 快速预览	Wheel to scroll · Space for Quick Look	
 SpaceForQuickLook	IDS_SPACE_FOR_QUICK_LOOK	3412	Space 快速预览	Space for Quick Look	
 TargetUnavailable	IDS_TARGET_UNAVAILABLE	3413	目标不可用	Target unavailable	
-ThePreviewUsesTheSameDataAsTheRealMenuCommandsFromWindowsAnd	IDS_THE_PREVIEW_USES_THE_SAME_DATA_AS_THE_REAL_MENU_COMMANDS_FROM_WINDOWS_AND	3414	预览与实际菜单使用同一份数据。Windows 和其他软件的命令排在 Pulse 项目之后，具体条目在「系统右键菜单」里查看。	The preview uses the same data as the real menu. Commands from Windows and other apps follow Pulse's own; see System context menu for them.	
+ThePreviewUsesTheSameDataAsTheRealMenuCommandsFromWindowsAnd	IDS_THE_PREVIEW_USES_THE_SAME_DATA_AS_THE_REAL_MENU_COMMANDS_FROM_WINDOWS_AND	3414	预览与实际菜单使用同一份数据。Windows 和其他软件的命令排在 FileP 项目之后，具体条目在「系统右键菜单」里查看。	The preview uses the same data as the real menu. Commands from Windows and other apps follow FileP's own; see System context menu for them.	
 Preset	IDS_PRESET	3415	方案	Preset	
 WindowsAndOtherApps	IDS_WINDOWS_AND_OTHER_APPS	3416	Windows 和其他软件	Windows and other apps	
 WindowsAppCommands	IDS_WINDOWS_APP_COMMANDS	3417	系统与软件命令	Windows & app commands	
@@ -2280,13 +2280,13 @@ OpRenamedPrefix	IDS_OP_RENAMED_PREFIX	3478	已重命名 	Renamed 	已重新命�
 OpCreatingPrefix	IDS_OP_CREATING_PREFIX	3479	正在新建 	Creating 	正在新增 
 OpRenamingPrefix	IDS_OP_RENAMING_PREFIX	3480	正在重命名 	Renaming 	正在重新命名 
 ToolbarSectionView	IDS_TOOLBAR_SECTION_VIEW	3481	排序与筛选	Sort & filter	排序與篩選
-PacksPageIntro	IDS_PACKS_PAGE_INTRO	3482	按需为 Pulse 添加模块：预览更多格式、搜索文件正文……每个模块独立下载、在隔离进程中运行，随时可以停用或卸载，不影响 Pulse 本体。	Add modules to Pulse as you need them: preview more formats, search inside files and more. Each module downloads on its own, runs in an isolated process and can be turned off or removed at any time without affecting Pulse itself.	按需為 Pulse 新增模組：預覽更多格式、搜尋檔案內文……每個模組獨立下載、在隔離處理程序中執行，隨時可以停用或解除安裝，不影響 Pulse 本體。
+PacksPageIntro	IDS_PACKS_PAGE_INTRO	3482	按需为 FileP 添加模块：预览更多格式、搜索文件正文……每个模块独立下载、在隔离进程中运行，随时可以停用或卸载，不影响 FileP 本体。	Add modules to FileP as you need them: preview more formats, search inside files and more. Each module downloads on its own, runs in an isolated process and can be turned off or removed at any time without affecting FileP itself.	按需為 FileP 新增模組：預覽更多格式、搜尋檔案內文……每個模組獨立下載、在隔離處理程序中執行，隨時可以停用或解除安裝，不影響 FileP 本體。
 ManagePacks	IDS_MANAGE_PACKS	3483	管理增强包	Manage packs	管理增強包
 UpdateAllPacks	IDS_UPDATE_ALL_PACKS	3484	全部更新	Update all	全部更新
 PackSearchSection	IDS_PACK_SEARCH_SECTION	3485	搜索	Search	搜尋
 ContentPackTitle	IDS_CONTENT_PACK_TITLE	3486	内容搜索	Content search	內容搜尋
 ContentPackDesc	IDS_CONTENT_PACK_DESC	3487	在 Word、Excel、PowerPoint、PDF 和文本文件的正文中搜索关键词，结果中高亮命中片段。索引只在本机建立，不上传任何内容。	Search for words inside Word, Excel, PowerPoint, PDF and text files, with the matching passages highlighted. The index is built on this PC only; nothing is uploaded.	在 Word、Excel、PowerPoint、PDF 和文字檔的內文中搜尋關鍵字，結果中醒目提示命中片段。索引只在本機建立，不上傳任何內容。
-ContentPackMeta	IDS_CONTENT_PACK_META	3488	SQLite FTS5 · PDFium · 随 Pulse 同步更新	SQLite FTS5 · PDFium · updates with Pulse	SQLite FTS5 · PDFium · 隨 Pulse 同步更新
+ContentPackMeta	IDS_CONTENT_PACK_META	3488	SQLite FTS5 · PDFium · 随 FileP 同步更新	SQLite FTS5 · PDFium · updates with FileP	SQLite FTS5 · PDFium · 隨 FileP 同步更新
 ManageContentIndex	IDS_MANAGE_CONTENT_INDEX	3489	管理索引	Manage index	管理索引
 OcrPackTitle	IDS_OCR_PACK_TITLE	3490	图片文字识别（OCR）	Text in images (OCR)	圖片文字辨識（OCR）
 OcrPackDesc	IDS_OCR_PACK_DESC	3491	截图、扫描件和照片里的文字也能被搜到。需要先安装「内容搜索」模块。	Find the text in screenshots, scans and photos too. Needs the Content search module.	截圖、掃描檔和相片裡的文字也能被搜到。需要先安裝「內容搜尋」模組。
@@ -2449,7 +2449,7 @@ LockVerbCopy	IDS_LOCK_VERB_COPY	3611	复制	copied	複製
 LockVerbRename	IDS_LOCK_VERB_RENAME	3612	重命名	renamed	重新命名
 LockSwitchTo	IDS_LOCK_SWITCH_TO	3613	切换到程序	Switch to	切換到程式
 LockClosed	IDS_LOCK_CLOSED	3614	✓ 已关闭	✓ Closed	✓ 已關閉
-LockWatch	IDS_LOCK_WATCH	3615	关闭这些程序后会自动继续，无需再点重试	Closing them lets Pulse continue on its own, no need to retry	關閉這些程式後會自動繼續，無需再按重試
+LockWatch	IDS_LOCK_WATCH	3615	关闭这些程序后会自动继续，无需再点重试	Closing them lets FileP continue on its own, no need to retry	關閉這些程式後會自動繼續，無需再按重試
 LockReleased	IDS_LOCK_RELEASED	3616	文件已释放，正在继续…	The file is free, continuing…	檔案已釋放，正在繼續…
 LockSkip	IDS_LOCK_SKIP	3617	跳过此项	Skip this item	略過此項
 LockMoreLead	IDS_LOCK_MORE_LEAD	3618	以及另外 	and 	以及另外 
@@ -2592,7 +2592,7 @@ TagLibraryExport	IDS_TAG_LIBRARY_EXPORT	3758	导出标签库…	Export tag libra
 TagLibraryExported	IDS_TAG_LIBRARY_EXPORTED	3759	已导出 %d 个标签	Exported %d tags	已匯出 %d 個標籤
 TagLibraryImported	IDS_TAG_LIBRARY_IMPORTED	3760	已导入 %d 个标签，%d 项	Imported %d tags, %d items	已匯入 %d 個標籤，%d 個項目
 TagLibrarySkipped	IDS_TAG_LIBRARY_SKIPPED	3761	%d 项在这台电脑上找不到，已跳过	%d items aren't on this PC and were skipped	%d 個項目在這台電腦上找不到，已略過
-TagLibraryBadFile	IDS_TAG_LIBRARY_BAD_FILE	3762	这不是 Pulse 标签库文件	This isn't a Pulse tag library	這不是 Pulse 標籤庫檔案
+TagLibraryBadFile	IDS_TAG_LIBRARY_BAD_FILE	3762	这不是 FileP 标签库文件	This isn't a FileP tag library	這不是 FileP 標籤庫檔案
 TagLibraryExportFailed	IDS_TAG_LIBRARY_EXPORT_FAILED	3763	导出标签库失败	Couldn't export the tag library	匯出標籤庫失敗
 TagRulesMenu	IDS_TAG_RULES_MENU	3764	自动规则	Auto rules	自動規則
 TagRuleNew	IDS_TAG_RULE_NEW	3765	新建规则…	New rule…	新增規則…
@@ -2708,7 +2708,7 @@ CloudFreedToast	IDS_CLOUD_FREED_TOAST	3908	已释放 · 文件还在云端，需
 CloudKeptToast	IDS_CLOUD_KEPT_TOAST	3909	已设为始终保留 · 网盘会在后台下载	Kept on this device · the drive downloads them in the background	已設為一律保留 · 雲端硬碟會在背景下載
 CloudPinFailed	IDS_CLOUD_PIN_FAILED	3910	有 {n} 项未能更改	{n} items could not be changed	有 {n} 項無法變更
 CloudOpenDownloadsFirst	IDS_CLOUD_OPEN_DOWNLOADS_FIRST	3911	会先下载	Downloads first	會先下載
-CloudOnlyNote	IDS_CLOUD_ONLY_NOTE	3912	这个文件的内容不在本地（{size}）。Pulse 不会为了预览自动下载；双击打开时，由{provider}下载。	This file's content is not on this device ({size}). Pulse never downloads just to preview; when you open it, {provider} downloads it.	這個檔案的內容不在本機（{size}）。Pulse 不會為了預覽自動下載；按兩下開啟時，由{provider}下載。
+CloudOnlyNote	IDS_CLOUD_ONLY_NOTE	3912	这个文件的内容不在本地（{size}）。FileP 不会为了预览自动下载；双击打开时，由{provider}下载。	This file's content is not on this device ({size}). FileP never downloads just to preview; when you open it, {provider} downloads it.	這個檔案的內容不在本機（{size}）。FileP 不會為了預覽自動下載；按兩下開啟時，由{provider}下載。
 CloudDownloadPreview	IDS_CLOUD_DOWNLOAD_PREVIEW	3913	下载并预览	Download and preview	下載並預覽
 CloudDownloadingFrom	IDS_CLOUD_DOWNLOADING_FROM	3914	正在从{provider}下载… {n}%	Downloading from {provider}… {n}%	正在從{provider}下載… {n}%
 CloudDownloadFailed	IDS_CLOUD_DOWNLOAD_FAILED	3915	未能从{provider}下载这个文件	Could not download this file from {provider}	無法從{provider}下載這個檔案
@@ -2748,18 +2748,18 @@ MountedDriveNote	IDS_MOUNTED_DRIVE_NOTE	3923	挂载盘符 · 不建索引、不�
 # AI 增强包: ai_pack_ui.cpp and its card on 设置 › 增强包.
 AiPackSection	IDS_AI_PACK_SECTION	3949	AI	AI	
 AiPackTitle	IDS_AI_PACK_TITLE	3950	AI 与 MCP	AI and MCP	
-AiPackDesc	IDS_AI_PACK_DESC	3951	让 Claude 等支持 MCP 的 AI 应用查找、查看和整理你的文件：只读操作直接执行，改动文件前都要在 Pulse 里确认，并且可以撤销。不用时不运行任何后台程序。	Lets AI apps that support MCP, such as Claude, find, inspect and organize your files: reads run directly, every change is confirmed in Pulse first and can be undone. Nothing runs in the background while it is not in use.	讓 Claude 等支援 MCP 的 AI 應用程式查詢、檢視和整理你的檔案：唯讀操作直接執行，改動檔案前都要在 Pulse 裡確認，並且可以復原。不用時不執行任何背景程式。
-AiPackMeta	IDS_AI_PACK_META	3952	Pulse.AI.exe · MCP · 随 Pulse 同步更新	Pulse.AI.exe · MCP · updates with Pulse	
+AiPackDesc	IDS_AI_PACK_DESC	3951	让 Claude 等支持 MCP 的 AI 应用查找、查看和整理你的文件：只读操作直接执行，改动文件前都要在 FileP 里确认，并且可以撤销。不用时不运行任何后台程序。	Lets AI apps that support MCP, such as Claude, find, inspect and organize your files: reads run directly, every change is confirmed in FileP first and can be undone. Nothing runs in the background while it is not in use.	讓 Claude 等支援 MCP 的 AI 應用程式查詢、檢視和整理你的檔案：唯讀操作直接執行，改動檔案前都要在 FileP 裡確認，並且可以復原。不用時不執行任何背景程式。
+AiPackMeta	IDS_AI_PACK_META	3952	Pulse.AI.exe · MCP · 随 FileP 同步更新	Pulse.AI.exe · MCP · updates with FileP	
 AiPackToastTitle	IDS_AI_PACK_TOAST_TITLE	3953	AI 增强包	AI pack	
 AiPackDownloading	IDS_AI_PACK_DOWNLOADING	3954	正在下载（约 %s）	Downloading (about %s)	
 AiPackAskTitle	IDS_AI_PACK_ASK_TITLE	3955	下载 AI 增强包	Download the AI pack	
 AiPackAskMessage	IDS_AI_PACK_ASK_MESSAGE	3956	AI 与 MCP 由增强包提供，需要时才下载，不占用安装包体积。下载约 %s。	AI and MCP come in an enhancement pack that is downloaded only when you want them. The download is about %s.	
 AiPackUpdateTitle	IDS_AI_PACK_UPDATE_TITLE	3957	更新 AI 增强包	Update the AI pack	
-AiPackUpdateMessage	IDS_AI_PACK_UPDATE_MESSAGE	3958	Pulse 已更新，AI 增强包需要更新到相同版本才能使用（约 %s）。	Pulse was updated; the AI pack has to be updated to the same version before it can be used (about %s).	
+AiPackUpdateMessage	IDS_AI_PACK_UPDATE_MESSAGE	3958	FileP 已更新，AI 增强包需要更新到相同版本才能使用（约 %s）。	FileP was updated; the AI pack has to be updated to the same version before it can be used (about %s).	
 AiPackRepairTitle	IDS_AI_PACK_REPAIR_TITLE	3959	修复 AI 增强包	Repair the AI pack	
 AiPackRepairMessage	IDS_AI_PACK_REPAIR_MESSAGE	3960	AI 增强包的文件不完整或已被改动，需要重新下载（约 %s）。	Files of the AI pack are missing or were changed; it has to be downloaded again (about %s).	
 AiPackAskItem	IDS_AI_PACK_ASK_ITEM	3961	Pulse.AI.exe — MCP 服务与 AI 助手	Pulse.AI.exe — MCP server and AI assistant	
-AiPackAskNote	IDS_AI_PACK_ASK_NOTE	3962	从 Pulse 在 GitHub 的同一发布页下载并校验 SHA-256，装在当前用户目录下，不需要管理员权限。装好后默认关闭，不会自动连接任何 AI 服务。	Downloaded from the same GitHub release as Pulse and checked against its SHA-256; installed for the current user, no administrator rights needed. It stays off and contacts no AI service until you turn it on.	
+AiPackAskNote	IDS_AI_PACK_ASK_NOTE	3962	从 FileP 在 GitHub 的同一发布页下载并校验 SHA-256，装在当前用户目录下，不需要管理员权限。装好后默认关闭，不会自动连接任何 AI 服务。	Downloaded from the same GitHub release as FileP and checked against its SHA-256; installed for the current user, no administrator rights needed. It stays off and contacts no AI service until you turn it on.	
 AiPackNotNow	IDS_AI_PACK_NOT_NOW	3963	暂不	Not now	
 AiPackStartFailed	IDS_AI_PACK_START_FAILED	3964	无法开始下载。	The download could not start.	
 AiPackInstalledTitle	IDS_AI_PACK_INSTALLED_TITLE	3965	AI 增强包已安装	AI pack installed	
@@ -2771,8 +2771,8 @@ AiPackRemoveMessage	IDS_AI_PACK_REMOVE_MESSAGE	3970	将删除 Pulse.AI.exe，AI 
 AiPackRemoveFailed	IDS_AI_PACK_REMOVE_FAILED	3971	无法卸载：AI 增强包正在使用中。请先断开 AI 应用，再重试。	Couldn't remove it: the AI pack is in use. Disconnect the AI app and try again.	無法解除安裝：AI 增強包正在使用中。請先中斷 AI 應用程式的連線，再重試。
 AiPackRemoved	IDS_AI_PACK_REMOVED	3972	AI 增强包已卸载	AI pack removed	
 AiUndoCreateZip	IDS_AI_UNDO_CREATE_ZIP	3973	新建压缩包（{client}）	New zip by {client}	新增壓縮檔（{client}）
-AiConnectTitle	IDS_AI_CONNECT_TITLE	3974	「{client}」想连接 Pulse	{client} wants to connect to Pulse	「{client}」想連線 Pulse
-AiConnectMessage	IDS_AI_CONNECT_MESSAGE	3975	连接后，它可以浏览和搜索你的文件夹、查看文件属性（不读取文件内容），并在 Pulse 里显示文件。新建任何文件之前都会先问你。	Once connected, it can browse and search your folders, look at file properties (never file contents) and show files in Pulse. It asks you before creating anything.	連線後，它可以瀏覽和搜尋你的資料夾、查看檔案屬性（不讀取檔案內容），並在 Pulse 裡顯示檔案。新增任何檔案之前都會先問你。
+AiConnectTitle	IDS_AI_CONNECT_TITLE	3974	「{client}」想连接 FileP	{client} wants to connect to FileP	「{client}」想連線 FileP
+AiConnectMessage	IDS_AI_CONNECT_MESSAGE	3975	连接后，它可以浏览和搜索你的文件夹、查看文件属性（不读取文件内容），并在 FileP 里显示文件。新建任何文件之前都会先问你。	Once connected, it can browse and search your folders, look at file properties (never file contents) and show files in Pulse. It asks you before creating anything.	連線後，它可以瀏覽和搜尋你的資料夾、查看檔案屬性（不讀取檔案內容），並在 FileP 裡顯示檔案。新增任何檔案之前都會先問你。
 AiConnectAllow	IDS_AI_CONNECT_ALLOW	3976	允许	Allow	允許
 AiConnectSession	IDS_AI_CONNECT_SESSION	3977	只允许这次	Allow this time	只允許這次
 AiDeny	IDS_AI_DENY	3978	拒绝	Deny	拒絕
@@ -2791,12 +2791,12 @@ AiToolGetContext	IDS_AI_TOOL_GET_CONTEXT	3990	查看当前窗口	Current window	
 AiToolListFolder	IDS_AI_TOOL_LIST_FOLDER	3991	列出文件夹	List folder	列出資料夾
 AiToolSearch	IDS_AI_TOOL_SEARCH	3992	搜索	Search	搜尋
 AiToolProperties	IDS_AI_TOOL_PROPERTIES	3993	查看属性	Properties	查看屬性
-AiToolReveal	IDS_AI_TOOL_REVEAL	3994	在 Pulse 中显示	Show in Pulse	在 Pulse 中顯示
+AiToolReveal	IDS_AI_TOOL_REVEAL	3994	在 FileP 中显示	Show in FileP	在 FileP 中顯示
 AiToolCreateZip	IDS_AI_TOOL_CREATE_ZIP	3995	新建压缩包	Create zip	新增壓縮檔
 AiToolUndo	IDS_AI_TOOL_UNDO	3996	撤销	Undo	復原
-AiPageIntro	IDS_AI_PAGE_INTRO	3997	让 Claude 等支持 MCP 的 AI 应用使用 Pulse 查找和整理文件。只读操作直接执行；新建文件前会先在 Pulse 里问你，并且可以撤销。	Let AI apps that support MCP, such as Claude, use Pulse to find and organize files. Reading happens directly; before creating a file they ask you in Pulse, and you can undo it.	讓 Claude 等支援 MCP 的 AI 應用程式使用 Pulse 尋找和整理檔案。唯讀操作直接執行；新增檔案前會先在 Pulse 裡問你，並且可以復原。
+AiPageIntro	IDS_AI_PAGE_INTRO	3997	让 Claude 等支持 MCP 的 AI 应用使用 FileP 查找和整理文件。只读操作直接执行；新建文件前会先在 FileP 里问你，并且可以撤销。	Let AI apps that support MCP, such as Claude, use FileP to find and organize files. Reading happens directly; before creating a file they ask you in FileP, and you can undo it.	讓 Claude 等支援 MCP 的 AI 應用程式使用 FileP 尋找和整理檔案。唯讀操作直接執行；新增檔案前會先在 FileP 裡問你，並且可以復原。
 AiEnableTitle	IDS_AI_ENABLE_TITLE	3998	允许 AI 应用连接	Allow AI apps to connect	允許 AI 應用程式連線
-AiEnableOffDesc	IDS_AI_ENABLE_OFF_DESC	3999	已关闭。打开后，配置好的 AI 应用就能连接 Pulse；第一次连接时会先问你。	Off. When it is on, AI apps you set up can connect to Pulse; the first time, Pulse asks you.	已關閉。開啟後，設定好的 AI 應用程式就能連線 Pulse；第一次連線時會先問你。
+AiEnableOffDesc	IDS_AI_ENABLE_OFF_DESC	3999	已关闭。打开后，配置好的 AI 应用就能连接 FileP；第一次连接时会先问你。	Off. When it is on, AI apps you set up can connect to FileP; the first time, FileP asks you.	已關閉。開啟後，設定好的 AI 應用程式就能連線 FileP；第一次連線時會先問你。
 AiStatusWaiting	IDS_AI_STATUS_WAITING	4000	正在等待 AI 应用连接	Waiting for AI apps to connect	正在等待 AI 應用程式連線
 AiStatusConnected	IDS_AI_STATUS_CONNECTED	4001	已连接：{clients}	Connected: {clients}	已連線：{clients}
 AiStatusStarting	IDS_AI_STATUS_STARTING	4002	正在准备…	Getting ready…	正在準備…
@@ -2808,14 +2808,14 @@ AiAppsSection	IDS_AI_APPS_SECTION	4007	应用	Apps	應用程式
 AiAppsEmpty	IDS_AI_APPS_EMPTY	4008	还没有应用连接过。	No app has connected yet.	還沒有應用程式連線過。
 AiGrantAllowed	IDS_AI_GRANT_ALLOWED	4009	已允许	Allowed	已允許
 AiGrantAsk	IDS_AI_GRANT_ASK	4010	连接时询问	Asks when it connects	連線時詢問
-AiGrantSession	IDS_AI_GRANT_SESSION	4011	允许到 Pulse 退出	Allowed until Pulse quits	允許到 Pulse 結束
+AiGrantSession	IDS_AI_GRANT_SESSION	4011	允许到 FileP 退出	Allowed until FileP quits	允許到 FileP 結束
 AiGrantDenied	IDS_AI_GRANT_DENIED	4012	已拒绝	Denied	已拒絕
 AiConnectedNow	IDS_AI_CONNECTED_NOW	4013	已连接	Connected	已連線
 AiRemoveEntry	IDS_AI_REMOVE_ENTRY	4014	移除	Remove	移除
 AiRulesSection	IDS_AI_RULES_SECTION	4015	始终允许	Always allowed	一律允許
 AiRulesEmpty	IDS_AI_RULES_EMPTY	4016	没有始终允许的操作。在新建确认里选「始终允许这个文件夹」后会列在这里。	Nothing is always allowed. Choosing “Always allow here” when asked adds it here.	沒有一律允許的操作。在新增確認裡選「一律允許這個資料夾」後會列在這裡。
-AiRecentSection	IDS_AI_RECENT_SECTION	4017	本次运行	Since Pulse started	本次執行
-AiRecentEmpty	IDS_AI_RECENT_EMPTY	4018	Pulse 启动后还没有调用。	No calls since Pulse started.	Pulse 啟動後還沒有呼叫。
+AiRecentSection	IDS_AI_RECENT_SECTION	4017	本次运行	Since FileP started	本次執行
+AiRecentEmpty	IDS_AI_RECENT_EMPTY	4018	FileP 启动后还没有调用。	No calls since FileP started.	FileP 啟動後還沒有呼叫。
 AiOpenLog	IDS_AI_OPEN_LOG	4019	打开活动记录	Open activity log	開啟活動記錄
 AiOutcomeRunning	IDS_AI_OUTCOME_RUNNING	4020	进行中	Running	進行中
 AiOutcomeDenied	IDS_AI_OUTCOME_DENIED	4021	你拒绝了	You declined	你拒絕了
@@ -2826,7 +2826,7 @@ AiOutcomeDone	IDS_AI_OUTCOME_DONE	4025	完成	Done	完成
 AiMoreCalls	IDS_AI_MORE_CALLS	4026	更早的 {n} 次调用在活动记录里。	{n} earlier calls are in the activity log.	更早的 {n} 次呼叫在活動記錄裡。
 AiUninstallTitle	IDS_AI_UNINSTALL_TITLE	4027	卸载 AI 增强包	Uninstall the AI pack	解除安裝 AI 增強包
 AiUninstallDesc	IDS_AI_UNINSTALL_DESC	4028	之后可以随时在「增强包」页重新下载。	You can download it again any time on the Enhancement packs page.	之後可以隨時在「增強包」頁重新下載。
-AiSettingsBroken	IDS_AI_SETTINGS_BROKEN	4029	ai.json 无法读取，Pulse 不会改动它。修正或删除这个文件后再试。	ai.json cannot be read, so Pulse leaves it alone. Fix or delete the file, then try again.	ai.json 無法讀取，Pulse 不會變更它。修正或刪除這個檔案後再試。
+AiSettingsBroken	IDS_AI_SETTINGS_BROKEN	4029	ai.json 无法读取，FileP 不会改动它。修正或删除这个文件后再试。	ai.json cannot be read, so FileP leaves it alone. Fix or delete the file, then try again.	ai.json 無法讀取，FileP 不會變更它。修正或刪除這個檔案後再試。
 AiSnackCreated	IDS_AI_SNACK_CREATED	4030	{client} 新建了「{name}」	{client} created “{name}”	{client} 新增了「{name}」
 AiSnackUndone	IDS_AI_SNACK_UNDONE	4031	{client} 撤销了「{name}」	{client} undid “{name}”	{client} 復原了「{name}」
 AiSnackOpen	IDS_AI_SNACK_OPEN	4032	打开位置	Show	開啟位置
@@ -2838,9 +2838,9 @@ SettingsTransferDesc	IDS_SETTINGS_TRANSFER_DESC	4037	把设置和个人数据导
 SettingsExportButton	IDS_SETTINGS_EXPORT_BUTTON	4038	导出设置…	Export settings…	匯出設定…
 SettingsImportButton	IDS_SETTINGS_IMPORT_BUTTON	4039	导入设置…	Import settings…	匯入設定…
 SettingsRestoreBackup	IDS_SETTINGS_RESTORE_BACKUP	4040	恢复导入前的设置	Restore previous settings	還原匯入前的設定
-SettingsRestartNow	IDS_SETTINGS_RESTART_NOW	4041	立即重启 Pulse	Restart Pulse now	立即重新啟動 Pulse
+SettingsRestartNow	IDS_SETTINGS_RESTART_NOW	4041	立即重启 FileP	Restart FileP now	立即重新啟動 FileP
 SettingsTransferBusy	IDS_SETTINGS_TRANSFER_BUSY	4042	正在处理…	Working…	正在處理…
-SettingsTransferPending	IDS_SETTINGS_TRANSFER_PENDING	4043	导入的设置将在 Pulse 重启后生效。	The imported settings take effect when Pulse restarts.	匯入的設定將在 Pulse 重新啟動後生效。
+SettingsTransferPending	IDS_SETTINGS_TRANSFER_PENDING	4043	导入的设置将在 FileP 重启后生效。	The imported settings take effect when FileP restarts.	匯入的設定將在 FileP 重新啟動後生效。
 SettingsTransferBackupFrom	IDS_SETTINGS_TRANSFER_BACKUP_FROM	4044	导入前的设置已备份（{time}）。	Settings from before the import were backed up ({time}).	匯入前的設定已備份（{time}）。
 TransferCatPrefs	IDS_TRANSFER_CAT_PREFS	4045	设置（含快捷键与右键菜单）	Settings, shortcuts and context menu	設定（含快速鍵與右鍵選單）
 TransferCatPlaces	IDS_TRANSFER_CAT_PLACES	4046	快速访问、收藏夹和工作区	Quick access, starred and workspaces	快速存取、收藏夾和工作區
@@ -2851,23 +2851,23 @@ ExportSettingsTitle	IDS_EXPORT_SETTINGS_TITLE	4050	导出设置	Export settings	
 ExportSettingsPrompt	IDS_EXPORT_SETTINGS_PROMPT	4051	选择要导出的内容。这台电脑专属的设置（开机启动、系统集成等）不会导出。	Choose what to export. Settings that belong to this PC (startup, Windows integration) stay out.	選擇要匯出的內容。這台電腦專屬的設定（開機啟動、系統整合等）不會匯出。
 ExportSettingsConfirm	IDS_EXPORT_SETTINGS_CONFIRM	4052	导出…	Export…	匯出…
 ImportSettingsTitle	IDS_IMPORT_SETTINGS_TITLE	4053	导入设置	Import settings	匯入設定
-ImportSettingsPrompt	IDS_IMPORT_SETTINGS_PROMPT	4054	来自 Pulse {version}，导出于 {time}。勾选的内容会替换这台电脑上的对应内容。	From Pulse {version}, exported {time}. The ticked items replace the same items on this PC.	來自 Pulse {version}，匯出於 {time}。勾選的內容會取代這台電腦上的對應內容。
-ImportSettingsNote	IDS_IMPORT_SETTINGS_NOTE	4055	导入前会先备份当前设置，可随时在「备份与迁移」中恢复。设置在 Pulse 重启后生效。	Your current settings are backed up first; restore them any time under Backup & transfer. The import takes effect when Pulse restarts.	匯入前會先備份目前設定，可隨時在「備份與移轉」中還原。設定在 Pulse 重新啟動後生效。
+ImportSettingsPrompt	IDS_IMPORT_SETTINGS_PROMPT	4054	来自 FileP {version}，导出于 {time}。勾选的内容会替换这台电脑上的对应内容。	From FileP {version}, exported {time}. The ticked items replace the same items on this PC.	來自 FileP {version}，匯出於 {time}。勾選的內容會取代這台電腦上的對應內容。
+ImportSettingsNote	IDS_IMPORT_SETTINGS_NOTE	4055	导入前会先备份当前设置，可随时在「备份与迁移」中恢复。设置在 FileP 重启后生效。	Your current settings are backed up first; restore them any time under Backup & transfer. The import takes effect when FileP restarts.	匯入前會先備份目前設定，可隨時在「備份與移轉」中還原。設定在 FileP 重新啟動後生效。
 ImportAndRestart	IDS_IMPORT_AND_RESTART	4056	导入并重启	Import and restart	匯入並重新啟動
 ImportRestartLater	IDS_IMPORT_RESTART_LATER	4057	导入，稍后重启	Import, restart later	匯入，稍後重新啟動
-ImportSettingsInvalid	IDS_IMPORT_SETTINGS_INVALID	4058	这个文件不是 Pulse 设置文件，或者已经损坏。	This file isn't a Pulse settings file, or it is damaged.	這個檔案不是 Pulse 設定檔，或者已經損壞。
-ImportSettingsNewer	IDS_IMPORT_SETTINGS_NEWER	4059	这个文件来自更新版本的 Pulse。请先更新 Pulse 再导入。	This file comes from a newer Pulse. Update Pulse first, then import it.	這個檔案來自較新版本的 Pulse。請先更新 Pulse 再匯入。
+ImportSettingsInvalid	IDS_IMPORT_SETTINGS_INVALID	4058	这个文件不是 FileP 设置文件，或者已经损坏。	This file isn't a FileP settings file, or it is damaged.	這個檔案不是 FileP 設定檔，或者已經損壞。
+ImportSettingsNewer	IDS_IMPORT_SETTINGS_NEWER	4059	这个文件来自更新版本的 FileP。请先更新 FileP 再导入。	This file comes from a newer Pulse. Update FileP first, then import it.	這個檔案來自較新版本的 FileP。請先更新 FileP 再匯入。
 RestoreSettingsTitle	IDS_RESTORE_SETTINGS_TITLE	4060	恢复导入前的设置	Restore previous settings	還原匯入前的設定
-RestoreSettingsPrompt	IDS_RESTORE_SETTINGS_PROMPT	4061	恢复到 {time} 导入前的状态。之后的改动会丢失，Pulse 会重启。	Go back to how things were before the import on {time}. Later changes are lost, and Pulse restarts.	還原到 {time} 匯入前的狀態。之後的變更會遺失，Pulse 會重新啟動。
+RestoreSettingsPrompt	IDS_RESTORE_SETTINGS_PROMPT	4061	恢复到 {time} 导入前的状态。之后的改动会丢失，FileP 会重启。	Go back to how things were before the import on {time}. Later changes are lost, and FileP restarts.	還原到 {time} 匯入前的狀態。之後的變更會遺失，FileP 會重新啟動。
 RestoreAndRestart	IDS_RESTORE_AND_RESTART	4062	恢复并重启	Restore and restart	還原並重新啟動
 SettingsExported	IDS_SETTINGS_EXPORTED	4063	设置已导出到 {file}	Settings exported to {file}	設定已匯出到 {file}
 SettingsExportFailed	IDS_SETTINGS_EXPORT_FAILED	4064	没能导出设置。	Couldn't export the settings.	無法匯出設定。
 SettingsImportFailed	IDS_SETTINGS_IMPORT_FAILED	4065	没能导入设置，当前设置没有改动。	Couldn't import the settings. Nothing was changed.	無法匯入設定，目前設定沒有變動。
-SettingsRestartFailed	IDS_SETTINGS_RESTART_FAILED	4066	没能重启 Pulse。请手动退出后重新打开，导入的设置会在那时生效。	Couldn't restart Pulse. Exit and reopen it yourself; the import takes effect then.	無法重新啟動 Pulse。請手動結束後重新開啟，匯入的設定會在那時生效。
+SettingsRestartFailed	IDS_SETTINGS_RESTART_FAILED	4066	没能重启 FileP。请手动退出后重新打开，导入的设置会在那时生效。	Couldn't restart Pulse. Exit and reopen it yourself; the import takes effect then.	無法重新啟動 FileP。請手動結束後重新開啟，匯入的設定會在那時生效。
 SettingsImportedToast	IDS_SETTINGS_IMPORTED_TOAST	4067	导入的设置已生效。如需撤销，可在「关于与诊断 › 备份与迁移」中恢复。	The imported settings are in place. To undo, go to About & diagnostics › Backup & transfer.	匯入的設定已生效。如需復原，可在「關於與診斷 › 備份與移轉」中還原。
 SettingsRestoredToast	IDS_SETTINGS_RESTORED_TOAST	4068	已恢复导入前的设置。	Previous settings restored.	已還原匯入前的設定。
 SettingsApplyFailedToast	IDS_SETTINGS_APPLY_FAILED_TOAST	4069	设置导入没有完成，部分内容可能保持原样。如有需要，可在「关于与诊断 › 备份与迁移」中恢复导入前的设置。	The settings import didn't finish; some items may be unchanged. If needed, restore the previous settings under About & diagnostics › Backup & transfer.	設定匯入沒有完成，部分內容可能維持原樣。如有需要，可在「關於與診斷 › 備份與移轉」中還原匯入前的設定。
-ExportSettingsFileName	IDS_EXPORT_SETTINGS_FILE_NAME	4070	Pulse 设置	Pulse settings	Pulse 設定
+ExportSettingsFileName	IDS_EXPORT_SETTINGS_FILE_NAME	4070	FileP 设置	FileP settings	FileP 設定
 GroupNetworkPinned	IDS_GROUP_NETWORK_PINNED	4071	已固定	Pinned	已釘選
 GroupNetworkDrives	IDS_GROUP_NETWORK_DRIVES	4072	网络驱动器	Network drives	網路磁碟機
 GroupNetworkDevices	IDS_GROUP_NETWORK_DEVICES	4073	局域网设备	On this network	區域網路裝置
@@ -2892,7 +2892,7 @@ NetworkStatusPinnedFormat	IDS_NETWORK_STATUS_PINNED_FORMAT	4091	%d 个已固定	
 NetworkStatusDrivesFormat	IDS_NETWORK_STATUS_DRIVES_FORMAT	4092	%d 个网络驱动器	%d network drives	%d 個網路磁碟機
 NetworkStatusRecentFormat	IDS_NETWORK_STATUS_RECENT_FORMAT	4093	%d 个最近访问	%d recent	%d 個最近存取
 ServerAddressUnsupportedFormat	IDS_SERVER_ADDRESS_UNSUPPORTED_FORMAT	4094	暂不支持 %s:// 地址。可以输入 \\\\服务器\\共享 或 smb://服务器/共享。	%s:// addresses aren't supported yet. Use \\\\server\\share or smb://server/share.	暫不支援 %s:// 位址。可以輸入 \\\\伺服器\\共用 或 smb://伺服器/共用。
-ServerAddressInvalid	IDS_SERVER_ADDRESS_INVALID	4095	无法识别这个服务器地址。	Pulse doesn't recognize this server address.	無法辨識這個伺服器位址。
+ServerAddressInvalid	IDS_SERVER_ADDRESS_INVALID	4095	无法识别这个服务器地址。	FileP doesn't recognize this server address.	無法辨識這個伺服器位址。
 ConnectServerAddressLabel	IDS_CONNECT_SERVER_ADDRESS_LABEL	4096	服务器地址	Server address	伺服器位址
 ConnectServerUnderstoodFormat	IDS_CONNECT_SERVER_UNDERSTOOD_FORMAT	4097	将被理解为 %s	Opens as %s	將被理解為 %s
 ConnectServerHostFormat	IDS_CONNECT_SERVER_HOST_FORMAT	4098	将打开 %s 并列出它的共享	Opens %s and lists its shares	將開啟 %s 並列出它的共用
@@ -2908,7 +2908,7 @@ NetworkCategoryDomain	IDS_NETWORK_CATEGORY_DOMAIN	4107	域网络	Domain network	
 NetworkCategoryPublic	IDS_NETWORK_CATEGORY_PUBLIC	4108	公用网络	Public network	公用網路
 NetworkRenameTitle	IDS_NETWORK_RENAME_TITLE	4109	重命名网络位置	Rename network location	重新命名網路位置
 NetworkRenameLabel	IDS_NETWORK_RENAME_LABEL	4110	显示名称	Display name	顯示名稱
-NetworkRenameNote	IDS_NETWORK_RENAME_NOTE	4111	只改 Pulse 里显示的名称，服务器上的共享不变。留空则恢复为共享名。	Changes the name shown in Pulse only; the share on the server stays the same. Leave it empty to use the share name.	只變更 Pulse 中顯示的名稱，伺服器上的共用不變。留空則恢復為共用名稱。
+NetworkRenameNote	IDS_NETWORK_RENAME_NOTE	4111	只改 FileP 里显示的名称，服务器上的共享不变。留空则恢复为共享名。	Changes the name shown in FileP only; the share on the server stays the same. Leave it empty to use the share name.	只變更 FileP 中顯示的名稱，伺服器上的共用不變。留空則恢復為共用名稱。
 NetworkClearRecent	IDS_NETWORK_CLEAR_RECENT	4112	清除最近访问	Clear recent servers	清除最近存取
 NetworkShowHiddenShares	IDS_NETWORK_SHOW_HIDDEN_SHARES	4113	显示隐藏共享	Show hidden shares	顯示隱藏共用
 NetworkDiscoverySettingsMenu	IDS_NETWORK_DISCOVERY_SETTINGS_MENU	4114	局域网发现设置…	Discovery settings…	區域網路探索設定…
@@ -2929,7 +2929,7 @@ NetworkHistoryCleared	IDS_NETWORK_HISTORY_CLEARED	4128	网络记录已清除	Net
 NetworkIndexNeedsShare	IDS_NETWORK_INDEX_NEEDS_SHARE	4129	这是本机上的文件夹。请选择服务器共享里的文件夹，或映射的网络驱动器；本地磁盘在「本地磁盘」中勾选即可索引。	That's a folder on this PC. Choose a folder on a server share or a mapped network drive. To index a local disk, check it under Local drives.	這是本機上的資料夾。請選擇伺服器共用中的資料夾，或對應的網路磁碟機；本機磁碟在「本機磁碟」中勾選即可索引。
 NetworkIndexNoWsl	IDS_NETWORK_INDEX_NO_WSL	4130	WSL 中的文件不能加入网络索引：持续扫描会让 WSL 无法关闭。可以打开该文件夹，把它钉为网络位置。	Files in WSL can't be added to the network index: constant scanning keeps WSL from shutting down. You can open the folder and pin it as a network location instead.	WSL 中的檔案不能加入網路索引：持續掃描會讓 WSL 無法關閉。可以開啟該資料夾，把它釘為網路位置。
 DateLastWeekFormat	IDS_DATE_LAST_WEEK_FORMAT	4131	上%s	Last %s	上%s
-AiAsstTitle	IDS_AI_ASST_TITLE	4132	Pulse 助手	Pulse Assistant	Pulse 助手
+AiAsstTitle	IDS_AI_ASST_TITLE	4132	FileP 助手	FileP Assistant	FileP 助手
 AiAsstNewChat	IDS_AI_ASST_NEW_CHAT	4133	新对话	New chat	新對話
 AiAsstFloat	IDS_AI_ASST_FLOAT	4134	浮动	Float	浮動
 AiAsstDock	IDS_AI_ASST_DOCK	4135	停靠	Dock	停靠
@@ -2938,7 +2938,7 @@ AiAsstGreetMorning	IDS_AI_ASST_GREET_MORNING	4137	早上好，想整理点什么
 AiAsstGreetNoon	IDS_AI_ASST_GREET_NOON	4138	中午好，想整理点什么？	Good day. What shall we tidy up?	午安，想整理點什麼？
 AiAsstGreetAfternoon	IDS_AI_ASST_GREET_AFTERNOON	4139	下午好，想整理点什么？	Good afternoon. What shall we tidy up?	午安，想整理點什麼？
 AiAsstGreetEvening	IDS_AI_ASST_GREET_EVENING	4140	晚上好，想整理点什么？	Good evening. What shall we tidy up?	晚上好，想整理點什麼？
-AiAsstIntro	IDS_AI_ASST_INTRO	4141	我能看到你在 Pulse 里打开的文件夹和选中的项目，可以帮你找文件、整理、重命名、加标签。	I can see the folder open in Pulse and what you have selected, and can help you find, organize, rename and tag files.	我能看到你在 Pulse 裡開啟的資料夾和選取的項目，可以幫你找檔案、整理、重新命名、加標籤。
+AiAsstIntro	IDS_AI_ASST_INTRO	4141	我能看到你在 FileP 里打开的文件夹和选中的项目，可以帮你找文件、整理、重命名、加标签。	I can see the folder open in FileP and what you have selected, and can help you find, organize, rename and tag files.	我能看到你在 FileP 裡開啟的資料夾和選取的項目，可以幫你找檔案、整理、重新命名、加標籤。
 AiAsstSugSortTitle	IDS_AI_ASST_SUG_SORT_TITLE	4142	按类型整理「{folder}」	Sort “{folder}” by type	按類型整理「{folder}」
 AiAsstSugSortDetail	IDS_AI_ASST_SUG_SORT_DETAIL	4143	图片、文档、安装包…各放一个文件夹	Pictures, documents, installers… each in a folder	圖片、文件、安裝包…各放一個資料夾
 AiAsstSugSizeTitle	IDS_AI_ASST_SUG_SIZE_TITLE	4144	「{folder}」里什么最占空间？	What takes the most space in “{folder}”?	「{folder}」裡什麼最佔空間？
@@ -2947,8 +2947,8 @@ AiAsstSugDupTitle	IDS_AI_ASST_SUG_DUP_TITLE	4146	找出重复的文件	Find dupl
 AiAsstSugDupDetail	IDS_AI_ASST_SUG_DUP_DETAIL	4147	只比较内容，不会删除任何东西	Compares contents only; nothing is deleted	只比較內容，不會刪除任何東西
 AiAsstSugPhotoTitle	IDS_AI_ASST_SUG_PHOTO_TITLE	4148	把照片按拍摄日期重命名	Rename photos by date taken	把照片按拍攝日期重新命名
 AiAsstSugPhotoDetail	IDS_AI_ASST_SUG_PHOTO_DETAIL	4149	例如 2026-10-09 旅行 01.jpg	For example 2026-10-09 Trip 01.jpg	例如 2026-10-09 旅行 01.jpg
-AiAsstSafe	IDS_AI_ASST_SAFE	4150	所有修改都会先在 Pulse 里让你确认，做完可以撤销。	Every change is confirmed in Pulse first and can be undone.	所有修改都會先在 Pulse 裡讓你確認，做完可以復原。
-AiAsstPlaceholder	IDS_AI_ASST_PLACEHOLDER	4151	让 Pulse 助手帮你找文件、整理文件夹…	Ask Pulse Assistant to find files, tidy folders…	讓 Pulse 助手幫你找檔案、整理資料夾…
+AiAsstSafe	IDS_AI_ASST_SAFE	4150	所有修改都会先在 FileP 里让你确认，做完可以撤销。	Every change is confirmed in FileP first and can be undone.	所有修改都會先在 FileP 裡讓你確認，做完可以復原。
+AiAsstPlaceholder	IDS_AI_ASST_PLACEHOLDER	4151	让 FileP 助手帮你找文件、整理文件夹…	Ask FileP Assistant to find files, tidy folders…	讓 FileP 助手幫你找檔案、整理資料夾…
 AiAsstContext	IDS_AI_ASST_CONTEXT	4152	{folder} · {n} 项	{folder} · {n} items	{folder} · {n} 項
 AiAsstAddFiles	IDS_AI_ASST_ADD_FILES	4153	添加文件	Add files	新增檔案
 AiAsstModelHeading	IDS_AI_ASST_MODEL_HEADING	4154	模型	Model	模型
@@ -2971,7 +2971,7 @@ AiAsstThinking	IDS_AI_ASST_THINKING	4170	思考中	Thinking	思考中
 AiAsstThought	IDS_AI_ASST_THOUGHT	4171	已思考 {n} 秒	Thought for {n}s	已思考 {n} 秒
 AiAsstSeconds	IDS_AI_ASST_SECONDS	4172	{n} 秒	{n}s	{n} 秒
 AiAsstStepWindow	IDS_AI_ASST_STEP_WINDOW	4173	查看当前窗口	Look at the current window	查看目前視窗
-AiAsstStepWindowRun	IDS_AI_ASST_STEP_WINDOW_RUN	4174	正在读取 Pulse 当前的文件夹和选中项…	Reading Pulse's current folder and selection…	正在讀取 Pulse 目前的資料夾和選取項目…
+AiAsstStepWindowRun	IDS_AI_ASST_STEP_WINDOW_RUN	4174	正在读取 FileP 当前的文件夹和选中项…	Reading FileP's current folder and selection…	正在讀取 FileP 目前的資料夾和選取項目…
 AiAsstStepWindowDone	IDS_AI_ASST_STEP_WINDOW_DONE	4175	{folder} · {n} 项 · 未选中	{folder} · {n} items · nothing selected	{folder} · {n} 項 · 未選取
 AiAsstStepRead	IDS_AI_ASST_STEP_READ	4176	读取文件夹	Read folder	讀取資料夾
 AiAsstStepReadRun	IDS_AI_ASST_STEP_READ_RUN	4177	正在看 {n} 个文件…	Looking at {n} files…	正在看 {n} 個檔案…
@@ -2987,7 +2987,7 @@ AiAsstConfirmSub	IDS_AI_ASST_CONFIRM_SUB	4186	位置：{folder}。不会覆盖�
 AiAsstConfirmHint	IDS_AI_ASST_CONFIRM_HINT	4187	右边的文件列表里已标出每个文件的去向	The file list shows where each file goes	右邊的檔案清單已標出每個檔案的去向
 AiAsstDeny	IDS_AI_ASST_DENY	4188	拒绝	Decline	拒絕
 AiAsstOrganize	IDS_AI_ASST_ORGANIZE	4189	整理	Sort	整理
-AiAsstConfirmed	IDS_AI_ASST_CONFIRMED	4190	你在 Pulse 里确认了：整理 {n} 个项目	You confirmed in Pulse: sort {n} items	你在 Pulse 裡確認了：整理 {n} 個項目
+AiAsstConfirmed	IDS_AI_ASST_CONFIRMED	4190	你在 FileP 里确认了：整理 {n} 个项目	You confirmed in FileP: sort {n} items	你在 FileP 裡確認了：整理 {n} 個項目
 AiAsstDenied	IDS_AI_ASST_DENIED	4191	你拒绝了：整理 {n} 个项目	You declined: sort {n} items	你拒絕了：整理 {n} 個項目
 AiAsstStepMove	IDS_AI_ASST_STEP_MOVE	4192	整理到文件夹	Sort into folders	整理到資料夾
 AiAsstStepMoveRun	IDS_AI_ASST_STEP_MOVE_RUN	4193	新建 {g} 个文件夹…	Creating {g} folders…	新增 {g} 個資料夾…
@@ -2997,7 +2997,7 @@ AiAsstStepsMove	IDS_AI_ASST_STEPS_MOVE	4196	整理了 {n} 个项目 → {g} 个�
 AiAsstResultTitle	IDS_AI_ASST_RESULT_TITLE	4197	已整理 {n} 个项目	Sorted {n} items	已整理 {n} 個項目
 AiAsstResultSub	IDS_AI_ASST_RESULT_SUB	4198	{folder} › {g} 个新文件夹	{folder} › {g} new folders	{folder} › {g} 個新資料夾
 AiAsstUndo	IDS_AI_ASST_UNDO	4199	撤销	Undo	復原
-AiAsstShowInPulse	IDS_AI_ASST_SHOW_IN_PULSE	4200	在 Pulse 中查看	Show in Pulse	在 Pulse 中查看
+AiAsstShowInPulse	IDS_AI_ASST_SHOW_IN_PULSE	4200	在 FileP 中查看	Show in FileP	在 FileP 中查看
 AiAsstUndone	IDS_AI_ASST_UNDONE	4201	已撤销	Undone	已復原
 AiAsstUndoneSub	IDS_AI_ASST_UNDONE_SUB	4202	{n} 个文件回到了「{folder}」，新建的 {g} 个文件夹已移到回收站	{n} files are back in “{folder}”; the {g} new folders went to the Recycle Bin	{n} 個檔案回到了「{folder}」，新增的 {g} 個資料夾已移到資源回收筒
 AiAsstUndoNote	IDS_AI_ASST_UNDO_NOTE	4203	你撤销了这次整理	You undid this sort	你復原了這次整理
@@ -3036,7 +3036,7 @@ AiAsstStepMoveDoneAny	IDS_AI_ASST_STEP_MOVE_DONE_ANY	4235	{n} 个项目 → {g} 
 AiAsstStepsMoveAny	IDS_AI_ASST_STEPS_MOVE_ANY	4236	整理了 {n} 个项目 → {g} 个文件夹	Sorted {n} items → {g} folders	整理了 {n} 個項目 → {g} 個資料夾
 AiAsstResultSubAny	IDS_AI_ASST_RESULT_SUB_ANY	4237	{folder} › {g} 个文件夹	{folder} › {g} folders	{folder} › {g} 個資料夾
 AiAsstUndoneSubAny	IDS_AI_ASST_UNDONE_SUB_ANY	4238	{n} 个文件回到了「{folder}」	{n} files are back in “{folder}”	{n} 個檔案回到了「{folder}」
-AiAsstUndoLabel	IDS_AI_ASST_UNDO_LABEL	4239	Pulse 助手整理	Pulse Assistant sort	Pulse 助手整理
+AiAsstUndoLabel	IDS_AI_ASST_UNDO_LABEL	4239	FileP 助手整理	FileP Assistant sort	FileP 助手整理
 AiAsstErrNoKey	IDS_AI_ASST_ERR_NO_KEY	4240	还没有连接模型。点输入框下方的模型名称，选「管理连接」，填上 DeepSeek 的 API Key 就能用了。	No model is connected yet. Click the model name under the input box, choose Manage connection and enter your DeepSeek API key.	還沒有連線模型。點輸入框下方的模型名稱，選「管理連線」，填上 DeepSeek 的 API Key 就能用了。
 AiAsstErrAuth	IDS_AI_ASST_ERR_AUTH	4241	API Key 无效或已过期。去「管理连接」换一个再试。	The API key is invalid or expired. Replace it in Manage connection and try again.	API Key 無效或已過期。到「管理連線」換一個再試。
 AiAsstErrBalance	IDS_AI_ASST_ERR_BALANCE	4242	DeepSeek 账户余额不足，充值后再试。	Your DeepSeek balance is too low. Top up and try again.	DeepSeek 帳戶餘額不足，儲值後再試。
@@ -3093,8 +3093,8 @@ AiConnDone	IDS_AI_CONN_DONE	4292	完成	Done	完成
 AiConnBack	IDS_AI_CONN_BACK	4293	返回	Back	返回
 AiConnShowKey	IDS_AI_CONN_SHOW_KEY	4294	显示密钥	Show key	顯示金鑰
 AiConnHideKey	IDS_AI_CONN_HIDE_KEY	4295	隐藏密钥	Hide key	隱藏金鑰
-AiListWatch	IDS_AI_LIST_WATCH	4296	Pulse 助手正在读取 {k}/{n}	Pulse Assistant is reading {k}/{n}	Pulse 助手正在讀取 {k}/{n}
-AiPeekDone	IDS_AI_PEEK_DONE	4297	Pulse 助手 · 完成	Pulse Assistant · Done	Pulse 助手 · 完成
+AiListWatch	IDS_AI_LIST_WATCH	4296	FileP 助手正在读取 {k}/{n}	FileP Assistant is reading {k}/{n}	FileP 助手正在讀取 {k}/{n}
+AiPeekDone	IDS_AI_PEEK_DONE	4297	FileP 助手 · 完成	FileP Assistant · Done	FileP 助手 · 完成
 AiPeekSorted	IDS_AI_PEEK_SORTED	4298	已把 {n} 个文件整理到 {g} 个新文件夹：{names}。	Sorted {n} files into {g} new folders: {names}.	已把 {n} 個檔案整理到 {g} 個新資料夾：{names}。
 AiPeekSortedAny	IDS_AI_PEEK_SORTED_ANY	4299	已把 {n} 个项目整理到 {g} 个文件夹：{names}。	Sorted {n} items into {g} folders: {names}.	已把 {n} 個項目整理到 {g} 個資料夾：{names}。
 AiPeekOpen	IDS_AI_PEEK_OPEN	4300	打开对话	Open chat	開啟對話
@@ -3307,17 +3307,17 @@ AiPeekFail	IDS_AI_PEEK_FAIL	4506	「{p}」没能完成，文件没有任何改�
 AiPeekFailUndo	IDS_AI_PEEK_FAIL_UNDO	4507	「{p}」没能完成。已经完成的改动可以在对话里撤销。	“{p}” didn't finish. What was already changed can be undone in the chat.	「{p}」沒能完成。已經完成的變更可以在對話裡復原。
 AiPeekServer	IDS_AI_PEEK_SERVER	4508	服务暂时出错	The service had a problem	服務暫時出錯
 AiPeekNet	IDS_AI_PEEK_NET	4509	连不上服务	Can't reach the service	連不上服務
-AiChipTip	IDS_AI_CHIP_TIP	4510	Pulse 助手  Ctrl+J	Pulse Assistant  Ctrl+J	Pulse 助手  Ctrl+J
+AiChipTip	IDS_AI_CHIP_TIP	4510	FileP 助手  Ctrl+J	FileP Assistant  Ctrl+J	FileP 助手  Ctrl+J
 AiQStep	IDS_AI_Q_STEP	4511	搜索	Search	搜尋
-AiQStepRun	IDS_AI_Q_STEP_RUN	4512	正在查 Pulse 索引…	Searching Pulse's index…	正在查 Pulse 索引…
+AiQStepRun	IDS_AI_Q_STEP_RUN	4512	正在查 FileP 索引…	Searching FileP's index…	正在查 FileP 索引…
 AiQStepDone	IDS_AI_Q_STEP_DONE	4513	{n} 个结果 · 用时 {t} 秒 · 不读文件内容	{n} results · {t} s · no file contents read	{n} 個結果 · 用時 {t} 秒 · 不讀檔案內容
-AiQStepsLabel	IDS_AI_Q_STEPS_LABEL	4514	在 Pulse 索引里搜索 · {n} 个结果	Searched Pulse's index · {n} results	在 Pulse 索引裡搜尋 · {n} 個結果
+AiQStepsLabel	IDS_AI_Q_STEPS_LABEL	4514	在 FileP 索引里搜索 · {n} 个结果	Searched FileP's index · {n} results	在 FileP 索引裡搜尋 · {n} 個結果
 AiQNoAnswer	IDS_AI_Q_NO_ANSWER	4515	搜索没有完成	the search did not finish	搜尋沒有完成
 AiQChipSearching	IDS_AI_Q_CHIP_SEARCHING	4516	搜索中	Searching	搜尋中
 AiQChipFound	IDS_AI_Q_CHIP_FOUND	4517	找到 {n} 个	Found {n}	找到 {n} 個
-AiQPeek	IDS_AI_Q_PEEK	4518	找到 {n} 个结果，已列在 Pulse 里	Found {n} results, listed in Pulse	找到 {n} 個結果，已列在 Pulse 裡
+AiQPeek	IDS_AI_Q_PEEK	4518	找到 {n} 个结果，已列在 FileP 里	Found {n} results, listed in FileP	找到 {n} 個結果，已列在 FileP 裡
 AiQTitle	IDS_AI_Q_TITLE	4519	搜索条件	Search conditions	搜尋條件
-AiQMeta	IDS_AI_Q_META	4520	Pulse 索引 · {t} 秒	Pulse index · {t} s	Pulse 索引 · {t} 秒
+AiQMeta	IDS_AI_Q_META	4520	FileP 索引 · {t} 秒	FileP index · {t} s	FileP 索引 · {t} 秒
 AiQAdd	IDS_AI_Q_ADD	4521	条件	Condition	條件
 AiQFiles	IDS_AI_Q_FILES	4522	个文件 · {size}	files · {size}	個檔案 · {size}
 AiQItems	IDS_AI_Q_ITEMS	4523	个项目 · {size}	items · {size}	個項目 · {size}
@@ -3362,7 +3362,7 @@ AiFollowRenamePrompt	IDS_AI_FOLLOW_RENAME_PROMPT	4561	把这些文件批量重�
 AiFollowCopy	IDS_AI_FOLLOW_COPY	4562	复制路径	Copy paths	複製路徑
 AiFollowCopied	IDS_AI_FOLLOW_COPIED	4563	已复制 {n} 个路径	Copied {n} paths	已複製 {n} 個路徑
 AiQSugTitle	IDS_AI_Q_SUG_TITLE	4564	找上个月的发票	Find last month's invoices	找上個月的發票
-AiQSugDetail	IDS_AI_Q_SUG_DETAIL	4565	用 Pulse 索引搜所有位置，结果列在右边	Searches everywhere with Pulse's index; results open in the list	用 Pulse 索引搜所有位置，結果列在右邊
+AiQSugDetail	IDS_AI_Q_SUG_DETAIL	4565	用 FileP 索引搜所有位置，结果列在右边	Searches everywhere with FileP's index; results open in the list	用 FileP 索引搜所有位置，結果列在右邊
 AiQSugPrompt	IDS_AI_Q_SUG_PROMPT	4566	找一下上个月的发票，PDF 和图片都算	Find last month's invoices, PDFs and pictures both	找一下上個月的發票，PDF 和圖片都算
 BrOrderDaily	IDS_BR_ORDER_DAILY	4567	每天从头编号	Start again each day	每天從頭編號
 BrOrderDailyShort	IDS_BR_ORDER_DAILY_SHORT	4568	每天从头	daily	每天從頭
@@ -3382,7 +3382,7 @@ AiRnCheckNoTaken	IDS_AI_RN_CHECK_NO_TAKEN	4581	{n} 张没有拍摄时间（{name
 AiRnCheckNoTakenMany	IDS_AI_RN_CHECK_NO_TAKEN_MANY	4582	{n} 张没有拍摄时间，用了修改时间	{n} without a date taken: used the date modified	{n} 張沒有拍攝時間，用了修改時間
 AiRnCheckSame	IDS_AI_RN_CHECK_SAME	4583	{n} 个文件名字不变，不会改动	{n} names stay the same and are left alone	{n} 個檔案名稱不變，不會改動
 AiRnCheckBad	IDS_AI_RN_CHECK_BAD	4584	{n} 个新名字不能用，会跳过	{n} new names are not allowed and are skipped	{n} 個新名稱不能用，會略過
-AiRnFoot	IDS_AI_RN_FOOT	4585	AI 只给规则，名字由 Pulse 在本机按规则生成	The AI only gives the rule; Pulse makes the names on this PC	AI 只給規則，名稱由 Pulse 在本機依規則產生
+AiRnFoot	IDS_AI_RN_FOOT	4585	AI 只给规则，名字由 FileP 在本机按规则生成	The AI only gives the rule; FileP makes the names on this PC	AI 只給規則，名稱由 FileP 在本機依規則產生
 AiRnTokNum	IDS_AI_RN_TOK_NUM	4586	序号 {s}	Number {s}	序號 {s}
 AiRnTokNumDaily	IDS_AI_RN_TOK_NUM_DAILY	4587	当天序号 {s}	Daily number {s}	當天序號 {s}
 AiRnStepReplace	IDS_AI_RN_STEP_REPLACE	4588	换成	→	換成
@@ -3404,7 +3404,7 @@ AiRnHint	IDS_AI_RN_HINT	4603	列表里已标出每个文件的新名字	The list
 AiRnAccept	IDS_AI_RN_ACCEPT	4604	重命名	Rename	重新命名
 AiRnAdjust	IDS_AI_RN_ADJUST	4605	在批量重命名中调整…	Adjust in Batch rename…	在批次重新命名中調整…
 AiRnAdjustTip	IDS_AI_RN_ADJUST_TIP	4606	打开批量重命名，规则已经填好，可以继续加步骤	Opens Batch rename with this rule filled in, ready for more steps	開啟批次重新命名，規則已經填好，可以繼續加步驟
-AiRnConfirmed	IDS_AI_RN_CONFIRMED	4607	你在 Pulse 里确认了：重命名 {n} 个文件	You confirmed in Pulse: rename {n} files	你在 Pulse 裡確認了：重新命名 {n} 個檔案
+AiRnConfirmed	IDS_AI_RN_CONFIRMED	4607	你在 FileP 里确认了：重命名 {n} 个文件	You confirmed in FileP: rename {n} files	你在 FileP 裡確認了：重新命名 {n} 個檔案
 AiRnDenied	IDS_AI_RN_DENIED	4608	你拒绝了：重命名 {n} 个文件	You declined: rename {n} files	你拒絕了：重新命名 {n} 個檔案
 AiRnAdjusted	IDS_AI_RN_ADJUSTED	4609	你在批量重命名中调整后改了 {n} 个文件	You adjusted it in Batch rename and renamed {n} files	你在批次重新命名中調整後改了 {n} 個檔案
 AiRnAdjustClosed	IDS_AI_RN_ADJUST_CLOSED	4610	你打开了批量重命名，没有改名	You opened Batch rename and renamed nothing	你開啟了批次重新命名，沒有改名
@@ -3415,7 +3415,7 @@ AiRnStepSome	IDS_AI_RN_STEP_SOME	4614	改了 {k} 个，共 {n} 个	Renamed {k} o
 AiRnChipRun	IDS_AI_RN_CHIP_RUN	4615	正在重命名 {k}/{n}	Renaming {k}/{n}	正在重新命名 {k}/{n}
 AiRnResultTitle	IDS_AI_RN_RESULT_TITLE	4616	已重命名 {n} 个文件	Renamed {n} files	已重新命名 {n} 個檔案
 AiRnDay	IDS_AI_RN_DAY	4617	{m}月{d}日 {n} 张	{m}/{d}: {n}	{m}月{d}日 {n} 張
-AiRnUndoLabel	IDS_AI_RN_UNDO_LABEL	4618	Pulse 助手重命名	Pulse Assistant rename	Pulse 助手重新命名
+AiRnUndoLabel	IDS_AI_RN_UNDO_LABEL	4618	FileP 助手重命名	FileP Assistant rename	FileP 助手重新命名
 AiRnOpenDialog	IDS_AI_RN_OPEN_DIALOG	4619	在批量重命名中打开	Open in Batch rename	在批次重新命名中開啟
 AiRnUndoneSub	IDS_AI_RN_UNDONE_SUB	4620	{n} 个文件换回了原来的名字	{n} files have their old names back	{n} 個檔案換回了原來的名稱
 AiRnUndoNote	IDS_AI_RN_UNDO_NOTE	4621	你撤销了这次重命名	You undid this rename	你復原了這次重新命名
@@ -3423,7 +3423,7 @@ AiPeekRenamed	IDS_AI_PEEK_RENAMED	4622	已重命名 {n} 个文件，例如 {name
 AiRnStepRead	IDS_AI_RN_STEP_READ	4623	读取拍摄时间	Reading dates taken	讀取拍攝時間
 AiRnStepReadDone	IDS_AI_RN_STEP_READ_DONE	4624	{k} 张有拍摄时间 · {m} 张没有	{k} with a date taken · {m} without	{k} 張有拍攝時間 · {m} 張沒有
 AiRnSugTitle	IDS_AI_RN_SUG_TITLE	4625	把选中的照片按拍摄日期重命名	Rename the selected photos by date taken	把選取的照片按拍攝日期重新命名
-AiRnSugDetail	IDS_AI_RN_SUG_DETAIL	4626	只出规则，Pulse 在本机改名	The AI writes a rule; Pulse renames on this PC	只出規則，Pulse 在本機改名
+AiRnSugDetail	IDS_AI_RN_SUG_DETAIL	4626	只出规则，FileP 在本机改名	The AI writes a rule; FileP renames on this PC	只出規則，FileP 在本機改名
 AiTkPlanLabel	IDS_AI_TK_PLAN_LABEL	4627	任务计划	Task plan	任務計畫
 AiTkPlanMeta	IDS_AI_TK_PLAN_META	4628	{n} 步 · 第 1 步已完成	{n} steps · step 1 done	{n} 步 · 第 1 步已完成
 AiTkPlanMetaRun	IDS_AI_TK_PLAN_META_RUN	4629	{n} 步 · 正在做第 {k} 步	{n} steps · on step {k}	{n} 步 · 正在做第 {k} 步
@@ -3460,7 +3460,7 @@ AiTkConfirmTitle	IDS_AI_TK_CONFIRM_TITLE	4659	执行这个任务？	Run this tas
 AiTkConfirmSub	IDS_AI_TK_CONFIRM_SUB	4660	{what}。不删除、不覆盖。	{what}. Nothing is deleted or overwritten.	{what}。不刪除、不覆寫。
 AiTkConfirmHint	IDS_AI_TK_CONFIRM_HINT	4661	整个任务算一步撤销；出问题会先停下来问你	The whole task undoes in one step; if anything goes wrong it stops and asks you	整個任務算一步復原；出問題會先停下來問你
 AiTkRun	IDS_AI_TK_RUN	4662	执行	Run	執行
-AiTkConfirmed	IDS_AI_TK_CONFIRMED	4663	你在 Pulse 里确认了：执行任务计划	You confirmed in Pulse: run the task plan	你在 Pulse 裡確認了：執行任務計畫
+AiTkConfirmed	IDS_AI_TK_CONFIRMED	4663	你在 FileP 里确认了：执行任务计划	You confirmed in FileP: run the task plan	你在 FileP 裡確認了：執行任務計畫
 AiTkDenied	IDS_AI_TK_DENIED	4664	你拒绝了这个任务，什么都没改	You declined the task; nothing changed	你拒絕了這個任務，什麼都沒改
 AiTkCreating	IDS_AI_TK_CREATING	4665	正在新建… {k} / {n}	Creating… {k} of {n}	正在新增… {k} / {n}
 AiTkFoldersDone	IDS_AI_TK_FOLDERS_DONE	4666	已新建 {n} 个	{n} created	已新增 {n} 個
@@ -3503,7 +3503,7 @@ AiTkReasonFail	IDS_AI_TK_REASON_FAIL	4702	无法移动	could not move	無法移�
 AiTkLnZip	IDS_AI_TK_LN_ZIP	4703	打包成 {name}（{size}）	Zipped into {name} ({size})	壓縮成 {name}（{size}）
 AiTkLnZipFail	IDS_AI_TK_LN_ZIP_FAIL	4704	没能打包 {name}（{reason}）	Could not make {name} ({reason})	無法壓縮 {name}（{reason}）
 AiTkUndoAll	IDS_AI_TK_UNDO_ALL	4705	撤销全部	Undo all	全部復原
-AiTkUndoLabel	IDS_AI_TK_UNDO_LABEL	4706	Pulse 助手任务：{label}	Pulse Assistant task: {label}	Pulse 助手任務：{label}
+AiTkUndoLabel	IDS_AI_TK_UNDO_LABEL	4706	FileP 助手任务：{label}	FileP Assistant task: {label}	FileP 助手任務：{label}
 AiTkUndoneSub	IDS_AI_TK_UNDONE_SUB	4707	{n} 个文件回到了原处，新建的文件夹和压缩包已移到回收站	{n} files are back where they were; the new folders and zip went to the Recycle Bin	{n} 個檔案回到了原處，新增的資料夾和壓縮檔已移到資源回收筒
 AiTkPeek	IDS_AI_TK_PEEK	4708	任务完成：{n} 个文件已放进 {folder}	Task done: {n} files filed into {folder}	任務完成：{n} 個檔案已放進 {folder}
 AiTkTooMany	IDS_AI_TK_TOO_MANY	4709	结果太多，请缩小条件	Too many results; narrow the conditions	結果太多，請縮小條件
@@ -3516,13 +3516,13 @@ AiTkTypeCode	IDS_AI_TK_TYPE_CODE	4715	代码	Code	程式碼
 AiTkTypeOther	IDS_AI_TK_TYPE_OTHER	4716	其他	Other	其他
 AiTkUndoNote	IDS_AI_TK_UNDO_NOTE	4717	你撤销了这个任务	You undid this task	你復原了這個任務
 AiDkStep	IDS_AI_DK_STEP	4718	统计占用	Measure space	統計佔用
-AiDkStepRun	IDS_AI_DK_STEP_RUN	4719	正在读 Pulse 索引…	Reading Pulse's index…	正在讀取 Pulse 索引…
+AiDkStepRun	IDS_AI_DK_STEP_RUN	4719	正在读 FileP 索引…	Reading FileP's index…	正在讀取 FileP 索引…
 AiDkStepDone	IDS_AI_DK_STEP_DONE	4720	已用 {used} GB / {total} GB · {t} · 没有扫描磁盘	{used} GB used of {total} GB · {t} · no disk scan	已用 {used} GB / {total} GB · {t} · 沒有掃描磁碟
 AiDkStepDonePlain	IDS_AI_DK_STEP_DONE_PLAIN	4721	已用 {used} GB / {total} GB · {t}	{used} GB used of {total} GB · {t}	已用 {used} GB / {total} GB · {t}
 AiDkChipMeasuring	IDS_AI_DK_CHIP_MEASURING	4722	统计中	Measuring	統計中
 AiDkChipDone	IDS_AI_DK_CHIP_DONE	4723	已统计	Measured	已統計
 AiDkTitle	IDS_AI_DK_TITLE	4724	本地磁盘 ({d}:)	Local Disk ({d}:)	本機磁碟 ({d}:)
-AiDkMetaIndex	IDS_AI_DK_META_INDEX	4725	Pulse 索引 · {t}	Pulse index · {t}	Pulse 索引 · {t}
+AiDkMetaIndex	IDS_AI_DK_META_INDEX	4725	FileP 索引 · {t}	FileP index · {t}	FileP 索引 · {t}
 AiDkMetaNoIndex	IDS_AI_DK_META_NO_INDEX	4726	索引里没有文件夹大小	No folder sizes in the index	索引中沒有資料夾大小
 AiDkUsedOf	IDS_AI_DK_USED_OF	4727	GB 已用 / {total} GB	GB used of {total} GB	GB 已用 / {total} GB
 AiDkFreeUnit	IDS_AI_DK_FREE_UNIT	4728	GB 可用	GB free	GB 可用
@@ -3587,7 +3587,7 @@ AiClBinOk	IDS_AI_CL_BIN_OK	4786	回收站放得下：上限 {max} GB，已用 {u
 AiClBinFull	IDS_AI_CL_BIN_FULL	4787	回收站放不下：上限 {max} GB，已用 {used} GB。少选一些，或先清空回收站	The Recycle Bin is too small: {used} GB of {max} GB used. Tick fewer, or empty it first	資源回收筒放不下：上限 {max} GB，已用 {used} GB。少選一些，或先清空資源回收筒
 AiClBinOff	IDS_AI_CL_BIN_OFF	4788	这个盘没有回收站，文件会被直接删除，所以这里不清理	This drive has no Recycle Bin, so nothing is cleaned here	這個磁碟沒有資源回收筒，檔案會被直接刪除，所以這裡不清理
 AiClAccept	IDS_AI_CL_ACCEPT	4789	移到回收站	Move to Recycle Bin	移到資源回收筒
-AiClConfirmed	IDS_AI_CL_CONFIRMED	4790	你在 Pulse 里确认了：把 {n} 个文件移到回收站	You confirmed in Pulse: move {n} files to the Recycle Bin	你在 Pulse 中確認了：把 {n} 個檔案移到資源回收筒
+AiClConfirmed	IDS_AI_CL_CONFIRMED	4790	你在 FileP 里确认了：把 {n} 个文件移到回收站	You confirmed in FileP: move {n} files to the Recycle Bin	你在 FileP 中確認了：把 {n} 個檔案移到資源回收筒
 AiClDenied	IDS_AI_CL_DENIED	4791	你没有同意清理，什么都没动	You declined; nothing changed	你沒有同意清理，什麼都沒動
 AiClRecStep	IDS_AI_CL_REC_STEP	4792	移到回收站	Move to Recycle Bin	移到資源回收筒
 AiClRecArg	IDS_AI_CL_REC_ARG	4793	{n} 个 · {gb} GB	{n} files · {gb} GB	{n} 個 · {gb} GB
@@ -3615,7 +3615,7 @@ AiClPurgeTitle	IDS_AI_CL_PURGE_TITLE	4814	永久删除这 {n} 个文件？	Perma
 AiClPurgeSub	IDS_AI_CL_PURGE_SUB	4815	从回收站彻底删除，释放 {gb} GB。无法撤销。回收站里其他 {k} 项不动。	They leave the Recycle Bin for good and free {gb} GB. This cannot be undone. The other {k} items in the bin stay.	從資源回收筒徹底刪除，釋放 {gb} GB。無法復原。資源回收筒裡其他 {k} 項不動。
 AiClPurgeHint	IDS_AI_CL_PURGE_HINT	4816	只有这一步不能撤销	Only this step cannot be undone	只有這一步不能復原
 AiClPurgeAccept	IDS_AI_CL_PURGE_ACCEPT	4817	永久删除	Delete permanently	永久刪除
-AiClPurgeConfirmed	IDS_AI_CL_PURGE_CONFIRMED	4818	你在 Pulse 里确认了：永久删除这 {n} 个文件	You confirmed in Pulse: permanently delete these {n} files	你在 Pulse 中確認了：永久刪除這 {n} 個檔案
+AiClPurgeConfirmed	IDS_AI_CL_PURGE_CONFIRMED	4818	你在 FileP 里确认了：永久删除这 {n} 个文件	You confirmed in FileP: permanently delete these {n} files	你在 FileP 中確認了：永久刪除這 {n} 個檔案
 AiClPurgeDenied	IDS_AI_CL_PURGE_DENIED	4819	没有永久删除，文件还在回收站里	Not deleted; the files stay in the Recycle Bin	沒有永久刪除，檔案還在資源回收筒裡
 AiClPurgeMissing	IDS_AI_CL_PURGE_MISSING	4820	回收站里找不到这批文件了，可能已被清空或还原	These files are no longer in the Recycle Bin; it may have been emptied or they were restored	資源回收筒裡找不到這批檔案了，可能已被清空或還原
 AiClChipInBin	IDS_AI_CL_CHIP_IN_BIN	4821	已移到回收站	In the Recycle Bin	已移到資源回收筒
@@ -3625,7 +3625,7 @@ AiClFreedTitle	IDS_AI_CL_FREED_TITLE	4824	已释放 {gb} GB	Freed {gb} GB	已釋
 AiClFreedSub	IDS_AI_CL_FREED_SUB	4825	{n} 个文件已永久删除 · 回收站里其他 {k} 项没动	{n} files deleted for good · the other {k} items in the bin stay	{n} 個檔案已永久刪除 · 資源回收筒裡其他 {k} 項沒動
 AiClGoneSub	IDS_AI_CL_GONE_SUB	4826	已永久删除，不能再撤销	Deleted for good; can no longer undo	已永久刪除，無法再復原
 AiDupStep	IDS_AI_DUP_STEP	4827	找重复文件	Find duplicates	找重複檔案
-AiDupStepSub	IDS_AI_DUP_STEP_SUB	4828	Pulse 正在本机比对…	Pulse is comparing on this PC…	Pulse 正在本機比對…
+AiDupStepSub	IDS_AI_DUP_STEP_SUB	4828	FileP 正在本机比对…	FileP is comparing on this PC…	FileP 正在本機比對…
 AiDupStepDone	IDS_AI_DUP_STEP_DONE	4829	{g} 组 · {n} 个文件 · {t} 秒	{g} groups · {n} files · {t} s	{g} 組 · {n} 個檔案 · {t} 秒
 AiDupStepNone	IDS_AI_DUP_STEP_NONE	4830	没有重复的文件 · 比对了 {n} 个 · {t} 秒	No duplicates · {n} files compared · {t} s	沒有重複的檔案 · 比對了 {n} 個 · {t} 秒
 AiDupSteps	IDS_AI_DUP_STEPS	4831	比对了{where} · {g} 组重复	Compared {where} · {g} duplicate groups	比對了{where} · {g} 組重複
@@ -3633,7 +3633,7 @@ AiDupStepsNone	IDS_AI_DUP_STEPS_NONE	4832	比对了{where} · 没有重复	Compa
 AiDupChipRun	IDS_AI_DUP_CHIP_RUN	4833	比对中 · 第 {i}/3 轮	Comparing · pass {i}/3	比對中 · 第 {i}/3 輪
 AiDupChipDone	IDS_AI_DUP_CHIP_DONE	4834	{g} 组重复	{g} duplicate groups	{g} 組重複
 AiDupChipNone	IDS_AI_DUP_CHIP_NONE	4835	没有重复文件	No duplicates	沒有重複檔案
-AiDupFunnel	IDS_AI_DUP_FUNNEL	4836	比对过程	How Pulse compared	比對過程
+AiDupFunnel	IDS_AI_DUP_FUNNEL	4836	比对过程	How FileP compared	比對過程
 AiDupFunnelMeta	IDS_AI_DUP_FUNNEL_META	4837	本机 · {t} 秒	This PC · {t} s	本機 · {t} 秒
 AiDupFunnelFoot	IDS_AI_DUP_FUNNEL_FOOT	4838	全部在这台电脑上算，文件内容不发给模型	All done on this PC; file contents never go to the model	全部在這台電腦上算，檔案內容不傳給模型
 AiDupS1	IDS_AI_DUP_S1	4839	按大小分组	Group by size	按大小分組
@@ -3667,7 +3667,7 @@ AiDupWhyBoth	IDS_AI_DUP_WHY_BOTH	4866	{k} 份在不同的文件夹里，删掉�
 AiDupWhyPicked	IDS_AI_DUP_WHY_PICKED	4867	你选了这份	You picked this one	你選了這份
 AiDupFileMore	IDS_AI_DUP_FILE_MORE	4868	还有 {n} 份	{n} more copies	還有 {n} 份
 AiDupMore	IDS_AI_DUP_MORE	4869	还有 {n} 组，都按同样的规则	{n} more groups, same rules	還有 {n} 組，都按同樣的規則
-AiDupMoreLink	IDS_AI_DUP_MORE_LINK	4870	在 Pulse 中查看全部	See all in Pulse	在 Pulse 中檢視全部
+AiDupMoreLink	IDS_AI_DUP_MORE_LINK	4870	在 FileP 中查看全部	See all in FileP	在 FileP 中檢視全部
 AiDupSumPre	IDS_AI_DUP_SUM_PRE	4871	留	Keep	留
 AiDupSumMid	IDS_AI_DUP_SUM_MID	4872	份 · 移走	· move	份 · 移走
 AiDupSumMid2	IDS_AI_DUP_SUM_MID2	4873	份 ·	·	份 ·
@@ -3686,7 +3686,7 @@ AiDupConfirmTitle	IDS_AI_DUP_CONFIRM_TITLE	4885	把 {n} 个副本移到回收站
 AiDupConfirmSub	IDS_AI_DUP_CONFIRM_SUB	4886	共 {size}。{g} 组里每组都留 1 份。	{size} in all. Each of the {g} groups keeps 1.	共 {size}。{g} 組裡每組都留 1 份。
 AiDupConfirmSubBoth	IDS_AI_DUP_CONFIRM_SUB_BOTH	4887	共 {size}。{g} 组里每组都留 1 份；{name} {k} 份都留。	{size} in all. Each of the {g} groups keeps 1; all {k} of {name} stay.	共 {size}。{g} 組裡每組都留 1 份；{name} {k} 份都留。
 AiDupConfirmSubBothN	IDS_AI_DUP_CONFIRM_SUB_BOTH_N	4888	共 {size}。{g} 组里每组都留 1 份；{name} 等 {b} 组都留。	{size} in all. Each of the {g} groups keeps 1; {name} and {b} more groups keep all.	共 {size}。{g} 組裡每組都留 1 份；{name} 等 {b} 組都留。
-AiDupLockHint	IDS_AI_DUP_LOCK_HINT	4889	先锁住要留的那份，核对内容没变才移走副本	Pulse locks the kept file and re-checks the content before moving copies	先鎖住要留的那份，核對內容沒變才移走副本
+AiDupLockHint	IDS_AI_DUP_LOCK_HINT	4889	先锁住要留的那份，核对内容没变才移走副本	FileP locks the kept file and re-checks the content before moving copies	先鎖住要留的那份，核對內容沒變才移走副本
 AiDupUndoHint	IDS_AI_DUP_UNDO_HINT	4890	移到回收站，可以撤销	Goes to the Recycle Bin; you can undo	移到資源回收筒，可以復原
 AiDupConfirmed	IDS_AI_DUP_CONFIRMED	4891	你确认了：把 {n} 个副本移到回收站	You confirmed: move {n} copies to the Recycle Bin	你確認了：把 {n} 個副本移到資源回收筒
 AiDupDenied	IDS_AI_DUP_DENIED	4892	你没有同意，副本都没动	You declined; no copy was moved	你沒有同意，副本都沒動
@@ -3700,7 +3700,7 @@ AiDupResUnit	IDS_AI_DUP_RES_UNIT	4899	份	copies	份
 AiDupResKept	IDS_AI_DUP_RES_KEPT	4900	留下的 {n} 个文件一个没动	The {n} kept files were not touched	留下的 {n} 個檔案一個沒動
 AiDupResSkipped	IDS_AI_DUP_RES_SKIPPED	4901	{g} 组在比对后改动过，没有动	{g} groups changed after the compare and were left alone	{g} 組在比對後改動過，沒有動
 AiDupResStill	IDS_AI_DUP_RES_STILL	4902	在回收站里时还占空间，清空后释放 {size}	Still takes space while in the Recycle Bin; emptying frees {size}	在資源回收筒裡時還佔空間，清空後釋放 {size}
-AiDupGuardNote	IDS_AI_DUP_GUARD_NOTE	4903	有文件在比对后改动过，Pulse 没有移动任何副本。重新比对一次再清理。	Files changed after the compare, so Pulse moved no copies. Compare again first.	有檔案在比對後改動過，Pulse 沒有移動任何副本。重新比對一次再清理。
+AiDupGuardNote	IDS_AI_DUP_GUARD_NOTE	4903	有文件在比对后改动过，FileP 没有移动任何副本。重新比对一次再清理。	Files changed after the compare, so FileP moved no copies. Compare again first.	有檔案在比對後改動過，FileP 沒有移動任何副本。重新比對一次再清理。
 AiDupUndoneSub	IDS_AI_DUP_UNDONE_SUB	4904	{n} 个副本都从回收站还原了	All {n} copies are back from the Recycle Bin	{n} 個副本都從資源回收筒還原了
 AiDupPeek	IDS_AI_DUP_PEEK	4905	清掉 {n} 个副本 · {size}	{n} copies cleared · {size}	清掉 {n} 個副本 · {size}
 AiDupChipVerify	IDS_AI_DUP_CHIP_VERIFY	4906	核对内容	Checking content	核對內容
@@ -3765,7 +3765,7 @@ AiCtlResFour	IDS_AI_CTL_RES_FOUR	4964	已分成四格	Split into four panes	已�
 AiCtlResLayout	IDS_AI_CTL_RES_LAYOUT	4965	布局已调整	Layout changed	版面已調整
 AiCtlResMainSingle	IDS_AI_CTL_RES_MAIN_SINGLE	4966	　主窗口回到单栏	　the main window has one pane again	　主視窗回到單欄
 AiCtlResOpened	IDS_AI_CTL_RES_OPENED	4967	已打开	Opened	已打開
-AiCtlResOrganizeSub	IDS_AI_CTL_RES_ORGANIZE_SUB	4968	都只改 Pulse 的整理信息，文件没动	Only Pulse's own organizing changed; the files were not touched	都只改 Pulse 的整理資訊，檔案沒動
+AiCtlResOrganizeSub	IDS_AI_CTL_RES_ORGANIZE_SUB	4968	都只改 FileP 的整理信息，文件没动	Only FileP's own organizing changed; the files were not touched	都只改 FileP 的整理資訊，檔案沒動
 AiCtlResSingle	IDS_AI_CTL_RES_SINGLE	4969	已回到单栏	Back to a single pane	已回到單欄
 AiCtlResThings	IDS_AI_CTL_RES_THINGS	4970	做好了 {n} 件事	Done: {n} changes	做好了 {n} 件事
 AiCtlResThree	IDS_AI_CTL_RES_THREE	4971	已分成三栏	Split into three panes	已分成三欄
@@ -3830,7 +3830,7 @@ AiSetResTitle1	IDS_AI_SET_RES_TITLE_1	5029	改了 1 项设置	Changed 1 setting	
 AiSetResSub	IDS_AI_SET_RES_SUB	5030	{page} · 已生效	{page} · applied	{page} · 已生效
 AiSetSys	IDS_AI_SET_SYS	5031	影响系统	Affects Windows	影響系統
 AiSetShow	IDS_AI_SET_SHOW	5032	在设置中查看	Show in Settings	在設定中查看
-AiSetWarnFm	IDS_AI_SET_WARN_FM	5033	文件夹、磁盘、此电脑和 Win+E 现在都用 Pulse 打开。撤销或在设置里关掉，就恢复资源管理器。	Folders, drives, This PC and Win+E now open in Pulse. Undo it or turn it off in Settings to go back to File Explorer.	資料夾、磁碟、本機和 Win+E 現在都用 Pulse 開啟。復原或在設定裡關掉，就恢復檔案總管。
+AiSetWarnFm	IDS_AI_SET_WARN_FM	5033	文件夹、磁盘、此电脑和 Win+E 现在都用 FileP 打开。撤销或在设置里关掉，就恢复资源管理器。	Folders, drives, This PC and Win+E now open in Pulse. Undo it or turn it off in Settings to go back to File Explorer.	資料夾、磁碟、本機和 Win+E 現在都用 FileP 開啟。復原或在設定裡關掉，就恢復檔案總管。
 AiSetUndone1	IDS_AI_SET_UNDONE_1	5034	设置已改回	The setting is back	設定已改回
 AiSetUndone2	IDS_AI_SET_UNDONE_2	5035	两项设置已改回	Both settings are back	兩項設定已改回
 AiSetUndoneN	IDS_AI_SET_UNDONE_N	5036	{n} 项设置已改回	{n} settings are back	{n} 項設定已改回
@@ -3838,7 +3838,7 @@ AiSetUndoneFm	IDS_AI_SET_UNDONE_FM	5037	，Win+E 还给了资源管理器	, and 
 AiSetNote	IDS_AI_SET_NOTE	5038	你撤销了设置修改	You undid the settings change	你復原了設定修改
 AiSetMark	IDS_AI_SET_MARK	5039	助手刚改的	Changed by the assistant	助手剛改的
 AiSetDenyT	IDS_AI_SET_DENY_T	5040	删除前的确认不能关	The delete confirmation stays on	刪除前的確認不能關
-AiSetDenyS	IDS_AI_SET_DENY_S	5041	移到回收站、永久删除，每次都要你在 Pulse 里点确认，助手关不掉这一步。	Moving to the Recycle Bin and deleting for good always wait for your OK in Pulse. The assistant cannot turn this step off.	移到資源回收筒、永久刪除，每次都要你在 Pulse 裡點確認，助手關不掉這一步。
+AiSetDenyS	IDS_AI_SET_DENY_S	5041	移到回收站、永久删除，每次都要你在 FileP 里点确认，助手关不掉这一步。	Moving to the Recycle Bin and deleting for good always wait for your OK in Pulse. The assistant cannot turn this step off.	移到資源回收筒、永久刪除，每次都要你在 FileP 裡點確認，助手關不掉這一步。
 AiSetLockT	IDS_AI_SET_LOCK_T	5042	这项只能你自己改	Only you can change this	這項只能你自己改
 AiSetLockS	IDS_AI_SET_LOCK_S	5043	助手不能改自己的权限和连接，免得它给自己放行。	The assistant cannot change its own permissions or connections, so it can never let itself through.	助手不能改自己的權限和連線，免得它給自己放行。
 AiSetLockHint	IDS_AI_SET_LOCK_HINT	5044	这些也只能你自己在设置里改：	Only you can change these in Settings:	這些也只能你自己在設定裡改：
@@ -3859,7 +3859,7 @@ AiVoicePauseHeading	IDS_AI_VOICE_PAUSE_HEADING	5058	停顿多久算说完	Pause 
 AiVoicePause1	IDS_AI_VOICE_PAUSE1	5059	1 秒	1 s	1 秒
 AiVoicePause2	IDS_AI_VOICE_PAUSE2	5060	2 秒	2 s	2 秒
 AiVoicePauseManual	IDS_AI_VOICE_PAUSE_MANUAL	5061	手动	Manual	手動
-AiVoiceMenuNote	IDS_AI_VOICE_MENU_NOTE	5062	只在点麦克风时录音，录完上传给语音服务识别，Pulse 不保存录音。文字填进输入框，按 Enter 才发送。	Records only after you click the mic. The audio goes to the speech service for recognition; Pulse keeps no recordings. The words go into the box and are sent only when you press Enter.	只在點麥克風時錄音，錄完上傳給語音服務辨識，Pulse 不儲存錄音。文字填進輸入框，按 Enter 才傳送。
+AiVoiceMenuNote	IDS_AI_VOICE_MENU_NOTE	5062	只在点麦克风时录音，录完上传给语音服务识别，FileP 不保存录音。文字填进输入框，按 Enter 才发送。	Records only after you click the mic. The audio goes to the speech service for recognition; FileP keeps no recordings. The words go into the box and are sent only when you press Enter.	只在點麥克風時錄音，錄完上傳給語音服務辨識，FileP 不儲存錄音。文字填進輸入框，按 Enter 才傳送。
 AiVoiceCardAdd	IDS_AI_VOICE_CARD_ADD	5063	添加语音识别连接	Add a speech recognition connection	新增語音辨識連線
 AiVoiceCardManage	IDS_AI_VOICE_CARD_MANAGE	5064	语音识别连接	Speech recognition connection	語音辨識連線
 AiVoiceCardSub	IDS_AI_VOICE_CARD_SUB	5065	DeepSeek 不能识别语音，需要另接一个语音识别服务（OpenAI 兼容的 /audio/transcriptions 接口）。	DeepSeek can't recognize speech, so voice input needs a separate speech recognition service (an OpenAI-compatible /audio/transcriptions endpoint).	DeepSeek 不能辨識語音，需要另接一個語音辨識服務（OpenAI 相容的 /audio/transcriptions 介面）。
@@ -3879,7 +3879,7 @@ AiVoiceErrNet	IDS_AI_VOICE_ERR_NET	5078	连不上 {host}。检查网络和地址
 AiVoiceErrHttp	IDS_AI_VOICE_ERR_HTTP	5079	服务返回了错误 {code}。{msg}	The service returned error {code}. {msg}	服務傳回了錯誤 {code}。{msg}
 AiVoiceErrNoModel	IDS_AI_VOICE_ERR_NO_MODEL	5080	这个服务没有列出语音识别模型。	This service lists no speech recognition models.	這個服務沒有列出語音辨識模型。
 AiVoiceErrSave	IDS_AI_VOICE_ERR_SAVE	5081	key 没能保存到本机，再试一次。	The key couldn't be saved on this PC. Try again.	key 沒能儲存到本機，再試一次。
-AiVoicePrivacy	IDS_AI_VOICE_PRIVACY	5082	只在你点麦克风时录音，录完上传给这个服务识别。Pulse 不保存录音。	Records only after you click the mic, then uploads it to this service for recognition. Pulse keeps no recordings.	只在你點麥克風時錄音，錄完上傳給這個服務辨識。Pulse 不儲存錄音。
+AiVoicePrivacy	IDS_AI_VOICE_PRIVACY	5082	只在你点麦克风时录音，录完上传给这个服务识别。FileP 不保存录音。	Records only after you click the mic, then uploads it to this service for recognition. FileP keeps no recordings.	只在你點麥克風時錄音，錄完上傳給這個服務辨識。FileP 不儲存錄音。
 AiVoiceCancel	IDS_AI_VOICE_CANCEL	5083	取消	Cancel	取消
 AiVoiceSave	IDS_AI_VOICE_SAVE	5084	保存	Save	儲存
 AiVoiceRemove	IDS_AI_VOICE_REMOVE	5085	移除连接	Remove connection	移除連線
@@ -3889,7 +3889,7 @@ AiVoiceNeedTitle	IDS_AI_VOICE_NEED_TITLE	5088	语音输入需要一个语音识�
 AiVoiceNeedSub	IDS_AI_VOICE_NEED_SUB	5089	DeepSeek 不能识别语音。推荐硅基流动的 SenseVoiceSmall：中文好，国内直接能用。也可以用 OpenAI 或其他兼容的服务。	DeepSeek can't recognize speech. SiliconFlow's SenseVoiceSmall is recommended: good with Chinese and reachable in mainland China. OpenAI or any compatible service works too.	DeepSeek 不能辨識語音。推薦矽基流動的 SenseVoiceSmall：中文好，國內直接能用。也可以用 OpenAI 或其他相容的服務。
 AiVoiceNeedButton	IDS_AI_VOICE_NEED_BUTTON	5090	添加语音连接	Add voice connection	新增語音連線
 AiVoiceNeedNote	IDS_AI_VOICE_NEED_NOTE	5091	现有的 DeepSeek 连接不受影响	Your DeepSeek connection stays as it is	現有的 DeepSeek 連線不受影響
-AiVoiceDeniedTitle	IDS_AI_VOICE_DENIED_TITLE	5092	Windows 不允许 Pulse 使用麦克风	Windows doesn't let Pulse use the microphone	Windows 不允許 Pulse 使用麥克風
+AiVoiceDeniedTitle	IDS_AI_VOICE_DENIED_TITLE	5092	Windows 不允许 FileP 使用麦克风	Windows doesn't let FileP use the microphone	Windows 不允許 FileP 使用麥克風
 AiVoiceDeniedSub	IDS_AI_VOICE_DENIED_SUB	5093	打开下面这个开关后，再点一次麦克风。	Turn on the switch below, then click the mic again.	開啟下面這個開關後，再點一次麥克風。
 AiVoiceCheckMic	IDS_AI_VOICE_CHECK_MIC	5094	找到麦克风：{name}	Microphone found: {name}	找到麥克風：{name}
 AiVoiceCheckDesktop	IDS_AI_VOICE_CHECK_DESKTOP	5095	允许桌面应用访问麦克风：已关闭	Let desktop apps access your microphone: Off	允許桌面應用程式存取麥克風：已關閉
@@ -3932,7 +3932,7 @@ ActPalUsed	IDS_ACT_PAL_USED	5131	这次用过的	Used this session	這次用過�
 ActPalCommon	IDS_ACT_PAL_COMMON	5132	常用	Frequent	常用
 ActPalUnavailable	IDS_ACT_PAL_UNAVAILABLE	5133	现在不能用	Not available now	目前無法使用
 ActPalNoCommand	IDS_ACT_PAL_NO_COMMAND	5135	没有叫这个名字的命令	No command by that name	沒有這個名稱的命令
-ActPalAskAssistant	IDS_ACT_PAL_ASK_ASSISTANT	5136	交给 Pulse 助手：「%s」	Ask Pulse Assistant: "%s"	交給 Pulse 助手：「%s」
+ActPalAskAssistant	IDS_ACT_PAL_ASK_ASSISTANT	5136	交给 FileP 助手：「%s」	Ask FileP Assistant: "%s"	交給 FileP 助手：「%s」
 ActWhySelect	IDS_ACT_WHY_SELECT	5137	先选中文件	Select items first	先選取項目
 ActWhySelectOne	IDS_ACT_WHY_SELECT_ONE	5138	先选中一个文件	Select one item first	先選取一個項目
 ActWhyOnePane	IDS_ACT_WHY_ONE_PANE	5139	现在只有一栏	Only one pane now	目前只有一欄
@@ -3992,9 +3992,9 @@ AiActNotRun	IDS_AI_ACT_NOT_RUN	5192	{title}：没有做	{title}: not done	{title
 AiActFailLine	IDS_AI_ACT_FAIL_LINE	5193	{title}：{why}	{title}: {why}	{title}：{why}
 AiActWhyNoFolder	IDS_AI_ACT_WHY_NO_FOLDER	5194	找不到这个文件夹	Can't find this folder	找不到這個資料夾
 AiActWhyNoFile	IDS_AI_ACT_WHY_NO_FILE	5195	找不到这个文件	Can't find this file	找不到這個檔案
-AiActWhyUnknown	IDS_AI_ACT_WHY_UNKNOWN	5196	Pulse 里没有这个功能	Pulse has no such feature	Pulse 裡沒有這個功能
+AiActWhyUnknown	IDS_AI_ACT_WHY_UNKNOWN	5196	FileP 里没有这个功能	FileP has no such feature	FileP 裡沒有這個功能
 AiActWhyLater	IDS_AI_ACT_WHY_LATER	5197	移动、改名和删除要先给你看计划	Moves, renames and deletes show you a plan first	移動、重新命名和刪除要先給你看計畫
-AiActWhyFailed	IDS_AI_ACT_WHY_FAILED	5198	Pulse 没能完成	Pulse couldn't do it	Pulse 沒能完成
+AiActWhyFailed	IDS_AI_ACT_WHY_FAILED	5198	FileP 没能完成	FileP couldn't do it	FileP 沒能完成
 AiActWhyNoItems	IDS_AI_ACT_WHY_NO_ITEMS	5199	没有可用的项目	No items to use	沒有可用的項目
 AiActWhyOneWindow	IDS_AI_ACT_WHY_ONE_WINDOW	5200	只有一个窗口	There's only one window	只有一個視窗
 AiActWhyNoMatch	IDS_AI_ACT_WHY_NO_MATCH	5201	没有符合条件的项目	No items match	沒有符合條件的項目
@@ -4002,13 +4002,13 @@ AiActWhyLoading	IDS_AI_ACT_WHY_LOADING	5202	这一栏还在加载	This pane is s
 AiActWhyLocked	IDS_AI_ACT_WHY_LOCKED	5203	这一项只能你自己操作	Only you can do this	這一項只能你自己操作
 AiActWhyDeclined	IDS_AI_ACT_WHY_DECLINED	5204	你没有同意	You declined	你沒有同意
 AiActRunTitle	IDS_AI_ACT_RUN_TITLE	5205	运行这个程序？	Run this program?	執行這個程式？
-AiActRunSub	IDS_AI_ACT_RUN_SUB	5206	程序会在 Pulse 之外运行，Pulse 不知道它会改动什么，也无法撤销。	The program runs outside Pulse. Pulse can't tell what it will change and can't undo it.	程式會在 Pulse 之外執行，Pulse 不知道它會變更什麼，也無法復原。
+AiActRunSub	IDS_AI_ACT_RUN_SUB	5206	程序会在 FileP 之外运行，FileP 不知道它会改动什么，也无法撤销。	The program runs outside Pulse. FileP can't tell what it will change and can't undo it.	程式會在 FileP 之外執行，FileP 不知道它會變更什麼，也無法復原。
 AiActRunDeny	IDS_AI_ACT_RUN_DENY	5207	不运行	Don't run	不執行
 AiActRunAccept	IDS_AI_ACT_RUN_ACCEPT	5208	运行	Run	執行
-AiActConfirmHint	IDS_AI_ACT_CONFIRM_HINT	5209	这类操作每次都会问你，不能设为始终允许	Pulse asks every time for this; it can't be always allowed	這類操作每次都會問你，不能設為一律允許
-AiActTagExternal	IDS_AI_ACT_TAG_EXTERNAL	5210	外部效果	Outside Pulse	外部效果
+AiActConfirmHint	IDS_AI_ACT_CONFIRM_HINT	5209	这类操作每次都会问你，不能设为始终允许	FileP asks every time for this; it can't be always allowed	這類操作每次都會問你，不能設為一律允許
+AiActTagExternal	IDS_AI_ACT_TAG_EXTERNAL	5210	外部效果	Outside FileP	外部效果
 AiActSysTitle	IDS_AI_ACT_SYS_TITLE	5211	{title}？	{title}?	{title}？
-AiActSysSub	IDS_AI_ACT_SYS_SUB	5212	这会改动 Windows 的设置，不只是 Pulse。	This changes Windows settings, not only Pulse.	這會變更 Windows 的設定，不只是 Pulse。
+AiActSysSub	IDS_AI_ACT_SYS_SUB	5212	这会改动 Windows 的设置，不只是 FileP。	This changes Windows settings, not only Pulse.	這會變更 Windows 的設定，不只是 FileP。
 AiActSysAccept	IDS_AI_ACT_SYS_ACCEPT	5213	继续	Continue	繼續
 AiActMoreSteps	IDS_AI_ACT_MORE_STEPS	5214	确认后会和另外 {n} 步一起做	Done together with {n} more steps once you confirm	確認後會和另外 {n} 步一起做
 AiActConfirmedRun	IDS_AI_ACT_CONFIRMED_RUN	5215	已运行 {name}	Ran {name}	已執行 {name}
@@ -4020,7 +4020,7 @@ AiActLineNewFolder	IDS_AI_ACT_LINE_NEW_FOLDER	5220	新建了文件夹 {name}	Mad
 AiActAllPanes	IDS_AI_ACT_ALL_PANES	5221	全部 {n} 栏	all {n} panes	全部 {n} 欄
 AiActLineLayout	IDS_AI_ACT_LINE_LAYOUT	5222	布局 {from} → {to}：{panes}	Layout {from} → {to}: {panes}	版面 {from} → {to}：{panes}
 AiActLineLayoutTo	IDS_AI_ACT_LINE_LAYOUT_TO	5223	布局 {to}：{panes}	Layout {to}: {panes}	版面 {to}：{panes}
-AiActResSub	IDS_AI_ACT_RES_SUB	5224	都只改 Pulse 的界面和整理信息，文件没动	Only Pulse's view and organizing changed; no files were touched	都只改 Pulse 的介面和整理資訊，檔案沒動
+AiActResSub	IDS_AI_ACT_RES_SUB	5224	都只改 FileP 的界面和整理信息，文件没动	Only FileP's view and organizing changed; no files were touched	都只改 FileP 的介面和整理資訊，檔案沒動
 AiActLineSort	IDS_AI_ACT_LINE_SORT	5225	按 {by} 排，{dir}	Sorted by {by}, {dir}	按 {by} 排，{dir}
 AiActLineSortAll	IDS_AI_ACT_LINE_SORT_ALL	5226	{panes}都按 {by} 排，{dir}	{panes} sorted by {by}, {dir}	{panes}都按 {by} 排，{dir}
 AiActBothPanes	IDS_AI_ACT_BOTH_PANES	5227	两栏	Both panes	兩欄
@@ -4107,9 +4107,9 @@ AiActWhyTagExists	IDS_AI_ACT_WHY_TAG_EXISTS	5307	已经有这个标签	This tag 
 AiActWhyNoName	IDS_AI_ACT_WHY_NO_NAME	5308	缺少名字	A name is missing	缺少名稱
 AiActTagIn	IDS_AI_ACT_TAG_IN	5309	{color} · 在「{group}」分组	{color} · in {group}	{color} · 在「{group}」群組
 AiActKeysDone	IDS_AI_ACT_KEYS_DONE	5310	{title}的快捷键改好了	The {title} shortcut is changed	{title}的快速鍵改好了
-AiActKeymapSub	IDS_AI_ACT_KEYMAP_SUB	5311	只影响 Pulse	Only affects Pulse	只影響 Pulse
+AiActKeymapSub	IDS_AI_ACT_KEYMAP_SUB	5311	只影响 FileP	Only affects FileP	只影響 FileP
 AiCtlStepsNone	IDS_AI_CTL_STEPS_NONE	5312	没有改动	Nothing changed	沒有變更
-AiActWhyKeyHeld	IDS_AI_ACT_WHY_KEY_HELD	5313	{keys} 被别的程序占用了，在 Pulse 里可能不起作用	{keys} is held by another program and may not work in Pulse	{keys} 被其他程式佔用，在 Pulse 裡可能沒有作用
+AiActWhyKeyHeld	IDS_AI_ACT_WHY_KEY_HELD	5313	{keys} 被别的程序占用了，在 FileP 里可能不起作用	{keys} is held by another program and may not work in FileP	{keys} 被其他程式佔用，在 FileP 裡可能沒有作用
 AiActWhyKeyIme	IDS_AI_ACT_WHY_KEY_IME	5314	{keys} 是中文输入法的快捷键，可能不起作用	The Chinese input method uses {keys}; it may not work	{keys} 是中文輸入法的快速鍵，可能沒有作用
 ActShellVerbs	IDS_ACT_SHELL_VERBS	5315	列出右键菜单项	List context menu items	列出右鍵選單項目
 ActShellRunVerb	IDS_ACT_SHELL_RUN_VERB	5316	运行右键菜单项	Run a context menu item	執行右鍵選單項目
@@ -4126,26 +4126,26 @@ AiGitNotRepo	IDS_AI_GIT_NOT_REPO	5326	这里不是 Git 仓库	This folder is not
 AiGitNothingToPush	IDS_AI_GIT_NOTHING_TO_PUSH	5327	没有要推送的提交	Nothing to push	沒有要推送的提交
 AiGitPullNoUpstream	IDS_AI_GIT_PULL_NO_UPSTREAM	5328	这个分支没有上游，不知道从哪里拉取	This branch has no upstream to pull from	這個分支沒有上游，不知道從哪裡拉取
 AiGitPushT	IDS_AI_GIT_PUSH_T	5329	推送到远端？	Push to the remote?	推送到遠端？
-AiGitPushS	IDS_AI_GIT_PUSH_S	5330	会把 {branch} 上的 {n} 个提交推到 {remote}。推送后别人就能看到，Pulse 无法撤销。	Pushes {n} commits on {branch} to {remote}. Others can see them afterwards, and Pulse can't undo it.	會把 {branch} 上的 {n} 個提交推到 {remote}。推送後別人就能看到，Pulse 無法復原。
-AiGitPushNewS	IDS_AI_GIT_PUSH_NEW_S	5331	会把新分支 {branch} 推到 {remote} 并设为上游。推送后别人就能看到，Pulse 无法撤销。	Pushes the new branch {branch} to {remote} and tracks it. Others can see it afterwards, and Pulse can't undo it.	會把新分支 {branch} 推到 {remote} 並設為上游。推送後別人就能看到，Pulse 無法復原。
-AiGitPushAnyS	IDS_AI_GIT_PUSH_ANY_S	5332	会把 {branch} 上的新提交推到 {remote}。推送后别人就能看到，Pulse 无法撤销。	Pushes the new commits on {branch} to {remote}. Others can see them afterwards, and Pulse can't undo it.	會把 {branch} 上的新提交推到 {remote}。推送後別人就能看到，Pulse 無法復原。
+AiGitPushS	IDS_AI_GIT_PUSH_S	5330	会把 {branch} 上的 {n} 个提交推到 {remote}。推送后别人就能看到，FileP 无法撤销。	Pushes {n} commits on {branch} to {remote}. Others can see them afterwards, and FileP can't undo it.	會把 {branch} 上的 {n} 個提交推到 {remote}。推送後別人就能看到，FileP 無法復原。
+AiGitPushNewS	IDS_AI_GIT_PUSH_NEW_S	5331	会把新分支 {branch} 推到 {remote} 并设为上游。推送后别人就能看到，FileP 无法撤销。	Pushes the new branch {branch} to {remote} and tracks it. Others can see it afterwards, and FileP can't undo it.	會把新分支 {branch} 推到 {remote} 並設為上游。推送後別人就能看到，FileP 無法復原。
+AiGitPushAnyS	IDS_AI_GIT_PUSH_ANY_S	5332	会把 {branch} 上的新提交推到 {remote}。推送后别人就能看到，FileP 无法撤销。	Pushes the new commits on {branch} to {remote}. Others can see them afterwards, and FileP can't undo it.	會把 {branch} 上的新提交推到 {remote}。推送後別人就能看到，FileP 無法復原。
 AiGitNCommits	IDS_AI_GIT_NCOMMITS	5333	{n} 个提交	{n} commits	{n} 個提交
 AiGitNewBranch	IDS_AI_GIT_NEW_BRANCH	5334	新分支	New branch	新分支
 AiGitPushDeny	IDS_AI_GIT_PUSH_DENY	5335	不推送	Don't push	不推送
 AiGitPullT	IDS_AI_GIT_PULL_T	5336	从远端拉取？	Pull from the remote?	從遠端拉取？
-AiGitPullS	IDS_AI_GIT_PULL_S	5337	会从 {remote} 拉取 {branch} 的新提交并合并到本地，工作区里的文件可能会变。Pulse 无法撤销。	Fetches the new commits of {branch} from {remote} and merges them; files in the working tree may change. Pulse can't undo it.	會從 {remote} 拉取 {branch} 的新提交並合併到本機，工作區裡的檔案可能會變。Pulse 無法復原。
+AiGitPullS	IDS_AI_GIT_PULL_S	5337	会从 {remote} 拉取 {branch} 的新提交并合并到本地，工作区里的文件可能会变。FileP 无法撤销。	Fetches the new commits of {branch} from {remote} and merges them; files in the working tree may change. FileP can't undo it.	會從 {remote} 拉取 {branch} 的新提交並合併到本機，工作區裡的檔案可能會變。FileP 無法復原。
 AiGitPullDeny	IDS_AI_GIT_PULL_DENY	5338	不拉取	Don't pull	不拉取
 AiGitDirtyNote	IDS_AI_GIT_DIRTY_NOTE	5339	工作区有 {n} 处更改	{n} local changes	工作區有 {n} 處變更
-AiGitPushStarted	IDS_AI_GIT_PUSH_STARTED	5340	已开始推送 {branch}，完成后 Pulse 会通知你	Pushing {branch}; Pulse tells you when it's done	已開始推送 {branch}，完成後 Pulse 會通知你
-AiGitPullStarted	IDS_AI_GIT_PULL_STARTED	5341	已开始拉取 {branch}，完成后 Pulse 会通知你	Pulling {branch}; Pulse tells you when it's done	已開始拉取 {branch}，完成後 Pulse 會通知你
+AiGitPushStarted	IDS_AI_GIT_PUSH_STARTED	5340	已开始推送 {branch}，完成后 FileP 会通知你	Pushing {branch}; FileP tells you when it's done	已開始推送 {branch}，完成後 FileP 會通知你
+AiGitPullStarted	IDS_AI_GIT_PULL_STARTED	5341	已开始拉取 {branch}，完成后 FileP 会通知你	Pulling {branch}; FileP tells you when it's done	已開始拉取 {branch}，完成後 FileP 會通知你
 AiShellRunT	IDS_AI_SHELL_RUN_T	5342	运行右键菜单项？	Run this context menu item?	執行右鍵選單項目？
-AiShellRunS	IDS_AI_SHELL_RUN_S	5343	会对 {target} 运行「{verb}」。这是其他程序加的菜单项，效果在 Pulse 之外，Pulse 无法撤销。	Runs "{verb}" on {target}. Another program added this item; it works outside Pulse, and Pulse can't undo it.	會對 {target} 執行「{verb}」。這是其他程式加的選單項目，效果在 Pulse 之外，Pulse 無法復原。
+AiShellRunS	IDS_AI_SHELL_RUN_S	5343	会对 {target} 运行「{verb}」。这是其他程序加的菜单项，效果在 FileP 之外，FileP 无法撤销。	Runs "{verb}" on {target}. Another program added this item; it works outside FileP, and FileP can't undo it.	會對 {target} 執行「{verb}」。這是其他程式加的選單項目，效果在 FileP 之外，FileP 無法復原。
 AiShellRan	IDS_AI_SHELL_RAN	5344	已运行「{verb}」	Ran "{verb}"	已執行「{verb}」
 AiShellNoVerb	IDS_AI_SHELL_NO_VERB	5345	右键菜单里没有「{verb}」	The context menu has no "{verb}"	右鍵選單裡沒有「{verb}」
 AiShellSubmenu	IDS_AI_SHELL_SUBMENU	5346	「{verb}」是子菜单，要指定里面的一项	"{verb}" is a submenu; name an item in it	「{verb}」是子選單，要指定裡面的一項
 AiShellVerbsSub	IDS_AI_SHELL_VERBS_SUB	5347	{n} 项：{names}	{n} items: {names}	{n} 項：{names}
 AiOpenWithT	IDS_AI_OPEN_WITH_T	5348	用 {app} 打开？	Open with {app}?	用 {app} 開啟？
-AiOpenWithS	IDS_AI_OPEN_WITH_S	5349	会用 {app} 打开 {target}。之后它做什么都在 Pulse 之外，Pulse 无法撤销。	Opens {target} with {app}. What it does next happens outside Pulse, and Pulse can't undo it.	會用 {app} 開啟 {target}。之後它做什麼都在 Pulse 之外，Pulse 無法復原。
+AiOpenWithS	IDS_AI_OPEN_WITH_S	5349	会用 {app} 打开 {target}。之后它做什么都在 FileP 之外，FileP 无法撤销。	Opens {target} with {app}. What it does next happens outside FileP, and FileP can't undo it.	會用 {app} 開啟 {target}。之後它做什麼都在 FileP 之外，FileP 無法復原。
 AiOpenWithAccept	IDS_AI_OPEN_WITH_ACCEPT	5350	打开	Open	開啟
 AiOpenWithNone	IDS_AI_OPEN_WITH_NONE	5351	工具栏上没有「{app}」	The toolbar has no "{app}"	工具列上沒有「{app}」
 AiOpenWithEmpty	IDS_AI_OPEN_WITH_EMPTY	5352	工具栏上还没有固定程序	No programs are pinned to the toolbar yet	工具列上還沒有釘選程式
@@ -4175,8 +4175,8 @@ AiDriveWhich	IDS_AI_DRIVE_WHICH	5375	先选中一个驱动器，或说出盘符	
 AiLockUnlockS	IDS_AI_LOCK_UNLOCK_S	5376	解锁 BitLocker 盘需要输入密码或恢复密钥，助手不会经手。	Unlocking a BitLocker drive needs its password or recovery key; the assistant never handles them.	解鎖 BitLocker 磁碟需要輸入密碼或修復金鑰，助手不會經手。
 AiLockUnlockWhere	IDS_AI_LOCK_UNLOCK_WHERE	5377	此电脑 → 双击 {letter} 盘	This PC → double-click drive {letter}	本機 → 按兩下 {letter} 磁碟
 AiLockUnlockWhereAny	IDS_AI_LOCK_UNLOCK_WHERE_ANY	5378	此电脑 → 双击加密的盘	This PC → double-click the locked drive	本機 → 按兩下加密的磁碟
-AiLockExitS	IDS_AI_LOCK_EXIT_S	5379	退出 Pulse 会关掉所有窗口，助手不会替你退出。	Exiting closes every Pulse window; the assistant won't do it for you.	結束 Pulse 會關掉所有視窗，助手不會替你結束。
-AiLockExitWhere	IDS_AI_LOCK_EXIT_WHERE	5380	命令面板 → 退出 Pulse	Command palette → Exit Pulse	命令面板 → 結束 Pulse
+AiLockExitS	IDS_AI_LOCK_EXIT_S	5379	退出 FileP 会关掉所有窗口，助手不会替你退出。	Exiting closes every FileP window; the assistant won't do it for you.	結束 FileP 會關掉所有視窗，助手不會替你結束。
+AiLockExitWhere	IDS_AI_LOCK_EXIT_WHERE	5380	命令面板 → 退出 FileP	Command palette → Exit FileP	命令面板 → 結束 FileP
 AiLockWhereSettings	IDS_AI_LOCK_WHERE_SETTINGS	5381	设置 → {page}	Settings → {page}	設定 → {page}
 AiActOpenedForYou	IDS_AI_ACT_OPENED_FOR_YOU	5382	已打开，由你来选	Opened for you to choose	已開啟，由你來選
 AiActTargetMany	IDS_AI_ACT_TARGET_MANY	5383	{name} 等 {n} 项	{name} and others ({n} items)	{name} 等 {n} 項
@@ -4186,7 +4186,7 @@ AiFoNoItems	IDS_AI_FO_NO_ITEMS	5386	没有选中要处理的文件	Nothing is se
 AiFoGone	IDS_AI_FO_GONE	5387	找不到「{name}」，它可能已被移走或删除	Can't find “{name}”; it may have been moved or deleted	找不到「{name}」，它可能已被移走或刪除
 AiFoTooMany	IDS_AI_FO_TOO_MANY	5388	一次最多处理 {n} 项，请分几次做	At most {n} items at a time; do it in parts	一次最多處理 {n} 項，請分幾次做
 AiFoDriveRoot	IDS_AI_FO_DRIVE_ROOT	5389	不能移动、改名或删除整个磁盘	A whole drive can't be moved, renamed or deleted	不能移動、改名或刪除整個磁碟
-AiFoSystem	IDS_AI_FO_SYSTEM	5390	{folder} 是系统或程序目录，Pulse 不会动里面的东西	{folder} is a system or program folder; Pulse doesn't touch it	{folder} 是系統或程式目錄，Pulse 不會動裡面的東西
+AiFoSystem	IDS_AI_FO_SYSTEM	5390	{folder} 是系统或程序目录，FileP 不会动里面的东西	{folder} is a system or program folder; FileP doesn't touch it	{folder} 是系統或程式目錄，FileP 不會動裡面的東西
 AiFoNoDest	IDS_AI_FO_NO_DEST	5391	没有目标文件夹：请说要放到哪里	No destination folder: say where they should go	沒有目標資料夾：請說要放到哪裡
 AiFoClipEmpty	IDS_AI_FO_CLIP_EMPTY	5392	剪贴板里没有文件	The clipboard holds no files	剪貼簿裡沒有檔案
 AiFoBadDest	IDS_AI_FO_BAD_DEST	5393	「{dest}」不是可以放文件的文件夹	“{dest}” isn't a folder files can go to	「{dest}」不是可以放檔案的資料夾
@@ -4219,7 +4219,7 @@ AiFoMoreSteps	IDS_AI_FO_MORE_STEPS	5419	确认后会和另外 {n} 步一起做�
 AiFoTitleMove	IDS_AI_FO_TITLE_MOVE	5420	把 {what}移到「{folder}」？	Move {what} to “{folder}”?	把 {what}移到「{folder}」？
 AiFoTitleCopy	IDS_AI_FO_TITLE_COPY	5421	把 {what}复制到「{folder}」？	Copy {what} to “{folder}”?	把 {what}複製到「{folder}」？
 AiFoSubTo	IDS_AI_FO_SUB_TO	5422	到 {dest}	To {dest}	到 {dest}
-AiFoSubNewDest	IDS_AI_FO_SUB_NEW_DEST	5423	{dest} 还没有，Pulse 会先新建它	{dest} doesn't exist yet; Pulse makes it first	{dest} 還沒有，Pulse 會先新建它
+AiFoSubNewDest	IDS_AI_FO_SUB_NEW_DEST	5423	{dest} 还没有，FileP 会先新建它	{dest} doesn't exist yet; FileP makes it first	{dest} 還沒有，FileP 會先新建它
 AiFoHintMove	IDS_AI_FO_HINT_MOVE	5424	移动可以撤销	Moves can be undone	移動可以復原
 AiFoHintCopy	IDS_AI_FO_HINT_COPY	5425	复制可以撤销	Copies can be undone	複製可以復原
 AiFoClash	IDS_AI_FO_CLASH	5426	{n} 项在那里已有同名，会保留两份，不覆盖	{n} names are taken there; both are kept, nothing is overwritten	{n} 項在那裡已有同名，會保留兩份，不覆蓋
@@ -4234,9 +4234,9 @@ AiFoTitleRecycle	IDS_AI_FO_TITLE_RECYCLE	5434	把 {what}移到回收站？	Move 
 AiFoSubRecycle	IDS_AI_FO_SUB_RECYCLE	5435	移到回收站，可以撤销。	They go to the Recycle Bin; you can undo.	移到資源回收筒，可以復原。
 AiFoHintDelete	IDS_AI_FO_HINT_DELETE	5436	删除每次都会问你，不能设为始终允许	Deleting always asks; it can't be set to always allow	刪除每次都會問你，不能設為一律允許
 AiFoTitlePurge	IDS_AI_FO_TITLE_PURGE	5437	永久删除 {what}？	Permanently delete {what}?	永久刪除 {what}？
-AiFoSubPurge	IDS_AI_FO_SUB_PURGE	5438	这 {n} 项不进回收站，会被永久删除，不能撤销，Pulse 也找不回来。	These {n} items skip the Recycle Bin and are deleted for good; this can't be undone and Pulse can't get them back.	這 {n} 項不進資源回收筒，會被永久刪除，不能復原，Pulse 也找不回來。
+AiFoSubPurge	IDS_AI_FO_SUB_PURGE	5438	这 {n} 项不进回收站，会被永久删除，不能撤销，FileP 也找不回来。	These {n} items skip the Recycle Bin and are deleted for good; this can't be undone and FileP can't get them back.	這 {n} 項不進資源回收筒，會被永久刪除，不能復原，FileP 也找不回來。
 AiFoTitleEmpty	IDS_AI_FO_TITLE_EMPTY	5439	清空回收站？	Empty the Recycle Bin?	清空資源回收筒？
-AiFoSubEmpty	IDS_AI_FO_SUB_EMPTY	5440	回收站里的 {n} 个文件（{size}）会被永久删除，不能撤销，Pulse 也找不回来。	The {n} files in the Recycle Bin ({size}) are deleted for good; this can't be undone and Pulse can't get them back.	資源回收筒裡的 {n} 個檔案（{size}）會被永久刪除，不能復原，Pulse 也找不回來。
+AiFoSubEmpty	IDS_AI_FO_SUB_EMPTY	5440	回收站里的 {n} 个文件（{size}）会被永久删除，不能撤销，FileP 也找不回来。	The {n} files in the Recycle Bin ({size}) are deleted for good; this can't be undone and FileP can't get them back.	資源回收筒裡的 {n} 個檔案（{size}）會被永久刪除，不能復原，FileP 也找不回來。
 AiFoHintArm	IDS_AI_FO_HINT_ARM	5441	永久删除每次都要点两次：第一次点后按钮变成「再点一次，永久删除」	A permanent delete always takes two clicks: after the first, the button says “Click again to delete permanently”	永久刪除每次都要點兩次：第一次點後按鈕變成「再點一次，永久刪除」
 AiFoArm	IDS_AI_FO_ARM	5442	再点一次，永久删除	Click again to delete permanently	再點一次，永久刪除
 AiFoTitleRestore	IDS_AI_FO_TITLE_RESTORE	5443	把 {what}还原到原来的位置？	Restore {what} to where they were?	把 {what}還原到原來的位置？
@@ -4264,10 +4264,10 @@ AiActResSelectResults	IDS_AI_ACT_RES_SELECT_RESULTS	5464	在搜索结果里选�
 AiActResFolders	IDS_AI_ACT_RES_FOLDERS	5465	分布在 {n} 个文件夹	In {n} folders	分布在 {n} 個資料夾
 AiActCountExts	IDS_AI_ACT_COUNT_EXTS	5466	{n} 个 {exts}	{n} {exts} files	{n} 個 {exts}
 AiMcpGroupView	IDS_AI_MCP_GROUP_VIEW	5467	查看与界面	View and layout	檢視與介面
-AiMcpGroupOrganize	IDS_AI_MCP_GROUP_ORGANIZE	5468	整理 Pulse	Organize Pulse	整理 Pulse
+AiMcpGroupOrganize	IDS_AI_MCP_GROUP_ORGANIZE	5468	整理 FileP	Organize FileP	整理 FileP
 AiMcpGroupCreate	IDS_AI_MCP_GROUP_CREATE	5469	新建	Create	新增
 AiMcpGroupFiles	IDS_AI_MCP_GROUP_FILES	5470	移动、重命名和删除	Move, rename and delete	移動、重新命名和刪除
-AiMcpGroupExternal	IDS_AI_MCP_GROUP_EXTERNAL	5471	Pulse 之外的效果	Effects outside Pulse	Pulse 之外的效果
+AiMcpGroupExternal	IDS_AI_MCP_GROUP_EXTERNAL	5471	FileP 之外的效果	Effects outside FileP	FileP 之外的效果
 AiMcpGroupLocked	IDS_AI_MCP_GROUP_LOCKED	5472	只能你自己做	Only you can do these	只能你自己做
 AiMcpWhere	IDS_AI_MCP_WHERE	5473	设置 › 增强包 › AI 与 MCP › AI 应用可以做的事	Settings › Enhancement packs › AI and MCP › What AI apps can do	設定 › 增強包 › AI 與 MCP › AI 應用可以做的事
 AiMcpUndoLabel	IDS_AI_MCP_UNDO_LABEL	5474	{client} 的操作	Changes by {client}	{client} 的操作
@@ -4276,19 +4276,19 @@ AiMcpArmNote	IDS_AI_MCP_ARM_NOTE	5476	永久删除无法撤销。再点一次按
 AiMcpCreateTitle	IDS_AI_MCP_CREATE_TITLE	5477	允许「{client}」{title}？	Allow {client}: {title}?	允許「{client}」{title}？
 AiUndoRunLabel	IDS_AI_UNDO_RUN_LABEL	5478	刚才的一组操作	the last group of changes	剛才的一組操作
 AiMcpGroupsSection	IDS_AI_MCP_GROUPS_SECTION	5479	AI 应用可以做的事	What AI apps can do	AI 應用可以做的事
-AiMcpGroupsFoot	IDS_AI_MCP_GROUPS_FOOT	5480	只对 AI 应用（MCP）生效，Pulse 助手的规则不变。锁定的设置（关闭删除确认、助手权限、连接、API 密钥）任何开关都不会放开。	These apply to AI apps (MCP) only; Pulse Assistant's rules stay the same. No switch unlocks the locked settings (turning off delete confirmation, assistant permissions, connections, API keys).	只對 AI 應用（MCP）生效，Pulse 助手的規則不變。鎖定的設定（關閉刪除確認、助手權限、連線、API 金鑰）任何開關都不會放開。
+AiMcpGroupsFoot	IDS_AI_MCP_GROUPS_FOOT	5480	只对 AI 应用（MCP）生效，FileP 助手的规则不变。锁定的设置（关闭删除确认、助手权限、连接、API 密钥）任何开关都不会放开。	These apply to AI apps (MCP) only; FileP Assistant's rules stay the same. No switch unlocks the locked settings (turning off delete confirmation, assistant permissions, connections, API keys).	只對 AI 應用（MCP）生效，FileP 助手的規則不變。鎖定的設定（關閉刪除確認、助手權限、連線、API 金鑰）任何開關都不會放開。
 AiMcpCountFirst	IDS_AI_MCP_COUNT_FIRST	5481	{n} 个动作	{n} actions	{n} 個動作
 AiMcpCount	IDS_AI_MCP_COUNT	5482	{n} 个	{n}	{n} 個
 AiMcpTagDefaultOn	IDS_AI_MCP_TAG_DEFAULT_ON	5483	默认打开	On by default	預設開啟
 AiMcpTagAsks	IDS_AI_MCP_TAG_ASKS	5484	每次问	Asks each time	每次問
-AiMcpDescView	IDS_AI_MCP_DESC_VIEW	5485	看 Pulse 现在的样子、查找文件、打开文件夹、切换视图和排序、选中项目。不改动任何文件。	See what Pulse shows, find files, open folders, switch views and sorting, select items. Changes no files.	看 Pulse 現在的樣子、尋找檔案、開啟資料夾、切換檢視和排序、選取項目。不變更任何檔案。
-AiMcpDescOrganize	IDS_AI_MCP_DESC_ORGANIZE	5486	标签、收藏、暂存托盘、标签页固定和颜色、快捷键、Pulse 的设置。直接做，AI 应用可以用 undo_last 撤销。	Tags, favorites, the tray, pinned and colored tabs, shortcuts, Pulse's settings. Done directly; the AI app can undo with undo_last.	標籤、收藏、暫存托盤、分頁固定和顏色、快速鍵、Pulse 的設定。直接做，AI 應用可以用 undo_last 復原。
-AiMcpDescCreate	IDS_AI_MCP_DESC_CREATE	5487	新建文件夹、文件和压缩包。每次先在 Pulse 里问你，可以选「始终允许这个文件夹」。	New folders, files and archives. Pulse asks you first each time; you can choose “Always allow here”.	新增資料夾、檔案和壓縮檔。每次先在 Pulse 裡問你，可以選「一律允許這個資料夾」。
-AiMcpDescFiles	IDS_AI_MCP_DESC_FILES	5488	先在 Pulse 里给你看计划（什么去哪里、回收站够不够），你点了才做；永久删除要点两次。没有「始终允许」。	Pulse shows you the plan first (what goes where, whether the Recycle Bin has room) and acts only when you click; a permanent delete takes two clicks. No “always allow”.	先在 Pulse 裡給你看計畫（什麼去哪裡、資源回收筒夠不夠），你點了才做；永久刪除要點兩次。沒有「一律允許」。
+AiMcpDescView	IDS_AI_MCP_DESC_VIEW	5485	看 FileP 现在的样子、查找文件、打开文件夹、切换视图和排序、选中项目。不改动任何文件。	See what FileP shows, find files, open folders, switch views and sorting, select items. Changes no files.	看 FileP 現在的樣子、尋找檔案、開啟資料夾、切換檢視和排序、選取項目。不變更任何檔案。
+AiMcpDescOrganize	IDS_AI_MCP_DESC_ORGANIZE	5486	标签、收藏、暂存托盘、标签页固定和颜色、快捷键、FileP 的设置。直接做，AI 应用可以用 undo_last 撤销。	Tags, favorites, the tray, pinned and colored tabs, shortcuts, FileP's settings. Done directly; the AI app can undo with undo_last.	標籤、收藏、暫存托盤、分頁固定和顏色、快速鍵、FileP 的設定。直接做，AI 應用可以用 undo_last 復原。
+AiMcpDescCreate	IDS_AI_MCP_DESC_CREATE	5487	新建文件夹、文件和压缩包。每次先在 FileP 里问你，可以选「始终允许这个文件夹」。	New folders, files and archives. FileP asks you first each time; you can choose “Always allow here”.	新增資料夾、檔案和壓縮檔。每次先在 FileP 裡問你，可以選「一律允許這個資料夾」。
+AiMcpDescFiles	IDS_AI_MCP_DESC_FILES	5488	先在 FileP 里给你看计划（什么去哪里、回收站够不够），你点了才做；永久删除要点两次。没有「始终允许」。	FileP shows you the plan first (what goes where, whether the Recycle Bin has room) and acts only when you click; a permanent delete takes two clicks. No “always allow”.	先在 FileP 裡給你看計畫（什麼去哪裡、資源回收筒夠不夠），你點了才做；永久刪除要點兩次。沒有「一律允許」。
 AiMcpDescExternal	IDS_AI_MCP_DESC_EXTERNAL	5489	Git 推送 / 拉取、第三方右键菜单、打开程序和脚本、云盘保留 / 释放、弹出驱动器。每次都问你。	Git push / pull, third-party context menu items, opening programs and scripts, keeping or freeing cloud files, ejecting drives. Asks you every time.	Git 推送 / 拉取、第三方右鍵選單、開啟程式和指令碼、雲端硬碟保留 / 釋放、退出磁碟機。每次都問你。
-AiMcpDescLocked	IDS_AI_MCP_DESC_LOCKED	5490	退出 Pulse、解锁 BitLocker 盘、改助手权限。AI 应用调用时只会得到原因和去哪里操作。	Quitting Pulse, unlocking BitLocker drives, changing the assistant's permissions. An AI app that asks only gets the reason and where you do it.	結束 Pulse、解鎖 BitLocker 磁碟、變更助手權限。AI 應用呼叫時只會得到原因和去哪裡操作。
+AiMcpDescLocked	IDS_AI_MCP_DESC_LOCKED	5490	退出 FileP、解锁 BitLocker 盘、改助手权限。AI 应用调用时只会得到原因和去哪里操作。	Quitting FileP, unlocking BitLocker drives, changing the assistant's permissions. An AI app that asks only gets the reason and where you do it.	結束 FileP、解鎖 BitLocker 磁碟、變更助手權限。AI 應用呼叫時只會得到原因和去哪裡操作。
 AiToolFindActions	IDS_AI_TOOL_FIND_ACTIONS	5491	查找动作	Find actions	尋找動作
-AiToolRunActions	IDS_AI_TOOL_RUN_ACTIONS	5492	执行 Pulse 动作	Run Pulse actions	執行 Pulse 動作
+AiToolRunActions	IDS_AI_TOOL_RUN_ACTIONS	5492	执行 FileP 动作	Run FileP actions	執行 FileP 動作
 AiOutcomeBlocked	IDS_AI_OUTCOME_BLOCKED	5493	被设置拦下	Blocked by settings	被設定擋下
 AiMcpSumSteps	IDS_AI_MCP_SUM_STEPS	5494	{n} 步	{n} steps	{n} 步
 AiMcpSumClicked	IDS_AI_MCP_SUM_CLICKED	5495	你点了「{button}」	You chose “{button}”	你點了「{button}」
@@ -4301,13 +4301,13 @@ AiSnackRunDone	IDS_AI_SNACK_RUN_DONE	5501	{client}：{summary}	{client}: {summar
 AiMcpSumByRule	IDS_AI_MCP_SUM_BY_RULE	5502	按「始终允许」	per “Always allow”	按「始終允許」
 AiOutcomeNotRun	IDS_AI_OUTCOME_NOT_RUN	5503	没有执行	Not run	沒有執行
 AiOutcomeNotUndone	IDS_AI_OUTCOME_NOT_UNDONE	5504	没有撤销	Not undone	沒有復原
-AiOutcomeBusy	IDS_AI_OUTCOME_BUSY	5505	Pulse 正忙	Pulse was busy	Pulse 正忙
+AiOutcomeBusy	IDS_AI_OUTCOME_BUSY	5505	FileP 正忙	FileP was busy	FileP 正忙
 AiOutcomeCannot	IDS_AI_OUTCOME_CANNOT	5506	做不了	Can't do this	做不了
 AiMcpWhyUnknown	IDS_AI_MCP_WHY_UNKNOWN	5507	没有「{id}」这个动作	There's no action “{id}”	沒有「{id}」這個動作
 AiMcpWhyOneFile	IDS_AI_MCP_WHY_ONE_FILE	5508	一次只能做一个文件操作	One file operation per call	一次只能做一個檔案操作
 AiMcpWhyOpenFirst	IDS_AI_MCP_WHY_OPEN_FIRST	5509	要先打开文件夹，再新建	Open the folder first, then create	要先開啟資料夾，再新增
 AiMcpWhyNoFolder	IDS_AI_MCP_WHY_NO_FOLDER	5510	当前显示的不是文件夹	The tab doesn't show a folder	目前顯示的不是資料夾
-AiMcpWhyUserOnly	IDS_AI_MCP_WHY_USER_ONLY	5511	只能你在 Pulse 里自己做	Only you can do this, in Pulse	只能你在 Pulse 裡自己做
+AiMcpWhyUserOnly	IDS_AI_MCP_WHY_USER_ONLY	5511	只能你在 FileP 里自己做	Only you can do this, in FileP	只能你在 FileP 裡自己做
 AiUndoNothing	IDS_AI_UNDO_NOTHING	5512	没有可撤销的改动	Nothing to undo	沒有可復原的變更
 AiUndoNotAi	IDS_AI_UNDO_NOT_AI	5513	最新的改动是你自己做的	The newest change is yours	最新的變更是你自己做的
 AiUndoGone	IDS_AI_UNDO_GONE	5514	那次改动已经不能撤销	That change can't be undone any more	那次變更已經不能復原
@@ -4382,10 +4382,10 @@ DoubleCtrlNormal	IDS_DOUBLE_CTRL_NORMAL	5582	300 毫秒	300 ms	300 毫秒
 DoubleCtrlSlow	IDS_DOUBLE_CTRL_SLOW	5583	400 毫秒	400 ms	400 毫秒
 GlobalSearchJump	IDS_GLOBAL_SEARCH_JUMP	5584	跳转	Go to	跳轉
 DialogJumpBar	IDS_DIALOG_JUMP_BAR	5585	对话框跳转条	Dialog jump bar	對話方塊跳轉列
-DialogJumpBarDesc	IDS_DIALOG_JUMP_BAR_DESC	5586	在其它程序的打开、保存对话框下方列出 Pulse 里的文件夹，点一下就跳过去；Ctrl+G 跳到当前文件夹	Lists your Pulse folders under other apps' Open and Save dialogs; click one to go there, Ctrl+G jumps to the current folder	在其他程式的開啟、儲存對話方塊下方列出 Pulse 裡的資料夾，點一下就跳過去；Ctrl+G 跳到目前資料夾
+DialogJumpBarDesc	IDS_DIALOG_JUMP_BAR_DESC	5586	在其它程序的打开、保存对话框下方列出 FileP 里的文件夹，点一下就跳过去；Ctrl+G 跳到当前文件夹	Lists your FileP folders under other apps' Open and Save dialogs; click one to go there, Ctrl+G jumps to the current folder	在其他程式的開啟、儲存對話方塊下方列出 FileP 裡的資料夾，點一下就跳過去；Ctrl+G 跳到目前資料夾
 DialogJumpSearchCue	IDS_DIALOG_JUMP_SEARCH_CUE	5587	跳转到…  拼音也行	Go to…	跳轉到…  拼音也行
-DialogJumpCurrent	IDS_DIALOG_JUMP_CURRENT	5588	跳到 Pulse 当前的文件夹	Go to the current Pulse folder	跳到 Pulse 目前的資料夾
-DialogJumpNone	IDS_DIALOG_JUMP_NONE	5589	Pulse 里还没有打开的文件夹	No folders open in Pulse	Pulse 裡還沒有開啟的資料夾
+DialogJumpCurrent	IDS_DIALOG_JUMP_CURRENT	5588	跳到 FileP 当前的文件夹	Go to the current FileP folder	跳到 FileP 目前的資料夾
+DialogJumpNone	IDS_DIALOG_JUMP_NONE	5589	FileP 里还没有打开的文件夹	No folders open in FileP	FileP 裡還沒有開啟的資料夾
 DialogJumpMore	IDS_DIALOG_JUMP_MORE	5590	快速访问和最近使用	Quick access and recent	快速存取和最近使用
 DialogJumpSearching	IDS_DIALOG_JUMP_SEARCHING	5591	正在搜索…	Searching…	正在搜尋…
 DialogJumpNoMatch	IDS_DIALOG_JUMP_NO_MATCH	5592	没有匹配的位置	No matching places	沒有符合的位置
@@ -4397,7 +4397,7 @@ DialogJumpFillOpen	IDS_DIALOG_JUMP_FILL_OPEN	5597	填入并打开 ↵	Fill in an
 DialogJumpChipCurrent	IDS_DIALOG_JUMP_CHIP_CURRENT	5598	当前	current	目前
 DialogJumpPinned	IDS_DIALOG_JUMP_PINNED	5599	快速访问	Quick access	快速存取
 DialogJumpRecent	IDS_DIALOG_JUMP_RECENT	5600	最近使用	Recent	最近使用
-DialogJumpAuto	IDS_DIALOG_JUMP_AUTO	5601	打开对话框时自动跳到 Pulse 当前文件夹	Go to the current Pulse folder when a dialog opens	開啟對話方塊時自動跳到 Pulse 目前資料夾
+DialogJumpAuto	IDS_DIALOG_JUMP_AUTO	5601	打开对话框时自动跳到 FileP 当前文件夹	Go to the current FileP folder when a dialog opens	開啟對話方塊時自動跳到 FileP 目前資料夾
 DialogJumpAutoDesc	IDS_DIALOG_JUMP_AUTO_DESC	5602	只跳一次；手动换了位置后不再干预	Only once per dialog; after you move elsewhere it stays put	只跳一次；手動換了位置後不再干預
 JumpHistory	IDS_JUMP_HISTORY	5603	记住常去的位置	Remember frequent places	記住常去的位置
 JumpHistoryDesc	IDS_JUMP_HISTORY_DESC	5604	把常去的文件夹排在前面；只保存在本机	Folders you go to often come first; kept on this PC only	把常去的資料夾排在前面；只儲存在本機

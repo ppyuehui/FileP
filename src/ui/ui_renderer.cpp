@@ -1555,13 +1555,13 @@ void MainRenderer::DrawTitleBar(const WindowViewModel& vm, const D2D1_RECT_F& re
             markFmt->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
             markFmt->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
             MakeBrush(dc, theme.accent_text, brAccentText_);
-            DrawTextRect(dc, markFmt.get(), brAccentText_.get(), L"P", x, markY, mark, mark);
+            DrawTextRect(dc, markFmt.get(), brAccentText_.get(), L"F", x, markY, mark, mark);
         }
     }
     x += mark + 8.0f * scale_;
     const float brandRight = TitleSidebarWidth(right) - 12.0f * scale_;
     const float nameWidth = MeasureLayoutText(compositor_, compositor_->DwriteFactory(),
-        compositor_->HeaderFormat(), L"Pulse");
+        compositor_->HeaderFormat(), L"FileP");
     const WindowIdentityGeometry identity = WindowIdentityLayout(vm, right);
     if (identity.hit.right > identity.hit.left && !identity.compact) {
         // Multi-window M7c: this window's dot and name instead of the product name.
@@ -1578,7 +1578,7 @@ void MainRenderer::DrawTitleBar(const WindowViewModel& vm, const D2D1_RECT_F& re
                             vm.window_identity_name, text_x, 0.0f, identity.hit.right - 6.0f * scale_ - text_x, h);
     } else if (x + nameWidth <= brandRight) {
         MakeBrush(dc, theme.text, brText_);
-        DrawTextRect(dc, compositor_->HeaderFormat(), brText_.get(), L"Pulse",
+        DrawTextRect(dc, compositor_->HeaderFormat(), brText_.get(), L"FileP",
             x, 0.0f, nameWidth + 1.0f * scale_, h);
         x += nameWidth + 12.0f * scale_;
         const auto description = l10n::Get(l10n::StringId::AppDescription);
