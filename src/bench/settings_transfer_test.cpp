@@ -51,6 +51,9 @@ void SeedSource(const fs::path& dir) {
           L"{\n  \"version\":3,\n  \"tags_generation\":\"7\",\n"
           L"  \"tags\":[{\"id\":\"t1\",\"name\":\"工作\",\"rgb\":0xFF0000}]\n}\n");
     Write(dir, L"aliases.json", L"{\"aliases\":{\"D:\\\\Projects\":\"项目\"}}");
+    Write(dir, L"commands.json",
+          L"{\"version\":1,\"commands\":[{\"name\":\"新建项目结构\",\"folder\":false,"
+          L"\"background\":true,\"steps\":[{\"kind\":\"folder\",\"value\":\"01资料\"}]}]}");
     Write(dir, L"saved_searches.json", L"{\"version\":1,\"items\":[]}");
 }
 
@@ -105,6 +108,7 @@ int wmain() {
     Check(!Contains(bundle_text, L"secret.txt"), L"export leaves recent items out");
     Check(Contains(bundle_text, L"\"theme_mode\":2") && Contains(bundle_text, L"copy_path|Ctrl+Shift+C"),
           L"export keeps preferences and shortcuts");
+    Check(Contains(bundle_text, L"新建项目结构"), L"custom commands travel with the settings");
     Check(pulse::json::ValidConfigObject(bundle_text), L"bundle is strict JSON despite legacy colours");
     std::wstring prefs_only;
     Check(BuildBundle(source.wstring(), kPrefs, {L"1.0.57", L"x"}, prefs_only, &included) &&
@@ -158,6 +162,7 @@ int wmain() {
     Check(pulse::json::ValidConfigObject(app), L"merged app.json is strict JSON");
     Check(Member(Read(target, L"context_menu.json"), L"builtin_hidden") == L"12",
           L"context menu layout arrives with the settings");
+    Check(Contains(Read(target, L"commands.json"), L"新建项目结构"), L"custom commands arrive");
     const std::wstring places = Read(target, L"places.json");
     Check(Contains(places, L"E:\\\\Mine") && !Contains(places, L"D:\\\\Projects"),
           L"quick access stays when places is not chosen");

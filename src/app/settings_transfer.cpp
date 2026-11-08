@@ -21,6 +21,7 @@ struct FileSpec {
 constexpr FileSpec kFiles[] = {
     {L"app.json", kPrefs, false},
     {L"context_menu.json", kPrefs, false},
+    {L"commands.json", kPrefs, false},   // 自定义命令
     {L"places.json", kPlaces | kTags, true},
     {L"tags.json", kTags, true},
     {L"tag_rules.json", kTags, false},
