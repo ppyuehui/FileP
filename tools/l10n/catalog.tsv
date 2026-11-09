@@ -4426,49 +4426,49 @@ OpAuthTitleMove	IDS_OP_AUTH_TITLE_MOVE	5626	移动到这里需要管理员权限
 OpAuthTitleDelete	IDS_OP_AUTH_TITLE_DELETE	5627	删除这些项目需要管理员权限	Deleting these items needs administrator permission	刪除這些項目需要系統管理員權限
 OpAuthNotGrantedShort	IDS_OP_AUTH_NOT_GRANTED_SHORT	5628	没有获得管理员权限。	Administrator permission wasn't granted.	沒有取得系統管理員權限。
 OpAuthorizationOnce	IDS_OP_AUTHORIZATION_ONCE	5629	确认一次即可，本次操作的其余项目不会再问。	You only need to approve once; the rest of this operation won't ask again.	確認一次即可，本次操作的其餘項目不會再詢問。
-SettingsSecTaskbar	IDS_SETTINGS_SEC_TASKBAR	5630	任务栏标题	Taskbar title	工作列標題
-SettingsTaskbarParent	IDS_SETTINGS_TASKBAR_PARENT	5631	上级文件夹字符数	Parent folder characters	上層資料夾字元數
-SettingsTaskbarParentDesc	IDS_SETTINGS_TASKBAR_PARENT_DESC	5632	任务栏标题里「上级/当前」的上级部分，超过这个字数就截断，末尾加 …；滑块拉到最右边是不限（按字符计，中文算一个字）	The parent part of the taskbar title (parent\current) is cut at this many characters with […] at the end; the last stop means no limit.	工作列標題裡「上層/目前」的上層部分，超過這個字數就截斷，末尾加 …；滑桿拉到最右邊是不限（按字元計，中文算一個字）
-SettingsTaskbarCurrent	IDS_SETTINGS_TASKBAR_CURRENT	5633	当前文件夹字符数	Current folder characters	目前資料夾字元數
-SettingsTaskbarCurrentDesc	IDS_SETTINGS_TASKBAR_CURRENT_DESC	5634	任务栏标题里「上级/当前」的当前部分，超过这个字数就截断，末尾加 …；滑块拉到最右边是不限（按字符计，中文算一个字）	The current part of the taskbar title (parent\current) is cut at this many characters with […] at the end; the last stop means no limit.	工作列標題裡「上層/目前」的目前部分，超過這個字數就截斷，末尾加 …；滑桿拉到最右邊是不限（按字元計，中文算一個字）
-TaskbarCharsNone	IDS_TASKBAR_CHARS_NONE	5640	不限	No limit	不限
-SettingsShowAi	IDS_SETTINGS_SHOW_AI	5641	显示左下角 AI 图标	Show the AI icon at the bottom left	顯示左下角 AI 圖示
-SettingsShowAiDesc	IDS_SETTINGS_SHOW_AI_DESC	5642	关掉后状态栏不再显示「✦ AI」入口	Off hides the 「✦ AI」 chip in the status bar	關掉後狀態列不再顯示「✦ AI」入口
-SettingsPageCommands	IDS_SETTINGS_PAGE_COMMANDS	5643	自定义命令	Custom commands	自訂命令
-SettingsSecCommands	IDS_SETTINGS_SEC_COMMANDS	5644	自定义命令	Custom commands	自訂命令
-SettingsCommandsDesc	IDS_SETTINGS_COMMANDS_DESC	5645	把一串常用操作存成命令，右键菜单或工具栏一键执行	Save a run of steps as a command and run it from the context menu or the toolbar	把一串常用操作存成命令，右鍵選單或工具列一鍵執行
-SettingsCommandsOpen	IDS_SETTINGS_COMMANDS_OPEN	5646	编辑命令…	Edit commands…	編輯命令…
-SettingsCommandsIntro	IDS_SETTINGS_COMMANDS_INTRO	5647	命令可以用右键菜单一键执行，也可以加到工具栏上。	Commands run from the context menu, or from the toolbar once added there.	命令可以用右鍵選單一鍵執行，也可以加到工具列上。
-CmdName	IDS_CMD_NAME	5648	名称	Name	名稱
-CmdPlaces	IDS_CMD_PLACES	5649	出现位置	Where it shows	出現位置
-CmdPlaceToolbar	IDS_CMD_PLACE_TOOLBAR	5650	工具栏	Toolbar	工具列
-CmdPlaceFolder	IDS_CMD_PLACE_FOLDER	5651	右键文件夹	Context menu on a folder	右鍵資料夾
-CmdPlaceBackground	IDS_CMD_PLACE_BACKGROUND	5652	右键空白处	Context menu on the background	右鍵空白處
-CmdList	IDS_CMD_LIST	5653	命令	Commands	命令
-CmdSteps	IDS_CMD_STEPS	5654	步骤（按顺序执行）	Steps (run in order)	步驟（依序執行）
-CmdNew	IDS_CMD_NEW	5655	新建命令	New command	新增命令
-CmdDelete	IDS_CMD_DELETE	5656	删除命令	Delete command	刪除命令
-CmdAddStep	IDS_CMD_ADD_STEP	5657	添加步骤	Add step	新增步驟
-CmdUpdateStep	IDS_CMD_UPDATE_STEP	5658	更新	Update	更新
-CmdStepUp	IDS_CMD_STEP_UP	5659	上移	Move up	上移
-CmdStepDown	IDS_CMD_STEP_DOWN	5660	下移	Move down	下移
-CmdStepDelete	IDS_CMD_STEP_DELETE	5661	删除步骤	Delete step	刪除步驟
-CmdKindFolder	IDS_CMD_KIND_FOLDER	5662	新建文件夹	New folder	新增資料夾
-CmdKindFile	IDS_CMD_KIND_FILE	5663	新建文件	New file	新增檔案
-CmdKindProgram	IDS_CMD_KIND_PROGRAM	5664	运行程序	Run a program	執行程式
-CmdKindScript	IDS_CMD_KIND_SCRIPT	5665	批处理脚本	Script	批次腳本
-CmdEmpty	IDS_CMD_EMPTY	5666	还没有命令，点「新建命令」开始	No commands yet — pick 新建命令	還沒有命令，點「新增命令」開始
-CmdKindTitle	IDS_CMD_KIND_TITLE	5667	步骤类型	Step type	步驟類型
-CmdKindDesc	IDS_CMD_KIND_DESC	5668	选好类型，再填下面的值	Pick the type, then fill the value below	選好類型，再填下面的值
-CmdValue	IDS_CMD_VALUE	5669	值	Value	值
-SettingsShowPathCopy	IDS_SETTINGS_SHOW_PATH_COPY	5670	地址栏复制按钮	Copy path button	位址列複製按鈕
-SettingsShowPathCopyDesc	IDS_SETTINGS_SHOW_PATH_COPY_DESC	5671	在地址栏右侧显示「复制路径」按钮	Show a 复制路径 button at the right of the address bar	顯示「複製路徑」按鈕
-SettingsAutoCollapse	IDS_SETTINGS_AUTO_COLLAPSE	5672	自动收起侧栏	Auto-collapse sidebar	自動收合側欄
-SettingsAutoCollapseDesc	IDS_SETTINGS_AUTO_COLLAPSE_DESC	5673	窗口变窄时自动把侧栏收成图标栏；关掉后侧栏保持完整宽度	Fold the sidebar to icons when the window gets narrow; off keeps it full width	視窗變窄時自動收合側欄
-SettingsShowHome	IDS_SETTINGS_SHOW_HOME	5674	地址栏主页按钮	Address bar home button	位址列首頁按鈕
-SettingsShowHomeDesc	IDS_SETTINGS_SHOW_HOME_DESC	5675	在地址栏左侧显示「此电脑」按钮，点一下回到此电脑	Show a 此电脑 button left of the address bar	顯示「此電腦」按鈕
-SettingsChangeHover	IDS_SETTINGS_CHANGE_HOVER	5678	悬停显示变化摘要	Change summary on hover	懸停顯示變化摘要
-AboutForkHomepage	IDS_ABOUT_FORK_HOMEPAGE	5680	本项目主页	This project's page	本專案首頁
-AboutForkNote	IDS_ABOUT_FORK_NOTE	5681	基于 Pulse 二次修改的个人版本	A personal fork of Pulse	Pulse 的個人修改版
-SettingsChangeHoverDesc	IDS_SETTINGS_CHANGE_HOVER_DESC	5679	鼠标停在「最近变化」标记上时弹出详情；关掉后只保留标记本身	Show the details popup when hovering a change badge; off keeps just the badge	懸停時顯示變化詳情
-CmdSummaryFormat	IDS_CMD_SUMMARY_FORMAT	5676	将执行：{steps}	Will run: {steps}	將執行：{steps}
+SettingsSecTaskbar	IDS_SETTINGS_SEC_TASKBAR	6400	任务栏标题	Taskbar title	工作列標題
+SettingsTaskbarParent	IDS_SETTINGS_TASKBAR_PARENT	6401	上级文件夹字符数	Parent folder characters	上層資料夾字元數
+SettingsTaskbarParentDesc	IDS_SETTINGS_TASKBAR_PARENT_DESC	6402	任务栏标题里「上级/当前」的上级部分，超过这个字数就截断，末尾加 …；滑块拉到最右边是不限（按字符计，中文算一个字）	The parent part of the taskbar title (parent\current) is cut at this many characters with […] at the end; the last stop means no limit.	工作列標題裡「上層/目前」的上層部分，超過這個字數就截斷，末尾加 …；滑桿拉到最右邊是不限（按字元計，中文算一個字）
+SettingsTaskbarCurrent	IDS_SETTINGS_TASKBAR_CURRENT	6403	当前文件夹字符数	Current folder characters	目前資料夾字元數
+SettingsTaskbarCurrentDesc	IDS_SETTINGS_TASKBAR_CURRENT_DESC	6404	任务栏标题里「上级/当前」的当前部分，超过这个字数就截断，末尾加 …；滑块拉到最右边是不限（按字符计，中文算一个字）	The current part of the taskbar title (parent\current) is cut at this many characters with […] at the end; the last stop means no limit.	工作列標題裡「上層/目前」的目前部分，超過這個字數就截斷，末尾加 …；滑桿拉到最右邊是不限（按字元計，中文算一個字）
+TaskbarCharsNone	IDS_TASKBAR_CHARS_NONE	6405	不限	No limit	不限
+SettingsShowAi	IDS_SETTINGS_SHOW_AI	6406	显示左下角 AI 图标	Show the AI icon at the bottom left	顯示左下角 AI 圖示
+SettingsShowAiDesc	IDS_SETTINGS_SHOW_AI_DESC	6407	关掉后状态栏不再显示「✦ AI」入口	Off hides the 「✦ AI」 chip in the status bar	關掉後狀態列不再顯示「✦ AI」入口
+SettingsPageCommands	IDS_SETTINGS_PAGE_COMMANDS	6408	自定义命令	Custom commands	自訂命令
+SettingsSecCommands	IDS_SETTINGS_SEC_COMMANDS	6409	自定义命令	Custom commands	自訂命令
+SettingsCommandsDesc	IDS_SETTINGS_COMMANDS_DESC	6410	把一串常用操作存成命令，右键菜单或工具栏一键执行	Save a run of steps as a command and run it from the context menu or the toolbar	把一串常用操作存成命令，右鍵選單或工具列一鍵執行
+SettingsCommandsOpen	IDS_SETTINGS_COMMANDS_OPEN	6411	编辑命令…	Edit commands…	編輯命令…
+SettingsCommandsIntro	IDS_SETTINGS_COMMANDS_INTRO	6412	命令可以用右键菜单一键执行，也可以加到工具栏上。	Commands run from the context menu, or from the toolbar once added there.	命令可以用右鍵選單一鍵執行，也可以加到工具列上。
+CmdName	IDS_CMD_NAME	6413	名称	Name	名稱
+CmdPlaces	IDS_CMD_PLACES	6414	出现位置	Where it shows	出現位置
+CmdPlaceToolbar	IDS_CMD_PLACE_TOOLBAR	6415	工具栏	Toolbar	工具列
+CmdPlaceFolder	IDS_CMD_PLACE_FOLDER	6416	右键文件夹	Context menu on a folder	右鍵資料夾
+CmdPlaceBackground	IDS_CMD_PLACE_BACKGROUND	6417	右键空白处	Context menu on the background	右鍵空白處
+CmdList	IDS_CMD_LIST	6418	命令	Commands	命令
+CmdSteps	IDS_CMD_STEPS	6419	步骤（按顺序执行）	Steps (run in order)	步驟（依序執行）
+CmdNew	IDS_CMD_NEW	6420	新建命令	New command	新增命令
+CmdDelete	IDS_CMD_DELETE	6421	删除命令	Delete command	刪除命令
+CmdAddStep	IDS_CMD_ADD_STEP	6422	添加步骤	Add step	新增步驟
+CmdUpdateStep	IDS_CMD_UPDATE_STEP	6423	更新	Update	更新
+CmdStepUp	IDS_CMD_STEP_UP	6424	上移	Move up	上移
+CmdStepDown	IDS_CMD_STEP_DOWN	6425	下移	Move down	下移
+CmdStepDelete	IDS_CMD_STEP_DELETE	6426	删除步骤	Delete step	刪除步驟
+CmdKindFolder	IDS_CMD_KIND_FOLDER	6427	新建文件夹	New folder	新增資料夾
+CmdKindFile	IDS_CMD_KIND_FILE	6428	新建文件	New file	新增檔案
+CmdKindProgram	IDS_CMD_KIND_PROGRAM	6429	运行程序	Run a program	執行程式
+CmdKindScript	IDS_CMD_KIND_SCRIPT	6430	批处理脚本	Script	批次腳本
+CmdEmpty	IDS_CMD_EMPTY	6431	还没有命令，点「新建命令」开始	No commands yet — pick 新建命令	還沒有命令，點「新增命令」開始
+CmdKindTitle	IDS_CMD_KIND_TITLE	6432	步骤类型	Step type	步驟類型
+CmdKindDesc	IDS_CMD_KIND_DESC	6433	选好类型，再填下面的值	Pick the type, then fill the value below	選好類型，再填下面的值
+CmdValue	IDS_CMD_VALUE	6434	值	Value	值
+SettingsShowPathCopy	IDS_SETTINGS_SHOW_PATH_COPY	6435	地址栏复制按钮	Copy path button	位址列複製按鈕
+SettingsShowPathCopyDesc	IDS_SETTINGS_SHOW_PATH_COPY_DESC	6436	在地址栏右侧显示「复制路径」按钮	Show a 复制路径 button at the right of the address bar	顯示「複製路徑」按鈕
+SettingsAutoCollapse	IDS_SETTINGS_AUTO_COLLAPSE	6437	自动收起侧栏	Auto-collapse sidebar	自動收合側欄
+SettingsAutoCollapseDesc	IDS_SETTINGS_AUTO_COLLAPSE_DESC	6438	窗口变窄时自动把侧栏收成图标栏；关掉后侧栏保持完整宽度	Fold the sidebar to icons when the window gets narrow; off keeps it full width	視窗變窄時自動收合側欄
+SettingsShowHome	IDS_SETTINGS_SHOW_HOME	6439	地址栏主页按钮	Address bar home button	位址列首頁按鈕
+SettingsShowHomeDesc	IDS_SETTINGS_SHOW_HOME_DESC	6440	在地址栏左侧显示「此电脑」按钮，点一下回到此电脑	Show a 此电脑 button left of the address bar	顯示「此電腦」按鈕
+SettingsChangeHover	IDS_SETTINGS_CHANGE_HOVER	6442	悬停显示变化摘要	Change summary on hover	懸停顯示變化摘要
+AboutForkHomepage	IDS_ABOUT_FORK_HOMEPAGE	6444	本项目主页	This project's page	本專案首頁
+AboutForkNote	IDS_ABOUT_FORK_NOTE	6445	基于 Pulse 二次修改的个人版本	A personal fork of Pulse	Pulse 的個人修改版
+SettingsChangeHoverDesc	IDS_SETTINGS_CHANGE_HOVER_DESC	6443	鼠标停在「最近变化」标记上时弹出详情；关掉后只保留标记本身	Show the details popup when hovering a change badge; off keeps just the badge	懸停時顯示變化詳情
+CmdSummaryFormat	IDS_CMD_SUMMARY_FORMAT	6441	将执行：{steps}	Will run: {steps}	將執行：{steps}
