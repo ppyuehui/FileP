@@ -2129,7 +2129,7 @@ StatusBarMetrics MakeStatusBarMetrics(const WindowViewModel& vm, const D2D1_RECT
         m.brand = D2D1::RectF(left, m.bar.top, left + name_w + 6.0f * scale + desc_w, m.bar.bottom);
         m.content_left = m.brand.right + 14.0f * scale;
     }
-    if (vm.status.ai_state != StatusAiState::Hidden && vm.settings_show_ai) {
+    if (vm.status.ai_state != StatusAiState::Hidden) {
         // Widths measured in the small face, scaled to the chip's 12.5 DIP.
         float k = 1.0f;
         if (small_format && small_format->GetFontSize() > 0.0f) k = 12.5f * scale / small_format->GetFontSize();

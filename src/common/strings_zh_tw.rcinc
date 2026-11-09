@@ -287,7 +287,7 @@ BEGIN
     IDS_FIXED_DISK "固定磁碟"
     IDS_PERFORMANCE_FORMAT "DEV  %.2f ms  %.0f FPS  ·  列舉 %.1f ms  ·  排序 %.1f ms  ·  CPU %.1f%%  ·  %.1f MB"
     IDS_SETTINGS_ABOUT_DIAGNOSTICS "關於與診斷"
-    IDS_ABOUT_PULSE "關於 Pulse"
+    IDS_ABOUT_PULSE "關於 FileP"
     IDS_VERSION_FORMAT "版本 %s"
     IDS_BUILD_ID_FORMAT "組建 ID：%s"
     IDS_DIAGNOSTICS "診斷"

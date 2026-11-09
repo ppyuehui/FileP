@@ -1447,7 +1447,6 @@ float MainRenderer::SettingsDestinationOffset(const WindowViewModel& vm, int set
     case I::SettingsShowHome: target=l.show_home_row;break;
     case I::SettingsAutoCollapse: target=l.auto_collapse_row;break;
     case I::SettingsShowPathCopy: target=l.show_path_copy_row;break;
-    case I::SettingsShowAi: target=l.show_ai_row;break;
     case I::SettingsLanguage: target=l.language_card;break;
     case I::StartupDialogsTitle:
     case I::ThirdPartyDialogsExperimental: target=l.dialog_management_section;break;

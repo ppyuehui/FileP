@@ -520,7 +520,7 @@ RemovableDisk	IDS_REMOVABLE_DISK	1279	移动磁盘	Removable drive	卸除式磁�
 FixedDisk	IDS_FIXED_DISK	1280	固定磁盘	Fixed drive	固定磁碟
 PerformanceFormat	IDS_PERFORMANCE_FORMAT	1281	DEV  %.2f ms  %.0f FPS  ·  枚举 %.1f ms  ·  排序 %.1f ms  ·  CPU %.1f%%  ·  %.1f MB	DEV  %.2f ms  %.0f FPS  ·  Enumerate %.1f ms  ·  Sort %.1f ms  ·  CPU %.1f%%  ·  %.1f MB	DEV  %.2f ms  %.0f FPS  ·  列舉 %.1f ms  ·  排序 %.1f ms  ·  CPU %.1f%%  ·  %.1f MB
 SettingsAboutDiagnostics	IDS_SETTINGS_ABOUT_DIAGNOSTICS	1282	关于与诊断	About & diagnostics	關於與診斷
-AboutPulse	IDS_ABOUT_PULSE	1283	关于 Pulse	About Pulse	關於 Pulse
+AboutPulse	IDS_ABOUT_PULSE	1283	关于 FileP	About FileP	關於 FileP
 VersionFormat	IDS_VERSION_FORMAT	1284	版本 %s	Version %s	版本 %s
 BuildIdFormat	IDS_BUILD_ID_FORMAT	1285	构建 ID：%s	Build ID: %s	組建 ID：%s
 Diagnostics	IDS_DIAGNOSTICS	1286	诊断	Diagnostics	診斷

@@ -32,6 +32,7 @@
 #include "window_arrange_ui.h"
 #include "app_updates.h"
 #include "app_internal.h"
+#include "custom_commands_page.h"
 #include "global_search_controller.h"
 #include "selection_caps.h"
 #include "app_input.h"
@@ -3393,9 +3394,9 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
             s->tabDragStartPt = POINT{ mx, my };
             SetCapture(hwnd);
         } else if (hit.region == ui::HitTestResult::TabClose && hit.index >= 0) {
-            s->renderer.FreezeTabWidths(BuildVm(*s, false), static_cast<float>(s->compositor.Width()));
-            CloseLayoutTab(*s, static_cast<size_t>(hit.index));
-            InvalidateRect(hwnd, nullptr, FALSE);
+            // 松开鼠标才关：按下后划走可以反悔。
+            s->tabClosePending = hit.index;
+            s->tabClosePoint = POINT{ mx, my };
         } else if (hit.region == ui::HitTestResult::TabNew || hit.region == ui::HitTestResult::TabScroll) {
             // Shares a branch: this else-if chain is at the compiler's nesting limit.
             if (hit.region == ui::HitTestResult::TabNew) {
@@ -3452,7 +3453,19 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
                    hit.region == ui::HitTestResult::SettingsBlankClick ||
                    hit.region == ui::HitTestResult::SettingsHomeFolder ||
                    hit.region == ui::HitTestResult::SettingsLanCache ||
-                   hit.region == ui::HitTestResult::SettingsThumbCache) {
+                   hit.region == ui::HitTestResult::SettingsThumbCache ||
+                   hit.region == ui::HitTestResult::SettingsTaskbarChars ||
+                   hit.region == ui::HitTestResult::SettingsCommandRow ||
+                   hit.region == ui::HitTestResult::SettingsCommandStep ||
+                   hit.region == ui::HitTestResult::SettingsCommandNew ||
+                   hit.region == ui::HitTestResult::SettingsCommandDelete ||
+                   hit.region == ui::HitTestResult::SettingsCommandPlaces ||
+                   hit.region == ui::HitTestResult::SettingsCommandKind ||
+                   hit.region == ui::HitTestResult::SettingsCommandAddStep ||
+                   hit.region == ui::HitTestResult::SettingsCommandUpdateStep ||
+                   hit.region == ui::HitTestResult::SettingsCommandUp ||
+                   hit.region == ui::HitTestResult::SettingsCommandDown ||
+                   hit.region == ui::HitTestResult::SettingsCommandDeleteStep) {
             // One branch on purpose: this else-if chain sits at MSVC's block
             // nesting limit (C1061), so new settings must not lengthen it.
             switch (hit.region) {
@@ -3467,6 +3480,27 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
             case ui::HitTestResult::SettingsMtimePalette: s->settings.MtimePalette(hit.index); break;
             case ui::HitTestResult::SettingsClickMode: s->settings.ClickMode(hit.index); break;
             case ui::HitTestResult::SettingsNameBand: s->settings.ClickMode(2 + hit.index); break;
+            case ui::HitTestResult::SettingsTaskbarChars: {
+                // 任务栏标题: two sliders, 6 = 上级目录, 7 = 当前文件夹.
+                const int which = 6 + std::clamp(hit.sub_index, 0, 1);
+                s->settings.BeginSlider(which);
+                s->settings.TaskbarChars(which, hit.index);
+                SetCapture(hwnd);
+                break;
+            }
+            case ui::HitTestResult::SettingsCommandRow:
+            case ui::HitTestResult::SettingsCommandStep:
+            case ui::HitTestResult::SettingsCommandNew:
+            case ui::HitTestResult::SettingsCommandDelete:
+            case ui::HitTestResult::SettingsCommandPlaces:
+            case ui::HitTestResult::SettingsCommandKind:
+            case ui::HitTestResult::SettingsCommandAddStep:
+            case ui::HitTestResult::SettingsCommandUpdateStep:
+            case ui::HitTestResult::SettingsCommandUp:
+            case ui::HitTestResult::SettingsCommandDown:
+            case ui::HitTestResult::SettingsCommandDeleteStep:
+                app::CommandsPageAction(*s, hit.region, hit.index);
+                break;
             default: s->settings.FolderSort(hit.index); break;
             }
             InvalidateRect(hwnd, nullptr, FALSE);
@@ -3576,8 +3610,11 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
             RecycleDuplicateGroup(*s, static_cast<size_t>(hit.index));
         } else if (hit.region == ui::HitTestResult::SettingsDupDeleteAll) {
             RecycleAllDuplicateExtras(*s);
-        } else if (hit.region == ui::HitTestResult::NavBack) {
-            GoBack(*s);
+        } else if (hit.region == ui::HitTestResult::NavBack ||
+                   hit.region == ui::HitTestResult::NavHome) {
+            // 此电脑 shares the branch: the chain sits at the C1061 limit.
+            if (hit.region == ui::HitTestResult::NavHome) NavigateTo(*s, L"");
+            else GoBack(*s);
         } else if (hit.region == ui::HitTestResult::NavForward) {
             GoForward(*s);
         } else if (hit.region == ui::HitTestResult::NavUp) {
@@ -4343,6 +4380,20 @@ LRESULT HandleLButtonUp(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
         if (s && ColumnHeaderPressTracking(*s)) {   // Details header: sort, or drop the dragged column
             EndColumnHeaderPress(*s);
             return 0;
+        }
+        if (s && s->tabClosePending >= 0) {
+            // 标签 ✕: pressing armed it; releasing on the same ✕ closes the tab.
+            const int pending = std::exchange(s->tabClosePending, -1);
+            const ui::WindowViewModel vm = BuildVm(*s, false);
+            const D2D1_RECT_F rect = D2D1::RectF(0, 0, static_cast<float>(s->compositor.Width()),
+                                                 static_cast<float>(s->compositor.Height()));
+            const ui::HitTestResult hit = s->renderer.HitTest(vm, rect, static_cast<float>(GET_X_LPARAM(lParam)),
+                                                              static_cast<float>(GET_Y_LPARAM(lParam)));
+            if (hit.region == ui::HitTestResult::TabClose && hit.index == pending) {
+                s->renderer.FreezeTabWidths(vm, static_cast<float>(s->compositor.Width()));
+                CloseLayoutTab(*s, static_cast<size_t>(pending));
+            }
+            InvalidateRect(hwnd, nullptr, FALSE);
         }
         if (s) {
             s->paneDragPending = false;

@@ -1358,7 +1358,7 @@ struct WindowViewModel {
     bool settings_list_zebra_rows = true;
     bool settings_list_tree_sticky = true;
     bool settings_menu_acrylic = true;
-    bool settings_show_ai = true;
+    // (the AI entry follows 设置 → AI 助手 → 启用)
     bool show_path_copy = true;   // 地址栏右侧的复制路径按钮
     bool settings_auto_collapse_sidebar = true;
     bool show_home_button = true;   // 地址栏左侧的「此电脑」按钮

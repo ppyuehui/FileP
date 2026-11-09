@@ -1381,11 +1381,6 @@ void SettingsController::ToggleUi(int index) {
         SaveAndApply(SettingsEffect::None);
         return;
     }
-    if (index == 81) {
-        prefs_->show_ai_entry = !prefs_->show_ai_entry;
-        SaveAndApply(SettingsEffect::None);
-        return;
-    }
     if (index == 1) {
         prefs_->ApplyLaunchOnStartup(!prefs_->launch_on_startup);
         SaveAndApply(SettingsEffect::None);

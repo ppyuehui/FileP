@@ -362,7 +362,6 @@ HitTestResult MainRenderer::HitTest(const WindowViewModel& vm, const D2D1_RECT_F
             if(ContainsPt(lay.show_home_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=84;return r;}
             if(ContainsPt(lay.auto_collapse_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=83;return r;}
             if(ContainsPt(lay.show_path_copy_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=82;return r;}
-            if(ContainsPt(lay.show_ai_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=81;return r;}
             {
                 if(ContainsPt(lay.cmd_place[0],x,y)) {r.region=HitTestResult::SettingsCommandPlaces;r.index=0;return r;}
                 if(ContainsPt(lay.cmd_place[1],x,y)) {r.region=HitTestResult::SettingsCommandPlaces;r.index=1;return r;}

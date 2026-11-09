@@ -126,7 +126,6 @@ void AppPrefs::ResetToDefaults() {
     blank_click_action = kBlankClickOff;
     preview_trigger = kPreviewTriggerHover;
     hover_preview_delay_ms = 500;
-    show_ai_entry = true;
     show_path_copy = true;
     auto_collapse_sidebar = true;
     show_home_button = true;
@@ -344,8 +343,6 @@ std::wstring AppPrefs::ToJson() const {
     out += blank_click_action != kBlankClickOff ? L"true" : L"false";
     out += L",\n  \"preview_trigger\":" + std::to_wstring(NormalizePreviewTrigger(preview_trigger));
     out += L",\n  \"hover_preview_delay_ms\":" + std::to_wstring(NormalizeHoverPreviewDelay(hover_preview_delay_ms));
-    out += L",\n  \"show_ai_entry\":";
-    out += show_ai_entry ? L"true" : L"false";
     out += L",\n  \"show_path_copy\":";
     out += show_path_copy ? L"true" : L"false";
     out += L",\n  \"auto_collapse_sidebar\":";
@@ -656,7 +653,7 @@ bool AppPrefs::FromJson(const std::wstring& json) {
         pulse::json::ExtractInt(json, L"preview_trigger", kPreviewTriggerHover));
     hover_preview_delay_ms = NormalizeHoverPreviewDelay(
         pulse::json::ExtractInt(json, L"hover_preview_delay_ms", 500));
-    show_ai_entry = pulse::json::ExtractBool(json, L"show_ai_entry", true);
+    pulse::json::ExtractBool(json, L"show_ai_entry", true);  // legacy key, ignored
     show_path_copy = pulse::json::ExtractBool(json, L"show_path_copy", true);
     auto_collapse_sidebar = pulse::json::ExtractBool(json, L"auto_collapse_sidebar", true);
     show_home_button = pulse::json::ExtractBool(json, L"show_home_button", true);

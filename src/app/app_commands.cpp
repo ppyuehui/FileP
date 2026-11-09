@@ -2003,7 +2003,13 @@ void DispatchMenuCommand(AppState& s, int cmd) {
         s.renderer.SetDetailsPanelVisible(s.showDetailsPanel, true);
         break;
     case app::CmdLayoutSingle: ApplyLayoutPreset(s, app::LayoutPreset::Single); break;
-    case app::CmdLayoutTwoVertical: ApplyLayoutPreset(s, app::LayoutPreset::TwoVertical); break;
+    case app::CmdLayoutTwoVertical:
+        // 左右分屏 as a switch (the toolbar button): side by side, and the next
+        // call folds back to one pane. The pane count is what the window
+        // actually shows, so the switch cannot disagree with the screen.
+        ApplyLayoutPreset(s, LiveLayout(s).VisiblePanes().size() > 1
+            ? app::LayoutPreset::Single : app::LayoutPreset::TwoVertical);
+        break;
     case app::CmdLayoutTwoHorizontal: ApplyLayoutPreset(s, app::LayoutPreset::TwoHorizontal); break;
     case app::CmdLayoutThree: ApplyLayoutPreset(s, app::LayoutPreset::Three); break;
     case app::CmdLayoutFourGrid: ApplyLayoutPreset(s, app::LayoutPreset::FourGrid); break;
@@ -3127,6 +3133,8 @@ constexpr ToolbarToolDef kToolbarTools[] = {
     {app::CmdCompressZip, L"\xF012", l10n::StringId::ToolbarToolZip, L"", false},
     {app::CmdToggleFolderSizes, L"\xEDA2", l10n::StringId::ToolbarToolFolderSizes, L"", true},
     {0, L"\xE7C3", l10n::StringId::ToolbarToolExtensions, L"", true},
+    {app::CmdLayoutTwoVertical, ui::command_icons::kGlyphSplitSideBySide, l10n::StringId::LayoutVertical,
+     L"Ctrl+Alt+2", false},
 };
 static_assert(std::size(kToolbarTools) == app::kToolbarToolCount, "one catalog row per toolbar_tools.h id");
 
@@ -4886,6 +4894,12 @@ std::vector<ui::SelectionChipAction> ToolbarPinActions(AppState& s) {
         action.glyph = def.glyph;
         action.label = l10n::Get(def.label);
         if (const auto key = app::ShownShortcut(def.shortcut); !key.empty()) action.label += L" (" + key + L")";
+        if (app::kToolbarToolIds[tool] == L"split_two") {
+            // 左右分屏: lit (accent) while the window is side by side.
+            action.checked = LiveLayout(s).VisiblePanes().size() > 1;
+            out.push_back(std::move(action));
+            continue;
+        }
         if (def.toggle) {
             action.checked = ToolbarToggleOn(s, static_cast<size_t>(tool));
             out.push_back(std::move(action));
@@ -4991,7 +5005,7 @@ static int ToolbarToolSection(std::wstring_view id) {
                                    L"paste", L"rename", L"delete", L"new_md", L"zip"})
         if (id == file) return 0;
     if (id == L"select_all" || id == L"invert" || id == L"select_wild") return 1;
-    for (std::wstring_view pane : {L"sidebar", L"split", L"details", L"columns", L"apply_all", L"recent"})
+    for (std::wstring_view pane : {L"sidebar", L"split", L"split_two", L"details", L"columns", L"apply_all", L"recent"})
         if (id == pane) return 3;
     for (std::wstring_view more : {L"terminal", L"search_all", L"adv_search", L"recycle", L"map_drive",
                                    L"shortcuts", L"settings"})
@@ -5005,7 +5019,7 @@ static std::vector<size_t> ToolbarPinsOrder(const AppState& s) {
     static constexpr std::wstring_view kCatalogOrder[] = {
         L"cut", L"copy", L"paste", L"rename", L"delete", L"undo", L"new_text", L"new_md", L"copy_path",
         L"properties", L"zip", L"select_all", L"invert", L"select_wild", L"hidden", L"protected", L"extensions", L"folder_size", L"compact",
-        L"zebra", L"size_bar", L"smart_date", L"outline", L"theme", L"split", L"details", L"columns",
+        L"zebra", L"size_bar", L"smart_date", L"outline", L"theme", L"split", L"split_two", L"details", L"columns",
         L"sidebar", L"apply_all", L"recent", L"terminal", L"search_all", L"adv_search", L"recycle",
         L"map_drive", L"shortcuts", L"settings"};
     static_assert(std::size(kCatalogOrder) == app::kToolbarToolCount, "every tool has a place");

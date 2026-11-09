@@ -2850,7 +2850,6 @@ ui::WindowViewModel BuildVm(AppState& s, bool probe_details) {
     vm.settings_list_zebra_rows = s.appPrefs.list_zebra_rows;
     vm.settings_list_tree_sticky = s.appPrefs.list_tree_sticky;
     vm.settings_menu_acrylic = s.appPrefs.menu_acrylic;
-    vm.settings_show_ai = s.appPrefs.show_ai_entry;
     vm.show_path_copy = s.appPrefs.show_path_copy;
     vm.settings_auto_collapse_sidebar = s.appPrefs.auto_collapse_sidebar;
     s.renderer.SetAutoCollapseSidebar(s.appPrefs.auto_collapse_sidebar);

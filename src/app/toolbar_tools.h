@@ -27,6 +27,8 @@ inline constexpr std::wstring_view kToolbarToolIds[] = {
     // were fixed buttons (cut .. delete, split / details / columns), then the
     // rest of the prototype's tools Pulse has commands for.
     L"cut", L"copy", L"paste", L"rename", L"delete", L"split", L"details", L"columns",
+    // 左右双栏: one click straight to the side-by-side layout (no split menu).
+    L"split_two",
     L"select_all", L"invert", L"select_wild", L"new_md", L"recent", L"apply_all",
     L"search_all", L"adv_search", L"recycle", L"map_drive", L"shortcuts", L"settings",
     // 压缩 (native zip) and the 文件夹大小 switch.

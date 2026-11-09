@@ -174,7 +174,6 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         l.show_home_row=row(64);
         l.auto_collapse_row=row(64);
         l.show_path_copy_row=row(64);
-        l.show_ai_row=row(64);
 
         section(I::SettingsSecBackground);
         l.wallpaper_card=row(narrow ? 124.0f : 84.0f);
