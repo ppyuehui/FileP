@@ -1193,6 +1193,29 @@ bool FluentMenu::TickSubMotion() {
     return !done;
 }
 
+// Windows' menu "safe triangle": the cursor apex where the flyout opened, the
+// flyout's left edge, and everything between keeps the flyout alive and freezes
+// the hover, so a diagonal trip does not land on the rows crossed on the way.
+bool FluentMenu::InSafeTriangle(POINT pt) const {
+    if (sub_parent_row_ < 0 || !sub_hwnd_ || !IsWindowVisible(sub_hwnd_)) return false;
+    RECT sub{};
+    if (!GetWindowRect(sub_hwnd_, &sub)) return false;
+    if (pt.x >= sub.left && pt.x < sub.right && pt.y >= sub.top && pt.y < sub.bottom) return true;
+    const POINT a = sub_anchor_;
+    const POINT b{sub.left, sub.top};
+    const POINT c{sub.left, sub.bottom};
+    const auto cross = [](const POINT& p, const POINT& q, const POINT& r) {
+        return static_cast<long long>(q.x - p.x) * (r.y - p.y) -
+               static_cast<long long>(q.y - p.y) * (r.x - p.x);
+    };
+    const long long d1 = cross(a, b, pt);
+    const long long d2 = cross(b, c, pt);
+    const long long d3 = cross(c, a, pt);
+    const bool negative = d1 < 0 || d2 < 0 || d3 < 0;
+    const bool positive = d1 > 0 || d2 > 0 || d3 > 0;
+    return !(negative && positive);
+}
+
 // Opens the one-level flyout for row's children, anchored to the row's right
 // edge (flips to the left when the work area runs out).
 void FluentMenu::OpenSubmenu(int row) {
@@ -1209,6 +1232,7 @@ void FluentMenu::OpenSubmenu(int row) {
     sub_hover_ = -1;
     sub_hover_swatch_ = -1;
     sub_pending_row_ = -1;
+    GetCursorPos(&sub_anchor_);   // the triangle's apex
 
     const int content_w = sub_model_.WidthPx();
     const int w = content_w + kShadowMargin * 2;
@@ -1336,6 +1360,14 @@ void FluentMenu::OnMouse(POINT client_pt, bool button_up) {
             }
         }
         return;
+    }
+    // Safe triangle: travelling diagonally from the header row towards the
+    // flyout crosses the rows in between; those must not steal the hover or
+    // close what is already open.
+    if (sub_parent_row_ >= 0 && row != sub_parent_row_) {
+        POINT screen{client_pt.x, client_pt.y};
+        ClientToScreen(hwnd_, &screen);
+        if (InSafeTriangle(screen)) return;
     }
     UpdateHover(row, HitTestSwatch(row, static_cast<float>(client_pt.x)));
     UpdateTooltip(row);

@@ -411,6 +411,10 @@ private:
     int sub_hover_swatch_ = -1;
     int sub_pending_row_ = -1;     // hover-to-open delay target
     std::chrono::steady_clock::time_point sub_pending_since_;
+    POINT sub_anchor_{};           // cursor when the flyout opened (safe triangle)
+    // The pointer is on the diagonal from the parent row to the flyout: neither
+    // the hover nor the open flyout may change while it travels there.
+    bool InSafeTriangle(POINT screen_pt) const;
     int sub_x_ = 0;                // flyout window origin (screen px)
     int sub_y_ = 0;
 
