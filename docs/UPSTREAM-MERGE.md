@@ -96,25 +96,27 @@ pwsh -NoProfile -File tools/check-fork-features.ps1
 
 > 它只证明**代码还在**，不证明行为对。所以还要走第 5 步。
 
-## 5. 编译 + 截图核对
+## 5. 编译 + 冒烟（一条命令）
 
 ```powershell
 pwsh -NoProfile -File C:\dev\FileP\build_filep.ps1
-icacls C:\dev\FileP\build\FileP.exe /setintegritylevel Medium
-
-# 逐页截图核对（页号见 src/ui/settings_page_ids.h）
-C:\dev\FileP\build\FileP.exe --shot C:\dev\p0.png  --shot-settings 0    # 外观：四个自有开关
-C:\dev\FileP\build\FileP.exe --shot C:\dev\p3.png  --shot-settings 3    # 关于：三个按钮 + FileP
-C:\dev\FileP\build\FileP.exe --shot C:\dev\p9.png  --shot-settings 9    # 文件列表：变化摘要
-C:\dev\FileP\build\FileP.exe --shot C:\dev\p10.png --shot-settings 10   # 标签页与窗口
-C:\dev\FileP\build\FileP.exe --shot C:\dev\p16.png --shot-settings 16   # 自定义命令（必看）
+pwsh -NoProfile -File tools/smoke-fork.ps1     # 自动：提 Medium 标签 + 截 5 页 + 跑 2 个测试
 ```
 
-再跑两个回归测试：
+`smoke-fork.ps1` 会做这些事，任何一项不合格就返回 1：
+
+| 检查 | 判据 |
+| --- | --- |
+| exe 完整性标签 | 不是 Low（是就自动提 Medium） |
+| 设置页 0 / 3 / 9 / 10 / 16 | 出图且大于 20 KB（页号见 `settings_page_ids.h`） |
+| `pulse_custom_commands_test` | 退出码 0 且 `0 failed` |
+| `pulse_settings_transfer_test` | 退出码 0 且 `0 failed` |
+
+想留存图片：`-OutDir C:\dev\smoke -KeepOpen`。
+整个合并流程也可以一条命令走完：
 
 ```powershell
-.\build\pulse_custom_commands_test.exe
-.\build\pulse_settings_transfer_test.exe
+pwsh -File tools/merge-upstream.ps1 -Merge -Build -Smoke -Push
 ```
 
 **手点清单**（截图看不到交互）：

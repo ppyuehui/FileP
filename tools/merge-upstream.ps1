@@ -5,18 +5,23 @@
 .DESCRIPTION
   默认只做「看看有什么新东西」：fetch 之后列出官方新增的提交、改了哪些文件、
   以及这次很可能冲突的位置。加 -Merge 才真的合并；-Build 合并后编译；
-  -Push 合并后推 origin（远端 Gitea）、local（本机 Gitea）、github 三个远端。
+  -Smoke 编译后自动跑冒烟（截 5 页 + 2 个测试）；-Push 推 origin / local / github。
+
+  合并后一定会跑 tools/check-fork-features.ps1：自有功能被官方覆盖就停下，
+  不编译、不推送。
 
 .EXAMPLE
   pwsh -File tools/merge-upstream.ps1
 
 .EXAMPLE
-  pwsh -File tools/merge-upstream.ps1 -Merge -Build -Push
+  pwsh -File tools/merge-upstream.ps1 -Merge -Build -Smoke -Push
 #>
 [CmdletBinding()]
 param(
     [switch]$Merge,
     [switch]$Build,
+    # 编译后自动冒烟：截 5 个设置页 + 跑 2 个回归测试
+    [switch]$Smoke,
     [switch]$Push,
     [string]$Upstream = 'upstream',
     [string]$Branch = 'main',
@@ -57,6 +62,11 @@ if ($LASTEXITCODE -ne 0) { Fail "远端没有 $upRef 分支。" }
 $newCount = [int](git rev-list --count "$Branch..$upRef")
 if ($newCount -eq 0) {
     Info "已是最新：$Branch 里没有缺 $upRef 的提交。"
+    if ($Smoke) {
+        Info '仍然跑一遍冒烟 ...'
+        pwsh -NoProfile -File (Join-Path $PSScriptRoot 'smoke-fork.ps1')
+        exit $LASTEXITCODE
+    }
     exit 0
 }
 
@@ -144,6 +154,12 @@ if ($Build) {
         pwsh -NoProfile -File $builder
         if ($LASTEXITCODE -ne 0) { Fail '编译失败，先修好再推送。' }
     }
+}
+
+if ($Smoke) {
+    Info '冒烟：截 5 个设置页 + 2 个回归测试 ...'
+    pwsh -NoProfile -File (Join-Path $PSScriptRoot 'smoke-fork.ps1')
+    if ($LASTEXITCODE -ne 0) { Fail '冒烟不合格，先修好再推送。' }
 }
 
 if ($Push) {
