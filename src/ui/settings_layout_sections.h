@@ -230,6 +230,10 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
             l.mtime_palette_card=row(seg_h,true); segments(l.mtime_palette_card,l.mtime_palette_row,6,408);
             for(auto& mtime_row : l.mtime_toggle_row) mtime_row=row(64,true);
         }
+        // 变化记录 lives with the mtime marks: both answer "what changed lately".
+        section(I::SettingsSecChanges);
+        l.change_tracking_row=row(64);
+        l.change_days_row=row(seg_h,true); segments(l.change_days_row,l.change_days,3,282);
 
         section(I::SettingsSecSyncStatus);
         for(auto& sync : l.sync_row) sync=row(64);
@@ -463,10 +467,6 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         section(I::SettingsSecStaging);
         l.tray_icon_card=row(seg_h); segments(l.tray_icon_card,l.tray_icon_row,3,282);
         l.tray_hide_row=row(64);
-
-        section(I::SettingsSecChanges);
-        l.change_tracking_row=row(64);
-        l.change_days_row=row(seg_h,true); segments(l.change_days_row,l.change_days,3,282);
 
         section(I::SidebarNetworkLocations);
         l.lan_discovery_row=row(64);

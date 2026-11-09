@@ -2315,7 +2315,7 @@ SettingsAppearanceIntro	IDS_SETTINGS_APPEARANCE_INTRO	3865	主题、颜色、背
 SettingsFileListIntro	IDS_SETTINGS_FILE_LIST_INTRO	3866	打开方式、显示哪些文件，以及列表里的各种提示。	How items open, which files show, and the hints in the list.	開啟方式、顯示哪些檔案，以及清單中的各種提示。
 SettingsTabsIntro	IDS_SETTINGS_TABS_INTRO	3867	启动时打开什么，新标签页和其他程序打开的文件夹去哪里。	What opens at startup, and where new tabs and folders from other apps go.	啟動時開啟什麼，新標籤頁和其他程式開啟的資料夾去哪裡。
 SettingsSystemIntro	IDS_SETTINGS_SYSTEM_INTRO	3868	开机启动、托盘，以及接管 Windows 里打开文件夹的方式。	Startup, the tray icon, and how Windows opens folders.	開機啟動、系統匣，以及接管 Windows 中開啟資料夾的方式。
-SettingsFileOpsIntro	IDS_SETTINGS_FILE_OPS_INTRO	3869	删除确认、暂存区和文件夹变化记录。	Delete confirmation, the staging tray and folder change history.	刪除確認、暫存區和資料夾變化記錄。
+SettingsFileOpsIntro	IDS_SETTINGS_FILE_OPS_INTRO	3869	删除确认和暂存区。	Delete confirmation and the staging tray.	刪除確認和暫存區。
 SettingsNavPersonal	IDS_SETTINGS_NAV_PERSONAL	3870	个性化	Personalize	個人化
 SettingsNavBrowse	IDS_SETTINGS_NAV_BROWSE	3871	浏览	Browsing	瀏覽
 SettingsNavSystem	IDS_SETTINGS_NAV_SYSTEM	3872	系统	System	系統
