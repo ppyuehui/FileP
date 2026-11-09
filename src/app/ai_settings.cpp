@@ -92,7 +92,7 @@ bool SameText(std::wstring_view a, std::wstring_view b) {
 
 std::wstring AiDirectory() {
     const std::wstring root = LocalAppData();
-    return root.empty() ? std::wstring{} : root + L"\\Pulse\\ai";
+    return root.empty() ? std::wstring{} : root + L"\\FileP\\ai";
 }
 
 std::wstring SettingsPath() {
@@ -197,8 +197,24 @@ Settings ParseSettings(std::string_view utf8, bool* malformed) {
     return s;
 }
 
+// 早期版本把 AI 设置写在 %LOCALAPPDATA%\Pulse\ai；新位置是 FileP，第一次读
+// 时把旧文件搬过来（搬不动就算了，不阻塞启动）。
+void MigrateLegacyAiSettings() {
+    const std::wstring dir = AiDirectory();
+    if (dir.empty()) return;
+    const std::wstring path = dir + L"\\ai.json";
+    if (GetFileAttributesW(path.c_str()) != INVALID_FILE_ATTRIBUTES) return;
+    const std::wstring root = LocalAppData();
+    if (root.empty()) return;
+    const std::wstring legacy = root + L"\\Pulse\\ai\\ai.json";
+    if (GetFileAttributesW(legacy.c_str()) == INVALID_FILE_ATTRIBUTES) return;
+    CreateDirectoryW(dir.c_str(), nullptr);
+    if (!CopyFileW(legacy.c_str(), path.c_str(), TRUE)) return;
+}
+
 Settings LoadSettings(bool* malformed) {
     if (malformed) *malformed = false;
+    MigrateLegacyAiSettings();
     const std::wstring path = SettingsPath();
     if (path.empty()) return {};
     const DWORD attributes = GetFileAttributesW(path.c_str());
