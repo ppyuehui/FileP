@@ -1294,7 +1294,7 @@ LRESULT CALLBACK WndProcImpl(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) 
         if (!s->compositor.Init(hwnd)) {
             const std::wstring message = L"Failed to initialize D3D/D2D/DWrite\n\n" +
                 s->compositor.InitializationError() + L"\n\nLog: %LOCALAPPDATA%\\Pulse\\pulse_graphics.log";
-            MessageBoxW(hwnd, message.c_str(), L"Pulse", MB_OK | MB_ICONERROR);
+            MessageBoxW(hwnd, message.c_str(), L"FileP", MB_OK | MB_ICONERROR);
             return -1;
         }
 #ifdef PULSE_WITH_SELFTEST
@@ -4257,7 +4257,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
     if (shell_tag || shell_tag_com) state.open_path.clear();
     std::wstring normalized_launch;
     if (!app::SingleInstanceCoordinator::NormalizeLaunchPath(state.open_path, normalized_launch)) {
-        MessageBoxW(nullptr, L"Invalid launch path.", L"Pulse", MB_OK | MB_ICONERROR);
+        MessageBoxW(nullptr, L"Invalid launch path.", L"FileP", MB_OK | MB_ICONERROR);
         return 1;
     }
     state.open_path = std::move(normalized_launch);
@@ -4275,7 +4275,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
     if (!SkipSingletonFromArgv()) {
         const auto result = state.single_instance.Acquire();
         if (result == app::SingleInstanceCoordinator::AcquireResult::Failed) {
-            MessageBoxW(nullptr, L"Could not establish the Pulse instance endpoint.", L"Pulse", MB_OK | MB_ICONERROR);
+            MessageBoxW(nullptr, L"Could not establish the FileP instance endpoint.", L"FileP", MB_OK | MB_ICONERROR);
             return 1;
         }
         if (result == app::SingleInstanceCoordinator::AcquireResult::Existing) {
@@ -4291,7 +4291,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
                 failure_prefs.Load();
                 l10n::Initialize(hInstance, failure_prefs.language);
                 const std::wstring message = l10n::HantText(l10n::Get(l10n::StringId::PulseIsBusyTheFolderWillShowUpInTheOpenPulseWindowShortlyIfI).c_str());
-                MessageBoxW(nullptr, message.c_str(), L"Pulse", MB_OK | MB_ICONINFORMATION);
+                MessageBoxW(nullptr, message.c_str(), L"FileP", MB_OK | MB_ICONINFORMATION);
             }
             OleShutdown();
             return forwarded ? 0 : 1;
@@ -4427,7 +4427,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
     HWND hwnd = CreateWindowExW(
         WS_EX_NOREDIRECTIONBITMAP,
         wc.lpszClassName,
-        L"Pulse",
+        L"FileP",
         // Pulse paints the entire title bar (WM_NCCALCSIZE makes the whole
         // window client area). WS_CAPTION is what makes DWM play the system
         // minimize / maximize / restore animations; WM_NCACTIVATE keeps the

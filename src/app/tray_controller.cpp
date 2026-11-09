@@ -38,7 +38,7 @@ NOTIFYICONDATAW TrayController::IconData(UINT flags) const {
         data.hIcon = LoadIconW(instance_, MAKEINTRESOURCEW(IDI_PULSE));
         if (!data.hIcon) data.hIcon = LoadIconW(nullptr, IDI_APPLICATION);
     }
-    if (flags & NIF_TIP) wcscpy_s(data.szTip, L"Pulse");
+    if (flags & NIF_TIP) wcscpy_s(data.szTip, L"FileP");
     return data;
 }
 

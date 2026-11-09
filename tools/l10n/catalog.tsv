@@ -1141,12 +1141,12 @@ IntegrationCompat	IDS_INTEGRATION_COMPAT	3661	兼容打开方式	Compatibility m
 IntegrationCompatDesc	IDS_INTEGRATION_COMPAT_DESC	3662	双击文件夹没反应时勾选：FileP 不再改动文件夹的双击动作，改为资源管理器先打开，再马上转到 FileP，可能会闪一下。	Turn on if double-clicking a folder does nothing: FileP leaves the double-click action alone, lets File Explorer open the folder, then moves it into FileP right away. It may flash briefly.	按兩下資料夾沒反應時勾選：FileP 不再改動資料夾的按兩下動作，改為檔案總管先開啟，再馬上轉到 FileP，可能會閃一下。
 IntegrationFailTitle	IDS_INTEGRATION_FAIL_TITLE	2486	设置没有完成	The change didn’t go through	設定沒有完成
 IntegrationDriftTitle	IDS_INTEGRATION_DRIFT_TITLE	2487	有入口被改回了文件资源管理器	Something was switched back to File Explorer	有入口被改回了檔案總管
-IntegrationDriftDesc	IDS_INTEGRATION_DRIFT_DESC	2488	可能是系统更新或其他软件改的。点「恢复」重新交给 FileP。	A Windows update or another app may have changed it. Choose Restore to hand it back to Pulse.	可能是系統更新或其他軟體改的。點「恢復」重新交給 FileP。
+IntegrationDriftDesc	IDS_INTEGRATION_DRIFT_DESC	2488	可能是系统更新或其他软件改的。点「恢复」重新交给 FileP。	A Windows update or another app may have changed it. Choose Restore to hand it back to FileP.	可能是系統更新或其他軟體改的。點「恢復」重新交給 FileP。
 IntegrationReapply	IDS_INTEGRATION_REAPPLY	2489	恢复	Restore	恢復
 IntegrationOptions	IDS_INTEGRATION_OPTIONS	2720	还可以	Also	還可以
 IntegrationTry	IDS_INTEGRATION_TRY	2721	试一试：打开「此电脑」	Try it: open This PC	試一試：開啟「本機」
 IntegrationOnFoot	IDS_INTEGRATION_ON_FOOT	2722	想换回来？关掉上面的开关就行。	Changed your mind? Just turn off the switch above.	想換回來？關掉上面的開關就行。
-IntegrationJustOn	IDS_INTEGRATION_JUST_ON	2723	好了。现在双击文件夹会用 FileP 打开。	Done. Folders you double-click now open in Pulse.	好了。現在按兩下資料夾會用 FileP 開啟。
+IntegrationJustOn	IDS_INTEGRATION_JUST_ON	2723	好了。现在双击文件夹会用 FileP 打开。	Done. Folders you double-click now open in FileP.	好了。現在按兩下資料夾會用 FileP 開啟。
 IntegrationRecycleOption	IDS_INTEGRATION_RECYCLE_OPTION	2724	回收站也用 FileP 打开	Open the Recycle Bin in FileP too	資源回收筒也用 FileP 開啟
 IntegrationOtherTitle	IDS_INTEGRATION_OTHER_TITLE	2725	现在用的是另一个位置的 FileP	Another copy of FileP is in use	目前用的是另一個位置的 FileP
 IntegrationUseThis	IDS_INTEGRATION_USE_THIS	2726	改用这一个	Use this one	改用這一個
@@ -2856,7 +2856,7 @@ ImportSettingsNote	IDS_IMPORT_SETTINGS_NOTE	4055	导入前会先备份当前设�
 ImportAndRestart	IDS_IMPORT_AND_RESTART	4056	导入并重启	Import and restart	匯入並重新啟動
 ImportRestartLater	IDS_IMPORT_RESTART_LATER	4057	导入，稍后重启	Import, restart later	匯入，稍後重新啟動
 ImportSettingsInvalid	IDS_IMPORT_SETTINGS_INVALID	4058	这个文件不是 FileP 设置文件，或者已经损坏。	This file isn't a FileP settings file, or it is damaged.	這個檔案不是 FileP 設定檔，或者已經損壞。
-ImportSettingsNewer	IDS_IMPORT_SETTINGS_NEWER	4059	这个文件来自更新版本的 FileP。请先更新 FileP 再导入。	This file comes from a newer Pulse. Update FileP first, then import it.	這個檔案來自較新版本的 FileP。請先更新 FileP 再匯入。
+ImportSettingsNewer	IDS_IMPORT_SETTINGS_NEWER	4059	这个文件来自更新版本的 FileP。请先更新 FileP 再导入。	This file comes from a newer FileP. Update FileP first, then import it.	這個檔案來自較新版本的 FileP。請先更新 FileP 再匯入。
 RestoreSettingsTitle	IDS_RESTORE_SETTINGS_TITLE	4060	恢复导入前的设置	Restore previous settings	還原匯入前的設定
 RestoreSettingsPrompt	IDS_RESTORE_SETTINGS_PROMPT	4061	恢复到 {time} 导入前的状态。之后的改动会丢失，FileP 会重启。	Go back to how things were before the import on {time}. Later changes are lost, and FileP restarts.	還原到 {time} 匯入前的狀態。之後的變更會遺失，FileP 會重新啟動。
 RestoreAndRestart	IDS_RESTORE_AND_RESTART	4062	恢复并重启	Restore and restart	還原並重新啟動
@@ -3830,7 +3830,7 @@ AiSetResTitle1	IDS_AI_SET_RES_TITLE_1	5029	改了 1 项设置	Changed 1 setting	
 AiSetResSub	IDS_AI_SET_RES_SUB	5030	{page} · 已生效	{page} · applied	{page} · 已生效
 AiSetSys	IDS_AI_SET_SYS	5031	影响系统	Affects Windows	影響系統
 AiSetShow	IDS_AI_SET_SHOW	5032	在设置中查看	Show in Settings	在設定中查看
-AiSetWarnFm	IDS_AI_SET_WARN_FM	5033	文件夹、磁盘、此电脑和 Win+E 现在都用 FileP 打开。撤销或在设置里关掉，就恢复资源管理器。	Folders, drives, This PC and Win+E now open in Pulse. Undo it or turn it off in Settings to go back to File Explorer.	資料夾、磁碟、本機和 Win+E 現在都用 FileP 開啟。復原或在設定裡關掉，就恢復檔案總管。
+AiSetWarnFm	IDS_AI_SET_WARN_FM	5033	文件夹、磁盘、此电脑和 Win+E 现在都用 FileP 打开。撤销或在设置里关掉，就恢复资源管理器。	Folders, drives, This PC and Win+E now open in FileP. Undo it or turn it off in Settings to go back to File Explorer.	資料夾、磁碟、本機和 Win+E 現在都用 FileP 開啟。復原或在設定裡關掉，就恢復檔案總管。
 AiSetUndone1	IDS_AI_SET_UNDONE_1	5034	设置已改回	The setting is back	設定已改回
 AiSetUndone2	IDS_AI_SET_UNDONE_2	5035	两项设置已改回	Both settings are back	兩項設定已改回
 AiSetUndoneN	IDS_AI_SET_UNDONE_N	5036	{n} 项设置已改回	{n} settings are back	{n} 項設定已改回
