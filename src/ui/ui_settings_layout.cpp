@@ -366,10 +366,11 @@ SettingsLayout MakeSettingsLayout(const WindowViewModel& vm, const D2D1_RECT_F& 
             const float actions_y = y + 66.0f * scale + lines * kAboutRowDip * scale + 10.0f * scale;
             static constexpr pulse::l10n::StringId kAboutLabels[] = {
                 pulse::l10n::StringId::AboutCopyInfo,
+                pulse::l10n::StringId::AboutForkHomepage,
                 pulse::l10n::StringId::AboutHomepage,
             };
             float ax = card_left + 16.0f * scale;
-            for (int i = 0; i < 2; ++i) {
+            for (int i = 0; i < 3; ++i) {
                 const float w = label_btn_w(pulse::l10n::Get(kAboutLabels[i]));
                 l.about_action[i] = D2D1::RectF(ax, actions_y, ax + w, actions_y + 32.0f * scale);
                 ax += w + 8.0f * scale;

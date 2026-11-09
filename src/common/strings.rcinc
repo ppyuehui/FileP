@@ -863,7 +863,7 @@ BEGIN
     IDS_HELP_OPEN "打开文件 / 文件夹"
     IDS_HELP_CLIPBOARD "复制 / 剪切 / 粘贴"
     IDS_HELP_TIP "按 Esc 关闭此窗口。编辑名称或搜索文字时，复制、粘贴和全选会作用于输入框。"
-    IDS_ABOUT_TAGLINE "快速、轻量的 Windows 文件管理器"
+    IDS_ABOUT_TAGLINE "快速、轻量的 Windows 文件管理器；本项目基于 Pulse 二次修改"
     IDS_ABOUT_VERSION "版本"
     IDS_ABOUT_BUILT "构建时间"
     IDS_ABOUT_BUILD_ID "构建 ID"
@@ -876,7 +876,7 @@ BEGIN
     IDS_ABOUT_INDEX_WAITING "已安装，等待连接"
     IDS_ABOUT_INDEX_USER "未安装（使用用户索引）"
     IDS_ABOUT_COPY_INFO "复制信息"
-    IDS_ABOUT_HOMEPAGE "项目主页"
+    IDS_ABOUT_HOMEPAGE "原项目主页"
     IDS_ABOUT_COPIED "已复制到剪贴板"
     IDS_RELEASE_NOTES "更新说明"
     IDS_RELEASE_NOTES_DESC "每个版本的改进与修复，点击版本号展开"
@@ -4445,6 +4445,8 @@ BEGIN
     IDS_CMD_SUMMARY_FORMAT "将执行：{steps}"
     IDS_SETTINGS_CHANGE_HOVER "悬停显示变化摘要"
     IDS_SETTINGS_CHANGE_HOVER_DESC "鼠标停在「最近变化」标记上时弹出详情；关掉后只保留标记本身"
+    IDS_ABOUT_FORK_HOMEPAGE "本项目主页"
+    IDS_ABOUT_FORK_NOTE "基于 Pulse 二次修改的个人版本"
 END
 
 LANGUAGE 0x09, 0x01
@@ -5307,7 +5309,7 @@ BEGIN
     IDS_HELP_OPEN "Open a file / folder"
     IDS_HELP_CLIPBOARD "Copy / cut / paste"
     IDS_HELP_TIP "Press Esc to close. While editing a name or search, copy, paste and select all apply to the text field."
-    IDS_ABOUT_TAGLINE "A fast, lightweight file manager for Windows"
+    IDS_ABOUT_TAGLINE "A fast, lightweight file manager for Windows; a personal fork of Pulse"
     IDS_ABOUT_VERSION "Version"
     IDS_ABOUT_BUILT "Built"
     IDS_ABOUT_BUILD_ID "Build ID"
@@ -5320,7 +5322,7 @@ BEGIN
     IDS_ABOUT_INDEX_WAITING "Installed, waiting to connect"
     IDS_ABOUT_INDEX_USER "Not installed (per-user index)"
     IDS_ABOUT_COPY_INFO "Copy info"
-    IDS_ABOUT_HOMEPAGE "Project page"
+    IDS_ABOUT_HOMEPAGE "Upstream project page"
     IDS_ABOUT_COPIED "Copied to the clipboard"
     IDS_RELEASE_NOTES "What's new"
     IDS_RELEASE_NOTES_DESC "Improvements and fixes in each version. Click a version to expand it."
@@ -8889,6 +8891,8 @@ BEGIN
     IDS_CMD_SUMMARY_FORMAT "Will run: {steps}"
     IDS_SETTINGS_CHANGE_HOVER "Change summary on hover"
     IDS_SETTINGS_CHANGE_HOVER_DESC "Show the details popup when hovering a change badge; off keeps just the badge"
+    IDS_ABOUT_FORK_HOMEPAGE "This project's page"
+    IDS_ABOUT_FORK_NOTE "A personal fork of Pulse"
 END
 
 // Traditional Chinese (Taiwan), generated from the Simplified entries above.

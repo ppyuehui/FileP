@@ -4453,6 +4453,8 @@ enum class StringId : UINT {
     SettingsShowHome = IDS_SETTINGS_SHOW_HOME,
     SettingsShowHomeDesc = IDS_SETTINGS_SHOW_HOME_DESC,
     SettingsChangeHover = IDS_SETTINGS_CHANGE_HOVER,
+    AboutForkHomepage = IDS_ABOUT_FORK_HOMEPAGE,
+    AboutForkNote = IDS_ABOUT_FORK_NOTE,
     SettingsChangeHoverDesc = IDS_SETTINGS_CHANGE_HOVER_DESC,
     CmdSummaryFormat = IDS_CMD_SUMMARY_FORMAT,
 };

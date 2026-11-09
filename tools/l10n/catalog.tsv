@@ -19,7 +19,7 @@ HelpDescription	IDS_HELP_DESCRIPTION	2041	搜索、预览、整理文件，用�
 HelpOpen	IDS_HELP_OPEN	2042	打开文件 / 文件夹	Open a file / folder	開啟檔案 / 資料夾
 HelpClipboard	IDS_HELP_CLIPBOARD	2043	复制 / 剪切 / 粘贴	Copy / cut / paste	複製 / 剪下 / 貼上
 HelpTip	IDS_HELP_TIP	2044	按 Esc 关闭此窗口。编辑名称或搜索文字时，复制、粘贴和全选会作用于输入框。	Press Esc to close. While editing a name or search, copy, paste and select all apply to the text field.	按 Esc 關閉此視窗。編輯名稱或搜尋文字時，複製、貼上和全選會作用於輸入框。
-AboutTagline	IDS_ABOUT_TAGLINE	2045	快速、轻量的 Windows 文件管理器	A fast, lightweight file manager for Windows	快速、輕量的 Windows 檔案管理器
+AboutTagline	IDS_ABOUT_TAGLINE	2045	快速、轻量的 Windows 文件管理器；本项目基于 Pulse 二次修改	A fast, lightweight file manager for Windows; a personal fork of Pulse	快速、輕量的 Windows 檔案管理器；本專案基於 Pulse 修改
 AboutVersion	IDS_ABOUT_VERSION	2046	版本	Version	版本
 AboutBuilt	IDS_ABOUT_BUILT	2047	构建时间	Built	組建時間
 AboutBuildId	IDS_ABOUT_BUILD_ID	2048	构建 ID	Build ID	組建 ID
@@ -32,7 +32,7 @@ AboutIndexService	IDS_ABOUT_INDEX_SERVICE	2054	运行中（全盘索引）	Runni
 AboutIndexWaiting	IDS_ABOUT_INDEX_WAITING	2055	已安装，等待连接	Installed, waiting to connect	已安裝，等待連線
 AboutIndexUser	IDS_ABOUT_INDEX_USER	2056	未安装（使用用户索引）	Not installed (per-user index)	未安裝（使用使用者索引）
 AboutCopyInfo	IDS_ABOUT_COPY_INFO	2057	复制信息	Copy info	複製資訊
-AboutHomepage	IDS_ABOUT_HOMEPAGE	2058	项目主页	Project page	專案首頁
+AboutHomepage	IDS_ABOUT_HOMEPAGE	2058	原项目主页	Upstream project page	原專案首頁
 AboutCopied	IDS_ABOUT_COPIED	2059	已复制到剪贴板	Copied to the clipboard	已複製到剪貼簿
 ReleaseNotes	IDS_RELEASE_NOTES	2060	更新说明	What's new	更新說明
 ReleaseNotesDesc	IDS_RELEASE_NOTES_DESC	2061	每个版本的改进与修复，点击版本号展开	Improvements and fixes in each version. Click a version to expand it.	每個版本的改進與修復，點選版本號展開
@@ -4468,5 +4468,7 @@ SettingsAutoCollapseDesc	IDS_SETTINGS_AUTO_COLLAPSE_DESC	5673	窗口变窄时自
 SettingsShowHome	IDS_SETTINGS_SHOW_HOME	5674	地址栏主页按钮	Address bar home button	位址列首頁按鈕
 SettingsShowHomeDesc	IDS_SETTINGS_SHOW_HOME_DESC	5675	在地址栏左侧显示「此电脑」按钮，点一下回到此电脑	Show a 此电脑 button left of the address bar	顯示「此電腦」按鈕
 SettingsChangeHover	IDS_SETTINGS_CHANGE_HOVER	5678	悬停显示变化摘要	Change summary on hover	懸停顯示變化摘要
+AboutForkHomepage	IDS_ABOUT_FORK_HOMEPAGE	5680	本项目主页	This project's page	本專案首頁
+AboutForkNote	IDS_ABOUT_FORK_NOTE	5681	基于 Pulse 二次修改的个人版本	A personal fork of Pulse	Pulse 的個人修改版
 SettingsChangeHoverDesc	IDS_SETTINGS_CHANGE_HOVER_DESC	5679	鼠标停在「最近变化」标记上时弹出详情；关掉后只保留标记本身	Show the details popup when hovering a change badge; off keeps just the badge	懸停時顯示變化詳情
 CmdSummaryFormat	IDS_CMD_SUMMARY_FORMAT	5676	将执行：{steps}	Will run: {steps}	將執行：{steps}

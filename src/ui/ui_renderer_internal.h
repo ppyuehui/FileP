@@ -2723,7 +2723,7 @@ struct SettingsLayout {
     D2D1_RECT_F update_card{};
     D2D1_RECT_F update_action[2]{};
     D2D1_RECT_F update_auto_row{};  // empty when this build has no updater
-    D2D1_RECT_F about_action[2]{};
+    D2D1_RECT_F about_action[3]{};
     D2D1_RECT_F release_card{};
     D2D1_RECT_F release_all{};
     std::vector<D2D1_RECT_F> release_rows;

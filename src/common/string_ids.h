@@ -4461,6 +4461,8 @@
 #define IDS_SETTINGS_SHOW_HOME                                                           5674
 #define IDS_SETTINGS_SHOW_HOME_DESC                                                      5675
 #define IDS_SETTINGS_CHANGE_HOVER                                                        5678
+#define IDS_ABOUT_FORK_HOMEPAGE                                                          5680
+#define IDS_ABOUT_FORK_NOTE                                                              5681
 #define IDS_SETTINGS_CHANGE_HOVER_DESC                                                   5679
 #define IDS_CMD_SUMMARY_FORMAT                                                           5676
 

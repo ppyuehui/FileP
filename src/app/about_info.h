@@ -11,6 +11,8 @@ namespace pulse::app {
 
 using AboutRow = std::pair<std::wstring, std::wstring>;  // label, value
 
+// This fork's own page (the About card links to both it and the upstream).
+inline constexpr const wchar_t* kFilePHomepage = L"https://github.com/ppyuehui/FileP";
 inline constexpr const wchar_t* kPulseHomepage = L"https://github.com/jimmgreen/pulse";
 inline constexpr const wchar_t* kPulseReleasesPage = L"https://github.com/jimmgreen/pulse/releases";
 // Other free, open-source apps by the same author, recommended on the About page.

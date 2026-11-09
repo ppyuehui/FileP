@@ -722,7 +722,7 @@ HitTestResult MainRenderer::HitTest(const WindowViewModel& vm, const D2D1_RECT_F
                 }
             } else if (vm.settings_page == 3) {
                 for (int i = 0; i < 3; ++i) {
-                    if (ContainsPt(i < 2 ? lay.about_action[i] : lay.release_all, x, y)) {
+                    if (ContainsPt(i < 3 ? lay.about_action[i] : lay.release_all, x, y)) {
                         r.region = HitTestResult::SettingsAboutAction;
                         r.index = i;
                         return r;

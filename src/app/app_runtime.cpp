@@ -852,6 +852,18 @@ void FillPaneSlots(AppState& s, ui::WindowViewModel& vm) {
             swprintf_s(version_text,
                 l10n::Get(l10n::StringId::VersionFormat).c_str(), PULSE_VERSION_STRING);
             vm.settings_version = version_text;
+            {
+                // PULSE_BUILD_ID starts with YYYYMMDDTHHMMSSZ: the build date as
+                // 26.11.08, which is what the sidebar footer shows.
+                std::wstring id = PULSE_BUILD_ID;
+                if (id.size() >= 8) {
+                    wchar_t date[16]{};
+                    swprintf_s(date, L"%.2s.%.2s.%.2s", id.c_str() + 2, id.c_str() + 4, id.c_str() + 6);
+                    vm.settings_build_date = date;
+                } else {
+                    vm.settings_build_date = L"--.--.--";
+                }
+            }
             wchar_t build_text[256]{};
             swprintf_s(build_text,
                 l10n::Get(l10n::StringId::BuildIdFormat).c_str(), PULSE_BUILD_ID);

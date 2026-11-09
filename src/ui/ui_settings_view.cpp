@@ -56,7 +56,7 @@ void MainRenderer::DrawSettings(const WindowViewModel& vm, const D2D1_RECT_F& re
     FillRect(dc, brStrokeDivider_.get(), lay.nav.left+16*scale_, lay.nav_row[3].top-12*scale_,
         lay.nav.right-lay.nav.left-32*scale_, 1);
     // A low window lists 关于 with the other rows; the version line gives way.
-    if (!compact_nav && lay.nav_row[3].bottom + 4*scale_ <= lay.nav.bottom-40*scale_) painter_.DrawText(L"Pulse " + vm.settings_version,
+    if (!compact_nav && lay.nav_row[3].bottom + 4*scale_ <= lay.nav.bottom-40*scale_) painter_.DrawText(L"FileP " + vm.settings_build_date,
         D2D1::RectF(lay.nav.left+20*scale_,lay.nav.bottom-40*scale_,lay.nav.right-12*scale_,lay.nav.bottom-16*scale_),
         compositor_->SmallFormat(),theme.text_secondary);
 
@@ -633,9 +633,10 @@ void MainRenderer::DrawSettings(const WindowViewModel& vm, const D2D1_RECT_F& re
             }
             static constexpr pulse::l10n::StringId kAboutActions[] = {
                 pulse::l10n::StringId::AboutCopyInfo,
+                pulse::l10n::StringId::AboutForkHomepage,
                 pulse::l10n::StringId::AboutHomepage,
             };
-            for (int i = 0; i < 2; ++i) {
+            for (int i = 0; i < 3; ++i) {
                 fluent::ControlState state{};
                 state.enabled = true;
                 state.hovered = IsHovered(vm, HitTestResult::SettingsAboutAction, i);

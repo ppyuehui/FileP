@@ -1338,6 +1338,7 @@ struct WindowViewModel {
     bool settings_index_system_expanded = false;
     std::vector<NetworkRootRowView> settings_network_roots;
     std::wstring settings_version;
+    std::wstring settings_build_date;   // 26.11.08, from the build id
     std::wstring settings_build_id;
     std::vector<std::pair<std::wstring, std::wstring>> settings_about_rows; // label, value
     const std::vector<ReleaseNoteView>* settings_release_notes = nullptr;   // newest first
