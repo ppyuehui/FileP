@@ -82,7 +82,17 @@ bool MergeLanDevice(std::vector<LanDevice>& list, const LanDevice& device) {
 }
 
 std::wstring LanDeviceUnc(const LanDevice& device) {
-    if (!device.host.empty()) return L"\\\\" + device.host;
+    if (!device.host.empty()) {
+        // mDNS reports "dy.local", but \\dy.local only resolves where an mDNS
+        // resolver runs: SMB wants the short name (\\dy).
+        std::wstring host = device.host;
+        if (host.size() > 6) {
+            std::wstring tail = host.substr(host.size() - 6);
+            for (auto& c : tail) c = static_cast<wchar_t>(towlower(c));
+            if (tail == L".local") host.resize(host.size() - 6);
+        }
+        return L"\\\\" + host;
+    }
     if (!device.ip.empty()) return L"\\\\" + device.ip;
     return {};
 }
