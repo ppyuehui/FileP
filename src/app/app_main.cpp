@@ -1875,29 +1875,10 @@ LRESULT CALLBACK WndProcImpl(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) 
                 BlankClickDeselect(*s, at);
             return result;
         }
-        // 最小化 / 最大化 / 关闭 act on release (WM_NCLBUTTONUP): pressing a
-        // caption button must not commit the action, exactly like Explorer.
+        // 最小化 / 最大化 / 关闭 go to DefWindowProc: the system already acts on
+        // the release (and cancels when the pointer slides off), so intercepting
+        // either message only breaks the single click.
         break;
-    }
-
-    case WM_NCLBUTTONUP: {
-        if (!s) break;
-        if (wParam != HTMINBUTTON && wParam != HTMAXBUTTON && wParam != HTCLOSE) break;
-        // Only when the pointer is still on the same button: a press dragged
-        // away must not minimize or close the window.
-        POINT at{GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam)};
-        if (!ScreenToClient(hwnd, &at)) return 0;
-        ui::WindowViewModel vm = BuildVm(*s, false);
-        const D2D1_RECT_F rect = D2D1::RectF(0, 0, (float)s->compositor.Width(), (float)s->compositor.Height());
-        const ui::HitTestResult hit = s->renderer.HitTest(vm, rect, (float)at.x, (float)at.y);
-        const bool same = (wParam == HTMINBUTTON && hit.region == ui::HitTestResult::Minimize) ||
-                          (wParam == HTMAXBUTTON && hit.region == ui::HitTestResult::Maximize) ||
-                          (wParam == HTCLOSE && hit.region == ui::HitTestResult::Close);
-        if (!same) return 0;
-        if (wParam == HTMINBUTTON) ShowWindow(hwnd, SW_MINIMIZE);
-        else if (wParam == HTMAXBUTTON) ShowWindow(hwnd, IsZoomed(hwnd) ? SW_RESTORE : SW_MAXIMIZE);
-        else CloseMainWindow(*s);
-        return 0;
     }
 
     case WM_NCLBUTTONDBLCLK:
