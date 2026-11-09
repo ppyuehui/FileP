@@ -1,4 +1,5 @@
 #include "../ui/edit_host.h"
+#include "../ui/known_extensions.h"
 #include "../ui/FluentTokens.h"
 #include "../ui/ui_renderer.h"
 // app_hosted_edit.cpp — extracted from app_main.cpp.
@@ -712,6 +713,15 @@ void ShowRenameOverlay(AppState& s) {
 
     const std::wstring& name = tab->EntryAt(s.renameIndex).name;
     std::wstring initial = name;
+    s.renameKeptExt.clear();
+    // 隐藏已知扩展名时，编辑框里只给主名（和列表里显示的一致），扩展名提交时补回。
+    if (!s.renameAlias) {
+        const size_t hidden = ui::HiddenExtensionLength(name, tab->EntryAt(s.renameIndex).is_dir);
+        if (hidden > 0 && hidden < name.size()) {
+            s.renameKeptExt = name.substr(name.size() - hidden);
+            initial.resize(name.size() - hidden);
+        }
+    }
     if (s.renameAlias) {
         const std::wstring alias = app::AliasStore::Instance().Find(EntryFullPath(*tab, s.renameIndex));
         if (!alias.empty()) initial = alias;
@@ -783,8 +793,12 @@ void HideRenameOverlay(AppState& s, bool commit) {
         GetWindowTextW(s.hwndRenameEdit, buf, ARRAYSIZE(buf));
         if (tab && buf[0] && index < (int)(tab->snapshot ? tab->EntryCount() : 0)) {
             std::wstring full = EntryFullPath(*tab, index);
+            // The hidden extension comes back on the way out, so the field only
+            // ever edits the stem.
+            std::wstring typed = buf;
+            if (!s.renameKeptExt.empty() && !typed.empty()) typed += s.renameKeptExt;
             // As the note under the field said: trimmed, numbered if taken.
-            const std::wstring target = RenameTarget(*tab, index, buf);
+            const std::wstring target = RenameTarget(*tab, index, typed);
             const std::wstring shell_id = tab->EntryAt(index).shell_id;
             if (fs::IsDevicePath(full) && !target.empty() && target != tab->EntryAt(index).name) {
                 // A phone file: the shell host renames it (no undo, as in Explorer).
@@ -1141,7 +1155,7 @@ static void UpdateRenameStatus(AppState& s) {
     if (!tab || !tab->snapshot || s.renameIndex >= static_cast<int>(tab->EntryCount())) return;
     std::wstring note;
     const std::wstring trimmed = TrimNameEnd(typed);
-    const std::wstring target = RenameTarget(*tab, s.renameIndex, typed);
+    const std::wstring target = RenameTarget(*tab, s.renameIndex, typed + s.renameKeptExt);
     if (!target.empty() && target != trimmed) {
         wchar_t line[700]{};
         swprintf_s(line, l10n::Get(l10n::StringId::RenameWillBecomeNumbered).c_str(), target.c_str());
@@ -1210,7 +1224,10 @@ static bool RenameChangesExtension(AppState& s) {
     if (entry.is_dir) return false;
     wchar_t buf[512]{};
     GetWindowTextW(s.hwndRenameEdit, buf, ARRAYSIZE(buf));
-    const std::wstring typed = TrimNameEnd(buf);  // "a.txt." keeps .txt
+    std::wstring typed = TrimNameEnd(buf);  // "a.txt." keeps .txt
+    // With 隐藏已知扩展名 the field only holds the stem: the extension it will
+    // end up with is the one it already has.
+    if (!s.renameKeptExt.empty() && !typed.empty()) typed += s.renameKeptExt;
     if (typed.empty() || entry.name == typed) return false;
     const std::wstring_view before = NameExtension(entry.name);
     const std::wstring_view after = NameExtension(typed);

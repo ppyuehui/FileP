@@ -654,6 +654,8 @@ struct AppState : AppCoreOwner {
     std::chrono::steady_clock::time_point operationFinishedAt{};
     HWND hwndRenameEdit = nullptr;
     int renameIndex = -1;
+    // 隐藏已知扩展名时，重命名框只编辑主名，这段（含点）在提交时补回。
+    std::wstring renameKeptExt;
     bool renameAlias = false;   // the rename field edits the 别名, not the name
     // Last key press, click or wheel turn in this window, any of its child
     // controls included (GetTickCount64; the message loop, NoteUserInput).
