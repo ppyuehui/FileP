@@ -9,6 +9,8 @@ namespace pulse::app { bool RunMediaColumnResizeCapture(); }
 #include "../ui/edit_host.h"
 #include "quick_access.h"
 #include "custom_commands_page.h"
+#include "app_commands.h"
+#include "../ui/settings_page_ids.h"
 #include "pane_close.h"
 #include "picker_host_mode.h"
 #include "picker_remote_host.h"
@@ -4254,6 +4256,36 @@ int ShotModeMain(AppState& state, HWND hwnd) {
         WaitForShotReady(state);
         StageTagShotStates(state);
         StageSplitShot(state);
+        if (state.shot_settings_page >= 0) {
+            // --shot-settings <page>: put Settings on that page right before the
+            // snapshot (the restored session may have activated another tab).
+            OpenSettingsTab(state, state.shot_settings_page);
+            if (state.shot_settings_page == ui::kSettingsPageCommands) {
+                state.command_sel = 0;
+                state.command_step_sel = 0;
+            }
+            for (int i = 0; i < 6; ++i) {
+                Render(state);
+                MSG msg{};
+                while (PeekMessageW(&msg, nullptr, 0, 0, PM_REMOVE)) {
+                    TranslateMessage(&msg);
+                    DispatchMessageW(&msg);
+                }
+                Sleep(30);
+            }
+        }
+        if (state.shot_run_command > 0) {
+            DispatchMenuCommand(state, state.shot_run_command);
+            for (int i = 0; i < 4; ++i) {
+                Render(state);
+                MSG msg{};
+                while (PeekMessageW(&msg, nullptr, 0, 0, PM_REMOVE)) {
+                    TranslateMessage(&msg);
+                    DispatchMessageW(&msg);
+                }
+                Sleep(30);
+            }
+        }
         if (state.shot_details && state.pane && state.pane->ActiveTab() &&
             state.pane->ActiveTab()->snapshot &&
             !state.pane->ActiveTab()->snapshot->empty()) {
@@ -4702,6 +4734,10 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, LPWSTR, int nCmdShow) {
              wcscmp(__wargv[i], L"--extension-store") == 0 ||
              wcscmp(__wargv[i], L"--extension-native") == 0) && i + 1 < __argc) {
             ++i; // Already loaded before UI initialization; never a navigation path.
+        } else if (wcscmp(__wargv[i], L"--shot-settings") == 0 && i + 1 < __argc) {
+            state.shot_settings_page = _wtoi(__wargv[++i]);
+        } else if (wcscmp(__wargv[i], L"--shot-run") == 0 && i + 1 < __argc) {
+            state.shot_run_command = _wtoi(__wargv[++i]);
         } else if (wcscmp(__wargv[i], L"--shot") == 0 && i + 1 < __argc) {
             state.shot.active = true;
             state.shot.output = __wargv[++i];
