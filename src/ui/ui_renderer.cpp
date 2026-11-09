@@ -2141,7 +2141,7 @@ void MainRenderer::DrawTitleBar(const WindowViewModel& vm, const D2D1_RECT_F& re
                             vm.window_identity_name, text_x, 0.0f, identity.hit.right - 6.0f * scale_ - text_x, h);
     } else if (title_brand_name_ && x + nameWidth <= brandRight) {
         MakeBrush(dc, theme.text, brText_);
-        DrawTextRect(dc, compositor_->HeaderFormat(), brText_.get(), L"Pulse",
+        DrawTextRect(dc, compositor_->HeaderFormat(), brText_.get(), L"FileP",
             x, 0.0f, nameWidth + 1.0f * scale_, h);
     }
 
