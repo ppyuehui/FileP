@@ -402,7 +402,12 @@ MainRenderer::WindowIdentityGeometry MainRenderer::WindowIdentityLayout(const Wi
     if (!vm.window_identity || vm.window_identity_name.empty() || !compositor_) return g;
     const D2D1_RECT_F toggle = SidebarToggleRect(w);
     const bool has_toggle = toggle.right > toggle.left;
-    if (!(has_toggle && user_sidebar_collapsed_)) {
+    // In a narrow window the toggle sits in the rail, where the identity mark
+    // used to be: the dot moves onto the toggle's corner instead of covering it
+    // (a click there was opening the identity menu, not folding the sidebar).
+    const bool toggle_in_rail = has_toggle &&
+        (user_sidebar_collapsed_ || (auto_collapse_sidebar_ && w / scale_ < kSidebarRailWindowDip));
+    if (!toggle_in_rail) {
         const float left = (12.0f + 24.0f + 4.0f) * scale_;
         float limit = TitleSidebarWidth(w) - 8.0f * scale_;
         if (has_toggle) limit = (std::min)(limit, toggle.left - 4.0f * scale_);
@@ -420,7 +425,7 @@ MainRenderer::WindowIdentityGeometry MainRenderer::WindowIdentityLayout(const Wi
     }
     g.compact = true;
     g.dot_radius = 4.0f * scale_;
-    if (has_toggle && user_sidebar_collapsed_) {
+    if (toggle_in_rail) {
         g.dot = D2D1::Point2F(toggle.right - 3.0f * scale_, toggle.bottom - 3.0f * scale_);
         const float reach = g.dot_radius + 3.0f * scale_;
         g.hit = D2D1::RectF(g.dot.x - reach, g.dot.y - reach, g.dot.x + reach, g.dot.y + reach);

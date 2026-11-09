@@ -150,12 +150,14 @@ HitTestResult MainRenderer::HitTest(const WindowViewModel& vm, const D2D1_RECT_F
         const float ctrlW = 46.0f * scale_;
         const TitleChrome chrome = MakeTitleChrome(rect.right, scale_, title_bar_height_);
         // Before the toggle: on the rail the window dot sits on its corner (M7c).
-        if (ContainsPt(WindowIdentityRect(vm, rect.right), x, y)) {
-            r.region = HitTestResult::WindowIdentity;
-            return r;
-        }
+        // The toggle wins over the identity mark: in a narrow window the two
+        // share the rail corner, and the button must stay a button.
         if (ContainsPt(SidebarToggleRect(rect.right), x, y)) {
             r.region = HitTestResult::SidebarToggle;
+            return r;
+        }
+        if (ContainsPt(WindowIdentityRect(vm, rect.right), x, y)) {
+            r.region = HitTestResult::WindowIdentity;
             return r;
         }
         const TabStripMetrics strip = ComputeTabStrip(vm, rect.right);
