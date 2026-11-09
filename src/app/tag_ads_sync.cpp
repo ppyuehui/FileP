@@ -152,7 +152,17 @@ static std::vector<std::wstring> SyncBatch(const std::vector<TagAdsUpdate>& upda
             const DWORD error = GetLastError();
             report(it->second.path, TagAdsFailureStage::StreamWrite, error);
             if (attempted && diagnostics) (*attempted)[it->first] = diagnostics->back();
-            ++it;
+            // A volume without alternate data streams will never accept the
+            // tags: keep the record out of the retry queue, or every launch
+            // replays the same failure (and its banner) forever. The notice
+            // still shows when the user tags such a file.
+            wchar_t root[32768]{};
+            DWORD flags = 0;
+            const bool permanent = GetVolumePathNameW(it->second.path.c_str(), root, ARRAYSIZE(root)) &&
+                GetVolumeInformationW(root, nullptr, 0, nullptr, nullptr, &flags, nullptr, 0) &&
+                (flags & FILE_NAMED_STREAMS) == 0;
+            if (permanent) it = staged.erase(it);
+            else ++it;
         }
     }
     const bool saved = Save(staged);
