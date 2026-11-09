@@ -1875,9 +1875,12 @@ LRESULT CALLBACK WndProcImpl(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) 
                 BlankClickDeselect(*s, at);
             return result;
         }
-        // 最小化 / 最大化 / 关闭 go to DefWindowProc: the system already acts on
-        // the release (and cancels when the pointer slides off), so intercepting
-        // either message only breaks the single click.
+        // 最小化 / 最大化 / 关闭: without WS_SYSMENU the system will not run these
+        // hit codes, and it does not deliver a usable non-client release, so the
+        // press acts directly (the original behaviour).
+        if (wParam == HTMINBUTTON) { ShowWindow(hwnd, SW_MINIMIZE); return 0; }
+        if (wParam == HTMAXBUTTON) { ShowWindow(hwnd, IsZoomed(hwnd) ? SW_RESTORE : SW_MAXIMIZE); return 0; }
+        if (wParam == HTCLOSE) { CloseMainWindow(*s); return 0; }
         break;
     }
 

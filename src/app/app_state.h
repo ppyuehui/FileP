@@ -427,6 +427,8 @@ struct AppState : AppCoreOwner {
     bool tabDragPending = false;
     // 标签上的 ✕: armed on press, acted on release while still over it.
     int tabClosePending = -1;
+    // 标题栏按钮: the hit-test code pressed, acted on the client mouse-up.
+    int captionPending = 0;
     POINT tabClosePoint{};
     bool tabDragging = false;
     int tabDragIndex = -1;               // window_tabs.items index of the dragged tab
