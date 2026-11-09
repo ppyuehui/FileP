@@ -4443,6 +4443,8 @@ BEGIN
     IDS_SETTINGS_SHOW_HOME "地址栏主页按钮"
     IDS_SETTINGS_SHOW_HOME_DESC "在地址栏左侧显示「此电脑」按钮，点一下回到此电脑"
     IDS_CMD_SUMMARY_FORMAT "将执行：{steps}"
+    IDS_SETTINGS_CHANGE_HOVER "悬停显示变化摘要"
+    IDS_SETTINGS_CHANGE_HOVER_DESC "鼠标停在「最近变化」标记上时弹出详情；关掉后只保留标记本身"
 END
 
 LANGUAGE 0x09, 0x01
@@ -8885,6 +8887,8 @@ BEGIN
     IDS_SETTINGS_SHOW_HOME "Address bar home button"
     IDS_SETTINGS_SHOW_HOME_DESC "Show a 此电脑 button left of the address bar"
     IDS_CMD_SUMMARY_FORMAT "Will run: {steps}"
+    IDS_SETTINGS_CHANGE_HOVER "Change summary on hover"
+    IDS_SETTINGS_CHANGE_HOVER_DESC "Show the details popup when hovering a change badge; off keeps just the badge"
 END
 
 // Traditional Chinese (Taiwan), generated from the Simplified entries above.

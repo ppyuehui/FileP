@@ -4460,6 +4460,8 @@
 #define IDS_SETTINGS_AUTO_COLLAPSE_DESC                                                  5673
 #define IDS_SETTINGS_SHOW_HOME                                                           5674
 #define IDS_SETTINGS_SHOW_HOME_DESC                                                      5675
+#define IDS_SETTINGS_CHANGE_HOVER                                                        5678
+#define IDS_SETTINGS_CHANGE_HOVER_DESC                                                   5679
 #define IDS_CMD_SUMMARY_FORMAT                                                           5676
 
 #endif  // PULSE_STRING_IDS_H

@@ -344,6 +344,7 @@ void FillChangePane(AppState& s, app::Tab& tab, ui::PaneViewModel& pane, const D
 
 void UpdateChangeHover(AppState& s, const ui::HitTestResult& hit, POINT point) {
     auto& state = s.changes;
+    if (!s.appPrefs.show_change_hover) { state.popover.visible = false; return; }
     if (hit.region == ui::HitTestResult::ChangeOpen) { state.hover_deadline = GetTickCount64() + 350; return; }
     if (hit.region != ui::HitTestResult::ChangeBadge) return;
     const auto path = HitPath(s, hit);
@@ -365,7 +366,7 @@ void UpdateChangeHover(AppState& s, const ui::HitTestResult& hit, POINT point) {
 }
 
 void FillChangePopover(AppState& s, ui::WindowViewModel& vm) {
-    vm.change_popover = s.changes.popover;
+    vm.change_popover = s.appPrefs.show_change_hover ? s.changes.popover : ui::WindowViewModel{}.change_popover;
     if (vm.change_popover.visible) vm.tooltip_text.clear();
 }
 

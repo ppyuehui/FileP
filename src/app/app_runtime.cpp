@@ -2720,6 +2720,7 @@ ui::WindowViewModel BuildVm(AppState& s, bool probe_details) {
     vm.settings_auto_collapse_sidebar = s.appPrefs.auto_collapse_sidebar;
     s.renderer.SetAutoCollapseSidebar(s.appPrefs.auto_collapse_sidebar);
     vm.show_home_button = s.appPrefs.show_home_button;
+    vm.settings_change_hover = s.appPrefs.show_change_hover;
     s.renderer.SetShowHomeButton(s.appPrefs.show_home_button);
     vm.settings_list_size_bar = s.appPrefs.list_size_bar;
     vm.settings_list_tag_names = s.appPrefs.list_tag_name_color;

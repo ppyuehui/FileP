@@ -1334,6 +1334,7 @@ float MainRenderer::SettingsDestinationOffset(const WindowViewModel& vm, int set
     case I::ListThumbnailBadges: target=l.list_style_row[5];break;
     case I::SettingsClickOpen: target=l.click_open_card;break;
     case I::SettingsItemCheckboxes: target=l.item_checkbox_row;break;
+    case I::SettingsChangeHover: target=l.change_hover_row;break;
     case I::ListMtimeHint: target=l.mtime_style_card;break;
     case I::ListMtimeRange: target=vm.settings_mtime.style ? l.mtime_range_card : l.mtime_style_card;break;
     case I::ListMtimePalette: target=vm.settings_mtime.style ? l.mtime_palette_card : l.mtime_style_card;break;

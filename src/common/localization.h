@@ -4452,6 +4452,8 @@ enum class StringId : UINT {
     SettingsAutoCollapseDesc = IDS_SETTINGS_AUTO_COLLAPSE_DESC,
     SettingsShowHome = IDS_SETTINGS_SHOW_HOME,
     SettingsShowHomeDesc = IDS_SETTINGS_SHOW_HOME_DESC,
+    SettingsChangeHover = IDS_SETTINGS_CHANGE_HOVER,
+    SettingsChangeHoverDesc = IDS_SETTINGS_CHANGE_HOVER_DESC,
     CmdSummaryFormat = IDS_CMD_SUMMARY_FORMAT,
 };
 

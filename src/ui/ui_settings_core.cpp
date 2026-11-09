@@ -872,6 +872,8 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
                 segmented(lay.change_days_row,lay.change_days,days,day_values,vm.settings_change_days,H::SettingsChangeDays,I::SettingsChangeDays,I::SettingsChangeDaysDesc,3,L"\xE9D5");
                 dim_end(dim);
             }
+            toggle(lay.change_hover_row,I::SettingsChangeHover,I::SettingsChangeHoverDesc,
+                   L"\xE9D9",vm.settings_change_hover,85);
             toggle(lay.sync_row[0],I::SyncOneDrive,I::SyncOneDriveDesc,L"\xE753",vm.settings_sync_onedrive,75);
             toggle(lay.sync_row[1],I::SyncSvn,I::SyncSvnDesc,L"\xE8AB",vm.settings_sync_svn,76);
         }

@@ -1270,6 +1270,11 @@ void SettingsController::ToggleUi(int index) {
         SaveAndApply(SettingsEffect::ListStyle);
         return;
     }
+    if (index == 85) {
+        prefs_->show_change_hover = !prefs_->show_change_hover;
+        SaveAndApply(SettingsEffect::None);
+        return;
+    }
     if (index == 84) {
         prefs_->show_home_button = !prefs_->show_home_button;
         SaveAndApply(SettingsEffect::None);

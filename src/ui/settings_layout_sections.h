@@ -234,6 +234,7 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         section(I::SettingsSecChanges);
         l.change_tracking_row=row(64);
         l.change_days_row=row(seg_h,true); segments(l.change_days_row,l.change_days,3,282);
+        l.change_hover_row=row(64);
 
         section(I::SettingsSecSyncStatus);
         for(auto& sync : l.sync_row) sync=row(64);
