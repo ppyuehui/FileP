@@ -1021,6 +1021,18 @@ bool SettingsController::SliderValue(int which, int value) {
         prefs_->frame_transparency = value;
         return true;
     }
+    if (which == 6 || which == 7) {
+        // 任务栏标题: dragging follows the same stops TaskbarChars uses (12 = 不限),
+        // so the thumb moves instead of only the click landing.
+        if (!prefs_) return false;
+        value = std::clamp(value, 0, 12);
+        const int chars = value >= 12 ? 0 : value + 1;
+        int& target = which == 6 ? prefs_->taskbar_parent_chars : prefs_->taskbar_current_chars;
+        if (target == chars) return false;
+        target = chars;
+        Apply(SettingsEffect::None);   // EndSlider saves once the drag ends
+        return true;
+    }
     if (!prefs_ || which < 0 || which > 1) return false;
     const bool snap = GetKeyState(VK_SHIFT) >= 0;
     int& target = which == 0 ? prefs_->wallpaper_look : prefs_->wallpaper_blur;
