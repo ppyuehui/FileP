@@ -8,8 +8,12 @@ namespace pulse::ui {
 // 增强包 selected. It follows the grouped general pages 9..12 (文件列表,
 // 标签页与窗口, 启动与集成, 文件操作).
 inline constexpr int kSettingsPageAi = 13;
-// 自定义命令 (a general page; follows 文件操作 and sits before the AI page).
-inline constexpr int kSettingsPageCommands = 14;
+// 自定义命令 (a general page; follows 文件操作; upstream took 14 and 15).
+inline constexpr int kSettingsPageCommands = 16;
 inline constexpr int kSettingsPageLast = kSettingsPageCommands;
+
+// Settings > AI 助手: Pulse's own assistant (a sidebar row under 增强包).
+inline constexpr int kSettingsPageAssistant = 14;
+inline constexpr int kSettingsPageNativeExtensions = 15;
 
 } // namespace pulse::ui
