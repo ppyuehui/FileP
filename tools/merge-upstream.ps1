@@ -68,16 +68,20 @@ Write-Host '改动最大的文件：' -ForegroundColor Cyan
 git diff --stat "$Branch...$upRef" | Select-Object -Last 20
 
 # 本分支改过的地方，官方一动就容易冲突。
+# 「别整侧取官方」的文件：整侧 checkout --theirs 会静默丢掉我们的功能，
+# 取完必须跑 tools/check-fork-features.ps1 确认没丢东西。
 $hotspots = @(
-    @{ Path = 'tools/l10n/catalog.tsv';   Hint = '两边都追加即可；合并后必须跑 py -3.12 tools/l10n/gen_strings.py' },
-    @{ Path = 'src/app/app_commands.cpp'; Hint = '工具栏目录 / 命令派发 / 自定义命令：保留自己的块，合入官方的块' },
-    @{ Path = 'src/app/context_menu.h';   Hint = '命令 id 区间：5200-5299 是自定义命令，5400+ 是新建按钮，别被官方新 id 撞上' },
-    @{ Path = 'src/ui/ui_renderer.cpp';   Hint = '标题栏 / 状态栏品牌：冲突时保留自己的布局' },
-    @{ Path = 'src/ui/ui_sidebar.cpp';    Hint = '侧边栏缩进：保留 item.indent 那段' },
-    @{ Path = 'src/ui/ui_toolbar.cpp';    Hint = '地址栏复制路径按钮：保留自己的' },
-    @{ Path = 'src/app/app_prefs.cpp';    Hint = '新增的偏好（show_ai_entry 等）：两边字段都留' },
-    @{ Path = 'README.md';                Hint = '保持本仓库版本：git checkout --ours README.md' },
-    @{ Path = '.github/workflows';        Hint = '本仓库有意删除了 CI（不在 GitHub 跑 Actions）：保持删除，别让上游的恢复回来' }
+    @{ Path = 'tools/l10n/catalog.tsv';    Hint = '两边都追加；我们的 id 在 6400+，官方 1.0.59 已用到 6390。合并后必须跑 py -3.12 tools/l10n/gen_strings.py' },
+    @{ Path = 'src/app/app_commands.cpp';  Hint = '别整侧取官方！工具栏目录（split_two）、命令派发、自定义命令行都在这' },
+    @{ Path = 'src/app/app_input.cpp';     Hint = '别整侧取官方！此电脑点击、设置页交互、任务栏滑块、标签 ✕ 松开都在这' },
+    @{ Path = 'src/app/app_main.cpp';      Hint = '别整侧取官方！设置目录 Roaming 覆写、截图开关、FileP 标题都在这' },
+    @{ Path = 'src/ui/ui_renderer.cpp';    Hint = '别整侧取官方！标题栏品牌、侧栏手动展开、自定义命令页辅助函数都在这' },
+    @{ Path = 'src/app/context_menu.h';    Hint = '命令 id：我们的自定义命令在 5700-5799，别被官方新 id 撞上' },
+    @{ Path = 'src/ui/settings_page_ids.h'; Hint = '设置页号：自定义命令固定 16（官方占了 13/14/15）' },
+    @{ Path = 'src/app/app_messages.h';    Hint = '私有消息：WM_CUSTOM_COMMAND_DONE = WM_APP+200（官方占 122）' },
+    @{ Path = 'src/app/app_prefs.cpp';     Hint = '新增的偏好：两边字段都留，JSON 读写也要成对' },
+    @{ Path = 'README.md';                 Hint = '保持本仓库版本：git checkout --ours README.md' },
+    @{ Path = '.github/workflows';         Hint = '本仓库有意删除了 CI：保持删除，git rm 掉上游恢复的' }
 )
 $changed = git diff --name-only "$Branch...$upRef"
 $hit = $hotspots | Where-Object { $changed -contains $_.Path }
@@ -116,6 +120,17 @@ if ($LASTEXITCODE -ne 0) {
 if ($changed -contains 'tools/l10n/catalog.tsv') {
     Info 'catalog.tsv 变了，重新生成字符串表 ...'
     py -3.12 tools/l10n/gen_strings.py
+    if ($LASTEXITCODE -ne 0) { Fail '生成字符串表失败。' }
+}
+
+Info '检查自有功能是否被合并冲掉 ...'
+pwsh -NoProfile -File (Join-Path $PSScriptRoot 'check-fork-features.ps1')
+if ($LASTEXITCODE -ne 0) {
+    Write-Host ''
+    Write-Host '有自有功能被官方版本覆盖了，先补回来再编译/推送。' -ForegroundColor Red
+    Write-Host '补法：看上面缺的那几项，回到 68df84b1（或任意更早的提交）把对应代码取回来。' -ForegroundColor Gray
+    Write-Host '  git show <旧提交>:src/app/app_input.cpp | Select-String -Pattern <锚点> -Context 6,20' -ForegroundColor Gray
+    exit 1
 }
 
 Info '合并完成。别忘了复验：自动更新是否仍是关闭的、界面是否正常。'
