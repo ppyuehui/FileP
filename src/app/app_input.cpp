@@ -3456,9 +3456,9 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
             s->tabDragStartPt = POINT{ mx, my };
             SetCapture(hwnd);
         } else if (hit.region == ui::HitTestResult::TabClose && hit.index >= 0) {
-            s->renderer.FreezeTabWidths(BuildVm(*s, false), static_cast<float>(s->compositor.Width()));
-            CloseLayoutTab(*s, static_cast<size_t>(hit.index));
-            InvalidateRect(hwnd, nullptr, FALSE);
+            // Act on release: a press that slides off the ✕ must not close the tab.
+            s->tabClosePending = hit.index;
+            s->tabClosePoint = POINT{mx, my};
         } else if (hit.region == ui::HitTestResult::TabNew || hit.region == ui::HitTestResult::TabScroll) {
             // Shares a branch: this else-if chain is at the compiler's nesting limit.
             if (hit.region == ui::HitTestResult::TabNew) {
@@ -4416,6 +4416,19 @@ LRESULT HandleLButtonUp(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
         }
         if (s && FavoritesBarDragging()) {   // 收藏栏: a click opens, a drag reorders
             EndFavoritesBarDrag(*s, false);
+            return 0;
+        }
+        if (s && s->tabClosePending >= 0) {
+            const int pending = std::exchange(s->tabClosePending, -1);
+            const int mx = GET_X_LPARAM(lParam), my = GET_Y_LPARAM(lParam);
+            ui::WindowViewModel vm = BuildVm(*s, false);
+            const D2D1_RECT_F rect = D2D1::RectF(0, 0, (float)s->compositor.Width(), (float)s->compositor.Height());
+            const ui::HitTestResult hit = s->renderer.HitTest(vm, rect, (float)mx, (float)my);
+            if (hit.region == ui::HitTestResult::TabClose && hit.index == pending) {
+                s->renderer.FreezeTabWidths(vm, static_cast<float>(s->compositor.Width()));
+                CloseLayoutTab(*s, static_cast<size_t>(pending));
+                InvalidateRect(hwnd, nullptr, FALSE);
+            }
             return 0;
         }
         if (s) {
