@@ -135,19 +135,20 @@
 | **自有开关（82-86）** | `fork_settings_toggles.cpp/.h` | `settings_controller.cpp` 一次 `ForkToggleSetting` 调用 |
 | **地址栏「此电脑」布局** | `fork_toolbar.cpp/.h` | `toolbar_layout.h` 一次 `ForkHomeButtonLayout` 调用 |
 | **自定义命令执行 + 确认框** | `fork_custom_commands.cpp/.h` | `app_commands.cpp` 派发里的两行调用 |
+| **标签 ✕ 松开 + 此电脑点击** | `fork_input.cpp/.h` | `app_input.cpp` 两行调用 |
+| **左右双栏一键开关** | `fork_commands.cpp/.h` | `app_commands.cpp` switch 里两行 |
 
-还没隔离、仍在官方文件里的自有代码：
+还没隔离、仍在官方文件里的自有代码（都是「必须贴着官方结构」的部分）：
 
-| 代码 | 位置 | 备注 |
+| 代码 | 位置 | 为什么留着 |
 | --- | --- | --- |
-| 四个自有开关的**行/绘制/命中** | `settings_layout_sections.h`、`ui_settings_core.cpp`、`ui_hit_test.cpp` | 逻辑已隔离，剩下的是各一两行调用，且都在「官方本来就有这一页」的地方，冲突可控 |
-| 地址栏「此电脑」**绘制与点击** | `ui_toolbar.cpp`、`app_input.cpp` | 布局已隔离 |
-| 工具栏 `split_two` 目录项与开关 | `toolbar_tools.h`、`app_commands.cpp` | 目录是官方数组，只能追加一行 |
-| 标签 ✕ 松开生效 | `app_input.cpp` | 一处分支 |
-| 任务栏标题字符数 | `app_window_title.cpp` 等 | 整份文件基本是我们重写的 |
+| 四个开关的**行/绘制/命中** | 布局、绘制、命中表各一两行 | 行是 `row()` 链里的一句，抽出去反而更难对位置 |
+| 「此电脑」的**绘制**与命中 | `ui_toolbar.cpp`、`ui_hit_test.cpp` | 各有一次 `layout.home` 判断 |
+| `split_two` 的**目录项** | `toolbar_tools.h`、`app_commands.cpp` 目录数组 | 官方数组，只能追加一行 |
+| 任务栏标题字符数 | `app_window_title.cpp` | 整份文件基本是我们重写的，不会冲突 |
 
-**下一步（按风险从低到高）**：① 工具栏 `split_two` 的开关逻辑收进 `fork_commands.cpp`；
-② 标签 ✕ 松开的分支收进 `fork_input.cpp`（和此电脑点击一起）。
+至此**逻辑层已全部隔离**（品牌、开关、命令执行、输入处理、工具栏布局），
+官方文件里剩下的是调用点和数据表条目。
 
 ## 五、待查问题
 

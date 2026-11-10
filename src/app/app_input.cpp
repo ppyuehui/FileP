@@ -33,6 +33,7 @@
 #include "app_updates.h"
 #include "app_internal.h"
 #include "custom_commands_page.h"
+#include "fork_input.h"
 #include "global_search_controller.h"
 #include "selection_caps.h"
 #include "app_input.h"
@@ -3393,10 +3394,7 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
             s->tabDragIndex = hit.index;
             s->tabDragStartPt = POINT{ mx, my };
             SetCapture(hwnd);
-        } else if (hit.region == ui::HitTestResult::TabClose && hit.index >= 0) {
-            // 松开鼠标才关：按下后划走可以反悔。
-            s->tabClosePending = hit.index;
-            s->tabClosePoint = POINT{ mx, my };
+        } else if (ForkArmTabClose(*s, hit, POINT{ mx, my })) {
         } else if (hit.region == ui::HitTestResult::TabNew || hit.region == ui::HitTestResult::TabScroll) {
             // Shares a branch: this else-if chain is at the compiler's nesting limit.
             if (hit.region == ui::HitTestResult::TabNew) {
@@ -3613,7 +3611,7 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
         } else if (hit.region == ui::HitTestResult::NavBack ||
                    hit.region == ui::HitTestResult::NavHome) {
             // 此电脑 shares the branch: the chain sits at the C1061 limit.
-            if (hit.region == ui::HitTestResult::NavHome) NavigateTo(*s, L"");
+            if (hit.region == ui::HitTestResult::NavHome) ForkHandleHomeClick(*s);
             else GoBack(*s);
         } else if (hit.region == ui::HitTestResult::NavForward) {
             GoForward(*s);
@@ -4381,20 +4379,8 @@ LRESULT HandleLButtonUp(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARAM 
             EndColumnHeaderPress(*s);
             return 0;
         }
-        if (s && s->tabClosePending >= 0) {
-            // 标签 ✕: pressing armed it; releasing on the same ✕ closes the tab.
-            const int pending = std::exchange(s->tabClosePending, -1);
-            const ui::WindowViewModel vm = BuildVm(*s, false);
-            const D2D1_RECT_F rect = D2D1::RectF(0, 0, static_cast<float>(s->compositor.Width()),
-                                                 static_cast<float>(s->compositor.Height()));
-            const ui::HitTestResult hit = s->renderer.HitTest(vm, rect, static_cast<float>(GET_X_LPARAM(lParam)),
-                                                              static_cast<float>(GET_Y_LPARAM(lParam)));
-            if (hit.region == ui::HitTestResult::TabClose && hit.index == pending) {
-                s->renderer.FreezeTabWidths(vm, static_cast<float>(s->compositor.Width()));
-                CloseLayoutTab(*s, static_cast<size_t>(pending));
-            }
-            InvalidateRect(hwnd, nullptr, FALSE);
-        }
+        // 标签 ✕ 松开：不 return，后面还有拖拽/滑块的收尾要跑。
+        if (s) ForkFinishTabClose(*s, hwnd, POINT{ GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) });
         if (s) {
             s->paneDragPending = false;
             if (s->paneSizeDragging) {

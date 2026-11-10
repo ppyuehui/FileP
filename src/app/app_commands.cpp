@@ -4,6 +4,7 @@
 #include "app_hosted_edit.h"
 #include "custom_commands.h"
 #include "fork_custom_commands.h"
+#include "fork_commands.h"
 #include "../ui/settings_page_ids.h"
 #include "../ui/view_zoom.h"
 #include "extensions/native/package_commands.h"
@@ -1960,11 +1961,7 @@ void DispatchMenuCommand(AppState& s, int cmd) {
         break;
     case app::CmdLayoutSingle: ApplyLayoutPreset(s, app::LayoutPreset::Single); break;
     case app::CmdLayoutTwoVertical:
-        // 左右分屏 as a switch (the toolbar button): side by side, and the next
-        // call folds back to one pane. The pane count is what the window
-        // actually shows, so the switch cannot disagree with the screen.
-        ApplyLayoutPreset(s, LiveLayout(s).VisiblePanes().size() > 1
-            ? app::LayoutPreset::Single : app::LayoutPreset::TwoVertical);
+        ForkDispatchCommand(s, cmd);   // 实现在 fork_commands.cpp
         break;
     case app::CmdLayoutTwoHorizontal: ApplyLayoutPreset(s, app::LayoutPreset::TwoHorizontal); break;
     case app::CmdLayoutThree: ApplyLayoutPreset(s, app::LayoutPreset::Three); break;
