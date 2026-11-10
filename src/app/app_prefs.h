@@ -160,6 +160,8 @@ struct AppPrefs {
     int preview_trigger = 0;
     int hover_preview_delay_ms = 500; // 300 / 500 / 800
     // 左下角的 AI 图标与入口 (status bar chip): off hides the chip.
+    // 自定义命令：点下去先列步骤问一句，确认了才执行（防误操作）。
+    bool confirm_custom_commands = true;
     // AI 入口显隐由官方「设置 → AI 助手 → 启用」负责，这里不再保留开关。
     bool show_path_copy = true;   // 地址栏右侧的复制路径按钮
     bool auto_collapse_sidebar = true;  // 窗口变窄时把侧栏收成图标栏

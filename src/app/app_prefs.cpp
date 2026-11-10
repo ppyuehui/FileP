@@ -130,6 +130,7 @@ void AppPrefs::ResetToDefaults() {
     auto_collapse_sidebar = true;
     show_home_button = true;
     show_change_hover = true;
+    confirm_custom_commands = true;
     hover_card_size = kHoverCardMedium;
     taskbar_parent_chars = 5;
     taskbar_current_chars = 5;
@@ -349,6 +350,8 @@ std::wstring AppPrefs::ToJson() const {
     out += auto_collapse_sidebar ? L"true" : L"false";
     out += L",\n  \"show_home_button\":";
     out += show_home_button ? L"true" : L"false";
+    out += L",\n  \"confirm_custom_commands\":";
+    out += confirm_custom_commands ? L"true" : L"false";
     out += L",\n  \"show_change_hover\":";
     out += show_change_hover ? L"true" : L"false";
     out += L",\n  \"hover_card_size\":" + std::to_wstring(NormalizeHoverCardSize(hover_card_size));
@@ -658,6 +661,7 @@ bool AppPrefs::FromJson(const std::wstring& json) {
     auto_collapse_sidebar = pulse::json::ExtractBool(json, L"auto_collapse_sidebar", true);
     show_home_button = pulse::json::ExtractBool(json, L"show_home_button", true);
     show_change_hover = pulse::json::ExtractBool(json, L"show_change_hover", true);
+    confirm_custom_commands = pulse::json::ExtractBool(json, L"confirm_custom_commands", true);
     hover_card_size = NormalizeHoverCardSize(
         pulse::json::ExtractInt(json, L"hover_card_size", kHoverCardMedium));
 

@@ -5164,3 +5164,9 @@ AboutForkHomepage	IDS_ABOUT_FORK_HOMEPAGE	6444	本项目主页	This project's pa
 AboutForkNote	IDS_ABOUT_FORK_NOTE	6445	基于 Pulse 二次修改的个人版本	A personal fork of Pulse	Pulse 的個人修改版
 SettingsChangeHoverDesc	IDS_SETTINGS_CHANGE_HOVER_DESC	6443	鼠标停在「最近变化」标记上时弹出详情；关掉后只保留标记本身	Show the details popup when hovering a change badge; off keeps just the badge	懸停時顯示變化詳情
 CmdSummaryFormat	IDS_CMD_SUMMARY_FORMAT	6441	将执行：{steps}	Will run: {steps}	將執行：{steps}
+
+CmdRunConfirmTitle	IDS_CMDRUNCONFIRMTITLE	6447	执行自定义命令	Run custom command	執行自訂命令
+CmdRunConfirmMessage	IDS_CMDRUNCONFIRMMESSAGE	6448	将在当前文件夹执行以下步骤：	The following steps run in the current folder:	將在目前資料夾執行以下步驟：
+CmdRunConfirmButton	IDS_CMDRUNCONFIRMBUTTON	6449	执行	Run	執行
+SettingsCommandConfirm	IDS_SETTINGSCOMMANDCONFIRM	6450	执行前先确认	Ask before running	執行前先確認
+SettingsCommandConfirmDesc	IDS_SETTINGSCOMMANDCONFIRMDESC	6451	点命令时先弹出对话框列出要执行的步骤，确认后才动手	List the steps and ask before a command runs	點命令時先顯示對話框列出要執行的步驟，確認後才動手

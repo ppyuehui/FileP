@@ -359,6 +359,7 @@ HitTestResult MainRenderer::HitTest(const WindowViewModel& vm, const D2D1_RECT_F
             }
             if(ContainsPt(lay.performance_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=4;return r;}
             if(ContainsPt(lay.menu_acrylic_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=36;return r;}
+            if(ContainsPt(lay.cmd_confirm_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=86;return r;}
             if(ContainsPt(lay.show_home_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=84;return r;}
             if(ContainsPt(lay.auto_collapse_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=83;return r;}
             if(ContainsPt(lay.show_path_copy_row,x,y)) {r.region=HitTestResult::SettingsToggle;r.index=82;return r;}

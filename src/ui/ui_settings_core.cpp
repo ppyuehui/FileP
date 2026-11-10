@@ -939,6 +939,8 @@ void MainRenderer::DrawSettingsCore(const WindowViewModel& vm, const D2D1_RECT_F
                     summary.replace(slot, 7, steps);
                 painter_.DrawText(summary, lay.cmd_summary, compositor_->SmallFormat(),
                                   theme.text_secondary);
+                toggle(lay.cmd_confirm_row, I::SettingsCommandConfirm, I::SettingsCommandConfirmDesc,
+                       L"\xE897", vm.command_confirm, 86);
             }
         }
         if(page==9) {

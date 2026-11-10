@@ -1684,6 +1684,34 @@ void RunCustomCommandAt(AppState& s, size_t index) {
         context.name = slash == std::wstring::npos ? path : path.substr(slash + 1);
     }
     const app::CustomCommand command = s.customCommands.commands[index];
+    // 防误操作: 先把要执行的步骤摆出来问一句，确认了才真的动手。
+    // 设置里可以关掉（设置 → 自定义命令 → 执行前先确认）。
+    if (s.appPrefs.confirm_custom_commands && s.hwnd) {
+        ui::ConfirmDialogSpec spec;
+        spec.tone = ui::ConfirmTone::Question;
+        spec.glyph = L"\\xE756";
+        spec.title = l10n::Get(l10n::StringId::CmdRunConfirmTitle);
+        if (!command.name.empty()) spec.title += L" · " + command.name;
+        spec.message = l10n::Get(l10n::StringId::CmdRunConfirmMessage);
+        for (size_t step = 0; step < command.steps.size() && step < 12; ++step) {
+            const app::CommandStep& it = command.steps[step];
+            std::wstring line = std::to_wstring(step + 1) + L". ";
+            switch (it.kind) {
+            case app::CommandStepKind::NewFolder: line += l10n::Get(l10n::StringId::CmdKindFolder); break;
+            case app::CommandStepKind::NewFile: line += l10n::Get(l10n::StringId::CmdKindFile); break;
+            case app::CommandStepKind::RunProgram: line += l10n::Get(l10n::StringId::CmdKindProgram); break;
+            default: line += l10n::Get(l10n::StringId::CmdKindScript); break;
+            }
+            if (!it.value.empty()) line += L"  " + app::ExpandCommandText(it.value, context);
+            spec.items.push_back(std::move(line));
+        }
+        spec.items_total = command.steps.size();
+        spec.note = context.dir;
+        spec.confirm_text = l10n::Get(l10n::StringId::CmdRunConfirmButton);
+        spec.cancel_text = l10n::Get(l10n::StringId::Cancel);
+        spec.default_choice = ui::ConfirmChoice::Cancel;
+        if (!ui::ShowConfirmDialog(s.hwnd, spec, s.darkMode, s.accentColor)) return;
+    }
     const HWND hwnd = s.hwnd;
     s.worker.EnqueueIo([command, context, hwnd] {
         auto outcome = std::make_unique<CustomCommandOutcome>();

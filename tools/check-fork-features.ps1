@@ -63,6 +63,7 @@ $checks = @(
     '自定义命令：工具栏钉住|src/app/app_commands.cpp|CustomCommandToolSlot|不能钉到工具栏'
     '自定义命令：自定义工具栏磁贴|src/app/app_commands.cpp|kToolbarCustomBase|自定义工具栏里找不到命令'
     '自定义命令：勾选即钉住|src/app/custom_commands_page.cpp|CustomCommandToolId|勾了工具栏但按钮不出现'
+    '自定义命令：执行前确认|src/app/app_commands.cpp|CmdRunConfirmTitle|点了就直接执行，没有确认框'
     '自定义命令：执行线程|src/app/app_commands.cpp|RunCustomCommandAt|命令点了没反应'
     '自定义命令：完成消息|src/app/app_messages.h|WM_CUSTOM_COMMAND_DONE|执行完不刷新'
 

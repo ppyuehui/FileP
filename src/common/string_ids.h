@@ -5157,5 +5157,10 @@
 #define IDS_ABOUT_FORK_NOTE                                                              6445
 #define IDS_SETTINGS_CHANGE_HOVER_DESC                                                   6443
 #define IDS_CMD_SUMMARY_FORMAT                                                           6441
+#define IDS_CMDRUNCONFIRMTITLE                                                           6447
+#define IDS_CMDRUNCONFIRMMESSAGE                                                         6448
+#define IDS_CMDRUNCONFIRMBUTTON                                                          6449
+#define IDS_SETTINGSCOMMANDCONFIRM                                                       6450
+#define IDS_SETTINGSCOMMANDCONFIRMDESC                                                   6451
 
 #endif  // PULSE_STRING_IDS_H

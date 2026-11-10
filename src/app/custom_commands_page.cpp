@@ -141,6 +141,7 @@ void FillCommandsPage(AppState& s, ui::WindowViewModel& vm) {
     vm.command_selected = s.command_sel;
     vm.command_step_selected = s.command_step_sel;
     vm.command_kind = s.command_kind;
+    vm.command_confirm = s.appPrefs.confirm_custom_commands;
     if (const app::CustomCommand* command = Selected(s)) {
         vm.command_toolbar = command->toolbar;
         vm.command_folder = command->folder_menu;

@@ -5139,6 +5139,11 @@ BEGIN
     IDS_ABOUT_FORK_HOMEPAGE "本项目主页"
     IDS_ABOUT_FORK_NOTE "基于 Pulse 二次修改的个人版本"
     IDS_STARTUPDIALOGSNEEDINSTALL "需要安装版才能启用（当前是免安装运行）。"
+    IDS_CMDRUNCONFIRMTITLE "执行自定义命令"
+    IDS_CMDRUNCONFIRMMESSAGE "将在当前文件夹执行以下步骤："
+    IDS_CMDRUNCONFIRMBUTTON "执行"
+    IDS_SETTINGSCOMMANDCONFIRM "执行前先确认"
+    IDS_SETTINGSCOMMANDCONFIRMDESC "点命令时先弹出对话框列出要执行的步骤，确认后才动手"
 END
 
 LANGUAGE 0x09, 0x01
@@ -10277,6 +10282,11 @@ BEGIN
     IDS_ABOUT_FORK_HOMEPAGE "This project's page"
     IDS_ABOUT_FORK_NOTE "A personal fork of Pulse"
     IDS_STARTUPDIALOGSNEEDINSTALL "Needs an installed copy; this one runs from a folder."
+    IDS_CMDRUNCONFIRMTITLE "Run custom command"
+    IDS_CMDRUNCONFIRMMESSAGE "The following steps run in the current folder:"
+    IDS_CMDRUNCONFIRMBUTTON "Run"
+    IDS_SETTINGSCOMMANDCONFIRM "Ask before running"
+    IDS_SETTINGSCOMMANDCONFIRMDESC "List the steps and ask before a command runs"
 END
 
 // Traditional Chinese (Taiwan), generated from the Simplified entries above.

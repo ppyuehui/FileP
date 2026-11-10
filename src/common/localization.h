@@ -5149,6 +5149,11 @@ enum class StringId : UINT {
     AboutForkNote = IDS_ABOUT_FORK_NOTE,
     SettingsChangeHoverDesc = IDS_SETTINGS_CHANGE_HOVER_DESC,
     CmdSummaryFormat = IDS_CMD_SUMMARY_FORMAT,
+    CmdRunConfirmTitle = IDS_CMDRUNCONFIRMTITLE,
+    CmdRunConfirmMessage = IDS_CMDRUNCONFIRMMESSAGE,
+    CmdRunConfirmButton = IDS_CMDRUNCONFIRMBUTTON,
+    SettingsCommandConfirm = IDS_SETTINGSCOMMANDCONFIRM,
+    SettingsCommandConfirmDesc = IDS_SETTINGSCOMMANDCONFIRMDESC,
 };
 
 bool IsLanguageId(std::wstring_view id) noexcept;

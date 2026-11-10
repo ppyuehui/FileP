@@ -396,6 +396,9 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         // 将执行：一句话摘要，小号次要色，排在编辑区下面。
         l.cmd_summary = D2D1::RectF(l.cmd_detail.left, ry, l.cmd_detail.right, ry + 26*scale);
         ry += 26*scale;
+        // 执行前先确认：防误操作的开关，摆在摘要下面。
+        l.cmd_confirm_row = D2D1::RectF(l.cmd_detail.left, ry + 4*scale, l.cmd_detail.right, ry + 52*scale);
+        ry += 56*scale;
 
     } else if (page == 11) {
         auto wrap_height = [&](std::wstring_view value, float width) {

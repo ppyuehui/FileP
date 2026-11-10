@@ -1374,6 +1374,7 @@ struct WindowViewModel {
     int command_selected = -1;
     int command_step_selected = -1;
     int command_kind = 0;
+    bool command_confirm = true;   // 执行前先弹对话框
     bool command_toolbar = false;
     bool command_folder = false;
     bool command_background = false;

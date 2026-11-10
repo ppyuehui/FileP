@@ -1361,6 +1361,11 @@ void SettingsController::ToggleUi(int index) {
         SaveAndApply(SettingsEffect::ListStyle);
         return;
     }
+    if (index == 86) {
+        prefs_->confirm_custom_commands = !prefs_->confirm_custom_commands;
+        SaveAndApply(SettingsEffect::None);
+        return;
+    }
     if (index == 85) {
         prefs_->show_change_hover = !prefs_->show_change_hover;
         SaveAndApply(SettingsEffect::None);
