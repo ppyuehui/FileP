@@ -34,6 +34,7 @@
 #include "app_internal.h"
 #include "custom_commands_page.h"
 #include "fork_input.h"
+#include "fork_sidebar_tree.h"
 #include "global_search_controller.h"
 #include "selection_caps.h"
 #include "app_input.h"
@@ -4022,6 +4023,8 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
                 InvalidateRect(hwnd, nullptr, FALSE);
             } else if (app::IsTagGroupPath(hit.path)) {
                 ToggleTagGroupRow(*s, hit.path);
+            } else if (ForkSidebarTreeToggle(*s, hit.path)) {
+                InvalidateRect(hwnd, nullptr, FALSE);   // 侧栏文件夹树：展开/收起
             }
         } else if (hit.region == ui::HitTestResult::SidebarItem) {
             // A section whose rows are the section itself (the starred root, the
@@ -4112,6 +4115,8 @@ LRESULT HandleLButtonDown(AppState* s, HWND hwnd, UINT msg, WPARAM wParam, LPARA
                 SetCapture(hwnd);
             } else if (!hit.path.empty()) {
                 NavigateTo(*s, hit.path);
+                // 点驱动器/文件夹行：顺手在它下面展开文件夹树（再点不会收起，收起见行末箭头）。
+                ForkSidebarTreeExpand(*s, hit.path);
             }
         } else if (hit.region == ui::HitTestResult::StatusBarCancelSearch) {
             if (auto* tab = ActiveTab(*s)) CancelActiveContentSearch(*s, *tab);

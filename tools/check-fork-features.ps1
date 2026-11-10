@@ -50,7 +50,8 @@ $checks = @(
     '工具栏：一键分屏派发|src/app/app_commands.cpp|split_two|点了变成弹菜单'
     '收藏夹栏：图标化阈值|src/ui/favorites_bar_layout.h|320.0f|半屏就退化成纯图标'
     '右键菜单：安全三角|src/ui/fluent_menu.cpp|InSafeTriangle|斜向移动二级菜单会被抢'
-    '标签页：✕ 松开才关|src/app/app_input.cpp|tabClosePending|变回按下即关'
+    '标签页：✕ 松开才关|src/app/fork_input.cpp|ForkFinishTabClose|变回按下即关'
+    '标签页：✕ 按下只是记下|src/app/app_input.cpp|ForkArmTabClose|按下就关'
 
     '自定义命令：核心|src/app/custom_commands.cpp|RunCustomCommand|命令执行器丢失'
     '自定义命令：设置页|src/app/custom_commands_page.cpp|CommandsPageAction|页面交互丢失'
@@ -63,7 +64,8 @@ $checks = @(
     '自定义命令：工具栏钉住|src/app/app_commands.cpp|CustomCommandToolSlot|不能钉到工具栏'
     '自定义命令：自定义工具栏磁贴|src/app/app_commands.cpp|kToolbarCustomBase|自定义工具栏里找不到命令'
     '自定义命令：勾选即钉住|src/app/custom_commands_page.cpp|CustomCommandToolId|勾了工具栏但按钮不出现'
-    '自定义命令：执行前确认|src/app/app_commands.cpp|CmdRunConfirmTitle|点了就直接执行，没有确认框'
+    '自定义命令：执行前确认|src/app/fork_custom_commands.cpp|CmdRunConfirmTitle|点了就直接执行，没有确认框'
+    '侧栏文件夹树|src/app/fork_sidebar_tree.cpp|ForkSidebarTreeApply|侧栏点驱动器不展开子文件夹'
     '自定义命令：执行线程|src/app/app_commands.cpp|RunCustomCommandAt|命令点了没反应'
     '自定义命令：完成消息|src/app/app_messages.h|WM_CUSTOM_COMMAND_DONE|执行完不刷新'
 

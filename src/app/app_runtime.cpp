@@ -7,6 +7,7 @@
 #include "dialog_management_ui.h"
 #include "app_navigation.h"
 #include "custom_commands_page.h"
+#include "fork_sidebar_tree.h"
 #include "../fs/drive_kind.h"
 #include "../fs/bounded_enumeration.h"
 #include "folder_statistics.h"
@@ -3646,6 +3647,7 @@ ui::WindowViewModel BuildVm(AppState& s, bool probe_details) {
         for (auto& slot : vm.pane_slots) slot.pane.history_preview_paths = paths;
     }
     extensions::native::SyncSettingsPagesHost(s, vm);
+    ForkSidebarTreeApply(s, vm);   // 侧栏文件夹树：插入已展开的子项
     return vm;
 }
 

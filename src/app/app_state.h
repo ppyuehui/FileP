@@ -154,8 +154,11 @@ struct WindowMergeUndo {
 };
 
 struct DeletePreflight;
+struct ForkSidebarTreeState;   // FileP: 侧栏文件夹树（fork_sidebar_tree.h）
 struct AppState : AppCoreOwner {
     ClosedPane closedPane;
+    // FileP: 侧栏里就地展开的文件夹树（见 fork_sidebar_tree.h）。
+    std::shared_ptr<ForkSidebarTreeState> forkSidebarTree;
     std::shared_ptr<DeletePreflight> delete_preflight;
     ui::FileOperationWindow delete_preflight_window;
     // Stand-alone window state with its own AppCore (tests and selftest probes).
