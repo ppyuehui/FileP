@@ -1811,8 +1811,8 @@ void DispatchMenuCommand(AppState& s, int cmd) {
     }
     case app::CmdOpenPath: {
         // Reveal the hit in its containing folder (search results).
-        app::Tab* tab = ActiveTab(s);
-        const std::wstring full = tab ? SelectedFullPath(s) : L"";
+        const app::Tab* current = ActiveTab(s);
+        const std::wstring full = current ? SelectedFullPath(s) : L"";
         if (!full.empty()) {
             const std::wstring parent = fs::ParentPath(full);
             const size_t slash = full.find_last_of(L"\\/");
@@ -1820,17 +1820,22 @@ void DispatchMenuCommand(AppState& s, int cmd) {
                 slash == std::wstring::npos ? full : full.substr(slash + 1);
             if (!parent.empty() && !leaf.empty()) {
                 NavigateTo(s, parent);
-                tab->pending_selected_name = leaf;
-                tab->pending_selected_names = { leaf };
-                tab->pending_selection_revision = tab->selection_revision;
-                tab->pending_ensure_selection_visible = true;
-                if (tab->snapshot) {
-                    for (size_t i = 0; i < tab->snapshot->size(); ++i) {
-                        if (_wcsicmp((*tab->snapshot)[i].name.c_str(), leaf.c_str()) != 0) continue;
-                        tab->SelectOnly(static_cast<int>(i));
-                        tab->pending_selection_revision = tab->selection_revision;
-                        EnsureRowVisible(s, *tab, static_cast<int>(i));
-                        break;
+                // NavigateTo may rebuild the tab list: never write through the
+                // pointer taken before it, or the pending selection lands on a
+                // stale tab and the file is not selected after the jump.
+                if (app::Tab* tab = ActiveTab(s)) {
+                    tab->pending_selected_name = leaf;
+                    tab->pending_selected_names = { leaf };
+                    tab->pending_selection_revision = tab->selection_revision;
+                    tab->pending_ensure_selection_visible = true;
+                    if (tab->snapshot && tab->snapshot_path == parent) {
+                        for (size_t i = 0; i < tab->snapshot->size(); ++i) {
+                            if (_wcsicmp((*tab->snapshot)[i].name.c_str(), leaf.c_str()) != 0) continue;
+                            tab->SelectOnly(static_cast<int>(i));
+                            tab->pending_selection_revision = tab->selection_revision;
+                            EnsureRowVisible(s, *tab, static_cast<int>(i));
+                            break;
+                        }
                     }
                 }
             }

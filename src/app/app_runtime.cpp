@@ -7,6 +7,7 @@
 #include "dialog_management_ui.h"
 #include "app_navigation.h"
 #include "custom_commands_page.h"
+#include "../common/runtime_log.h"
 #include "../fs/drive_kind.h"
 #include "../fs/bounded_enumeration.h"
 #include "folder_statistics.h"
@@ -434,11 +435,27 @@ void SelectLaunchedFile(AppState& s, const std::wstring& raw, bool reveal) {
                path[path.size() - 2] != L':') path.pop_back();
     }
     const DWORD attrs = LaunchArgumentAttributes(path);
-    if (attrs == INVALID_FILE_ATTRIBUTES || (!reveal && (attrs & FILE_ATTRIBUTE_DIRECTORY) != 0)) return;
+    if (attrs == INVALID_FILE_ATTRIBUTES || (!reveal && (attrs & FILE_ATTRIBUTE_DIRECTORY) != 0)) {
+        diagnostics::runtime::Event("reveal_select_skipped",
+            {{"attributes_valid", attrs != INVALID_FILE_ATTRIBUTES ? 1u : 0u},
+             {"is_directory", (attrs & FILE_ATTRIBUTE_DIRECTORY) != 0 ? 1u : 0u},
+             {"reveal", reveal ? 1u : 0u}}, diagnostics::runtime::Level::Warning);
+        return;
+    }
     const size_t slash = path.find_last_of(L"\\/");
     const std::wstring leaf = slash == std::wstring::npos ? path : path.substr(slash + 1);
     if (leaf.empty()) return;
-    if (app::Tab* tab = ActiveTab(s)) SelectNameInTab(s, *tab, leaf);
+    if (app::Tab* tab = ActiveTab(s)) {
+        const bool listed = tab->snapshot && [&] {
+            for (const auto& entry : *tab->snapshot)
+                if (_wcsicmp(entry.name.c_str(), leaf.c_str()) == 0) return true;
+            return false;
+        }();
+        diagnostics::runtime::Event("reveal_select",
+            {{"reveal", reveal ? 1u : 0u}, {"listed_now", listed ? 1u : 0u},
+             {"rows", tab->snapshot ? tab->snapshot->size() : 0u}}, diagnostics::runtime::Level::Info);
+        SelectNameInTab(s, *tab, leaf);
+    }
 }
 
 void OpenFolderInNewTab(AppState& s, const std::wstring& raw, bool reveal) {
