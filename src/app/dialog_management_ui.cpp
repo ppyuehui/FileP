@@ -131,6 +131,14 @@ void FillDialogManagementVm(AppState& s,ui::WindowViewModel& vm) {
     else if(!snapshot.bundle_verified && !snapshot.auto_enabled) vm.settings_dialog_status=l10n::Get(I::StartupDialogsMissing);
     else vm.settings_dialog_status=l10n::Get(snapshot.auto_enabled ? I::StartupDialogsOn : I::StartupDialogsOff);
     const DWORD error=current->error ? current->error : snapshot.auto_error ? snapshot.auto_error : (!snapshot.bundle_verified ? snapshot.bundle_error : 0);
+    // FileP: 免安装运行时永远找不到 DialogBridge 组件（要安装包才铺下来），
+    // 这不是"组件损坏"，如实说明，也别再弹"需要处理"和「重试」。
+    if(!snapshot.bundle_verified && !snapshot.auto_enabled && !current->error && !snapshot.auto_error &&
+       snapshot.bundle_error==ERROR_NOT_SUPPORTED) {
+        vm.settings_dialog_failed=false;
+        vm.settings_dialog_status=l10n::Get(I::StartupDialogsNeedInstall);
+        return;
+    }
     if(error && !current->busy) vm.settings_dialog_status+=L" ("+std::to_wstring(error)+L")";
     if(!current->notice.empty()) vm.settings_dialog_status+=L"\n"+current->notice;
 }

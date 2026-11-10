@@ -4797,6 +4797,7 @@ enum class StringId : UINT {
     StartupDialogsOn = IDS_STARTUPDIALOGSON,
     StartupDialogsChecking = IDS_STARTUPDIALOGSCHECKING,
     StartupDialogsMissing = IDS_STARTUPDIALOGSMISSING,
+    StartupDialogsNeedInstall = IDS_STARTUPDIALOGSNEEDINSTALL,
     StartupDialogsFailed = IDS_STARTUPDIALOGSFAILED,
     StartupDialogsConflict = IDS_STARTUPDIALOGSCONFLICT,
     StartupDialogsEnableTitle = IDS_STARTUPDIALOGSENABLETITLE,

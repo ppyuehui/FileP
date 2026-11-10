@@ -4805,6 +4805,7 @@
 #define IDS_STARTUPDIALOGSON                                                             6207
 #define IDS_STARTUPDIALOGSCHECKING                                                       6208
 #define IDS_STARTUPDIALOGSMISSING                                                        6209
+#define IDS_STARTUPDIALOGSNEEDINSTALL                                                    6446
 #define IDS_STARTUPDIALOGSFAILED                                                         6210
 #define IDS_STARTUPDIALOGSCONFLICT                                                       6211
 #define IDS_STARTUPDIALOGSENABLETITLE                                                    6212

@@ -5138,6 +5138,7 @@ BEGIN
     IDS_SETTINGS_CHANGE_HOVER_DESC "鼠标停在「最近变化」标记上时弹出详情；关掉后只保留标记本身"
     IDS_ABOUT_FORK_HOMEPAGE "本项目主页"
     IDS_ABOUT_FORK_NOTE "基于 Pulse 二次修改的个人版本"
+    IDS_STARTUPDIALOGSNEEDINSTALL "需要安装版才能启用（当前是免安装运行）。"
 END
 
 LANGUAGE 0x09, 0x01
@@ -10275,6 +10276,7 @@ BEGIN
     IDS_SETTINGS_CHANGE_HOVER_DESC "Show the details popup when hovering a change badge; off keeps just the badge"
     IDS_ABOUT_FORK_HOMEPAGE "This project's page"
     IDS_ABOUT_FORK_NOTE "A personal fork of Pulse"
+    IDS_STARTUPDIALOGSNEEDINSTALL "Needs an installed copy; this one runs from a folder."
 END
 
 // Traditional Chinese (Taiwan), generated from the Simplified entries above.

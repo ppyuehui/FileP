@@ -4812,6 +4812,7 @@ StartupDialogsOff	IDS_STARTUPDIALOGSOFF	6206	使用 Windows 对话框	Using Wind
 StartupDialogsOn	IDS_STARTUPDIALOGSON	6207	使用 Pulse 对话框	Using Pulse dialogs	
 StartupDialogsChecking	IDS_STARTUPDIALOGSCHECKING	6208	正在检查组件和入口…	Checking components and registration…	
 StartupDialogsMissing	IDS_STARTUPDIALOGSMISSING	6209	组件缺失或校验失败。请修复安装后重试；尚未启用此功能。	Components are missing or invalid. Repair the installation and retry; this feature has not been enabled.	
+StartupDialogsNeedInstall	IDS_STARTUPDIALOGSNEEDINSTALL	6446	需要安装版才能启用（当前是免安装运行）。	Needs an installed copy; this one runs from a folder.	需要安裝版才能啟用（目前是免安裝執行）。
 StartupDialogsFailed	IDS_STARTUPDIALOGSFAILED	6210	操作未完成。请重试或导出诊断；当前状态以实际入口为准。	The operation did not complete. Retry or export diagnostics; the actual registration determines the current state.	
 StartupDialogsConflict	IDS_STARTUPDIALOGSCONFLICT	6211	打开和保存对话框的入口已被其他组件占用。Pulse 不会覆盖它，请先关闭对应功能再重试。	Another component owns the open/save dialog entry. Pulse will not overwrite it. Turn off that feature before retrying.	
 StartupDialogsEnableTitle	IDS_STARTUPDIALOGSENABLETITLE	6212	开启 Pulse 打开和保存对话框？	Enable Pulse open and save dialogs?	
