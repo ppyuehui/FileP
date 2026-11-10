@@ -5145,6 +5145,8 @@ void ShowToolbarCustomize(AppState& s, int page) {
             ++saved_slot;
         }
         tools = app::KeepToolbarSeparators(s.appPrefs.toolbar_tools, tools);
+        // 防线：一次掉太多就把旧列表留着（见 fork_commands.cpp）。
+        if (!ForkToolbarPinsSane(s.appPrefs.toolbar_tools, tools)) return;
         if (tools != s.appPrefs.toolbar_tools) {
             s.appPrefs.toolbar_tools = std::move(tools);
             if (g_toolbar_link_tool >= 0) PushToolbarPinDrag(s);   // the ring follows its pin

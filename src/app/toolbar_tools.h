@@ -17,6 +17,9 @@
 namespace pulse::app {
 
 // Saved in prefs: never rename or reorder. Append new tools at the end.
+// 这个数组和 app_commands.cpp 里的 kToolbarTools 目录**按下标一一对应**：
+// 第 i 个 id 必须配第 i 行图标/文字。新增工具只能追加到两者的末尾，
+// 否则会出现「钉的是 A、存下来的是 B」——2026-11-10 就因此丢过工具栏设置。
 inline constexpr std::wstring_view kToolbarToolIds[] = {
     // The former toolbar_pins bits, in bit order.
     L"new_text", L"copy_path", L"terminal", L"properties", L"undo",
@@ -27,14 +30,15 @@ inline constexpr std::wstring_view kToolbarToolIds[] = {
     // were fixed buttons (cut .. delete, split / details / columns), then the
     // rest of the prototype's tools Pulse has commands for.
     L"cut", L"copy", L"paste", L"rename", L"delete", L"split", L"details", L"columns",
-    // 左右双栏: one click straight to the side-by-side layout (no split menu).
-    L"split_two",
     L"select_all", L"invert", L"select_wild", L"new_md", L"recent", L"apply_all",
     L"search_all", L"adv_search", L"recycle", L"map_drive", L"shortcuts", L"settings",
     // 压缩 (native zip) and the 文件夹大小 switch.
     L"zip", L"folder_size",
     // The 文件扩展名 switch.
     L"extensions",
+    // 左右双栏: one click straight to the side-by-side layout (no split menu).
+    // Must stay last: the catalog rows in app_commands.cpp append it the same way.
+    L"split_two",
 };
 inline constexpr size_t kToolbarToolCount = std::size(kToolbarToolIds);
 inline constexpr size_t kLegacyToolbarPins = 5;
