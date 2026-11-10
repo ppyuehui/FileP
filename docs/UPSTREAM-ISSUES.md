@@ -5,10 +5,25 @@
 > 英文段落是给 GitHub issue 直接用的措辞；中文是给我们自己看的说明。
 >
 > 自查方法：`git show 0856a655:<文件>` 确认该代码来自上游，而不是我们的改动。
+>
+> **提交状态**
+>
+> | # | 问题 | 状态 |
+> | --- | --- | --- |
+> | 1 | 打开所在位置只跳目录不选中 | ✅ **已提交上游 issue [#578](https://github.com/jimmgreen/pulse/issues/578)**（含 `git am` 格式补丁） |
+> | 2 | 免安装版误报"组件缺失或校验失败" | 未提交（备选） |
+> | 3 | 关掉收藏栏会把用户隐藏的分组放出来 | 未提交（备选） |
+> | 4 | 每次启动弹 UAC | 未提交（备选） |
+> | 5 | `--shot` 带文件参数把文件当文件夹 | 未提交（开发工具，可不提） |
 
 ---
 
 ## 1. Search results: "Open location" navigates to the folder but does not select the file
+
+> **已提交：[issue #578](https://github.com/jimmgreen/pulse/issues/578)**
+> 正文里带了可直接 `git am` 的补丁（`src/app/reveal_request.{h,cpp}` + 三处调用）。
+> 上游同类问题 [#190](https://github.com/jimmgreen/pulse/issues/190) 修的是"启动/命令行"那条路，
+> 搜索结果的 reveal 这条路当时没覆盖到；`main` 上 `CmdOpenPath` 至今没变。
 
 **Environment** Pulse 1.0.59, Windows 11 26H2 (x64).
 
@@ -48,76 +63,6 @@ snapshot-apply step consumes once, instead of reusing `pending_selected_*`; norm
 **Status in our fork** Worked around in FileP: `src/app/fork_reveal.cpp` keeps a
 `(folder, names, deadline)` request and applies it in `BuildVm` when the listing actually
 matches. Verified with a screenshot: the row is selected and scrolled to.
-
----
-
-## 2. Portable copy: the dialog takeover card says "components missing or invalid — repair the installation"
-
-**Steps**
-1. Run Pulse from an ordinary folder (not installed).
-2. 设置 → 启动与集成 → 打开和保存对话框 → **导出诊断**.
-
-**Actual** A red "需要处理 / Needs attention" badge, the text
-"组件缺失或校验失败。请修复安装后重试；尚未启用此功能。(50)", and the toggle is disabled.
-The diagnostics file contains `bundle_verified=0`, `bundle_error=50`.
-
-**Expected** "This feature requires an installed copy" — not "repair the installation".
-
-**Root cause** `ResolveInstalledBundle()` (`src/common/dialog_bundle.cpp`) returns
-`ERROR_NOT_SUPPORTED` (50) when `dialog-current.json` / `DialogBridge\<sha256>` are absent,
-which is exactly the case for any uninstalled copy. `dialog_management_ui.cpp` maps **any**
-non-zero bundle error to the "missing or invalid, repair the installation" string.
-
-**Suggested fix** Special-case `ERROR_NOT_SUPPORTED` and say the feature needs an installed
-build; keep the "repair" wording for genuine verification failures.
-
----
-
-## 3. Turning the favorites bar off un-hides a sidebar section the user hid on purpose
-
-**Steps**
-1. In the sidebar section menu, hide **收藏夹 / Favorites**.
-2. Turn the favorites bar on, then off (Ctrl+Shift+B twice).
-
-**Expected** The section stays hidden, as the user chose.
-
-**Actual** The section reappears: `ToggleFavoritesBar()` (
-`src/app/favorites_bar.cpp`) clears the `Starred` bit in `sidebarHiddenMask`, which is the
-same bit the user's "hide" choice uses.
-
-**Suggested fix** `SidebarHiddenMaskWithBar()` already computes the bar-induced hide on the
-fly; `ToggleFavoritesBar()` should not write it back into the user's mask.
-
----
-
-## 4. UAC prompt on every launch when the Win + E takeover is enabled
-
-**Steps** Start Pulse normally (default settings).
-
-**Actual** Windows asks for administrator rights every launch; the elevated broker process
-(`pulse_hotkey_broker.exe`) is started each time.
-
-**Expected** No elevation unless the user turns on the Win + E takeover (a per-session
-elevation is what actually needs admin).
-
-**Root cause** `ShellWindowInit` passes `elevated = !s.isolatedTest`
-(`src/app/shell_window_sync.cpp`), so the broker always runs elevated.
-
-**Status in our fork** We pass `false`; folder opening (including Win + E) still works
-through the non-elevated path.
-
----
-
-## 5. (dev tool) `--shot <png> <file>` opens the file as a folder
-
-**Steps** `Pulse.exe --shot out.png "C:\dev\photo.png"`.
-
-**Actual** A tab opens **at the file path** and shows "This folder cannot be opened".
-
-**Expected** The parent folder opens with the file selected (same rule as opening a file
-from Explorer).
-
-**Note** Only affects the screenshot harness; the normal launch path is fine.
 
 ---
 

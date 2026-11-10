@@ -1,0 +1,200 @@
+From 6de462fc8a8eb45fe92ab43357e39e5ffda2d716 Mon Sep 17 00:00:00 2001
+From: FileP fork <fork@local>
+Date: Tue, 10 Nov 2026 16:33:33 +0800
+Subject: [PATCH] app: select the item after "open location"
+
+Opening a search result's location navigated to its folder but never selected
+the file: the reveal intent rode on the tab's pending-selection fields, which
+navigation invalidates (ClearSelection + selection_revision bump), so
+TakeListingSelection() treated them as stale and overwrote them with the now
+empty selection before anything was restored. On top of that, the pane path is
+display text (C:\dir) while selection paths are extended (\\?\C:\dir\file),
+so comparing the target folder to the current one never matched.
+
+Keep the intent in its own request (folder + names, short deadline) and apply
+it once per view-model build when the tab really lists that folder. Used by the
+search-result menu verb and by the staging tray's "show in folder".
+---
+ src/app/app_commands.cpp   |  3 ++
+ src/app/app_runtime.cpp    |  2 +
+ src/app/reveal_request.cpp | 86 ++++++++++++++++++++++++++++++++++++++
+ src/app/reveal_request.h   | 26 ++++++++++++
+ 4 files changed, 117 insertions(+)
+ create mode 100644 src/app/reveal_request.cpp
+ create mode 100644 src/app/reveal_request.h
+
+diff --git a/src/app/app_commands.cpp b/src/app/app_commands.cpp
+index d01d7f7f..02b8dfe3 100644
+--- a/src/app/app_commands.cpp
++++ b/src/app/app_commands.cpp
+@@ -8,6 +8,7 @@
+ #include "group_selection_plan.h"
+ #include "quick_preview_navigation.h"
+ #include "tag_color_commands.h"
++#include "reveal_request.h"
+ #include "picker_appearance.h"
+ #include "git_ui.h"
+ #include "mtime_hint_prefs.h"
+@@ -947,6 +948,7 @@ void ShowTrayBatchMenu(AppState& s, POINT screen_pt) {
+             const size_t slash = p.find_last_of(L"\\/");
+             leaves.push_back(slash == std::wstring::npos ? p : p.substr(slash + 1));
+         }
++        RequestReveal(s, parent, leaves);
+         NavigateTo(s, parent);
+         if (app::Tab* tab = ActiveTab(s)) {
+             tab->pending_selected_names = leaves;
+@@ -1806,6 +1808,7 @@ void DispatchMenuCommand(AppState& s, int cmd) {
+             const std::wstring leaf =
+                 slash == std::wstring::npos ? full : full.substr(slash + 1);
+             if (!parent.empty() && !leaf.empty()) {
++                RequestReveal(s, parent, { leaf });
+                 NavigateTo(s, parent);
+                 tab->pending_selected_name = leaf;
+                 tab->pending_selected_names = { leaf };
+diff --git a/src/app/app_runtime.cpp b/src/app/app_runtime.cpp
+index 6edba5f7..d119027a 100644
+--- a/src/app/app_runtime.cpp
++++ b/src/app/app_runtime.cpp
+@@ -4,6 +4,7 @@
+ #include "recycle_shell_watch.h"
+ // app_runtime.cpp — extracted from app_main.cpp.
+ #include "app_window_title.h"
++#include "reveal_request.h"
+ #include "dialog_management_ui.h"
+ #include "../fs/drive_kind.h"
+ #include "../fs/bounded_enumeration.h"
+@@ -2734,6 +2735,7 @@ static void FillTrayShelf(AppState& s, ui::TrayDeckView& deck, ULONGLONG now) {
+ 
+ ui::WindowViewModel BuildVm(AppState& s, bool probe_details) {
+     SyncTaskbarWindowTitle(s);
++    ApplyRevealRequest(s);   // "open location": pick the item once the listing is there
+     if (!s.pane) return {};
+     TickContentPackInstall(s);
+     TickAiPackInstall(s);
+diff --git a/src/app/reveal_request.cpp b/src/app/reveal_request.cpp
+new file mode 100644
+index 00000000..e420e9d4
+--- /dev/null
++++ b/src/app/reveal_request.cpp
+@@ -0,0 +1,86 @@
++// reveal_request.cpp — see reveal_request.h.
++#include "reveal_request.h"
++
++#include <unordered_map>
++
++#include "app_input.h"
++#include "app_runtime.h"
++#include "app_state.h"
++
++namespace pulse {
++namespace {
++
++struct Request {
++    std::wstring folder;
++    std::vector<std::wstring> names;
++    ULONGLONG deadline = 0;
++};
++
++// One per window; a closed window leaves a tiny entry that expires by itself.
++std::unordered_map<const AppState*, Request> g_requests;
++
++// The pane path is display text (C:\dir) while selection paths are extended
++// (\\?\C:\dir\file); strip the prefix and a trailing separator before comparing.
++std::wstring PlainPath(std::wstring value) {
++    if (value.rfind(L"\\\\?\\UNC\\", 0) == 0) value = L"\\\\" + value.substr(8);
++    else if (value.rfind(L"\\\\?\\", 0) == 0) value.erase(0, 4);
++    while (value.size() > 1 && (value.back() == L'\\' || value.back() == L'/') &&
++           value[value.size() - 2] != L':')
++        value.pop_back();
++    return value;
++}
++
++bool SamePath(const std::wstring& a, const std::wstring& b) {
++    if (a.empty() || b.empty()) return false;
++    return _wcsicmp(PlainPath(a).c_str(), PlainPath(b).c_str()) == 0;
++}
++
++} // namespace
++
++void RequestReveal(AppState& s, const std::wstring& folder, std::vector<std::wstring> names) {
++    if (folder.empty() || names.empty()) return;
++    Request& request = g_requests[&s];
++    request.folder = folder;
++    request.names = std::move(names);
++    request.deadline = GetTickCount64() + 15000;   // give up if the folder never arrives
++}
++
++void RequestReveal(AppState& s, const std::wstring& full_path) {
++    const size_t slash = full_path.find_last_of(L"\\/");
++    if (slash == std::wstring::npos) return;
++    std::wstring folder = full_path.substr(0, slash);
++    std::wstring name = full_path.substr(slash + 1);
++    if (name.empty()) return;
++    RequestReveal(s, folder, {std::move(name)});
++}
++
++void ApplyRevealRequest(AppState& s) {
++    const auto found = g_requests.find(&s);
++    if (found == g_requests.end()) return;
++    if (GetTickCount64() > found->second.deadline) {
++        g_requests.erase(found);
++        return;
++    }
++    app::Tab* tab = ActiveTab(s);
++    if (!tab || !tab->snapshot || !SamePath(tab->current_path, found->second.folder)) return;
++    std::vector<int> rows;
++    int focus = -1;
++    for (size_t i = 0; i < tab->snapshot->size(); ++i) {
++        const auto& entry = (*tab->snapshot)[i];
++        for (const auto& name : found->second.names) {
++            if (_wcsicmp(entry.name.c_str(), name.c_str()) != 0) continue;
++            rows.push_back(static_cast<int>(i));
++            if (focus < 0) focus = static_cast<int>(i);
++            break;
++        }
++    }
++    g_requests.erase(found);   // the listing arrived: this request is done either way
++    if (rows.empty()) return;
++    tab->SelectIndices(rows);
++    if (focus >= 0) {
++        tab->selected_index = tab->selection_anchor = focus;
++        EnsureRowVisible(s, *tab, focus);
++    }
++}
++
++} // namespace pulse
+diff --git a/src/app/reveal_request.h b/src/app/reveal_request.h
+new file mode 100644
+index 00000000..c6cbcdf3
+--- /dev/null
++++ b/src/app/reveal_request.h
+@@ -0,0 +1,26 @@
++// reveal_request.h — "open location" that actually selects the item.
++//
++// The reveal intent cannot ride on the tab's pending-selection fields: navigation
++// clears the selection and bumps selection_revision, so TakeListingSelection()
++// treats those fields as stale and overwrites them with the empty selection
++// before anything is restored. Keep the intent here instead: a folder plus the
++// names to pick, consumed once when a listing for that folder actually arrives.
++#pragma once
++#include <string>
++#include <vector>
++
++namespace pulse {
++
++struct AppState;
++
++// Select `names` once the active tab lists `folder`. Empty folder or names is a no-op.
++void RequestReveal(AppState& s, const std::wstring& folder, std::vector<std::wstring> names);
++
++// Select the single item `full_path` points at (its folder open, the item picked).
++void RequestReveal(AppState& s, const std::wstring& full_path);
++
++// Called once per view-model build: applies a pending request when the tab really
++// shows the folder, then forgets it (also expires an old request).
++void ApplyRevealRequest(AppState& s);
++
++} // namespace pulse
+-- 
+2.54.0.windows.1
+
