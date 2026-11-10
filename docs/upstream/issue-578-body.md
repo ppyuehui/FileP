@@ -1,33 +1,31 @@
-## Summary
+## 现象
 
-Right-clicking a search result and choosing **Open location** navigates to the containing
-folder, but the entry is never selected and the list is not scrolled to it.
+搜索结果上右键 → **打开所在位置**（或在暂存区用"在所在位置显示"），只跳到了所在文件夹，
+**目标文件没有被选中**，列表也没有滚到它那一行。
 
-This is the same class of bug as #190 ("keep a launcher's open-file-location selection until
-its listing lands"), which was fixed for the launcher/command-line path. The reveal path
-(search result menu verb, staging tray's *show in folder*) still rides on
-`Tab::pending_selected_*`, which navigation invalidates, so it never lands.
+和 [#190](https://github.com/jimmgreen/pulse/issues/190)（"keep a launcher's open-file-location
+selection until its listing lands"）是同一类问题：#190 修的是"启动 / 命令行"那条路，
+搜索结果的 reveal 这条路仍挂在 `Tab::pending_selected_*` 上，所以一直没生效。
 
-## Environment
+## 环境
 
-- Pulse 1.0.59 portable, Windows 11 (26H2) x64. Also present in `main`
-  (`CmdOpenPath` in `src/app/app_commands.cpp` is unchanged).
-- Reproduces from the global search window and from the item context menu of a search result.
+- Pulse 1.0.59 便携版，Windows 11 26H2 x64；
+- `main` 上依然存在（`CmdOpenPath` 那段没变过，我核对过 raw 文件）；
+- 全局搜索窗口、搜索结果条目的右键菜单都能复现。
 
-## Steps
+## 复现步骤
 
-1. Search for a file (name or content).
-2. Right-click one of the results -> **Open location** (打開所在位置 / 在所在位置顯示).
-3. Watch the folder that opens.
+1. 搜索一个文件（按名字或内容都行）；
+2. 在结果上右键 → **打开所在位置**；
+3. 看打开的文件夹。
 
-**Expected** the containing folder opens with that entry selected, scrolled into view.
+**期望**：父目录打开，目标条目处于选中状态，并自动滚动到可见位置。
 
-**Actual** only the folder opens: no row selected, list stays at the top, status bar shows
-no selection count.
+**实际**：只打开了目录。没有行被选中，列表停在顶部，状态栏也没有"已选中 N 项"。
 
-## Root cause
+## 原因（两处，都在 reveal 这条路上）
 
-### 1. The intent is stored in fields that navigation invalidates
+### 1. 意图存在了"导航会作废"的字段里
 
 ```cpp
 // src/app/app_commands.cpp — CmdOpenPath
@@ -37,29 +35,27 @@ tab->pending_selected_names = { leaf };
 tab->pending_selection_revision = tab->selection_revision;
 ```
 
-Navigation clears the selection and bumps `selection_revision`. When the listing arrives,
-`TakeListingSelection()` (`src/app/listing_selection_restore.h`) sees
-`pending_selection_revision != tab.selection_revision`, concludes the pending data belongs
-to an older listing, and calls `CapturePendingListingSelection()` — which **overwrites**
-the pending names with the current (empty) selection. Nothing is left to restore.
+导航会清空选中并 `++selection_revision`。等新列表到达时，
+`TakeListingSelection()`（`src/app/listing_selection_restore.h`）发现
+`pending_selection_revision != tab.selection_revision`，判定这批 pending 属于**更早的列表**，
+于是调用 `CapturePendingListingSelection()` —— 用**当前（空的）选中**把 pending 覆盖掉，
+最后没有任何东西可恢复。
 
-### 2. The folder comparison mixes two path spellings
+### 2. 文件夹比较用了两种路径写法
 
-The pane's `current_path` is display text (`C:\dir`), while a selected entry's
-`full_path` is the extended form (`\\?\C:\dir\file`). A plain comparison between the
-reveal target and the current folder never matches, so even the eager
-`SelectOnly()` inside `CmdOpenPath` cannot fire.
+面板的 `current_path` 是显示文本（`C:\dir`），而选中条目的 `full_path` 是扩展形式
+（`\\?\C:\dir\file`）。任何"目标文件夹是不是当前文件夹"的判断只要直接比字符串就永远不相等，
+所以 `CmdOpenPath` 里那次"立刻选中"也从来没触发过。
 
-## Proposed fix
+## 建议的修法
 
-Give the reveal intent its own field that navigation does not touch (the shape of the #190
-fix): a folder plus the names to pick, with a short deadline. `BuildVm()` applies it once,
-when the active tab really lists that folder and those names exist, selecting them and
-calling `EnsureRowVisible()`. Paths are normalized (strip `\\?\`, trailing separator)
-before comparing. The existing pending-selection code can stay as a fallback.
+给 reveal 意图一个导航不会动的字段（就是 #190 那个思路的形状）：文件夹 + 要选中的名字 + 一个短超时。
+在 `BuildVm()` 里应用一次 —— 当活动标签页确实列出那个文件夹、且名字存在时，选中它们并调用
+`EnsureRowVisible()`。比较路径前先归一（去掉 `\\?\` 前缀和尾部斜杠）。
+原来的 pending 选中逻辑可以留着做兜底，不用删。
 
 <details>
-<summary>Patch (applies to 1.0.59, <code>git am</code> format)</summary>
+<summary>补丁（基于 1.0.59，<code>git am</code> 格式）</summary>
 
 ```diff
 From 6de462fc8a8eb45fe92ab43357e39e5ffda2d716 Mon Sep 17 00:00:00 2001
@@ -266,7 +262,6 @@ index 00000000..c6cbcdf3
 
 </details>
 
-Verified in a private fork that builds this code path: after the change the list scrolls to
-the entry and selects it (screenshot on request).
+这个改动我在自己的分支里编译并跑过：改完之后列表会滚到目标文件并选中它（需要截图我可以补）。
 
-Happy to open a PR if a diff is easier to review that way.
+如果 diff 不好看，我可以直接开 PR。
