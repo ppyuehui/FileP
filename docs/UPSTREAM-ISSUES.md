@@ -21,6 +21,7 @@
 ## 1. Search results: "Open location" navigates to the folder but does not select the file
 
 > **已提交：[issue #578](https://github.com/jimmgreen/pulse/issues/578)**
+> 标题与正文均为中文（作者是中文母语）。
 > 正文里带了可直接 `git am` 的补丁（`src/app/reveal_request.{h,cpp}` + 三处调用）。
 > 上游同类问题 [#190](https://github.com/jimmgreen/pulse/issues/190) 修的是"启动/命令行"那条路，
 > 搜索结果的 reveal 这条路当时没覆盖到；`main` 上 `CmdOpenPath` 至今没变。
