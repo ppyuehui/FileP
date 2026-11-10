@@ -193,9 +193,9 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         l.ui_font_size_card=row(seg_h); fitted_segments(l.ui_font_size_card,l.ui_font_size_row,{I::UiFontSmall,I::UiFontDefault,I::UiFontLarge,I::UiFontLarger});
 
         section(I::SettingsSecTaskbar);
-        // Allocate the two rows; 任务栏标题 draws its own slider cells there.
-        l.taskbar_parent_card=row(seg_h);
-        l.taskbar_current_card=row(seg_h);
+        // 任务栏标题: two sliders, each with three cells (label + rail + value).
+        l.taskbar_parent_card=row(seg_h); segments(l.taskbar_parent_card,l.taskbar_parent_row,3,360);
+        l.taskbar_current_card=row(seg_h); segments(l.taskbar_current_card,l.taskbar_current_row,3,360);
     } else if (page == 9) {
         section(I::SettingsSecOpenSelect);
         l.click_open_card=row(seg_h); fitted_segments(l.click_open_card,l.click_open_row,{I::ClickOpenDouble,I::ClickOpenSingle});
@@ -294,12 +294,6 @@ float LayoutSettingsGeneral(SettingsLayout& l, const WindowViewModel& vm, float 
         l.open_pulse_icon_card=row(narrow ? 108.0f : 64.0f); fitted_segments(l.open_pulse_icon_card,l.open_pulse_icon_row,{I::ExternalOpenWindow,I::ExternalOpenTab,I::OpenWindowActivate});
         l.new_window_shows_card=row(narrow ? 108.0f : 64.0f); fitted_segments(l.new_window_shows_card,l.new_window_shows_row,{I::OpenWindowStartup,I::OpenWindowThisPc,I::NewTabOpenCurrent});
         l.external_open_card=row(seg_h); fitted_segments(l.external_open_card,l.external_open_row,{I::ExternalOpenSmart,I::ExternalOpenTab,I::ExternalOpenWindow});
-
-        section(I::SettingsSecTabs);
-        l.vertical_tabs_row=row(64);
-        l.pinned_names_row=row(64);
-        l.close_tab_double_click_row=row(64);
-        l.close_last_tab_row=row(64);
 
         section(I::SettingsSecArrangeWindows);
         l.arrange_minimized_row=row(64);

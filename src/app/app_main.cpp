@@ -9,6 +9,7 @@ namespace pulse::app { bool RunMediaColumnResizeCapture(); }
 #include "../ui/edit_host.h"
 #include "quick_access.h"
 #include "custom_commands_page.h"
+#include "custom_commands.h"
 #include "app_commands.h"
 #include "../ui/settings_page_ids.h"
 #include "pane_close.h"
@@ -650,6 +651,9 @@ void Render(AppState& s) {
     UpdateProcessMetrics(s);
     const auto build_vm_start = std::chrono::steady_clock::now();
     ui::WindowViewModel vm = BuildVm(s);
+    // 自定义命令页: line up the page's two native edits with the rows this
+    // frame draws (created here, so no frame paints a field in the wrong place).
+    app::SyncCommandsPage(s, vm);
     const auto build_vm_end = std::chrono::steady_clock::now();
     const auto explorer_frame = CaptureExplorerFrame(s, vm);
     const auto trace_explorer_frame_failure = [&](HRESULT draw, HRESULT present, bool hidden) {
@@ -1660,6 +1664,10 @@ LRESULT CALLBACK WndProcImpl(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) 
             s->savedSearches.Load();
             SyncSavedSearchSidebar(*s);
             s->places.Load();
+            // 自定义命令 (commands.json): the store has to be read before the
+            // settings page or the context menu asks for it.
+            if (s->isolatedTest) s->customCommands.persist = s->isolatedTestPersist;
+            s->customCommands.Load();
             if (!s->isolatedTest || s->isolatedTestPersist)
                 app::AliasStore::Instance().Load(app::GetPulseConfigDir() + L"\\aliases.json");
             app::AliasStore::PinyinHook() = [](std::wstring_view name, std::wstring_view query) {
