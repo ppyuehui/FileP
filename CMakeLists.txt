@@ -629,7 +629,6 @@ if(PULSE_APP_SOURCES)
         src/app/fork_custom_commands.cpp
         src/app/fork_input.cpp
         src/app/fork_commands.cpp
-        src/app/fork_sidebar_tree.cpp
         src/ui/ui_settings_context.cpp src/ui/ui_settings_packs.cpp src/ui/ui_settings_shortcuts.cpp
         src/ui/ui_settings_sysctx.cpp src/ui/file_operation_dialog.cpp src/ui/folder_picker_dialog.cpp
         src/ui/quick_access_editor.cpp src/ui/shortcut_help.cpp src/ui/tag_manager_panel.cpp

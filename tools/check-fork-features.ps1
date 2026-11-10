@@ -65,7 +65,6 @@ $checks = @(
     '自定义命令：自定义工具栏磁贴|src/app/app_commands.cpp|kToolbarCustomBase|自定义工具栏里找不到命令'
     '自定义命令：勾选即钉住|src/app/custom_commands_page.cpp|CustomCommandToolId|勾了工具栏但按钮不出现'
     '自定义命令：执行前确认|src/app/fork_custom_commands.cpp|CmdRunConfirmTitle|点了就直接执行，没有确认框'
-    '侧栏文件夹树|src/app/fork_sidebar_tree.cpp|ForkSidebarTreeApply|侧栏点驱动器不展开子文件夹'
     '自定义命令：执行线程|src/app/app_commands.cpp|RunCustomCommandAt|命令点了没反应'
     '自定义命令：完成消息|src/app/app_messages.h|WM_CUSTOM_COMMAND_DONE|执行完不刷新'
 

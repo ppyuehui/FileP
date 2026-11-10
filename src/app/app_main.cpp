@@ -10,7 +10,6 @@ namespace pulse::app { bool RunMediaColumnResizeCapture(); }
 #include "quick_access.h"
 #include "custom_commands_page.h"
 #include "fork_custom_commands.h"
-#include "fork_sidebar_tree.h"
 #include "custom_commands.h"
 #include "app_commands.h"
 #include "../ui/settings_page_ids.h"
@@ -3549,13 +3548,6 @@ LRESULT CALLBACK WndProcImpl(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) 
     // FileP: 自定义命令跑完了（后台线程 PostMessage 回来）→ 刷新或报错。
     case WM_CUSTOM_COMMAND_DONE:
         if (s) ReceiveCustomCommandResult(*s, lParam);
-        return 0;
-    // FileP: 侧栏文件夹树列完了子文件夹。
-    case WM_FORK_SIDEBAR_TREE:
-        if (s) {
-            ForkSidebarTreeLoaded(*s, lParam);
-            InvalidateRect(hwnd, nullptr, FALSE);
-        }
         return 0;
     case WM_DETAILS_META: {
         auto* result = reinterpret_cast<DetailsMetaResult*>(lParam);
