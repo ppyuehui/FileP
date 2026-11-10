@@ -8,6 +8,7 @@
 #include "app_navigation.h"
 #include "custom_commands_page.h"
 #include "../common/runtime_log.h"
+#include "fork_reveal.h"
 #include "../fs/drive_kind.h"
 #include "../fs/bounded_enumeration.h"
 #include "folder_statistics.h"
@@ -2766,6 +2767,8 @@ static void FillTrayShelf(AppState& s, ui::TrayDeckView& deck, ULONGLONG now) {
 
 ui::WindowViewModel BuildVm(AppState& s, bool probe_details) {
     SyncTaskbarWindowTitle(s);
+
+    ForkApplyReveal(s);   // 打开所在位置：列表到了就把目标选中
     if (!s.pane) return {};
     TickContentPackInstall(s);
     TickAiPackInstall(s);

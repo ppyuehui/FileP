@@ -5,6 +5,7 @@
 #include "custom_commands.h"
 #include "fork_custom_commands.h"
 #include "fork_commands.h"
+#include "fork_reveal.h"
 #include "../ui/settings_page_ids.h"
 #include "../ui/view_zoom.h"
 #include "extensions/native/package_commands.h"
@@ -951,6 +952,7 @@ void ShowTrayBatchMenu(AppState& s, POINT screen_pt) {
             const size_t slash = p.find_last_of(L"\\/");
             leaves.push_back(slash == std::wstring::npos ? p : p.substr(slash + 1));
         }
+        ForkRequestRevealMany(s, parent, leaves);   // 同上：不靠 pending
         NavigateTo(s, parent);
         if (app::Tab* tab = ActiveTab(s)) {
             tab->pending_selected_names = leaves;
@@ -1819,14 +1821,24 @@ void DispatchMenuCommand(AppState& s, int cmd) {
             const std::wstring leaf =
                 slash == std::wstring::npos ? full : full.substr(slash + 1);
             if (!parent.empty() && !leaf.empty()) {
+                ForkRequestRevealMany(s, parent, { leaf });   // 列表到了再选，见 fork_reveal.cpp
                 NavigateTo(s, parent);
                 // NavigateTo may rebuild the tab list: never write through the
                 // pointer taken before it, or the pending selection lands on a
                 // stale tab and the file is not selected after the jump.
                 if (app::Tab* tab = ActiveTab(s)) {
+                    // 注意：这里不能用 selection_revision。导航过程中选中会被清空、
+                    // revision 随之加一，列表到达时 pending 就被当成"过期的旧选中"
+                    // 覆盖掉（CapturePendingListingSelection 会拿当前空选中重写）。
+                    // UINT64_MAX 表示"不要用当前选中覆盖我，就按这个名字选"。
                     tab->pending_selected_name = leaf;
                     tab->pending_selected_names = { leaf };
-                    tab->pending_selection_revision = tab->selection_revision;
+                    tab->pending_selection_revision = UINT64_MAX;
+                    tab->pending_selection_key_revision = UINT64_MAX;
+                    tab->pending_selection_keys.clear();
+                    tab->pending_selection_key_names.clear();
+                    tab->pending_selection_focus_key.clear();
+                    tab->pending_selection_key_focus_name.clear();
                     tab->pending_ensure_selection_visible = true;
                     if (tab->snapshot && tab->snapshot_path == parent) {
                         for (size_t i = 0; i < tab->snapshot->size(); ++i) {
