@@ -1089,12 +1089,28 @@ bool AppPrefs::RememberPickerFolder(std::wstring_view key, const std::wstring& f
     return true;
 }
 
+// 每次写设置前先留一份旧的：app.json -> app.json.bak1 -> … -> app.json.bak5。
+// 被别的实例按内存状态覆盖、或者读错文件之后再保存，都还能翻回来。
+static void RotateSettingsBackup(const std::wstring& path) {
+    if (GetFileAttributesW(path.c_str()) == INVALID_FILE_ATTRIBUTES) return;
+    const std::wstring prefix = path + L".bak";
+    DeleteFileW((prefix + L"5").c_str());
+    for (int i = 4; i >= 1; --i) {
+        const std::wstring from = prefix + std::to_wstring(i);
+        DeleteFileW((prefix + std::to_wstring(i + 1)).c_str());
+        MoveFileExW(from.c_str(), (prefix + std::to_wstring(i + 1)).c_str(), MOVEFILE_REPLACE_EXISTING);
+    }
+    CopyFileW(path.c_str(), (prefix + L"1").c_str(), FALSE);
+}
+
 bool AppPrefs::Save() const {
     if (!persist) return true;
     if (load_failed) return false;
     const std::wstring dir = GetPulseConfigDir();
     if (dir.empty()) return false;
-    return WriteUtf8FileAtomic(dir + L"\\app.json", ToJson());
+    const std::wstring path = dir + L"\\app.json";
+    RotateSettingsBackup(path);
+    return WriteUtf8FileAtomic(path, ToJson());
 }
 
 } // namespace pulse::app

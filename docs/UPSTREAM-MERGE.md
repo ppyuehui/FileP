@@ -141,6 +141,15 @@ git push local main           # 本机 Gitea（失败就重试一次，仍失败
 git -c http.sslBackend=openssl push github main   # GitHub（要代理，直连常 TLS 失败）
 ```
 
+## 6.5 设置文件的坑（2026-11-10 踩过）
+
+- **改设置前先确认 FileP 已退出**：程序把设置存在内存里，任何一次操作都会把内存状态写回 `app.json`；
+  若你在它运行期间手工改文件，它一保存就覆盖掉了。
+- **不要用「mtime 更新」判断哪份设置更好**：合并 1.0.59 后程序一度把默认值写到
+  `%LOCALAPPDATA%\FileP`（更新、更小），按时间戳把它拷到 `%APPDATA%\FileP` 就把真设置盖掉了。
+  要比内容（`toolbar_tools`、`places`、`tags` 的条数）。
+- 现在每次保存前会自动滚存 `app.json.bak1…bak5`；出事就把 `bak1` 改名回 `app.json`。
+
 ## 7. 收尾
 
 - 更新 `docs/FORK-CHANGES.md`：官方这次把哪些功能自己做了（我们的可以删）、

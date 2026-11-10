@@ -122,7 +122,7 @@
 | 项 | 我们的做法 |
 | --- | --- |
 | 全局热键的辅助进程 | **不启动提权版本**：官方每次启动都会弹 UAC 申请管理员（`pulse_hotkey_broker.exe`），我们改成 `elevated_support = false`，普通窗口上热键照常，管理员窗口上的热键会漏（可接受） |
-| 设置备份 | 设置损坏或被覆盖后无法恢复 —— 每次合并后先 `copy %APPDATA%\FileP %APPDATA%\FileP\backup-<时间>` |
+| 设置自动备份 | 每次写 `app.json` 前把旧的滚存为 `app.json.bak1`…`bak5`（保留 5 份）。误覆盖后直接改名回 `app.json` 即可恢复 |
 
 ## 五、删掉/不做的部分
 
