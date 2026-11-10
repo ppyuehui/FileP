@@ -67,14 +67,20 @@ inline ToolbarLayout MakeToolbarLayout(float width, float scale, float top, floa
     out.navigation_tier = navigation.tier;
     out.refresh_inside = navigation.refresh_inside;
     out.merged_search = navigation.merged;
-    // 此电脑: one more button right after the navigation cluster; the address
-    // bar gives up that width on its left edge.
-    if (show_home) {
-        const float home_w = NavigationStep(available, scale);
-        out.home = D2D1::RectF(out.address.left - home_w, out.address.top,
-                               out.address.left, out.address.bottom);
-        out.address.left += home_w;
-        out.address_text.left += home_w;
+    // 此电脑: one more button right after the navigation cluster (back, forward,
+    // up); the address bar gives up that width on its left edge. Placing it
+    // before the field instead of after the refresh button keeps it in the same
+    // run as the arrows.
+    if (show_home && out.navigation[2].right > out.navigation[2].left) {
+        const float step = available < 500 ? 26.0f * scale : 34.0f * scale;
+        const float home_left = out.navigation[2].right + 4 * scale;
+        out.home = D2D1::RectF(home_left, out.navigation[2].top,
+                               home_left + step - 4 * scale, out.navigation[2].bottom);
+        const float need = (out.home.right + margin) - out.address.left;
+        if (need > 0) {
+            out.address.left += need;
+            out.address_text.left = (std::max)(out.address_text.left + need, out.address.left);
+        }
     }
     const bool overflow = available < 540*scale;
     float x = left + margin;

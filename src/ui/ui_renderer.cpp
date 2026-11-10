@@ -431,6 +431,10 @@ ID2D1Bitmap* MainRenderer::AppIconBitmap(const common::MenuIconRef& pixels) {
 }
 
 float MainRenderer::TitleBrandWidth(const WindowViewModel& vm, float w) const {
+    // FileP: 左上角只留侧栏开关，产品图标和名字搬到状态栏左下角
+    // （见 DrawStatusBar 里 sb.brand 那段），所以这里只要开关那一小块。
+    title_brand_name_ = false;
+    return title_brand_width_ = 52.0f * scale_;
     const float aligned = TitleSidebarWidth(w);
     title_brand_width_ = aligned;
     title_brand_name_ = true;
@@ -2095,7 +2099,8 @@ void MainRenderer::DrawTitleBar(const WindowViewModel& vm, const D2D1_RECT_F& re
                                 brTextSecondary_.get());
         }
     }
-    if (hasToggle && (user_sidebar_collapsed_ || SidebarAutoCollapsed(right)) && (vertical_tabs_ || embedded_)) {
+    // FileP: 左上角只有侧栏开关，产品图标不再画在标题栏（在状态栏左下角）。
+    if (true) {
         // Rail: the toggle stands in for the brand mark.
     } else if (ID2D1Bitmap* logo = LogoBitmap()) {
         // 1:1 on whole pixels so the pixel-fitted frame stays sharp.
@@ -2139,7 +2144,7 @@ void MainRenderer::DrawTitleBar(const WindowViewModel& vm, const D2D1_RECT_F& re
         MakeBrush(dc, theme.text, brText_);
         DrawTextEndEllipsis(compositor_, compositor_->HeaderFormat(), brText_.get(),
                             vm.window_identity_name, text_x, 0.0f, identity.hit.right - 6.0f * scale_ - text_x, h);
-    } else if (title_brand_name_ && x + nameWidth <= brandRight) {
+    } else if (false && title_brand_name_ && x + nameWidth <= brandRight) {
         MakeBrush(dc, theme.text, brText_);
         DrawTextRect(dc, compositor_->HeaderFormat(), brText_.get(), L"FileP",
             x, 0.0f, nameWidth + 1.0f * scale_, h);
@@ -2924,6 +2929,27 @@ void MainRenderer::DrawStatusBar(const WindowViewModel& vm, const D2D1_RECT_F& f
     // Everything but the AI chip ends left of it (MakeStatusBarMetrics).
     D2D1_RECT_F rect = full;
     rect.right = sb.content_right;
+    // 左下角品牌：图标 + FileP（标题栏左上角只留侧栏开关）。
+    if (sb.brand.right > sb.brand.left) {
+        const float mark = 14.0f * scale_;
+        const float mark_y = sb.bar.top + (status_height_ - mark) * 0.5f;
+        const float mark_x = sb.brand.left;
+        if (ID2D1Bitmap* logo = LogoBitmap()) {
+            const D2D1_SIZE_U ls = logo->GetPixelSize();
+            const float lx = std::round(mark_x + (mark - static_cast<float>(ls.width)) * 0.5f);
+            const float ly = std::round(mark_y + (mark - static_cast<float>(ls.height)) * 0.5f);
+            dc->DrawBitmap(logo, D2D1::RectF(lx, ly, lx + static_cast<float>(ls.width), ly + static_cast<float>(ls.height)),
+                           1.0f, D2D1_INTERPOLATION_MODE_LINEAR, nullptr, nullptr);
+        } else {
+            MakeBrush(dc, theme.accent, brAccent_);
+            dc->FillEllipse(D2D1::Ellipse(D2D1::Point2F(mark_x + mark * 0.5f, mark_y + mark * 0.5f),
+                                          mark * 0.5f, mark * 0.5f), brAccent_.get());
+        }
+        MakeBrush(dc, theme.text, brText_);
+        DrawTextRect(dc, small_fmt, brText_.get(), L"FileP",
+                     mark_x + mark + 6.0f * scale_, sb.bar.top,
+                     sb.brand.right - (mark_x + mark + 6.0f * scale_), status_height_);
+    }
     if (sb.ai_chip.right > sb.ai_chip.left) {
         // The AI chip (ai_panel_view.h): "✦ AI", what the assistant or an
         // outside client is doing, and whether Pulse 助手 is open.

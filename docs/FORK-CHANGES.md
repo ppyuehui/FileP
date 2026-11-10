@@ -17,7 +17,7 @@
 | --- | --- | --- |
 | 主程序文件名 | `pulse.exe` | `FileP.exe`（CMake `OUTPUT_NAME`） |
 | 窗口标题 | Pulse | FileP |
-| 标题栏品牌文字 | Pulse | FileP |
+| 产品图标与名字 | 标题栏左上角 | **状态栏左下角**（图标 + FileP）；标题栏左上角只有侧栏开关 |
 | 托盘提示 | Pulse | FileP |
 | 错误/提示框标题 | Pulse | FileP |
 | 关于页 | 单一项目主页 | 复制信息 / 本项目主页 / 原项目主页，并注明「本项目基于 Pulse 二次修改」 |
@@ -116,6 +116,13 @@
 | AI 设置目录 | 还在 `%LOCALAPPDATA%\Pulse\ai` | 已改到 FileP 并带迁移 |
 
 ---
+
+## 四点七、安全与整洁
+
+| 项 | 我们的做法 |
+| --- | --- |
+| 全局热键的辅助进程 | **不启动提权版本**：官方每次启动都会弹 UAC 申请管理员（`pulse_hotkey_broker.exe`），我们改成 `elevated_support = false`，普通窗口上热键照常，管理员窗口上的热键会漏（可接受） |
+| 设置备份 | 设置损坏或被覆盖后无法恢复 —— 每次合并后先 `copy %APPDATA%\FileP %APPDATA%\FileP\backup-<时间>` |
 
 ## 五、删掉/不做的部分
 
