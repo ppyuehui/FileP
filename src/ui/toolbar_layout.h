@@ -1,4 +1,5 @@
 #pragma once
+#include "fork_toolbar.h"
 #include "responsive_chrome_layout.h"
 #include <d2d1.h>
 #include <algorithm>
@@ -67,21 +68,8 @@ inline ToolbarLayout MakeToolbarLayout(float width, float scale, float top, floa
     out.navigation_tier = navigation.tier;
     out.refresh_inside = navigation.refresh_inside;
     out.merged_search = navigation.merged;
-    // 此电脑: one more button right after the navigation cluster (back, forward,
-    // up); the address bar gives up that width on its left edge. Placing it
-    // before the field instead of after the refresh button keeps it in the same
-    // run as the arrows.
-    if (show_home && out.navigation[2].right > out.navigation[2].left) {
-        const float step = available < 500 ? 26.0f * scale : 34.0f * scale;
-        const float home_left = out.navigation[2].right + 4 * scale;
-        out.home = D2D1::RectF(home_left, out.navigation[2].top,
-                               home_left + step - 4 * scale, out.navigation[2].bottom);
-        const float need = (out.home.right + margin) - out.address.left;
-        if (need > 0) {
-            out.address.left += need;
-            out.address_text.left = (std::max)(out.address_text.left + need, out.address.left);
-        }
-    }
+    // 此电脑（我们的按钮，实现在 fork_toolbar.cpp）。
+    if (show_home) ForkHomeButtonLayout(out, available, scale, margin);
     const bool overflow = available < 540*scale;
     float x = left + margin;
     out.create = {left+margin,top+50*scale,left+margin+create_width,top+82*scale};

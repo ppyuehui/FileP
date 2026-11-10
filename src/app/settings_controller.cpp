@@ -1,6 +1,7 @@
 #include "../common/windows_compat.h"
 #include "../common/localization.h"
 #include "settings_controller.h"
+#include "fork_settings_toggles.h"
 #include "blank_pane_click.h"
 #include "default_file_manager.h"
 #include "shell_integration_registry.h"
@@ -1361,31 +1362,8 @@ void SettingsController::ToggleUi(int index) {
         SaveAndApply(SettingsEffect::ListStyle);
         return;
     }
-    if (index == 86) {
-        prefs_->confirm_custom_commands = !prefs_->confirm_custom_commands;
-        SaveAndApply(SettingsEffect::None);
-        return;
-    }
-    if (index == 85) {
-        prefs_->show_change_hover = !prefs_->show_change_hover;
-        SaveAndApply(SettingsEffect::None);
-        return;
-    }
-    if (index == 84) {
-        prefs_->show_home_button = !prefs_->show_home_button;
-        SaveAndApply(SettingsEffect::None);
-        return;
-    }
-    if (index == 83) {
-        prefs_->auto_collapse_sidebar = !prefs_->auto_collapse_sidebar;
-        SaveAndApply(SettingsEffect::None);
-        return;
-    }
-    if (index == 82) {
-        prefs_->show_path_copy = !prefs_->show_path_copy;
-        SaveAndApply(SettingsEffect::None);
-        return;
-    }
+    // FileP 自己的开关（82-86）都在 fork_settings_toggles.cpp 里。
+    if (ForkToggleSetting(*this, index)) return;
     if (index == 1) {
         prefs_->ApplyLaunchOnStartup(!prefs_->launch_on_startup);
         SaveAndApply(SettingsEffect::None);

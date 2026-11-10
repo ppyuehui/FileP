@@ -132,19 +132,22 @@
 | --- | --- | --- |
 | 自定义命令（模型/执行器/设置页/右键行） | `custom_commands.cpp/.h`、`custom_commands_page.cpp/.h` | 派发与菜单各一行调用 |
 | **品牌（标题栏/状态栏）** | `fork_branding.cpp/.h` | `ui_renderer.cpp` 三处常量判断 + 一次 `DrawForkStatusBrand` 调用；`ui_renderer_internal.h` 一次 `ForkStatusBrandRect` 调用 |
+| **自有开关（82-86）** | `fork_settings_toggles.cpp/.h` | `settings_controller.cpp` 一次 `ForkToggleSetting` 调用 |
+| **地址栏「此电脑」布局** | `fork_toolbar.cpp/.h` | `toolbar_layout.h` 一次 `ForkHomeButtonLayout` 调用 |
+| **自定义命令执行 + 确认框** | `fork_custom_commands.cpp/.h` | `app_commands.cpp` 派发里的两行调用 |
 
 还没隔离、仍在官方文件里的自有代码：
 
-| 代码 | 位置 |
-| --- | --- |
-| 四个自有开关的行/绘制/命中/切换 | `settings_layout_sections.h`、`ui_settings_core.cpp`、`ui_hit_test.cpp`、`settings_controller.cpp` |
-| 地址栏「此电脑」按钮的布局与点击 | `toolbar_layout.h`、`ui_toolbar.cpp`、`app_input.cpp` |
-| 工具栏 `split_two` 目录项与开关 | `toolbar_tools.h`、`app_commands.cpp` |
-| 标签 ✕ 松开生效 | `app_input.cpp` |
-| 任务栏标题字符数 | `app_window_title.cpp`、`settings_layout_sections.h` 等 |
+| 代码 | 位置 | 备注 |
+| --- | --- | --- |
+| 四个自有开关的**行/绘制/命中** | `settings_layout_sections.h`、`ui_settings_core.cpp`、`ui_hit_test.cpp` | 逻辑已隔离，剩下的是各一两行调用，且都在「官方本来就有这一页」的地方，冲突可控 |
+| 地址栏「此电脑」**绘制与点击** | `ui_toolbar.cpp`、`app_input.cpp` | 布局已隔离 |
+| 工具栏 `split_two` 目录项与开关 | `toolbar_tools.h`、`app_commands.cpp` | 目录是官方数组，只能追加一行 |
+| 标签 ✕ 松开生效 | `app_input.cpp` | 一处分支 |
+| 任务栏标题字符数 | `app_window_title.cpp` 等 | 整份文件基本是我们重写的 |
 
-**下一步（按风险从低到高）**：① 四个自有开关收进 `fork_settings.cpp`（行/绘制/命中/切换成套搬）；
-② 地址栏「此电脑」按钮；③ 工具栏 `split_two`。
+**下一步（按风险从低到高）**：① 工具栏 `split_two` 的开关逻辑收进 `fork_commands.cpp`；
+② 标签 ✕ 松开的分支收进 `fork_input.cpp`（和此电脑点击一起）。
 
 ## 五、待查问题
 

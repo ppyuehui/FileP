@@ -105,6 +105,9 @@ using SettingsTaskCompletion = std::function<void(SettingsTaskResult)>;
 
 class SettingsController {
 public:
+    // FileP: 自有开关的存取（实现在 fork_settings_toggles.cpp）。
+    AppPrefs& ForkPrefs() { return *prefs_; }
+    void ForkSaveToggle();
     struct UiCallbacks {
         std::function<bool(std::wstring&)> pick_image;
         std::function<bool(std::wstring&, std::wstring_view)> pick_folder;
