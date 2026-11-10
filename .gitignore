@@ -94,3 +94,6 @@ CONERR$
 # Local scratch: experiment backups and size/test scripts.
 /_backups/
 /.size-test/
+
+# fork-patches: 由 tools/export-fork-patches.ps1 从 git 历史生成，不入库（清单入）
+/fork-patches/*.patch

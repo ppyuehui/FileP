@@ -4,6 +4,7 @@
 > 每次合并官方新版本后，请回来过一遍这张表，确认每一项仍然成立。
 
 - 跟随官方更新的操作手册：[UPSTREAM-MERGE.md](UPSTREAM-MERGE.md)
+- 上次合并的踩坑记录：[MERGE-LESSONS.md](MERGE-LESSONS.md)
 - 自有功能守卫：`pwsh -File tools/check-fork-features.ps1`（35 项，合并后必须跑）
 - 我们的仓库：`https://git.huihui.xx.kg:2222/hui/FileP.git`（另有 `local` / `github` 两个镜像）
 - 分支：`main`；上游远程名 `upstream`（只 fetch）

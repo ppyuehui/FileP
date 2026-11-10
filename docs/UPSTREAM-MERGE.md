@@ -1,6 +1,6 @@
 # 以后怎么跟随官方更新（最保险的流程）
 
-> 这份是操作手册。**功能清单**见 [FORK-CHANGES.md](FORK-CHANGES.md)，
+> 这份是操作手册。**踩过的坑**见 [MERGE-LESSONS.md](MERGE-LESSONS.md)，**功能清单**见 [FORK-CHANGES.md](FORK-CHANGES.md)，
 > 自动检查见 `tools/check-fork-features.ps1`，合并脚本见 `tools/merge-upstream.ps1`。
 
 ## 一句话版本
