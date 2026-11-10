@@ -124,5 +124,24 @@
 4. **未来方向**：把还没隔离的功能也往独立文件挪（像 `custom_commands` 那样），
    让官方文件里的改动越少越好 —— 这是降低合并成本的唯一根治办法
 
+---
+
+## 四、已隔离的自有代码（进行中）
+
+| 模块 | 文件 | 官方文件里还剩什么 |
+| --- | --- | --- |
+| 自定义命令（模型/执行器/设置页/右键行） | `custom_commands.cpp/.h`、`custom_commands_page.cpp/.h` | 派发与菜单各一行调用 |
+| **品牌（标题栏/状态栏）** | `fork_branding.cpp/.h` | `ui_renderer.cpp` 三处常量判断 + 一次 `DrawForkStatusBrand` 调用；`ui_renderer_internal.h` 一次 `ForkStatusBrandRect` 调用 |
+
+还没隔离、仍在官方文件里的自有代码：
+
+| 代码 | 位置 |
+| --- | --- |
+| 四个自有开关的行/绘制/命中/切换 | `settings_layout_sections.h`、`ui_settings_core.cpp`、`ui_hit_test.cpp`、`settings_controller.cpp` |
+| 地址栏「此电脑」按钮的布局与点击 | `toolbar_layout.h`、`ui_toolbar.cpp`、`app_input.cpp` |
+| 工具栏 `split_two` 目录项与开关 | `toolbar_tools.h`、`app_commands.cpp` |
+| 标签 ✕ 松开生效 | `app_input.cpp` |
+| 任务栏标题字符数 | `app_window_title.cpp`、`settings_layout_sections.h` 等 |
+
 > 补丁是在**当时的上游代码**上生成的，不能整包 `git apply` 到今天；
 > 它的价值是"这个功能当年是怎么写的"，用来抄，不是用来贴。

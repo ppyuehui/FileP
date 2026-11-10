@@ -622,6 +622,8 @@ if(PULSE_APP_SOURCES)
     # sorting, drawing the file list and input stay at /O2.
     set(PULSE_SIZE_SOURCES
         src/ui/ui_settings_core.cpp src/ui/ui_settings_view.cpp src/ui/ui_settings_layout.cpp
+        # FileP: 品牌相关的绘制收在自己的文件里（合并官方新版时少冲突）
+        src/ui/fork_branding.cpp
         src/ui/ui_settings_context.cpp src/ui/ui_settings_packs.cpp src/ui/ui_settings_shortcuts.cpp
         src/ui/ui_settings_sysctx.cpp src/ui/file_operation_dialog.cpp src/ui/folder_picker_dialog.cpp
         src/ui/quick_access_editor.cpp src/ui/shortcut_help.cpp src/ui/tag_manager_panel.cpp

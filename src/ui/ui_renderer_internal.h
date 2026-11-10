@@ -2,6 +2,7 @@
 #include "pane_layout_strip.h"
 // ui_renderer_internal.h — Draw + HitTest shared geometry (not a public API).
 #pragma once
+#include "fork_branding.h"
 #include <list>
 #include "ui_renderer.h"
 #include "layer_alphas.h"
@@ -2120,15 +2121,9 @@ StatusBarMetrics MakeStatusBarMetrics(const WindowViewModel& vm, const D2D1_RECT
     D2D1_RECT_F rect = full;
     rect.right -= PaneLayoutStripWidth(vm, full.right-full.left, scale, factory, small_format) + (vm.layout_controls.visible ? 12*scale : 0);
     m.content_left = m.pad;
-    // 左下角的品牌：状态栏最左边是「FileP 文件管理器」。
-    if (factory && small_format && full.right - full.left > 720.0f * scale) {
-        const float name_w = MeasureTextWidth(factory, small_format, L"FileP") * 1.06f + 1.0f;
-        const float desc_w = MeasureTextWidth(factory, small_format,
-                                              l10n::Get(l10n::StringId::AppDescription));
-        const float left = full.left + m.pad;
-        m.brand = D2D1::RectF(left, m.bar.top, left + name_w + 6.0f * scale + desc_w, m.bar.bottom);
+    // 左下角的品牌（实现在 fork_branding.cpp）。
+    if (ForkStatusBrandRect(m.bar, m.pad, full, scale, factory, small_format, &m.brand, &m.content_left))
         m.content_left = m.brand.right + 14.0f * scale;
-    }
     if (vm.status.ai_state != StatusAiState::Hidden) {
         // Widths measured in the small face, scaled to the chip's 12.5 DIP.
         float k = 1.0f;

@@ -939,6 +939,10 @@ private:
         D2D1_SIZE_U size{};
     } pane_zoom_motion_;
     void DrawStatusBar(const WindowViewModel& vm, const D2D1_RECT_F& rect, const Theme& theme);
+    // FileP: 状态栏左下角的品牌（实现在 fork_branding.cpp）。
+    void DrawForkStatusBrand(ID2D1DeviceContext* dc, const Theme& theme,
+                             const D2D1_RECT_F& bar, const D2D1_RECT_F& brand,
+                             IDWriteTextFormat* small_format);
     void DrawAddressSuggestions(const WindowViewModel& vm, const D2D1_RECT_F& rect, const Theme& theme);
     void DrawFilterTagSuggestions(const WindowViewModel& vm, const D2D1_RECT_F& rect, const Theme& theme);
     void DrawTeachBubble(const WindowViewModel& vm, const D2D1_RECT_F& rect, const Theme& theme);
