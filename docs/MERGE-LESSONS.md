@@ -143,5 +143,16 @@
 | 标签 ✕ 松开生效 | `app_input.cpp` |
 | 任务栏标题字符数 | `app_window_title.cpp`、`settings_layout_sections.h` 等 |
 
+**下一步（按风险从低到高）**：① 四个自有开关收进 `fork_settings.cpp`（行/绘制/命中/切换成套搬）；
+② 地址栏「此电脑」按钮；③ 工具栏 `split_two`。
+
+## 五、待查问题
+
+- **工具栏钉住会莫名变少**（2026-11-10 出现两次，剩下 `extensions / details / cmd:0` 这类组合）。
+  已排除：设置读取失败（同一次启动其它设置都在）、`UpgradeToolbarTools`（它只会加不会减）。
+  嫌疑在 `toolbar_picker.cpp` 的 `Emit()` → `spec.on_tools` 这条链路：
+  下一步在这里加一行 `diagnostics::runtime::Event`，记录旧列表、勾选下标、新列表，
+  复现一次即可定位。**在修好之前，打开「自定义工具栏」后请留意工具栏按钮有没有变少。**
+
 > 补丁是在**当时的上游代码**上生成的，不能整包 `git apply` 到今天；
 > 它的价值是"这个功能当年是怎么写的"，用来抄，不是用来贴。
