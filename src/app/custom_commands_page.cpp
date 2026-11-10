@@ -1,6 +1,7 @@
 // custom_commands_page.cpp — 自定义命令 page (settings 14): the model the page
 // draws, the two dark text fields parked over it, and the row actions.
 #include "custom_commands_page.h"
+#include <algorithm>
 
 #include "../common/windows_compat.h"
 #include "../common/localization.h"
@@ -326,7 +327,18 @@ void CommandsPageAction(AppState& s, ui::HitTestResult::Region region, int index
     }
     case R::SettingsCommandPlaces:
         if (command) {
-            if (index == 0) command->toolbar = !command->toolbar;
+            if (index == 0) {
+                command->toolbar = !command->toolbar;
+                // 勾上「工具栏」就把按钮钉上去（取消勾选就摘掉），否则用户还要
+                // 再去 自定义工具栏 里找一遍——那一页原本就该有它。
+                const size_t at = static_cast<size_t>((std::max)(0, s.command_sel));
+                const std::wstring id = app::CustomCommandToolId(at);
+                auto& list = s.appPrefs.toolbar_tools;
+                const auto found = std::find(list.begin(), list.end(), id);
+                if (command->toolbar && found == list.end()) list.push_back(id);
+                else if (!command->toolbar && found != list.end()) list.erase(found);
+                if (!s.isolatedTest) s.appPrefs.Save();
+            }
             else if (index == 1) command->folder_menu = !command->folder_menu;
             else command->background_menu = !command->background_menu;
             s.customCommands.Save();

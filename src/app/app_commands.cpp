@@ -5015,6 +5015,10 @@ static int ToolbarToolSection(std::wstring_view id) {
 
 // The tools page order: pinned tools in toolbar order lead; the rest follow
 // in the prototype's catalog order.
+// The picker's tile indices: 0…tools-1 are the tools, then the view buttons,
+// then one tile per 自定义命令 (appended at the end so the older indices stay).
+static constexpr size_t kToolbarCustomBase = app::kToolbarToolCount + kToolbarViewCount;
+
 static std::vector<size_t> ToolbarPinsOrder(const AppState& s) {
     static constexpr std::wstring_view kCatalogOrder[] = {
         L"cut", L"copy", L"paste", L"rename", L"delete", L"undo", L"new_text", L"new_md", L"copy_path",
@@ -5036,6 +5040,15 @@ static std::vector<size_t> ToolbarPinsOrder(const AppState& s) {
     for (int index : app::ToolbarViewLayoutOrder(s.appPrefs.toolbar_view_order))
         order.push_back(app::kToolbarToolCount + static_cast<size_t>(index));
     order.push_back(app::kToolbarToolCount + 3); // Favorites bar is not a view control.
+    // 自定义命令 pinned on the toolbar: one tile each, in their pinned order.
+    std::vector<char> placed_custom(s.customCommands.commands.size(), 0);
+    for (const auto& id : s.appPrefs.toolbar_tools) {
+        const size_t custom = app::CustomCommandToolSlot(id);
+        if (custom < placed_custom.size() && !placed_custom[custom]) {
+            placed_custom[custom] = 1;
+            order.push_back(kToolbarCustomBase + custom);
+        }
+    }
     return order;
 }
 
@@ -5089,6 +5102,19 @@ void ShowToolbarCustomize(AppState& s, int page) {
         tile.checked = ToolbarViewShown(s, i);
         spec.pins.push_back(std::move(tile));
     }
+    // 自定义命令: one tile each, so the user's commands can be pinned like a
+    // built-in tool (the toolbar runs their steps on one click).
+    for (size_t i = 0; i < s.customCommands.commands.size(); ++i) {
+        ui::ToolbarPickerTile tile;
+        tile.glyph = L"\xE756";
+        tile.label = s.customCommands.commands[i].name.empty()
+                         ? l10n::Get(l10n::StringId::SettingsPageCommands)
+                         : s.customCommands.commands[i].name;
+        tile.keywords = app::CustomCommandToolId(i);
+        tile.section = 0;   // 文件: they act on the folder, and stay visible without scrolling
+        tile.checked = ToolbarToolPinned(s, app::CustomCommandToolId(i));
+        spec.pins.push_back(std::move(tile));
+    }
     spec.pins_order = ToolbarPinsOrder(s);
 
     // 选中时: the chip's actions, kept ones in chip order first.
@@ -5138,6 +5164,11 @@ void ShowToolbarCustomize(AppState& s, int page) {
         bool view[kToolbarViewCount] = {};
         for (size_t index : pinned) {
             if (index < app::kToolbarToolCount) tools.emplace_back(app::kToolbarToolIds[index]);
+            else if (index >= kToolbarCustomBase) {
+                const size_t custom = index - kToolbarCustomBase;
+                if (custom < s.customCommands.commands.size())
+                    tools.emplace_back(app::CustomCommandToolId(custom));
+            }
             else if (index - app::kToolbarToolCount < kToolbarViewCount) {
                 const size_t at = index - app::kToolbarToolCount;
                 view[at] = true;
