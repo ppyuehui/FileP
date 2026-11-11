@@ -69,6 +69,8 @@ $checks = @(
     '打开所在位置：每帧应用|src/app/app_runtime.cpp|ForkApplyReveal(s)|模块在，但没人调用，等于没修'
     '打开所在位置：右键菜单接线|src/app/app_commands.cpp|ForkRequestRevealMany(s, parent, { leaf })|右键又只跳目录'
     '打开所在位置：托盘接线|src/app/app_commands.cpp|ForkRequestRevealMany(s, parent, leaves)|托盘又只跳目录'
+    '复制路径：底部提示|src/app/fork_commands.cpp|ForkNotifyPathCopied|复制后没有任何提示'
+    '复制路径：提示接线|src/app/app_commands.cpp|ForkNotifyPathCopied(s, shown, 1)|地址栏复制按钮没提示'
     '自定义命令：执行线程|src/app/app_commands.cpp|RunCustomCommandAt|命令点了没反应'
     '自定义命令：完成消息|src/app/app_messages.h|WM_CUSTOM_COMMAND_DONE|执行完不刷新'
 

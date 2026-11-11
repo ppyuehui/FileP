@@ -4,6 +4,8 @@
 #include <algorithm>
 
 #include "../../src/common/runtime_log.h"
+#include "../common/localization.h"
+#include "../ui/notification_toast.h"
 #include "app_commands.h"
 #include "app_navigation.h"
 #include "app_runtime.h"
@@ -20,6 +22,28 @@ bool ForkDispatchCommand(AppState& s, int cmd) {
     ApplyLayoutPreset(s, LiveLayout(s).VisiblePanes().size() > 1
         ? app::LayoutPreset::Single : app::LayoutPreset::TwoVertical);
     return true;
+}
+
+void ForkNotifyPathCopied(AppState& s, const std::wstring& text, size_t count) {
+    if (!s.hwnd) return;
+    std::wstring title;
+    if (count > 1) {
+        title = l10n::Get(l10n::StringId::CopyPathDoneMany);
+        if (const size_t slot = title.find(L"{n}"); slot != std::wstring::npos)
+            title.replace(slot, 3, std::to_wstring(count));
+    } else {
+        title = l10n::Get(l10n::StringId::CopyPathDoneTitle);
+    }
+    // 一条路径就把它显示出来，太长时截断——截图和日志里都不会铺满整个窗口。
+    std::wstring detail;
+    if (count <= 1 && !text.empty()) {
+        detail = text;
+        for (wchar_t& ch : detail)
+            if (ch == L'\r' || ch == L'\n') ch = L' ';
+        if (detail.size() > 120) detail = detail.substr(0, 117) + L"...";
+    }
+    s.notification_toast.ShowSnack(s.hwnd, ui::SnackIcon::Copied, std::move(title),
+                                   std::move(detail), {}, {}, 2500);
 }
 
 bool ForkToolbarPinsSane(const std::vector<std::wstring>& before,

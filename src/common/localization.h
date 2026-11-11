@@ -5154,6 +5154,8 @@ enum class StringId : UINT {
     CmdRunConfirmButton = IDS_CMDRUNCONFIRMBUTTON,
     SettingsCommandConfirm = IDS_SETTINGSCOMMANDCONFIRM,
     SettingsCommandConfirmDesc = IDS_SETTINGSCOMMANDCONFIRMDESC,
+    CopyPathDoneTitle = IDS_COPYPATHDONETITLE,
+    CopyPathDoneMany = IDS_COPYPATHDONEMANY,
 };
 
 bool IsLanguageId(std::wstring_view id) noexcept;

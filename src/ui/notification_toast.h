@@ -9,7 +9,7 @@ namespace pulse::ui {
 struct SnackPalette;   // snack_style.h
 // Multi-window M7i (toast redesign A): what a capsule notification shows on
 // its left.
-enum class SnackIcon { Tab, Window, Undo, Merge, Suggest };
+enum class SnackIcon { Tab, Window, Undo, Merge, Suggest, Copied };
 // A capsule button: posts `message` to the owner and closes it (0: closes).
 struct SnackAction {
     std::wstring label;

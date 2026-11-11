@@ -5170,3 +5170,5 @@ CmdRunConfirmMessage	IDS_CMDRUNCONFIRMMESSAGE	6448	将在当前文件夹执行�
 CmdRunConfirmButton	IDS_CMDRUNCONFIRMBUTTON	6449	执行	Run	執行
 SettingsCommandConfirm	IDS_SETTINGSCOMMANDCONFIRM	6450	执行前先确认	Ask before running	執行前先確認
 SettingsCommandConfirmDesc	IDS_SETTINGSCOMMANDCONFIRMDESC	6451	点命令时先弹出对话框列出要执行的步骤，确认后才动手	List the steps and ask before a command runs	點命令時先顯示對話框列出要執行的步驟，確認後才動手
+CopyPathDoneTitle	IDS_COPYPATHDONETITLE	6452	已复制路径	Path copied	已複製路徑
+CopyPathDoneMany	IDS_COPYPATHDONEMANY	6453	已复制 {n} 项路径	Copied {n} paths	已複製 {n} 項路徑

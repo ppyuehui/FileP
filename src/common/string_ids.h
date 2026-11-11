@@ -5162,5 +5162,7 @@
 #define IDS_CMDRUNCONFIRMBUTTON                                                          6449
 #define IDS_SETTINGSCOMMANDCONFIRM                                                       6450
 #define IDS_SETTINGSCOMMANDCONFIRMDESC                                                   6451
+#define IDS_COPYPATHDONETITLE                                                            6452
+#define IDS_COPYPATHDONEMANY                                                             6453
 
 #endif  // PULSE_STRING_IDS_H

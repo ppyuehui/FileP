@@ -5144,6 +5144,8 @@ BEGIN
     IDS_CMDRUNCONFIRMBUTTON "执行"
     IDS_SETTINGSCOMMANDCONFIRM "执行前先确认"
     IDS_SETTINGSCOMMANDCONFIRMDESC "点命令时先弹出对话框列出要执行的步骤，确认后才动手"
+    IDS_COPYPATHDONETITLE "已复制路径"
+    IDS_COPYPATHDONEMANY "已复制 {n} 项路径"
 END
 
 LANGUAGE 0x09, 0x01
@@ -10287,6 +10289,8 @@ BEGIN
     IDS_CMDRUNCONFIRMBUTTON "Run"
     IDS_SETTINGSCOMMANDCONFIRM "Ask before running"
     IDS_SETTINGSCOMMANDCONFIRMDESC "List the steps and ask before a command runs"
+    IDS_COPYPATHDONETITLE "Path copied"
+    IDS_COPYPATHDONEMANY "Copied {n} paths"
 END
 
 // Traditional Chinese (Taiwan), generated from the Simplified entries above.

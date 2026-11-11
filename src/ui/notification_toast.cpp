@@ -92,6 +92,7 @@ std::wstring_view SnackGlyph(SnackIcon icon) {
     case SnackIcon::Undo: return L"\xE7A7";     // Undo
     case SnackIcon::Merge: return L"\xE7C4";    // TaskView: windows into one
     case SnackIcon::Suggest: return L"\xEA80";  // Lightbulb
+    case SnackIcon::Copied: return L"\xE8C8";   // Copy: a path went to the clipboard
     case SnackIcon::Tab:
     default: return L"\xE8B7";                  // Folder
     }

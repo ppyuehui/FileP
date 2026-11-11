@@ -1943,12 +1943,18 @@ void DispatchMenuCommand(AppState& s, int cmd) {
         // Item menu copies the selection; background menu copies the folder.
         app::Tab* tab = ActiveTab(s);
         if (tab && tab->SelectedCount() > 0) {
+            const size_t picked = tab->SelectedCount();
             CopySelectedPath(s);
+            ForkNotifyPathCopied(s, {}, picked);   // 底部提示：已复制 N 项路径
             break;
         }
         std::wstring full = tab ? tab->current_path : L"";
-        if (!full.empty())
-            ops::WriteClipboardText(fs::IsDevicePath(full) ? DeviceFriendlyPath(full) : ClipboardPath(full));
+        if (!full.empty()) {
+            const std::wstring shown =
+                fs::IsDevicePath(full) ? DeviceFriendlyPath(full) : ClipboardPath(full);
+            ops::WriteClipboardText(shown);
+            ForkNotifyPathCopied(s, shown, 1);     // 底部提示：已复制路径 + 路径本身
+        }
         break;
     }
     case app::CmdUndo:
@@ -2847,7 +2853,10 @@ void ShowSidebarDriveMenu(AppState& s, std::wstring path, POINT screen_pt) {
     switch (cmd) {
     case app::CmdOpen: NavigateTo(s, path); break;
     case app::CmdOpenInNewTab: OpenFolderTab(s, path); break;
-    case app::CmdCopyPath: ops::WriteClipboardText(path); break;
+    case app::CmdCopyPath:   // 侧栏驱动器的「复制路径」
+        ops::WriteClipboardText(path);
+        ForkNotifyPathCopied(s, path, 1);
+        break;
     case app::CmdCopy: ops::WriteClipboard({path}, false); break;
     case app::CmdOpenTerminal: s.ops.OpenTerminal(path); break;
     case app::CmdProperties: s.ops.ShowProperties(path); break;
