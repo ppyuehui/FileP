@@ -182,6 +182,19 @@ void CopySelectedPath(AppState& s) {
     ops::WriteClipboardText(text);
 }
 
+void CopyAddressBarPath(AppState& s) {
+    // 复制路径 (the address bar's button) belongs to the bar, so a selected row
+    // must not turn it into a copy of that row's path. A search page's bar shows
+    // the folder the search started in; copy that, not the query.
+    app::Tab* tab = ActiveTab(s);
+    if (!tab) return;
+    const std::wstring& full = tab->search_origin_valid ? tab->search_origin_path : tab->current_path;
+    if (full.empty()) return;
+    const std::wstring shown = fs::IsDevicePath(full) ? DeviceFriendlyPath(full) : ClipboardPath(full);
+    ops::WriteClipboardText(shown);
+    ForkNotifyPathCopied(s, shown, 1);   // 底部提示：已复制路径 + 路径本身
+}
+
 // Creates "新建文件夹"/"新建文本文档.txt" via the ops layer, then (on the next
 // snapshot) selects it and enters the rename overlay.
 // 新建文件夹 in a writable phone folder: named apart from the rows listed,

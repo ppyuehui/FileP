@@ -9,6 +9,8 @@ namespace pulse::app { struct SelectionCaps; struct DriveVerbResult; }
 namespace pulse {
 bool EnsureMenu(AppState& s);
 void CopySelectedPath(AppState& s);
+// 地址栏右侧的复制按钮: copies the address bar's folder, never the selection.
+void CopyAddressBarPath(AppState& s);
 void CreateNewItem(AppState& s, bool folder);
 void QueueTagAds(AppState& s, std::vector<app::TagAdsUpdate> updates);
 bool DeleteTagAndRefreshViews(AppState& s, const app::TagId& tag_id);

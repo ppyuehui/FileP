@@ -601,8 +601,8 @@ bool HandleFavoritesBarPress(AppState& s, const ui::HitTestResult& hit) {
         return true;
     }
     if (hit.region == ui::HitTestResult::AddressFavorites) {
-        // 复制路径 (the selected items, else the open folder).
-        DispatchMenuCommand(s, app::CmdCopyPath);
+        // 复制路径: the address bar's own address, even with rows selected.
+        CopyAddressBarPath(s);
         InvalidateRect(s.hwnd, nullptr, FALSE);
         return true;
     }
