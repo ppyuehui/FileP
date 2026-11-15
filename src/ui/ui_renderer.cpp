@@ -202,7 +202,7 @@ void MainRenderer::SetEmbedded(float top_dip, float bottom_dip) {
 float MainRenderer::SidebarOwnWidth(float window_width) const {
     const float rail = kSidebarRailWidthDip * scale_;
     // 自动收起侧栏 off, or the user expanded by hand: keep the full width.
-    if ((SidebarAutoCollapsed(window_width) && !user_forced_full_) || collapse_value_ >= 1.0f) return rail;
+    if (SidebarAutoCollapsed(window_width) || collapse_value_ >= 1.0f) return rail;
     const float full = SidebarFullWidth(window_width);
     return collapse_value_ <= 0.0f ? full : full + (rail - full) * collapse_value_;
 }
@@ -239,10 +239,11 @@ void MainRenderer::SetAiPanel(bool open, AiPanelMode mode, bool animate) {
 }
 
 void MainRenderer::SetSidebarCollapsed(bool on, bool animate) {
+    // 手动展开后窄窗口不再自动收，再收起点一次才交回宽度规则。只有状态真的变了
+    // 才算用户的选择：BuildVm 每帧都会用已保存的偏好重设一次，不能每帧重新武装
+    // 这个标记，否则窄窗口里侧栏永远是展开的、标题栏按钮点了没反应。
+    if (on != user_sidebar_collapsed_) user_forced_full_ = !on;
     user_sidebar_collapsed_ = on;
-    // Expanding by hand keeps the full sidebar even in a narrow window; folding
-    // it again hands control back to the width rule.
-    user_forced_full_ = !on;
     ApplySidebarCollapse(animate);
 }
 

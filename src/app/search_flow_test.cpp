@@ -614,6 +614,9 @@ int RunSidebarNarrowTest(AppState& s, const wchar_t* output) {
         s.scale=scale;s.renderer.SetScale(scale);
         for(int dip:{899,900}) {
             if(dip==899) CloseSidebarPeek(s);
+            // Each case starts from the width rule, not from the previous case's
+            // hand-expanded ("user forced full") override.
+            s.renderer.SetSidebarForcedFull(false);
             s.appPrefs.sidebar_collapsed=false;s.renderer.SetSidebarCollapsed(false,false);
             RECT client{},outer{};GetClientRect(s.hwnd,&client);GetWindowRect(s.hwnd,&outer);
             const int width=static_cast<int>(dip*scale+0.5f);
@@ -688,6 +691,13 @@ int RunSidebarNarrowTest(AppState& s, const wchar_t* output) {
             toggle();check(!s.renderer.SidebarPeek() && s.appPrefs.sidebar_collapsed,
                 "narrow toggle closes overlay while preserving collapsed preference");
             s.appPrefs.sidebar_collapsed=false;s.renderer.SetSidebarCollapsed(false,false);
+            // Regression: a narrow window whose sidebar was expanded by hand must
+            // fold back to the rail on the next press, without touching the saved
+            // preference (that press used to toggle an invisible overlay instead).
+            toggle();
+            check(!s.renderer.SidebarForcedFull() && s.renderer.SidebarAutoCollapsed(w) &&
+                  !s.appPrefs.sidebar_collapsed,
+                "narrow toggle folds a hand-expanded sidebar without changing the saved preference");
             toggle();check(s.renderer.SidebarPeekPinned(),"prepare open overlay for resize boundary check");
         }
     }

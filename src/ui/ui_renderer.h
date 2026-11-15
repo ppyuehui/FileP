@@ -158,10 +158,15 @@ public:
     // turns animations off). Re-setting the current state is a no-op.
     void SetSidebarCollapsed(bool on, bool animate = false);
     void SetAutoCollapseSidebar(bool on) { auto_collapse_sidebar_ = on; }
+    // 窄窗口里手动展开过：本窗口不再自动收；再点收起时清掉，交回宽度规则。
+    void SetSidebarForcedFull(bool on) { user_forced_full_ = on; }
+    bool SidebarForcedFull() const { return user_forced_full_; }
     void SetShowHomeButton(bool on) { show_home_button_ = on; }
     bool SidebarCollapsed() const { return sidebar_collapsed_; }
+    // 窗口变窄时的自动图标栏：设置关掉、或本窗口手动展开过，都不再自动收。
     bool SidebarAutoCollapsed(float window_width) const {
-        return window_width / scale_ < kSidebarRailWindowDip;
+        return auto_collapse_sidebar_ && !user_forced_full_ &&
+               window_width / scale_ < kSidebarRailWindowDip;
     }
     bool SidebarRailVisible(float window_width) const {
         return SidebarAutoCollapsed(window_width) || sidebar_collapsed_;

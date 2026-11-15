@@ -95,6 +95,15 @@ void ApplyVerticalTabs(AppState& s, ui::WindowViewModel& vm) {
 
 void ToggleSidebarCollapsed(AppState& s) {
     const float width = static_cast<float>(s.compositor.Width());
+    // 窄窗口里手动展开过：侧栏现在是完整宽度，这一下只把它收回图标栏，
+    // 不动已保存的偏好（窄窗口的点击历来不改偏好）。
+    if (s.renderer.SidebarForcedFull() && width / s.scale < ui::kSidebarRailWindowDip) {
+        s.sidebarPeekArmAt = 0;
+        s.renderer.SetSidebarPeek(false);
+        s.renderer.SetSidebarForcedFull(false);
+        InvalidateRect(s.hwnd, nullptr, FALSE);
+        return;
+    }
     if (s.renderer.SidebarAutoCollapsed(width)) {
         const bool open = !s.renderer.SidebarPeekVisible(width);
         s.sidebarPeekArmAt = 0;
