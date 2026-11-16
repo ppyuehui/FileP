@@ -162,7 +162,9 @@ enum MenuCmd : int {
     CmdToolbarToolBase = 5300,
     CmdToolbarToolEnd = 5400,
     // New menu ▸ 「新建」按钮的主操作: + AppPrefs::toolbar_new_primary (0..2).
-    CmdNewPrimaryBase = 5400,
+    // The toolbar range ends at CmdToolbarToolEnd, which 1.0.60 links in
+    // kMenuCmdLinks: sharing its value there trips MenuCommandsUnique().
+    CmdNewPrimaryBase = 5410,
     // Network page (app_network_page.h): 连接服务器 and its ▾ menu, 最近访问.
     CmdConnectServer = 5190,
     CmdForgetNetworkRecent = 5191,
@@ -180,6 +182,7 @@ enum MenuCmd : int {
     CmdDupReapplyRules = 5203,           // 重复文件 tab row: 按规则重新标
     CmdShellStaticBase = 6000,
     CmdShellComBase = 8000,
+    CmdShellComLast = CmdShellComBase + 0x7FFF, // live and predicted Shell menu IDs
 };
 
 // One merged Explorer row (registry static verb or pulse_shell COM item),
@@ -263,6 +266,9 @@ static_assert(CmdIndexBase + 48 <= CmdShellNewBase && CmdShellNewBase + kMaxShel
 // sent every custom command to the first shell template.
 static_assert(CmdCustomCommandBase > CmdShellNewBase + kMaxShellNewItems);
 static_assert(CmdCustomCommandLast < CmdShellStaticBase);
+// 5400 is CmdToolbarToolEnd (an exclusive end that 1.0.60 also links), so the
+// three 新建 primary commands sit just above it.
+static_assert(CmdNewPrimaryBase > CmdToolbarToolEnd && CmdNewPrimaryBase + 2 < CmdCustomCommandManage);
 
 // Other windows' shown folders, most recently used window first (M6e).
 inline constexpr size_t kMaxWindowTransferTargets = 32;

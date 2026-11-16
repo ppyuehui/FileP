@@ -51,10 +51,10 @@ void SyncExplorerTakeover(AppState& s) {
         s.appPrefs.integration_enabled && s.appPrefs.integration_win_e && s.appPrefs.take_over_win_e &&
         s.single_instance.OwnsEndpoint(ServiceWindow(s)) && !s.core.exiting;
     if (win_e_enabled && !s.core.win_e_hotkey)
-        // FileP: never start the elevated hotkey broker — it asked for UAC on
-        // every launch. The low-level hook still works for normal windows; only
-        // hotkeys pressed over an elevated window are missed.
-        s.core.win_e_hotkey = std::make_unique<app::WinEHotkey>(s.single_instance, ServiceWindow(s), WM_OPEN_EXTERNAL, false);
+        // Official 1.0.60 dropped the elevated hotkey broker (it asked for UAC on
+        // every launch), so the FileP-only "never start the broker" override is
+        // gone with it. The hook still covers normal windows only.
+        s.core.win_e_hotkey = std::make_unique<app::WinEHotkey>(s.single_instance, ServiceWindow(s), WM_OPEN_EXTERNAL);
     else if (!win_e_enabled && s.core.win_e_hotkey) s.core.win_e_hotkey.reset();
     app::HandoffDiagnostics::sink.store(+[](uint64_t id, app::HandoffPhase phase, uint64_t code,
                                           uint64_t detail, uint64_t elapsed) noexcept {

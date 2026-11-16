@@ -81,7 +81,7 @@ git diff --stat "$Branch...$upRef" | Select-Object -Last 20
 # 「别整侧取官方」的文件：整侧 checkout --theirs 会静默丢掉我们的功能，
 # 取完必须跑 tools/check-fork-features.ps1 确认没丢东西。
 $hotspots = @(
-    @{ Path = 'tools/l10n/catalog.tsv';    Hint = '两边都追加；我们的 id 在 6400+，官方 1.0.59 已用到 6390。合并后必须跑 py -3.12 tools/l10n/gen_strings.py' },
+    @{ Path = 'tools/l10n/catalog.tsv';    Hint = '两边都追加；我们的 id 在 7000-7053，官方 1.0.60 已用到 6438。合并后必须跑 py -3.12 tools/l10n/gen_strings.py' },
     @{ Path = 'src/app/app_commands.cpp';  Hint = '别整侧取官方！工具栏目录（split_two）、命令派发、自定义命令行都在这' },
     @{ Path = 'src/app/app_input.cpp';     Hint = '别整侧取官方！此电脑点击、设置页交互、任务栏滑块、标签 ✕ 松开都在这' },
     @{ Path = 'src/app/app_main.cpp';      Hint = '别整侧取官方！设置目录 Roaming 覆写、截图开关、FileP 标题都在这' },
