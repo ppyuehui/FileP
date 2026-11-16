@@ -28,6 +28,9 @@ Use an x64 Visual Studio developer prompt with MSVC, CMake 3.25+, and Ninja:
 以下为按需选择的命令，不是每次任务必须依次执行的清单：
 
 ```powershell
+# 本机编译统一用 build_filep.ps1：它会把「当天日期」打成产品版本（26.11.16），
+# 刷新构建 id，并关掉自动更新；version.txt 仍记官方基线（预览包下载地址用它拼）。
+# 想用官方版本号：pwsh -File C:\dev\FileP\build_filep.ps1 -Version 1.0.60
 # 默认：仅构建受影响的目标，此处以主程序为例
 cmake --build build --target pulse
 # 仅涉及对应模块时运行；必要时先构建对应测试目标

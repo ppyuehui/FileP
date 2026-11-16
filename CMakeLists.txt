@@ -1,5 +1,14 @@
 ﻿cmake_minimum_required(VERSION 3.25)
-file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/version.txt" PULSE_VERSION LIMIT_COUNT 1)
+# version.txt is the upstream Pulse release this tree tracks; it stays at the
+# official number because the preview-pack download URLs are built from it
+# (PULSE_UPSTREAM_VERSION below). FileP's own product version is the build date:
+# build_filep.ps1 passes -DPULSE_VERSION_OVERRIDE=YY.MM.DD so every local build
+# reports today's date (About > 版本, the exe version resource, store checks).
+file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/version.txt" PULSE_UPSTREAM_VERSION LIMIT_COUNT 1)
+set(PULSE_VERSION "${PULSE_UPSTREAM_VERSION}")
+if(DEFINED PULSE_VERSION_OVERRIDE AND NOT PULSE_VERSION_OVERRIDE STREQUAL "")
+    set(PULSE_VERSION "${PULSE_VERSION_OVERRIDE}")
+endif()
 project(Pulse VERSION ${PULSE_VERSION} LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -1397,9 +1406,9 @@ target_link_libraries(pulse_pack_catalog PRIVATE cabinet bcrypt)
 set(PULSE_CONTENT_PACK_DIR "${CMAKE_BINARY_DIR}/content-pack")
 set(PULSE_CONTENT_PACK_CATALOG "${CMAKE_BINARY_DIR}/generated/content_pack_catalog.h")
 add_custom_command(OUTPUT "${PULSE_CONTENT_PACK_CATALOG}"
-    COMMAND pulse_pack_catalog --key content --symbol Content --version "${PULSE_VERSION}"
+    COMMAND pulse_pack_catalog --key content --symbol Content --version "${PULSE_UPSTREAM_VERSION}"
         --channel "${PULSE_CONTENT_PACK_CHANNEL}"
-        --base-url "https://github.com/jimmgreen/pulse/releases/download/v${PULSE_VERSION}/"
+        --base-url "https://github.com/jimmgreen/pulse/releases/download/v${PULSE_UPSTREAM_VERSION}/"
         --out-dir "${PULSE_CONTENT_PACK_DIR}" --header "${PULSE_CONTENT_PACK_CATALOG}"
         "$<TARGET_FILE:pulse_content>" "$<TARGET_FILE:pulse_document>"
     DEPENDS pulse_pack_catalog pulse_content pulse_document
@@ -1426,9 +1435,9 @@ endif()
 set(PULSE_AI_PACK_DIR "${CMAKE_BINARY_DIR}/ai-pack")
 set(PULSE_AI_PACK_CATALOG "${CMAKE_BINARY_DIR}/generated/ai_pack_catalog.h")
 add_custom_command(OUTPUT "${PULSE_AI_PACK_CATALOG}"
-    COMMAND pulse_pack_catalog --key ai --symbol Ai --version "${PULSE_VERSION}"
+    COMMAND pulse_pack_catalog --key ai --symbol Ai --version "${PULSE_UPSTREAM_VERSION}"
         --channel "${PULSE_CONTENT_PACK_CHANNEL}"
-        --base-url "https://github.com/jimmgreen/pulse/releases/download/v${PULSE_VERSION}/"
+        --base-url "https://github.com/jimmgreen/pulse/releases/download/v${PULSE_UPSTREAM_VERSION}/"
         --out-dir "${PULSE_AI_PACK_DIR}" --header "${PULSE_AI_PACK_CATALOG}"
         "$<TARGET_FILE:pulse_ai>"
     DEPENDS pulse_pack_catalog pulse_ai "$<TARGET_FILE:pulse_ai>"

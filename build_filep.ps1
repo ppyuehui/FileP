@@ -3,7 +3,11 @@
 # replace it (see the manifest URL and public key in CMakeLists.txt).
 param([string]$Target = "pulse", [switch]$Fresh, [string]$Config = "Release",
       # Keep the build id a tree already has (CI pins PULSE_BUILD_ID for releases).
-      [switch]$KeepBuildId)
+      [switch]$KeepBuildId,
+      # Product version stamped into this build; defaults to today's date
+      # (YY.MM.DD), which is how FileP numbers its own builds. Pass -Version 1.0.60
+      # to use the upstream number, or -Version '' to take version.txt as-is.
+      [string]$Version = (Get-Date).ToString('yy.MM.dd'))
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 Push-Location $root
@@ -34,12 +38,15 @@ try {
     }
     $freshArgs = @()
     if ($Fresh) { $freshArgs += '--fresh' }
+    $versionArg = if ($Version) { "-DPULSE_VERSION_OVERRIDE=$Version" } else { '-DPULSE_VERSION_OVERRIDE=' }
+    if ($Version) { Write-Host "version: $Version (upstream base: $(Get-Content (Join-Path $root 'version.txt') -TotalCount 1))" -ForegroundColor Cyan }
     $cmakeArgs = $freshArgs + @('-S','.','-B','build','-G','Ninja',
         "-DCMAKE_BUILD_TYPE=$Config",
         '-DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreaded',
         '-DPULSE_WITH_SELFTEST=OFF',
         '-DPULSE_UPDATE_MANIFEST_URL=',
-        '-DPULSE_UPDATE_PUBLIC_KEY_HEX=')
+        '-DPULSE_UPDATE_PUBLIC_KEY_HEX=',
+        $versionArg)
     & cmake @cmakeArgs
     if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
     & cmake --build build --target $Target
