@@ -6,7 +6,7 @@ param([string]$Target = "pulse", [switch]$Fresh, [string]$Config = "Release",
       [switch]$KeepBuildId,
       # Product version stamped into this build; defaults to today's date
       # (YY.MM.DD), which is how FileP numbers its own builds. Pass -Version 1.0.60
-      # to use the upstream number, or -Version '' to take version.txt as-is.
+      # to use the upstream number, or -Version '' to let CMake pick the date.
       [string]$Version = (Get-Date).ToString('yy.MM.dd'))
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path

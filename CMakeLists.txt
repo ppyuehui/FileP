@@ -5,9 +5,12 @@
 # build_filep.ps1 passes -DPULSE_VERSION_OVERRIDE=YY.MM.DD so every local build
 # reports today's date (About > 版本, the exe version resource, store checks).
 file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/version.txt" PULSE_UPSTREAM_VERSION LIMIT_COUNT 1)
-set(PULSE_VERSION "${PULSE_UPSTREAM_VERSION}")
 if(DEFINED PULSE_VERSION_OVERRIDE AND NOT PULSE_VERSION_OVERRIDE STREQUAL "")
     set(PULSE_VERSION "${PULSE_VERSION_OVERRIDE}")
+else()
+    # A configure without the override (new build dir, direct cmake) still gets
+    # a dated version instead of the upstream number.
+    string(TIMESTAMP PULSE_VERSION "%y.%m.%d")
 endif()
 project(Pulse VERSION ${PULSE_VERSION} LANGUAGES C CXX)
 
