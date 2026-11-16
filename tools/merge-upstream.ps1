@@ -127,19 +127,17 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
-if ($changed -contains 'tools/l10n/catalog.tsv') {
-    Info 'catalog.tsv 变了，重新生成字符串表 ...'
-    py -3.12 tools/l10n/gen_strings.py
-    if ($LASTEXITCODE -ne 0) { Fail '生成字符串表失败。' }
-}
-
-Info '检查自有功能是否被合并冲掉 ...'
-pwsh -NoProfile -File (Join-Path $PSScriptRoot 'check-fork-features.ps1')
+Info '校验号段、catalog 自有行、l10n 与自有功能 ...'
+# merge-verify 会：按 merge-base 把我们改过的官方文案回填 → 查字符串/命令/切换号/私有消息
+# 号段 → 重新生成 l10n → 跑 check-fork-features.ps1。
+pwsh -NoProfile -File (Join-Path $PSScriptRoot 'merge-verify.ps1')
 if ($LASTEXITCODE -ne 0) {
     Write-Host ''
-    Write-Host '有自有功能被官方版本覆盖了，先补回来再编译/推送。' -ForegroundColor Red
-    Write-Host '补法：看上面缺的那几项，回到 68df84b1（或任意更早的提交）把对应代码取回来。' -ForegroundColor Gray
+    Write-Host '有号段冲突或自有功能被官方版本覆盖了，先处理再编译/推送。' -ForegroundColor Red
+    Write-Host '号段冲突：先迁号（改 catalog/context_menu/fork_settings_toggles），再单独提交一次。' -ForegroundColor Gray
+    Write-Host '功能被覆盖：回到 68df84b1（或任意更早的提交）把对应代码取回来。' -ForegroundColor Gray
     Write-Host '  git show <旧提交>:src/app/app_input.cpp | Select-String -Pattern <锚点> -Context 6,20' -ForegroundColor Gray
+    Write-Host '官方已自行实现的项，登记到 docs/FORK-OBSOLETE.md，别再补回来。' -ForegroundColor Gray
     exit 1
 }
 

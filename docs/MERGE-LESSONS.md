@@ -87,16 +87,38 @@
 | 中文路径下 `rc.exe` 失败 | 统一从 `C:devFileP`（junction）编译 |
 | `FileP.exe` / `pulse_shell.exe` 被占用 → LNK1104 | 先 `Stop-Process`，再编译 |
 | DSH 是 Low 令牌，编出的 exe 带 Low 标签 | 每次 `icacls /setintegritylevel Medium`（冒烟脚本自动做） |
+| 链接报 `LNK1104: 无法打开 pulse_shell.exe` | 资源管理器/高权限进程里残留的 `pulse_shell` 锁住了 exe，本会话结束不掉。`build_filep.ps1` 现在**编译前自动结束** FileP 和辅助进程，结束不掉会**提前退出（exit 2）**并打印要执行的命令；管理员 PowerShell 里 `Get-Process pulse_shell | Stop-Process -Force` 或重启资源管理器即可 |
 | GitHub 直连 TLS 失败 | `git -c http.sslBackend=openssl push github`；仍失败就等网络，不要 force |
 
 ---
+
+### 10. catalog 里改官方行会被静默顶回；号段撞车 git 不报警
+
+1.0.60 合并时发现的两类"无声"问题：
+
+| 现象 | 根因 |
+| --- | --- |
+| 关于页又写「关于 Pulse」 | 我们的 catalog 合并规则只有「官方文件 + 我们的新增行追加到末尾」。**改官方已有行的文案**不在规则里，合并取官方就丢了 |
+| 编译期 `static_assert: kMenuCmdLinks 重复` | 我们为修工具栏区间把 `CmdNewPrimaryBase` 从 5180 挪到 5400；官方 1.0.60 把 5400 的 `CmdToolbarToolEnd` 也登记进表 |
+| 字符串 id 撞号 | 官方新增 6391–6438，我们原来占 6400–6453 |
+| 设置切换号（潜在） | 官方 `settings_controller` 里 `index == 82` 之类，会让我们的开关静默失效。这类**没有断言、不报错** |
+
+**护栏**：`tools/merge-verify.ps1`
+- catalog 自有行按 merge-base **自动回填**（`tools/l10n/merge_fork_rows.py`，只改文案不动 id）；
+- 字符串 / 菜单命令 / 设置切换号 / 私有消息四类号段逐项比对；
+- 之后自动 `gen_strings.py` + `check-fork-features.ps1`。
+`tools/merge-upstream.ps1` 合并成功后会自动调用它。
+
+**规则**：官方新占号段 → **先迁号再合并**，迁号单独提交一次；官方自己实现/删掉的功能登记到
+`docs/FORK-OBSOLETE.md`，别补回来。
 
 ## 二、现在的护栏
 
 | 工具 | 作用 | 什么时候跑 |
 | --- | --- | --- |
 | `tools/merge-upstream.ps1` | 看官方改了什么、冲突热点、合并 | 每次跟版本 |
-| `tools/check-fork-features.ps1` | 40 项自有功能锚点 | 合并后（脚本自动调用） |
+| `tools/merge-verify.ps1` | 号段比对 + catalog 自有行回填 + l10n + 守卫 | 合并后第一件事 |
+| `tools/check-fork-features.ps1` | 50 项自有功能锚点 | 合并后（merge-verify 自动调用） |
 | `tools/smoke-fork.ps1` | 提标签 + 5 页截图 + 2 个测试 | 编译后 |
 | `tools/export-fork-patches.ps1` | 把 70 个自有提交导出成补丁 + 清单 | 需要"抄回某个功能"时 |
 | `docs/FORK-CHANGES.md` | 功能差异清单 | 改功能时 |

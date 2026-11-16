@@ -77,6 +77,8 @@ $checks = @(
     '设置页号：自定义命令 = 16|src/ui/settings_page_ids.h|kSettingsPageCommands = 16|页号被官方占用'
     '设置页：侧栏顺序含它|src/ui/ui_renderer_internal.h|kSettingsPageCommands|侧栏看不到入口'
     '号段：字符串 >= 7000|tools/l10n/catalog.tsv|IDS_SETTINGS_SHOW_PATH_COPY|字符串 id 与官方撞号（1.0.60 已用到 6438，我们的整体迁到 7000-7053）'
+    '号段：设置切换号 82-86|src/app/fork_settings_toggles.cpp|{86, &AppPrefs::confirm_custom_commands}|切换号被官方占用（先查 upstream 的 settings_controller，再迁号）'
+    '版本号分工：预览包地址用官方基线|CMakeLists.txt|releases/download/v${PULSE_UPSTREAM_VERSION}/|预览包地址跟着日期版本变，下载 404'
 
     '网络盘：去掉 .local|src/app/lan_device.cpp|ends_with(L".local")|局域网设备进不去'
     '标签：永久失败不重试|src/app/tag_ads_sync.cpp|FILE_NAMED_STREAMS|每次启动都弹标签提示'

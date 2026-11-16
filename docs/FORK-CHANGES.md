@@ -186,6 +186,8 @@
 | 版本号 | 本机编译默认打**当天日期**（`26.11.16`，`-Version 1.0.60` 可回到官方号）；`version.txt` 仍记官方基线 `1.0.60`，预览包下载地址（`releases/download/v1.0.60/`）由它拼，不能跟着日期变 |
 | 编译 | 必须从 ASCII 路径：`pwsh -File C:\dev\FileP\build_filep.ps1`；当天第一次编译会刷新 `build\pulse_build_id.txt`，关于页「构建时间 / 构建 ID」和左下角 `FileP 26.11.16` 跟着变（`-KeepBuildId` 可保留原 id） |
 | 合并上游 | `pwsh tools/merge-upstream.ps1`（列表）→ `-Merge -Build -Push` |
+| 合并校验 | `pwsh tools/merge-verify.ps1`：号段（字符串/命令/切换号/WM_APP）+ catalog 自有行回填 + l10n + 守卫；`-Build -Smoke` 一条龙 |
+| 官方已实现/已删的项 | 登记在 [FORK-OBSOLETE.md](FORK-OBSOLETE.md)，别补回来 |
 | 测试 | 新增 `pulse_custom_commands_test` |
 | 调试截图 | `FileP.exe --shot <png> [--shot-settings <页号>] [--shot-run <命令号>]` |
 

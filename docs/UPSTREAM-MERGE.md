@@ -86,13 +86,25 @@ py -3.12 tools/l10n/gen_strings.py
 py -3.12 tools/l10n/gen_strings.py --check     # 必须 "up to date"
 ```
 
-## 4. 跑功能守卫（关键一步）
+## 4. 跑合并校验（关键一步）
 
 ```powershell
-pwsh -NoProfile -File tools/check-fork-features.ps1
+pwsh -NoProfile -File tools/merge-verify.ps1
 ```
 
-35 项自有功能，逐条查代码锚点在不在；缺了会打印「功能 / 文件 / 症状」并返回 1。
+一条命令查五类 git 不会报警的问题，然后自动重新生成 l10n、跑功能守卫：
+
+| 检查 | 查什么 | 漏了会怎样 |
+| --- | --- | --- |
+| catalog 自有行 | 我们改过的官方文案（如 AboutPulse = 「关于 FileP」）被官方版本顶回去 | 关于页又写「关于 Pulse」（1.0.60 合并时真发生过） |
+| 字符串号段 | 我们的 7000 段有没有被官方新 id 占 | 文案串行、`gen_strings.py` 报重复 id |
+| 菜单命令号 | `MenuCmd` 里我们和官方有没有重号 | 点一个命令执行成另一个 |
+| 设置切换号 82-86 | 官方 `settings_controller` 有没有用同一批 `index` | **点 A 开关改了 B 设置，完全不报错** |
+| 私有消息 WM_APP | 我们的 `WM_APP+200` 有没有被官方占 | 收到别的模块的消息 |
+
+catalog 那项是**自动回填**：按 merge-base 找出"我们在合并前改过的官方行"，把文案盖回来。
+
+加 `-Build -Smoke` 可以一条命令走完编译和冒烟。
 
 > 它只证明**代码还在**，不证明行为对。所以还要走第 5 步。
 

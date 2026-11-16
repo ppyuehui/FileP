@@ -7,7 +7,9 @@ param([string]$Target = "pulse", [switch]$Fresh, [string]$Config = "Release",
       # Product version stamped into this build; defaults to today's date
       # (YY.MM.DD), which is how FileP numbers its own builds. Pass -Version 1.0.60
       # to use the upstream number, or -Version '' to let CMake pick the date.
-      [string]$Version = (Get-Date).ToString('yy.MM.dd'))
+      [string]$Version = (Get-Date).ToString('yy.MM.dd'),
+      # Leave a running FileP alone (the linker then fails on the locked exes).
+      [switch]$KeepRunning)
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 Push-Location $root
@@ -17,6 +19,50 @@ try {
             [System.Environment]::SetEnvironmentVariable($matches[1], $matches[2])
         }
     }
+    # A running FileP (or one of its hosts) holds the exe images and the linker
+    # fails with LNK1104 halfway through. Close them first: settings are saved as
+    # they change.
+    if (-not $KeepRunning) {
+        $running = @(Get-Process FileP, Pulse.Index, Pulse.Content, Pulse.Preview, Pulse.AI, Pulse.Document, pulse_shell -ErrorAction SilentlyContinue)
+        foreach ($proc in $running) {
+            try { Stop-Process -Id $proc.Id -Force -ErrorAction Stop }
+            catch { Write-Host "  keep $($proc.ProcessName) ($($proc.Id)): no access" -ForegroundColor DarkYellow }
+        }
+        if ($running.Count -gt 0) {
+            Write-Host ("closed {0} running host(s) before linking" -f $running.Count) -ForegroundColor Cyan
+            Start-Sleep -Milliseconds 400
+        }
+    }
+
+    # Helpers started from a higher-integrity process cannot be closed from this
+    # session; refuse before compiling instead of failing on LNK1104 at link time.
+    $exes = @('FileP.exe', 'pulse_shell.exe', 'pulse_launcher.exe', 'pulse_elevated.exe',
+        'pulse_hotkey_broker.exe', 'Pulse.Index.exe', 'Pulse.Content.exe', 'Pulse.Preview.exe',
+        'Pulse.AI.exe', 'Pulse.Document.exe')
+    $locked = @()
+    for ($attempt = 0; $attempt -lt 3; $attempt++) {
+        $locked = @()
+        foreach ($exe in $exes) {
+            $path = Join-Path $root ('build/' + $exe)
+            if (-not (Test-Path $path)) { continue }
+            try {
+                $stream = [System.IO.File]::Open($path, 'Open', 'ReadWrite', 'None')
+                $stream.Close()
+            } catch {
+                $locked += $exe
+            }
+        }
+        if ($locked.Count -eq 0) { break }
+        if ($attempt -lt 2) { Start-Sleep -Seconds 1 }
+    }
+    if ($locked.Count -gt 0) {
+        Write-Host ("这些输出 exe 被占用，链接会失败：" + ($locked -join ', ')) -ForegroundColor Red
+        Write-Host '多半是资源管理器/高权限进程里的 pulse_shell 还活着。请用管理员 PowerShell 执行：' -ForegroundColor Yellow
+        Write-Host ('  Get-Process ' + (($locked | ForEach-Object { $_.Replace('.exe', '') }) -join ',') + ' | Stop-Process -Force') -ForegroundColor Yellow
+        Write-Host '或重启资源管理器后再编译（-KeepRunning 可跳过自动结束）。' -ForegroundColor Yellow
+        exit 2
+    }
+
     # The fork shows the build date as its version (About > 构建时间, sidebar
     # footer). CMake keeps the first id it generated in build/pulse_build_id.txt
     # forever, so a tree built on an old day kept reporting that day. Give the
