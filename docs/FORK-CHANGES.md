@@ -22,7 +22,7 @@
 | 托盘提示 | Pulse | FileP |
 | 错误/提示框标题 | Pulse | FileP |
 | 关于页 | 单一项目主页 | 复制信息 / 本项目主页 / 原项目主页，并注明「本项目基于 Pulse 二次修改」 |
-| 设置页左下角 | 版本号 | `FileP 26.11.08`（编译日期） |
+| 设置页左下角 | 版本号 | `FileP 26.11.16`（编译日期，每天第一次编译自动刷新） |
 | 配置文件目录 | `%APPDATA%\Pulse` | `%APPDATA%\FileP`，首次启动自动迁移旧目录 |
 | README | 英文/官方 | 改写为 FileP 说明，标注上游来源与许可证 |
 
@@ -182,7 +182,7 @@
 | 项 | 说明 |
 | --- | --- |
 | 产物 | `build\FileP.exe`，编译后必须 `icacls /setintegritylevel Medium` |
-| 编译 | 必须从 ASCII 路径：`pwsh -File C:\dev\FileP\build_filep.ps1` |
+| 编译 | 必须从 ASCII 路径：`pwsh -File C:\dev\FileP\build_filep.ps1`；当天第一次编译会刷新 `build\pulse_build_id.txt`，关于页「构建时间 / 构建 ID」和左下角 `FileP 26.11.16` 跟着变（`-KeepBuildId` 可保留原 id） |
 | 合并上游 | `pwsh tools/merge-upstream.ps1`（列表）→ `-Merge -Build -Push` |
 | 测试 | 新增 `pulse_custom_commands_test` |
 | 调试截图 | `FileP.exe --shot <png> [--shot-settings <页号>] [--shot-run <命令号>]` |
